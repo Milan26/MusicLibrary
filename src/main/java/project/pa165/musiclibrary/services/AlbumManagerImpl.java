@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project.pa165.musiclibrary.services;
 
 import java.util.List;
@@ -13,7 +8,8 @@ import project.pa165.musiclibrary.dao.AlbumDao;
 import project.pa165.musiclibrary.entities.Album;
 
 /**
- *
+ * Implementation of AlbumManager
+ * 
  * @author Milan
  */
 @Service

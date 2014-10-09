@@ -7,13 +7,13 @@ package project.pa165.musiclibrary.entities;
 
 import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
+ * User Entity.
  * 
  * @author Milan
  */
@@ -35,8 +35,11 @@ public class User implements Serializable {
     @Column(nullable = false, length = 40)
     private String lastName;
     
-    @Embedded
-    private Adress adress;
+    @Column(nullable = false, length = 26)
+    private String password;
+    
+    @Column
+    private String role;
     
     public Long getId() {
         return id;
@@ -70,12 +73,12 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public Adress getAdress() {
-        return adress;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAdress(Adress adress) {
-        this.adress = adress;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -98,6 +101,8 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + ", adress=" + adress + '}';
+        return "User{" + "id=" + id + ", email=" + email + ", firstName="
+                + firstName + ", lastName=" + lastName + '}';
     }
+
 }

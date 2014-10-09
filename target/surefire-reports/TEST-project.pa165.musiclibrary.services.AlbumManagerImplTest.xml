@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="10" failures="0" name="project.pa165.musiclibrary.services.AlbumManagerImplTest" time="6.74" errors="0" skipped="0">
+<testsuite tests="10" failures="0" name="project.pa165.musiclibrary.services.AlbumManagerImplTest" time="6.59" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_05\jre\bin"/>
@@ -17,7 +17,7 @@
     <property name="sun.os.patch.level" value=""/>
     <property name="test" value="project.pa165.musiclibrary.services.AlbumManagerImplTest"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\Milan\Documents\NetBeansProjects\MusicLibrary"/>
+    <property name="user.dir" value="C:\Users\Milan\Documents\GitHub\MusicLibrary"/>
     <property name="java.runtime.version" value="1.8.0_05-b13"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_05\jre\lib\endorsed"/>
@@ -28,7 +28,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 8.1"/>
-    <property name="maven.ext.class.path" value="C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar"/>
+    <property name="maven.ext.class.path" value="C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar"/>
     <property name="classworlds.conf" value="C:\IDE\netbeans\java\maven\bin\m2.conf"/>
     <property name="sun.jnu.encoding" value="Cp1250"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\OpenVPN\bin;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Calibre2\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\Nmap;."/>
@@ -46,7 +46,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_05\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=project.pa165.musiclibrary.services.AlbumManagerImplTest -Dmaven.ext.class.path=C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 surefire:test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=project.pa165.musiclibrary.services.AlbumManagerImplTest -Dmaven.ext.class.path=C:\IDE\netbeans\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 surefire:test"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="user.language.format" value="sk"/>
@@ -64,14 +64,14 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testCreatedAlbumProperties" time="0.32"/>
-  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testDeleteAlbum" time="0.079"/>
-  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testUpdateAlbum" time="0.057"/>
-  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testCreateAlbum" time="0.07"/>
-  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testFindAlbumByTitleOnEmptyDb" time="0.2"/>
-  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testFindAlbumByTitleWithUniqueTitle" time="0.108"/>
-  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testGetAllAlbums" time="0.064"/>
-  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testFindAlbumByTitleWithMultipleSameTitleAlbum" time="0.053"/>
-  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testFindAlbum" time="0.042"/>
-  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testFindAlbumOnEmptyDb" time="0.047"/>
+  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testCreatedAlbumProperties" time="0.312"/>
+  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testDeleteAlbum" time="0.078"/>
+  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testUpdateAlbum" time="0.047"/>
+  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testCreateAlbum" time="0.047"/>
+  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testFindAlbumByTitleOnEmptyDb" time="0.188"/>
+  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testFindAlbumByTitleWithUniqueTitle" time="0.078"/>
+  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testGetAllAlbums" time="0.063"/>
+  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testFindAlbumByTitleWithMultipleSameTitleAlbum" time="0.063"/>
+  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testFindAlbum" time="0.047"/>
+  <testcase classname="project.pa165.musiclibrary.services.AlbumManagerImplTest" name="testFindAlbumOnEmptyDb" time="0.05"/>
 </testsuite>

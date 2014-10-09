@@ -7,6 +7,7 @@ package project.pa165.musiclibrary.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
- *
+ * Artist Entity.
+ * 
  * @author Milan
  */
 @Entity
@@ -35,7 +37,7 @@ public class Artist implements Serializable {
     private String note;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<Song> songs;
+    private List<Song> songs;
 
     public Long getId() {
         return id;
@@ -65,7 +67,7 @@ public class Artist implements Serializable {
         return songs;
     }
 
-    public void setSongs(Collection<Song> songs) {
+    public void setSongs(List<Song> songs) {
         this.songs = songs;
     }
 

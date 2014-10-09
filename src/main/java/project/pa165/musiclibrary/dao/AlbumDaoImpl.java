@@ -4,10 +4,19 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import project.pa165.musiclibrary.entities.Album;
 
+/**
+ * Implementation of AlbumDao.
+ * 
+ * @author Milan
+ */
 @Repository
-public class AlbumDaoImpl extends GenericDaoImpl<Album> implements AlbumDao {
+public class AlbumDaoImpl extends AbstractGenericDaoImpl<Album> implements AlbumDao {
 
+    /**
+     * Sets specific type for genericDao.
+     */
     public AlbumDaoImpl() {
+        super();
         setType(Album.class);
     }
 

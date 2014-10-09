@@ -16,7 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- *
+ * Song Entity.
+ * 
  * @author Milan
  */
 @Entity
@@ -45,7 +46,7 @@ public class Song implements Serializable {
     private Integer bitrate;
 
     @Column
-    private String string;
+    private String note;
     
     @ManyToOne(cascade = CascadeType.ALL)
     private Artist artist;
@@ -102,11 +103,11 @@ public class Song implements Serializable {
     }
 
     public String getString() {
-        return string;
+        return note;
     }
 
     public void setString(String string) {
-        this.string = string;
+        this.note = string;
     }
 
     public Artist getArtist() {
@@ -147,7 +148,7 @@ public class Song implements Serializable {
     public String toString() {
         return "Song{" + "id=" + id + ", title=" + title + ", trackNumber="
                 + trackNumber + ", lenght=" + lenght + ", genre=" + genre 
-                + ", bitrate=" + bitrate + ", string=" + string + ", artist="
+                + ", bitrate=" + bitrate + ", string=" + note + ", artist="
                 + artist + ", album=" + album + '}';
     }
 }

@@ -1,5 +1,10 @@
 package project.pa165.musiclibrary.entities;
 
+/**
+ * Basic music genre enum.
+ * 
+ * @author Milan
+ */
 public enum Genre {
 
     ALTERNATIVE,

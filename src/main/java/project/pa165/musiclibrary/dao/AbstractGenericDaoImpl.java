@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project.pa165.musiclibrary.dao;
 
 import java.util.List;
@@ -11,23 +6,34 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- *
+ * Implementation of basic CRUD operations and common queries.
+ * 
  * @author Milan
  * @param <T>
  */
-public abstract class GenericDaoImpl<T> implements GenericDao<T> {
+public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
 
     private Class<T> type;
 
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void setType(final Class<T> type) {
+    /**
+     * Set type for current context.
+     * 
+     * @param type
+     */
+    public void setType(Class<T> type) {
 
         this.type = type;
     }
 
-    protected final Session getCurrentSession() {
+    /**
+     * Get session bound to a context.
+     * 
+     * @return          current Session
+     */
+    protected Session getCurrentSession() {
 
         return sessionFactory.getCurrentSession();
     }
