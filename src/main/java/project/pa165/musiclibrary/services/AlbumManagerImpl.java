@@ -20,25 +20,25 @@ public class AlbumManagerImpl implements AlbumManager {
 
     @Override
     @Transactional
-    public void createAlbum(Album album) {
+    public void createAlbum(final Album album) {
         albumDao.create(album);
     }
 
     @Override
     @Transactional
-    public void deleteAlbum(Long id) {
+    public void deleteAlbum(final Long id) {
         albumDao.delete(id);
     }
 
     @Override
     @Transactional
-    public void updateAlbum(Album album) {
+    public void updateAlbum(final Album album) {
         albumDao.update(album);
     }
 
     @Override
     @Transactional
-    public Album findAlbum(Long id) {
+    public Album findAlbum(final Long id) {
         return albumDao.find(id);
     }
 
@@ -50,7 +50,7 @@ public class AlbumManagerImpl implements AlbumManager {
 
     @Override
     @Transactional
-    public List<Album> findAlbumByTitle(String title) {
+    public List<Album> findAlbumByTitle(final String title) {
         return albumDao.findAlbumByTitle(title);
     }
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project.pa165.musiclibrary.services;
 
 import java.util.ArrayList;
@@ -52,6 +47,9 @@ public class AlbumManagerImplTest {
         assertNotNull(album.getId());
     }
 
+    /**
+     *
+     */
     @Test
     public void testCreatedAlbumProperties() {
 
@@ -120,6 +118,9 @@ public class AlbumManagerImplTest {
         assertEquals(album, actual);
     }
 
+    /**
+     *
+     */
     @Test
     public void testFindAlbumOnEmptyDb() {
         assertNull(albumManager.findAlbum(1l));
@@ -235,6 +236,9 @@ public class AlbumManagerImplTest {
         deepAssert(expected.toArray(), actual.toArray());
     }
 
+    /**
+     *
+     */
     @Test
     public void testFindAlbumByTitleOnEmptyDb() {
         assertEquals(albumManager.findAlbumByTitle("Unity").size(), 0);

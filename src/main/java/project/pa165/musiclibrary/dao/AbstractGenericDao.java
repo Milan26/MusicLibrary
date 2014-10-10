@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Milan
  * @param <T>
  */
-public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
+public abstract class AbstractGenericDao<T> implements GenericDao<T> {
 
     private Class<T> type;
 
@@ -21,15 +21,15 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
     /**
      * Set type for current context.
      * 
-     * @param type
+     * @param type      type of current context
      */
-    public void setType(Class<T> type) {
+    public void setType(final Class<T> type) {
 
         this.type = type;
     }
 
     /**
-     * Get session bound to a context.
+     * Get session bound to a current context.
      * 
      * @return          current Session
      */
@@ -39,25 +39,25 @@ public abstract class AbstractGenericDaoImpl<T> implements GenericDao<T> {
     }
 
     @Override
-    public void create(T t) {
+    public void create(final T t) {
         getCurrentSession().save(t);
     }
 
     @Override
-    public void update(T t) {
+    public void update(final T t) {
         getCurrentSession().update(t);
     }
 
     @Override
-    public void delete(Long id) {
-        T obj = (T) getCurrentSession().get(type, id);
-        if (null != obj) {
+    public void delete(final Long id) {
+        final T obj = (T) getCurrentSession().get(type, id);
+        if (obj != null) {
             getCurrentSession().delete(obj);
         }
     }
 
     @Override
-    public T find(Long id) {
+    public T find(final Long id) {
         return (T) getCurrentSession().get(type, id);
     }
 

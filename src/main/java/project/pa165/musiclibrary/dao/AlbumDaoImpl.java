@@ -10,7 +10,7 @@ import project.pa165.musiclibrary.entities.Album;
  * @author Milan
  */
 @Repository
-public class AlbumDaoImpl extends AbstractGenericDaoImpl<Album> implements AlbumDao {
+public class AlbumDaoImpl extends AbstractGenericDao<Album> implements AlbumDao {
 
     /**
      * Sets specific type for genericDao.
@@ -21,7 +21,7 @@ public class AlbumDaoImpl extends AbstractGenericDaoImpl<Album> implements Album
     }
 
     @Override
-    public List<Album> findAlbumByTitle(String title) {
+    public List<Album> findAlbumByTitle(final String title) {
         return getCurrentSession()
                 .createQuery("SELECT a FROM Album a WHERE a.title = :title ")
                 .setParameter("title", title)
