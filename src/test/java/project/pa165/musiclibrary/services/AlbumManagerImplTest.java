@@ -21,7 +21,7 @@ import project.pa165.musiclibrary.entities.Album;
 
 /**
  *
- * @author Milan
+ * @author Martin
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext.xml")

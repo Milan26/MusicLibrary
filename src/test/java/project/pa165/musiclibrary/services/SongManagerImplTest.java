@@ -29,40 +29,29 @@ import project.pa165.musiclibrary.entities.Song;
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
 public class SongManagerImplTest {
-   
+
     @Autowired
     private SongManager songManager;
+
     /**
      * Test of createSong method, of class SongManagerImpl.
      */
     @Test
     public void testCreateSong() {
-        Song song = new Song();
-        song.setTitle("Walk");    
-        song.setBitrate(320);
-        song.setGenre(Genre.ROCK);
-        song.setLenght(200);
-        song.setNote("test");
-        song.setTrackNumber((short)1);
-        
+        Song song = createSong("Walk", (short) 1, 200, Genre.ROCK, 320, "test");
+
         assertNull(song.getId());
         songManager.createSong(song);
         assertNotNull(song.getId());
     }
-    
-    public void testCreatedSongProperties(){
-        Song song = new Song();
-        song.setTitle("Walk");    
-        song.setBitrate(320);
-        song.setGenre(Genre.ROCK);
-        song.setLenght(200);
-        song.setNote("test");
-        song.setTrackNumber((short)1);
-        
+
+    public void testCreatedSongProperties() {
+        Song song = createSong("Walk", (short) 1, 200, Genre.ROCK, 320, "test");
+
         assertNull(song.getId());
         songManager.createSong(song);
         assertNotNull(song.getId());
-        
+
         Long id = song.getId();
         assertNotNull(id);
 
@@ -82,18 +71,12 @@ public class SongManagerImplTest {
      */
     @Test
     public void testDeleteSong() {
-        Song song = new Song();
-        song.setTitle("Walk");    
-        song.setBitrate(320);
-        song.setGenre(Genre.ROCK);
-        song.setLenght(200);
-        song.setNote("test");
-        song.setTrackNumber((short)1);
-        
+        Song song = createSong("Walk", (short) 1, 200, Genre.ROCK, 320, "test");
+
         assertNull(song.getId());
         songManager.createSong(song);
         assertNotNull(song.getId());
-        
+
         songManager.deleteSong(song.getId());
         assertNull(songManager.findSong(song.getId()));
     }
@@ -103,11 +86,7 @@ public class SongManagerImplTest {
      */
     @Test
     public void testUpdateSong() {
-        Song song = new Song();
-        song.setTitle("Walk");    
-        song.setGenre(Genre.ROCK);
-        song.setLenght(200);
-        song.setTrackNumber((short)1);
+        Song song = createSong("Walk", (short) 1, 200, Genre.ROCK, null, null);
 
         assertNull(song.getId());
         songManager.createSong(song);
@@ -129,24 +108,18 @@ public class SongManagerImplTest {
 
         assertEquals(song, actual);
     }
-    
+
     /**
      * Test of findSong method, of class SongManagerImpl.
      */
     @Test
     public void testFindSong() {
-        Song song = new Song();
-        song.setTitle("Walk");    
-        song.setBitrate(320);
-        song.setGenre(Genre.ROCK);
-        song.setLenght(200);
-        song.setNote("test");
-        song.setTrackNumber((short)1);
-        
+        Song song = createSong("Walk", (short) 1, 200, Genre.ROCK, 320, "test");
+
         assertNull(song.getId());
         songManager.createSong(song);
         assertNotNull(song.getId());
-        
+
         assertNotNull(songManager.findSong(1l));
 
         assertEquals(song, songManager.findSong(1l));
@@ -157,28 +130,15 @@ public class SongManagerImplTest {
      */
     @Test
     public void testGetAllSongs() {
-        Song song1 = new Song();
-        song1.setTitle("Walk");    
-        song1.setBitrate(320);
-        song1.setGenre(Genre.ROCK);
-        song1.setLenght(200);
-        song1.setNote("test");
-        song1.setTrackNumber((short)1);
-        
-        Song song2 = new Song();
-        song2.setTitle("Arlandria");    
-        song2.setBitrate(128);
-        song2.setGenre(Genre.ROCK);
-        song2.setLenght(300);
-        song2.setNote("test");
-        song2.setTrackNumber((short)2);
-        
+        Song song1 = createSong("Walk", (short) 1, 200, Genre.ROCK, 320, "test");
+        Song song2 = createSong("Arlandria", (short) 2, 300, Genre.ROCK, 128, "test");
+
         assertNull(song1.getId());
         assertNull(song2.getId());
         songManager.createSong(song1);
         songManager.createSong(song2);
         assertEquals(songManager.getAllSongs().size(), 2);
-        
+
         List<Song> expected = new ArrayList<>();
         expected.add(song1);
         expected.add(song2);
@@ -193,74 +153,48 @@ public class SongManagerImplTest {
      */
     @Test
     public void testFindSongByTitle() {
-        Song song1 = new Song();
-        song1.setTitle("Walk");    
-        song1.setBitrate(320);
-        song1.setGenre(Genre.ROCK);
-        song1.setLenght(200);
-        song1.setNote("test");
-        song1.setTrackNumber((short)1);
-        
-        Song song2 = new Song();
-        song2.setTitle("Arlandria");    
-        song2.setBitrate(128);
-        song2.setGenre(Genre.ROCK);
-        song2.setLenght(300);
-        song2.setNote("test");
-        song2.setTrackNumber((short)2);
-        
+        Song song1 = createSong("Walk", (short) 1, 200, Genre.ROCK, 320, "test");
+        Song song2 = createSong("Arlandria", (short) 2, 300, Genre.ROCK, 128, "test");
+
         assertNull(song1.getId());
         assertNull(song2.getId());
         songManager.createSong(song1);
         songManager.createSong(song2);
-        
+
         assertEquals(songManager.getAllSongs().size(), 2);
 
         List<Song> expected = new ArrayList<>();
         expected.add(song2);
         List<Song> actual = songManager.findSongByTitle("Arl");
-        
+
         assertArrayEquals(expected.toArray(), actual.toArray());
         deepAssert(expected.toArray(), actual.toArray());
     }
-    
+
     /**
      * Test of findSongByTitle method, of class SongManagerImpl.
      */
     @Test
     public void testFindSongsByTitle() {
-        Song song1 = new Song();
-        song1.setTitle("wAlk");    
-        song1.setBitrate(320);
-        song1.setGenre(Genre.ROCK);
-        song1.setLenght(200);
-        song1.setNote("test");
-        song1.setTrackNumber((short)1);
-        
-        Song song2 = new Song();
-        song2.setTitle("walking");    
-        song2.setBitrate(128);
-        song2.setGenre(Genre.ROCK);
-        song2.setLenght(300);
-        song2.setNote("test");
-        song2.setTrackNumber((short)2);
-        
+        Song song1 = createSong("wAlk", (short) 1, 200, Genre.ROCK, 320, "test");
+        Song song2 = createSong("walking", (short) 2, 300, Genre.ROCK, 128, "test");
+
         assertNull(song1.getId());
         assertNull(song2.getId());
         songManager.createSong(song1);
         songManager.createSong(song2);
-        
+
         assertEquals(songManager.getAllSongs().size(), 2);
 
         List<Song> expected = new ArrayList<>();
         expected.add(song1);
         expected.add(song2);
         List<Song> actual = songManager.findSongByTitle("Walk");
-        
+
         assertArrayEquals(expected.toArray(), actual.toArray());
         deepAssert(expected.toArray(), actual.toArray());
     }
-    
+
     /**
      *
      */
@@ -268,7 +202,19 @@ public class SongManagerImplTest {
     public void testFindSongByTitleOnEmptyDb() {
         assertEquals(songManager.findSongByTitle("Unity").size(), 0);
     }
-    
+
+    private Song createSong(String title, Short trackNumber, Integer length,
+            Genre genre, Integer bitrate, String note) {
+        Song song = new Song();
+        song.setTitle(title);
+        song.setTrackNumber(trackNumber);
+        song.setLenght(length);
+        song.setGenre(genre);
+        song.setBitrate(bitrate);
+        song.setNote(note);
+        return song;
+    }
+
     private void deepAssert(Object[] arr1, Object[] arr2) {
         assertEquals(arr1.length, arr2.length);
 
@@ -284,5 +230,5 @@ public class SongManagerImplTest {
             assertEquals(song1.getTrackNumber(), song2.getTrackNumber());
         }
     }
-    
+
 }

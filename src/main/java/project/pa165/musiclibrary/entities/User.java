@@ -26,16 +26,16 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, length = 255)
+    @Column
     private String email;
     
-    @Column(nullable = false, length = 40)
+    @Column
     private String firstName;
     
-    @Column(nullable = false, length = 40)
+    @Column
     private String lastName;
     
-    @Column(nullable = false, length = 26)
+    @Column
     private String password;
     
     @Column
