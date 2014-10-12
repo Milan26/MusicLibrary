@@ -23,8 +23,7 @@ public class AlbumDaoImpl extends AbstractGenericDao<Album> implements AlbumDao 
     @Override
     public List<Album> findAlbumByTitle(final String title) {
         return getCurrentSession()
-                .createQuery("SELECT a FROM Album a WHERE a.title = :title ")
-                .setParameter("title", title)
+                .createQuery("SELECT a FROM Album a WHERE lower(a.title) LIKE lower('%" + title + "%')")
                 .list();
     }
 
