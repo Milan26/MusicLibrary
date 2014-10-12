@@ -9,7 +9,7 @@ import project.pa165.musiclibrary.entities.User;
 
 /**
  * Implementation of UserManager
- * 
+ *
  * @author Martin
  */
 @Service

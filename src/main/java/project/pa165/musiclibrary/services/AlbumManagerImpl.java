@@ -9,7 +9,7 @@ import project.pa165.musiclibrary.entities.Album;
 
 /**
  * Implementation of AlbumManager
- * 
+ *
  * @author Milan
  */
 @Service

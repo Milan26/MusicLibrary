@@ -1,6 +1,7 @@
 package project.pa165.musiclibrary.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.joda.time.LocalDate;
@@ -38,9 +39,8 @@ public class AlbumManagerImplTest {
     @Test
     public void testCreateAlbum() {
 
-        Album album = new Album();
-        album.setTitle("Unity");
-        album.setReleaseDate(new LocalDate(1991, 2, 6).toDate());
+        Album album = createUser("Unity", new LocalDate(1991, 2, 6).toDate(),
+                "http://pathtocoverart.com", "Just testing Unity album");
 
         assertNull(album.getId());
         albumManager.createAlbum(album);
@@ -53,11 +53,8 @@ public class AlbumManagerImplTest {
     @Test
     public void testCreatedAlbumProperties() {
 
-        Album album = new Album();
-        album.setTitle("Unity");
-        album.setReleaseDate(new LocalDate(1991, 2, 6).toDate());
-        album.setCoverArt("http://pathtocoverart.com");
-        album.setNote("Just testing Unity album");
+        Album album = createUser("Unity", new LocalDate(1991, 2, 6).toDate(),
+                "http://pathtocoverart.com", "Just testing Unity album");
 
         assertNull(album.getId());
         albumManager.createAlbum(album);
@@ -77,9 +74,8 @@ public class AlbumManagerImplTest {
      */
     @Test
     public void testDeleteAlbum() {
-        Album album = new Album();
-        album.setTitle("Unity");
-        album.setReleaseDate(new LocalDate(1991, 2, 6).toDate());
+        Album album = createUser("Unity", new LocalDate(1991, 2, 6).toDate(),
+                "http://pathtocoverart.com", "Just testing Unity album");
 
         assertNull(album.getId());
         albumManager.createAlbum(album);
@@ -93,9 +89,8 @@ public class AlbumManagerImplTest {
      */
     @Test
     public void testUpdateAlbum() {
-        Album album = new Album();
-        album.setTitle("Unity");
-        album.setReleaseDate(new LocalDate(1991, 2, 6).toDate());
+        Album album = createUser("Unity", new LocalDate(1991, 2, 6).toDate(),
+                null, null);
 
         assertNull(album.getId());
         albumManager.createAlbum(album);
@@ -131,9 +126,8 @@ public class AlbumManagerImplTest {
      */
     @Test
     public void testFindAlbum() {
-        Album album = new Album();
-        album.setTitle("Unity");
-        album.setReleaseDate(new LocalDate(1991, 2, 6).toDate());
+        Album album = createUser("Unity", new LocalDate(1991, 2, 6).toDate(),
+                "http://pathtocoverart.com", "Just testing Unity album");
 
         assertNull(album.getId());
         albumManager.createAlbum(album);
@@ -149,16 +143,10 @@ public class AlbumManagerImplTest {
      */
     @Test
     public void testGetAllAlbums() {
-        Album album1 = new Album();
-        album1.setTitle("Unity");
-        album1.setReleaseDate(new LocalDate(1991, 2, 6).toDate());
-        album1.setCoverArt("http://pathtocoverart.com");
-        album1.setNote("Just testing Unity album");
-        Album album2 = new Album();
-        album2.setTitle("Hello");
-        album2.setReleaseDate(new LocalDate(2001, 1, 1).toDate());
-        album1.setCoverArt("http://blabla.com");
-        album1.setNote("I am hungry");
+        Album album1 = createUser("Unity", new LocalDate(1991, 2, 6).toDate(),
+                "http://pathtocoverart.com", "Just testing Unity album");
+        Album album2 = createUser("Hello", new LocalDate(2001, 1, 1).toDate(),
+                "http://blabla.com", "I am hungry");
 
         assertNull(album1.getId());
         assertNull(album2.getId());
@@ -180,16 +168,10 @@ public class AlbumManagerImplTest {
      */
     @Test
     public void testFindAlbumByTitleWithUniqueTitle() {
-        Album album1 = new Album();
-        album1.setTitle("Unity");
-        album1.setReleaseDate(new LocalDate(1991, 2, 6).toDate());
-        album1.setCoverArt("http://pathtocoverart.com");
-        album1.setNote("Just testing Unity album");
-        Album album2 = new Album();
-        album2.setTitle("Hello");
-        album2.setReleaseDate(new LocalDate(2001, 1, 1).toDate());
-        album1.setCoverArt("http://blabla.com");
-        album1.setNote("I am hungry");
+        Album album1 = createUser("Unity", new LocalDate(1991, 2, 6).toDate(),
+                "http://pathtocoverart.com", "Just testing Unity album");
+        Album album2 = createUser("Hello", new LocalDate(2001, 1, 1).toDate(),
+                "http://blabla.com", "I am hungry");
 
         assertNull(album1.getId());
         assertNull(album2.getId());
@@ -210,16 +192,10 @@ public class AlbumManagerImplTest {
      */
     @Test
     public void testFindAlbumByTitleWithMultipleSameTitleAlbum() {
-        Album album1 = new Album();
-        album1.setTitle("Unity");
-        album1.setReleaseDate(new LocalDate(1991, 2, 6).toDate());
-        album1.setCoverArt("http://pathtocoverart.com");
-        album1.setNote("Just testing Unity album");
-        Album album2 = new Album();
-        album2.setTitle("Unity");
-        album2.setReleaseDate(new LocalDate(2001, 1, 1).toDate());
-        album1.setCoverArt("http://blabla.com");
-        album1.setNote("I am hungry");
+        Album album1 = createUser("Unity", new LocalDate(1991, 2, 6).toDate(),
+                "http://pathtocoverart.com", "Just testing Unity album");
+        Album album2 = createUser("Hello", new LocalDate(2001, 1, 1).toDate(),
+                "http://blabla.com", "I am hungry");
 
         assertNull(album1.getId());
         assertNull(album2.getId());
@@ -242,6 +218,16 @@ public class AlbumManagerImplTest {
     @Test
     public void testFindAlbumByTitleOnEmptyDb() {
         assertEquals(albumManager.findAlbumByTitle("Unity").size(), 0);
+    }
+    
+    private Album createUser(String title, Date releaseDate,
+            String coverArt, String note) {
+        Album album = new Album();
+        album.setTitle(title);
+        album.setReleaseDate(releaseDate);
+        album.setCoverArt(coverArt);
+        album.setNote(note);
+        return album;
     }
     
     private void deepAssert(Object[] arr1, Object[] arr2) {

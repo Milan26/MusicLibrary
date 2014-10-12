@@ -102,12 +102,12 @@ public class Song implements Serializable {
         this.bitrate = bitrate;
     }
 
-    public String getString() {
+    public String getNote() {
         return note;
     }
 
-    public void setString(String string) {
-        this.note = string;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public Artist getArtist() {
@@ -148,7 +148,7 @@ public class Song implements Serializable {
     public String toString() {
         return "Song{" + "id=" + id + ", title=" + title + ", trackNumber="
                 + trackNumber + ", lenght=" + lenght + ", genre=" + genre 
-                + ", bitrate=" + bitrate + ", string=" + note + ", artist="
+                + ", bitrate=" + bitrate + ", note=" + note + ", artist="
                 + artist + ", album=" + album + '}';
     }
 }

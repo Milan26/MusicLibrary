@@ -16,5 +16,5 @@ public interface SongDao extends GenericDao<Song>  {
      * @param title     name of song or songs
      * @return          return list of all songs that satisfy given parameter
      */
-    public List<Song> findSongByTitle(String title);
+    List<Song> findSongByTitle(String title);
 }

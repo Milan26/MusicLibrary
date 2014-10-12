@@ -12,7 +12,8 @@ import project.pa165.musiclibrary.entities.Artist;
  * @author Matúš
  */
 @Service
-public class ArtistManagerImpl implements ArtistManager{
+public class ArtistManagerImpl implements ArtistManager {
+
     @Autowired
     private ArtistDao artistDao;
 
