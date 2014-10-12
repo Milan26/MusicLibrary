@@ -11,7 +11,7 @@ import project.pa165.musiclibrary.entities.Artist;
 public interface ArtistDao extends GenericDao<Artist> {
 
      /**
-     * Get all albums with same title as given parameter.
+     * Get all artists with same title as given parameter.
      *
      * @param name      name of artist or artists
      * @return          return list of all artists that satisfy given parameter
