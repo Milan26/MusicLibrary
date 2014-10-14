@@ -1,15 +1,7 @@
 package project.pa165.musiclibrary.services;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.transaction.Transactional;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,8 +9,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import project.pa165.musiclibrary.entities.User;
 
+import javax.inject.Inject;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
+
 /**
- *
  * @author Milan
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,7 +26,7 @@ import project.pa165.musiclibrary.entities.User;
 @TransactionConfiguration(defaultRollback = true)
 public class UserManagerImplTest {
 
-    @Autowired
+    @Inject
     private UserManager userManager;
 
     /**
@@ -93,7 +91,6 @@ public class UserManagerImplTest {
         assertNotNull(id);
 
 
-
         user.setEmail("john@doel.com");
         user.setPassword("p4sswordddd");
 
@@ -154,7 +151,7 @@ public class UserManagerImplTest {
         assertArrayEquals(expected.toArray(), actual.toArray());
         deepAssert(expected.toArray(), actual.toArray());
     }
-    
+
     private User createUser(String firstName, String secondName, String email, String password) {
         User user = new User();
         user.setFirstName(firstName);

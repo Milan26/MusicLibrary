@@ -5,13 +5,8 @@
  */
 package project.pa165.musiclibrary.services;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.transaction.Transactional;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -19,8 +14,14 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import project.pa165.musiclibrary.entities.Genre;
 import project.pa165.musiclibrary.entities.Song;
 
+import javax.inject.Inject;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
+
 /**
- *
  * @author Matus
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,7 +31,7 @@ import project.pa165.musiclibrary.entities.Song;
 @TransactionConfiguration(defaultRollback = true)
 public class SongManagerImplTest {
 
-    @Autowired
+    @Inject
     private SongManager songManager;
 
     /**
@@ -204,7 +205,7 @@ public class SongManagerImplTest {
     }
 
     private Song createSong(String title, Short trackNumber, Integer length,
-            Genre genre, Integer bitrate, String note) {
+                            Genre genre, Integer bitrate, String note) {
         Song song = new Song();
         song.setTitle(title);
         song.setTrackNumber(trackNumber);

@@ -1,15 +1,16 @@
 package project.pa165.musiclibrary.dao;
 
-import java.util.List;
-import org.springframework.stereotype.Repository;
 import project.pa165.musiclibrary.entities.Artist;
+
+import javax.inject.Named;
+import java.util.List;
 
 /**
  * Implementation of ArtistDao.
- * 
+ *
  * @author Matúš
  */
-@Repository
+@Named
 public class ArtistDaoImpl extends AbstractGenericDao<Artist> implements ArtistDao {
 
     /**

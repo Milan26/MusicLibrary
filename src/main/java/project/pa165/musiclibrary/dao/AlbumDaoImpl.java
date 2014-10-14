@@ -1,15 +1,16 @@
 package project.pa165.musiclibrary.dao;
 
-import java.util.List;
-import org.springframework.stereotype.Repository;
 import project.pa165.musiclibrary.entities.Album;
+
+import javax.inject.Named;
+import java.util.List;
 
 /**
  * Implementation of AlbumDao.
- * 
+ *
  * @author Milan
  */
-@Repository
+@Named
 public class AlbumDaoImpl extends AbstractGenericDao<Album> implements AlbumDao {
 
     /**

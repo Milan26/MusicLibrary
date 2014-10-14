@@ -1,23 +1,21 @@
 package project.pa165.musiclibrary.services;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.transaction.Transactional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import project.pa165.musiclibrary.entities.Artist;
 
+import javax.inject.Inject;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
+
 /**
- *
  * @author Alex
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,7 +24,8 @@ import project.pa165.musiclibrary.entities.Artist;
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
 public class ArtistManagerImplTest {
-    @Autowired
+
+    @Inject
     private ArtistManager artistManager;
 
     /**
@@ -71,7 +70,7 @@ public class ArtistManagerImplTest {
     public void testDeleteArtist() {
         Artist artist = new Artist();
         artist.setName("The Testers");
-        
+
         assertNull(artist.getId());
         artistManager.createArtist(artist);
 
@@ -86,7 +85,7 @@ public class ArtistManagerImplTest {
     public void testUpdateArtist() {
         Artist artist = new Artist();
         artist.setName("The Testers");
-        
+
         assertNull(artist.getId());
         artistManager.createArtist(artist);
         assertNotNull(artist.getId());
@@ -106,7 +105,7 @@ public class ArtistManagerImplTest {
     }
 
     /**
-     *Test of findArtist method, on empty database.
+     * Test of findArtist method, on empty database.
      */
     @Test
     public void testFindArtistOnEmptyDb() {
@@ -120,7 +119,7 @@ public class ArtistManagerImplTest {
     public void testFindArtist() {
         Artist artist = new Artist();
         artist.setName("The Testers");
-        
+
         assertNull(artist.getId());
         artistManager.createArtist(artist);
 
@@ -141,7 +140,7 @@ public class ArtistManagerImplTest {
         Artist artist2 = new Artist();
         artist2.setName("Testing Unit");
         artist2.setNote("Testing Unit testing");
- 
+
         assertNull(artist1.getId());
         assertNull(artist2.getId());
         artistManager.createArtist(artist1);
@@ -183,7 +182,7 @@ public class ArtistManagerImplTest {
         assertArrayEquals(expected.toArray(), test.toArray());
         deepAssert(expected.toArray(), test.toArray());
     }
-    
+
     /**
      * Test of findArtistByName method, of class ArtistManagerImpl.
      */
@@ -218,7 +217,7 @@ public class ArtistManagerImplTest {
     public void testFindArtistByNameOnEmptyDb() {
         assertEquals(artistManager.findArtistByName("The Testers").size(), 0);
     }
-    
+
     private void deepAssert(Object[] arr1, Object[] arr2) {
         assertEquals(arr1.length, arr2.length);
 

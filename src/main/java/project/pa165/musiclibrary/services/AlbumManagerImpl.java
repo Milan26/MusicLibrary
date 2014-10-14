@@ -1,55 +1,51 @@
 package project.pa165.musiclibrary.services;
 
-import java.util.List;
-import javax.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import project.pa165.musiclibrary.dao.AlbumDao;
 import project.pa165.musiclibrary.entities.Album;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Implementation of AlbumManager
  *
  * @author Milan
  */
-@Service
+@Named
+@Transactional
 public class AlbumManagerImpl implements AlbumManager {
 
-    @Autowired
+    @Inject
     private AlbumDao albumDao;
 
     @Override
-    @Transactional
     public void createAlbum(final Album album) {
         albumDao.create(album);
     }
 
     @Override
-    @Transactional
     public void deleteAlbum(final Long id) {
         albumDao.delete(id);
     }
 
     @Override
-    @Transactional
     public void updateAlbum(final Album album) {
         albumDao.update(album);
     }
 
     @Override
-    @Transactional
     public Album findAlbum(final Long id) {
         return albumDao.find(id);
     }
 
     @Override
-    @Transactional
     public List<Album> getAllAlbums() {
         return albumDao.getAll();
     }
 
     @Override
-    @Transactional
     public List<Album> findAlbumByTitle(final String title) {
         return albumDao.findAlbumByTitle(title);
     }

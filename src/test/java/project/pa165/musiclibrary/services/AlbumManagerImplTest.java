@@ -1,17 +1,8 @@
 package project.pa165.musiclibrary.services;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.transaction.Transactional;
 import org.joda.time.LocalDate;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,8 +10,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import project.pa165.musiclibrary.entities.Album;
 
+import javax.inject.Inject;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static org.junit.Assert.*;
+
 /**
- *
  * @author Martin
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,7 +28,7 @@ import project.pa165.musiclibrary.entities.Album;
 @TransactionConfiguration(defaultRollback = true)
 public class AlbumManagerImplTest {
 
-    @Autowired
+    @Inject
     private AlbumManager albumManager;
 
     /**
@@ -186,7 +184,7 @@ public class AlbumManagerImplTest {
         assertArrayEquals(expected.toArray(), actual.toArray());
         deepAssert(expected.toArray(), actual.toArray());
     }
-    
+
     /**
      * Test of findAlbumByTitle method, of class AlbumManagerImpl.
      */
@@ -219,9 +217,9 @@ public class AlbumManagerImplTest {
     public void testFindAlbumByTitleOnEmptyDb() {
         assertEquals(albumManager.findAlbumByTitle("Unity").size(), 0);
     }
-    
+
     private Album createUser(String title, Date releaseDate,
-            String coverArt, String note) {
+                             String coverArt, String note) {
         Album album = new Album();
         album.setTitle(title);
         album.setReleaseDate(releaseDate);
@@ -229,7 +227,7 @@ public class AlbumManagerImplTest {
         album.setNote(note);
         return album;
     }
-    
+
     private void deepAssert(Object[] arr1, Object[] arr2) {
         assertEquals(arr1.length, arr2.length);
 
