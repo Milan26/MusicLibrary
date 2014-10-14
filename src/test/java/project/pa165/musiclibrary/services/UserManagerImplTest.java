@@ -88,16 +88,17 @@ public class UserManagerImplTest {
 
         assertNull(user.getId());
         userManager.createUser(user);
-        assertNotNull(user.getId());
 
         Long id = user.getId();
-        User actual = userManager.findUser(id);
+        assertNotNull(id);
+
+
 
         user.setEmail("john@doel.com");
         user.setPassword("p4sswordddd");
 
         userManager.updateUser(user);
-        actual = userManager.findUser(id);
+        User actual = userManager.findUser(id);
 
         assertNotNull(actual.getEmail());
         assertNotNull(actual.getPassword());
@@ -157,7 +158,7 @@ public class UserManagerImplTest {
     private User createUser(String firstName, String secondName, String email, String password) {
         User user = new User();
         user.setFirstName(firstName);
-        user.setLastName(firstName);
+        user.setLastName(secondName);
         user.setEmail(email);
         user.setPassword(password);
         return user;

@@ -48,6 +48,7 @@ public abstract class AbstractGenericDao<T> implements GenericDao<T> {
         getCurrentSession().update(t);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void delete(final Long id) {
         final T obj = (T) getCurrentSession().get(type, id);
@@ -56,11 +57,13 @@ public abstract class AbstractGenericDao<T> implements GenericDao<T> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public T find(final Long id) {
         return (T) getCurrentSession().get(type, id);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<T> getAll() {
         return (List<T>) getCurrentSession().createCriteria(type).list();

@@ -21,5 +21,5 @@ public enum Genre {
     SOUL,
     REGGAE,
     ROCK,
-    SOUNDTRACK;
+    SOUNDTRACK
 }

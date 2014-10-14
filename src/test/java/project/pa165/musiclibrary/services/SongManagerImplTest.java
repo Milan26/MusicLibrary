@@ -59,7 +59,7 @@ public class SongManagerImplTest {
         assertEquals(song.getTitle(), actual.getTitle());
         assertEquals(song.getBitrate(), actual.getBitrate());
         assertEquals(song.getGenre(), actual.getGenre());
-        assertEquals(song.getLenght(), actual.getLenght());
+        assertEquals(song.getLength(), actual.getLength());
         assertEquals(song.getTrackNumber(), actual.getTrackNumber());
         assertEquals(song.getNote(), actual.getNote());
         assertNull(song.getAlbum());
@@ -103,7 +103,7 @@ public class SongManagerImplTest {
         songManager.updateSong(song);
         actual = songManager.findSong(id);
 
-        assertNotNull(actual.getLenght());
+        assertNotNull(actual.getLength());
         assertNotNull(actual.getNote());
 
         assertEquals(song, actual);
@@ -208,7 +208,7 @@ public class SongManagerImplTest {
         Song song = new Song();
         song.setTitle(title);
         song.setTrackNumber(trackNumber);
-        song.setLenght(length);
+        song.setLength(length);
         song.setGenre(genre);
         song.setBitrate(bitrate);
         song.setNote(note);
@@ -225,7 +225,7 @@ public class SongManagerImplTest {
             assertEquals(song1.getTitle(), song2.getTitle());
             assertEquals(song1.getBitrate(), song2.getBitrate());
             assertEquals(song1.getGenre(), song2.getGenre());
-            assertEquals(song1.getLenght(), song2.getLenght());
+            assertEquals(song1.getLength(), song2.getLength());
             assertEquals(song1.getNote(), song2.getNote());
             assertEquals(song1.getTrackNumber(), song2.getTrackNumber());
         }
