@@ -1,7 +1,8 @@
 package project.pa165.musiclibrary.dao;
 
-import java.util.List;
 import project.pa165.musiclibrary.entities.Album;
+
+import java.util.List;
 
 /**
  * Base interface for operations and queries on Album entity.
