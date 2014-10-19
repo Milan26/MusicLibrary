@@ -1,73 +1,67 @@
 package project.pa165.musiclibrary.dao;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
  * Implementation of basic CRUD operations and common queries.
- * 
- * @author Milan
+ *
  * @param <T>
+ * @author Milan
  */
 public abstract class AbstractGenericDao<T> implements GenericDao<T> {
 
     private Class<T> type;
+    private EntityManager entityManager;
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
 
-    /**
-     * Set type for current context.
-     * 
-     * @param type      type of current context
-     */
-    public void setType(final Class<T> type) {
-
-        this.type = type;
+    @PersistenceContext
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     /**
-     * Get session bound to a current context.
-     * 
-     * @return          current Session
+     * Set type for current context.
+     *
+     * @param type type of current context
      */
-    protected Session getCurrentSession() {
-
-        return sessionFactory.getCurrentSession();
+    public void setType(final Class<T> type) {
+        this.type = type;
     }
 
     @Override
     public void create(final T t) {
-        getCurrentSession().save(t);
+        getEntityManager().persist(t);
     }
 
     @Override
     public void update(final T t) {
-        getCurrentSession().update(t);
+        getEntityManager().merge(t);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public void delete(final Long id) {
-        final T obj = (T) getCurrentSession().get(type, id);
+        final T obj = find(id);
         if (obj != null) {
-            getCurrentSession().delete(obj);
+            getEntityManager().remove(obj);
         }
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public T find(final Long id) {
-        return (T) getCurrentSession().get(type, id);
+        return getEntityManager().find(type, id);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public List<T> getAll() {
-        return (List<T>) getCurrentSession().createCriteria(type).list();
+        return getEntityManager().createQuery("FROM " + type.getName(), type).getResultList();
     }
 
 }

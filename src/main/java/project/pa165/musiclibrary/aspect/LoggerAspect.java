@@ -29,7 +29,7 @@ public class LoggerAspect {
         try {
             result = joinPoint.proceed();
         } catch (Throwable throwable) {
-            LOG.error(getMessage(joinPoint.getSignature().getName(), joinPoint.getArgs(), result), throwable);
+            LOG.error(getMessage(joinPoint.getSignature().getName(), joinPoint.getArgs(), null), throwable);
         }
         logMessage(joinPoint.getSignature().getName(), joinPoint.getArgs(), result);
         return result;
@@ -40,9 +40,6 @@ public class LoggerAspect {
     }
 
     private String getMessage(String methodName, Object[] methodArguments, Object result) {
-        StringBuilder messageBuilder = new StringBuilder(methodName).append("(");
-        messageBuilder.append(Arrays.toString(methodArguments));
-        messageBuilder.append("): ").append(result);
-        return messageBuilder.toString();
+        return methodName + "(" + Arrays.toString(methodArguments) + "): " + result;
     }
 }

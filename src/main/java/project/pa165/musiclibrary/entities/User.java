@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project.pa165.musiclibrary.entities;
 
 import javax.persistence.*;
@@ -10,7 +5,7 @@ import java.io.Serializable;
 
 /**
  * User Entity.
- * 
+ *
  * @author Milan
  */
 @Entity
@@ -18,26 +13,26 @@ import java.io.Serializable;
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, length = 255)
     private String email;
-    
+
     @Column(nullable = false, length = 40)
     private String firstName;
-    
+
     @Column(nullable = false, length = 40)
     private String lastName;
-    
+
     @Column(nullable = false, length = 26)
     private String password;
-    
+
     @Column
     private String role;
-    
+
     public Long getId() {
         return id;
     }
@@ -77,7 +72,7 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public String getRole() {
         return role;
     }
@@ -85,7 +80,7 @@ public class User implements Serializable {
     public void setRole(String role) {
         this.role = role;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;

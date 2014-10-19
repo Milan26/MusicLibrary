@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project.pa165.musiclibrary.entities;
 
 import javax.persistence.*;
@@ -13,7 +8,7 @@ import java.util.List;
 
 /**
  * Album Entity.
- * 
+ *
  * @author Milan
  */
 @Entity
@@ -32,9 +27,6 @@ public class Album implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date releaseDate;
 
-    /**
-     * TODO: type?
-     */
     @Column
     private String coverArt;
 
