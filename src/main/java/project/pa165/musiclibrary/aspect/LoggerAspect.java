@@ -29,16 +29,20 @@ public class LoggerAspect {
         try {
             result = joinPoint.proceed();
         } catch (Throwable throwable) {
-            LOG.error(joinPoint.getSignature().getName() + " " + Arrays.toString(joinPoint.getArgs()), throwable);
+            LOG.error(getMessage(joinPoint.getSignature().getName(), joinPoint.getArgs(), result), throwable);
         }
         logMessage(joinPoint.getSignature().getName(), joinPoint.getArgs(), result);
         return result;
     }
 
     private void logMessage(String methodName, Object[] methodArguments, Object result) {
+        LOG.info(getMessage(methodName, methodArguments, result));
+    }
+
+    private String getMessage(String methodName, Object[] methodArguments, Object result) {
         StringBuilder messageBuilder = new StringBuilder(methodName).append("(");
         messageBuilder.append(Arrays.toString(methodArguments));
         messageBuilder.append("): ").append(result);
-        LOG.info(messageBuilder.toString());
+        return messageBuilder.toString();
     }
 }

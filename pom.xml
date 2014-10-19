@@ -20,6 +20,7 @@
         <aspectj.version>1.7.3</aspectj.version>
         <junit.version>4.11</junit.version>
         <commons.version>1.4</commons.version>
+        <javaee.version>7.0</javaee.version>
         <joda-time.version>2.5</joda-time.version>
     </properties>
 
@@ -101,7 +102,7 @@
         <!-- Spring AOP + AspectJ -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
+            <artifactId>spring-aspects</artifactId>
             <version>${spring.version}</version>
         </dependency>
         <dependency>
@@ -127,16 +128,16 @@
             <artifactId>commons-dbcp</artifactId>
             <version>${commons.version}</version>
         </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>${javaee.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
             <version>${joda-time.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
         </dependency>
 
     </dependencies>

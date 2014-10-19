@@ -17,37 +17,45 @@ import java.util.List;
 @Transactional
 public class AlbumManagerImpl implements AlbumManager {
 
-    @Inject
     private AlbumDao albumDao;
+
+    public AlbumDao getAlbumDao() {
+        return albumDao;
+    }
+
+    @Inject
+    public void setAlbumDao(AlbumDao albumDao) {
+        this.albumDao = albumDao;
+    }
 
     @Override
     public void createAlbum(final Album album) {
-        albumDao.create(album);
+        getAlbumDao().create(album);
     }
 
     @Override
     public void deleteAlbum(final Long id) {
-        albumDao.delete(id);
+        getAlbumDao().delete(id);
     }
 
     @Override
     public void updateAlbum(final Album album) {
-        albumDao.update(album);
+        getAlbumDao().update(album);
     }
 
     @Override
     public Album findAlbum(final Long id) {
-        return albumDao.find(id);
+        return getAlbumDao().find(id);
     }
 
     @Override
     public List<Album> getAllAlbums() {
-        return albumDao.getAll();
+        return getAlbumDao().getAll();
     }
 
     @Override
     public List<Album> findAlbumByTitle(final String title) {
-        return albumDao.findAlbumByTitle(title);
+        return getAlbumDao().findAlbumByTitle(title);
     }
 
 }

@@ -15,37 +15,45 @@ import java.util.List;
 @Transactional
 public class ArtistManagerImpl implements ArtistManager {
 
-    @Inject
     private ArtistDao artistDao;
+
+    public ArtistDao getArtistDao() {
+        return artistDao;
+    }
+
+    @Inject
+    public void setArtistDao(ArtistDao artistDao) {
+        this.artistDao = artistDao;
+    }
 
     @Override
     public void createArtist(final Artist artist) {
-        artistDao.create(artist);
+        getArtistDao().create(artist);
     }
 
     @Override
     public void deleteArtist(final Long id) {
-        artistDao.delete(id);
+        getArtistDao().delete(id);
     }
 
     @Override
     public void updateArtist(final Artist artist) {
-        artistDao.update(artist);
+        getArtistDao().update(artist);
     }
 
     @Override
     public Artist findArtist(final Long id) {
-        return artistDao.find(id);
+        return getArtistDao().find(id);
     }
 
     @Override
     public List<Artist> getAllArtists() {
-        return artistDao.getAll();
+        return getArtistDao().getAll();
     }
 
     @Override
     public List<Artist> findArtistByName(final String name) {
-        return artistDao.findArtistByName(name);
+        return getArtistDao().findArtistByName(name);
     }
 
 }

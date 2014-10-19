@@ -17,32 +17,40 @@ import java.util.List;
 @Transactional
 public class UserManagerImpl implements UserManager {
 
-    @Inject
     private UserDao userDao;
+
+    public UserDao getUserDao() {
+        return userDao;
+    }
+
+    @Inject
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Override
     public void createUser(final User user) {
-        userDao.create(user);
+        getUserDao().create(user);
     }
 
     @Override
     public void deleteUser(final Long id) {
-        userDao.delete(id);
+        getUserDao().delete(id);
     }
 
     @Override
     public void updateUser(final User user) {
-        userDao.update(user);
+        getUserDao().update(user);
     }
 
     @Override
     public User findUser(final Long id) {
-        return userDao.find(id);
+        return getUserDao().find(id);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return userDao.getAll();
+        return getUserDao().getAll();
     }
 
 }
