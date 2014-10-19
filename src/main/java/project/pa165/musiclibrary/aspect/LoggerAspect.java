@@ -29,7 +29,7 @@ public class LoggerAspect {
         try {
             result = joinPoint.proceed();
         } catch (Throwable throwable) {
-            //LOG.fatal(joinPoint.getSignature().getName() + " " + Arrays.toString(joinPoint.getArgs()), throwable);
+            LOG.error(joinPoint.getSignature().getName() + " " + Arrays.toString(joinPoint.getArgs()), throwable);
         }
         logMessage(joinPoint.getSignature().getName(), joinPoint.getArgs(), result);
         return result;
