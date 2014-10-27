@@ -32,7 +32,7 @@ public class SongManagerImpl implements SongManager {
         try {
             getSongDao().create(song);
         } catch (DaoException e) {
-
+            // TODO
         }
     }
 
@@ -41,7 +41,7 @@ public class SongManagerImpl implements SongManager {
         try {
             getSongDao().delete(id);
         } catch (DaoException e) {
-
+            // TODO
         }
     }
 
@@ -50,7 +50,7 @@ public class SongManagerImpl implements SongManager {
         try {
             getSongDao().update(song);
         } catch (DaoException e) {
-
+            // TODO
         }
     }
 
@@ -60,7 +60,7 @@ public class SongManagerImpl implements SongManager {
         try {
             song = getSongDao().find(id);
         } catch (DaoException e) {
-
+            // TODO
         }
         return song;
     }
@@ -71,7 +71,7 @@ public class SongManagerImpl implements SongManager {
         try {
             allSongs = getSongDao().getAll();
         } catch (DaoException e) {
-
+            // TODO
         }
         return allSongs;
     }
@@ -82,7 +82,7 @@ public class SongManagerImpl implements SongManager {
         try {
             allMatchedSongs = getSongDao().findSongByTitle(title);
         } catch (DaoException e) {
-
+            // TODO
         }
         return allMatchedSongs;
     }

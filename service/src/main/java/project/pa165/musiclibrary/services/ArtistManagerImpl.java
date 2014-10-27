@@ -32,7 +32,7 @@ public class ArtistManagerImpl implements ArtistManager {
         try {
             getArtistDao().create(artist);
         } catch (DaoException e) {
-
+            // TODO
         }
     }
 
@@ -41,7 +41,7 @@ public class ArtistManagerImpl implements ArtistManager {
         try {
             getArtistDao().delete(id);
         } catch (DaoException e) {
-
+            // TODO
         }
     }
 
@@ -50,7 +50,7 @@ public class ArtistManagerImpl implements ArtistManager {
         try {
             getArtistDao().update(artist);
         } catch (DaoException e) {
-
+            // TODO
         }
     }
 
@@ -60,7 +60,7 @@ public class ArtistManagerImpl implements ArtistManager {
         try {
             artist = getArtistDao().find(id);
         } catch (DaoException e) {
-
+            // TODO
         }
         return artist;
     }
@@ -71,7 +71,7 @@ public class ArtistManagerImpl implements ArtistManager {
         try {
             allArtists = getArtistDao().getAll();
         } catch (DaoException e) {
-
+            // TODO
         }
         return allArtists;
     }
@@ -82,7 +82,7 @@ public class ArtistManagerImpl implements ArtistManager {
         try {
             allMatchedArtists = getArtistDao().findArtistByName(name);
         } catch (DaoException e) {
-
+            // TODO
         }
         return allMatchedArtists;
     }

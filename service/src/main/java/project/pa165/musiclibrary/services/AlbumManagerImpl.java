@@ -49,7 +49,7 @@ public class AlbumManagerImpl implements AlbumManager {
             if (albumDto != null) album = getDozerBeanMapper().map(albumDto, Album.class);
             getAlbumDao().create(album);
         } catch (DaoException daoEx) {
-
+            // TODO
         }
     }
 
@@ -58,7 +58,7 @@ public class AlbumManagerImpl implements AlbumManager {
         try {
             getAlbumDao().delete(id);
         } catch (DaoException daoEx) {
-
+            // TODO
         }
     }
 
@@ -69,7 +69,7 @@ public class AlbumManagerImpl implements AlbumManager {
             if (albumDto != null) album = getDozerBeanMapper().map(albumDto, Album.class);
             getAlbumDao().update(album);
         } catch (DaoException daoEx) {
-
+            // TODO
         }
     }
 
@@ -79,7 +79,7 @@ public class AlbumManagerImpl implements AlbumManager {
         try {
             album = getAlbumDao().find(id);
         } catch (DaoException daoEx) {
-
+            // TODO
         }
         return album != null ? getDozerBeanMapper().map(album, AlbumDto.class) : null;
     }
@@ -90,7 +90,7 @@ public class AlbumManagerImpl implements AlbumManager {
         try {
             allAlbums = getAlbumDao().getAll();
         } catch (DaoException daoEx) {
-
+            // TODO
         }
         return getMappedAlbumDtoCollection(allAlbums);
     }
@@ -101,7 +101,7 @@ public class AlbumManagerImpl implements AlbumManager {
         try {
             allMatchedAlbums = getAlbumDao().findAlbumByTitle(title);
         } catch (DaoException daoEx) {
-
+            // TODO
         }
         return getMappedAlbumDtoCollection(allMatchedAlbums);
     }

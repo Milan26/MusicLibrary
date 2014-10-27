@@ -34,7 +34,7 @@ public class UserManagerImpl implements UserManager {
         try {
             getUserDao().create(user);
         } catch (DaoException e) {
-
+            // TODO
         }
     }
 
@@ -43,7 +43,7 @@ public class UserManagerImpl implements UserManager {
         try {
             getUserDao().delete(id);
         } catch (DaoException e) {
-
+            // TODO
         }
     }
 
@@ -52,7 +52,7 @@ public class UserManagerImpl implements UserManager {
         try {
             getUserDao().update(user);
         } catch (DaoException e) {
-
+            // TODO
         }
     }
 
@@ -62,7 +62,7 @@ public class UserManagerImpl implements UserManager {
         try {
             user = getUserDao().find(id);
         } catch (DaoException e) {
-
+            // TODO
         }
         return user;
     }
@@ -73,7 +73,7 @@ public class UserManagerImpl implements UserManager {
         try {
             allUsers = getUserDao().getAll();
         } catch (DaoException e) {
-
+            // TODO
         }
         return allUsers;
     }
