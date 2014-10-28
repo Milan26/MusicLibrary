@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
  * @author Milan
  */
 @RunWith(MockitoJUnitRunner.class)
-public class AlbumDtoManagerImplTest {
+public class AlbumManagerImplTest {
 
     private Album album1;
     private Album album2;
