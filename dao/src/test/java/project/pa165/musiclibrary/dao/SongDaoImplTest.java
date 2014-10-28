@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
  * @author Matus
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/applicationContext-persistence-test.xml")
+@ContextConfiguration("classpath:/applicationContext-dao.xml")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
@@ -89,7 +89,7 @@ public class SongDaoImplTest {
         assertNotEquals("Updated note", actual.getNote());
 
         song1.setGenre(Genre.ALTERNATIVE);
-        song1.setBitrate(Integer.valueOf(198));
+        song1.setBitrate(198);
         song1.setNote("Updated note");
 
         getSongDao().update(song1);
@@ -138,12 +138,8 @@ public class SongDaoImplTest {
 
     @Test
     public void testGetAllAlbumsEmptyDb() throws DaoException {
-        List<Song> expected = new ArrayList<>();
-        assertEquals(expected.size(), 0);
         List<Song> actual = getSongDao().getAll();
         assertEquals(actual.size(), 0);
-
-        assertArrayEquals(expected.toArray(), actual.toArray());
     }
 
     @Test
@@ -200,8 +196,6 @@ public class SongDaoImplTest {
 
     @Test
     public void testFindAlbumByTitleOnEmptyDb() throws DaoException {
-        List<Song> expected = new ArrayList<>();
-        assertEquals(expected.size(), 0);
         List<Song> actual = getSongDao().getAll();
         assertEquals(actual.size(), 0);
 

@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
  * @author Alex
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/applicationContext-persistence-test.xml")
+@ContextConfiguration("classpath:/applicationContext-dao.xml")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
@@ -136,12 +136,8 @@ public class ArtistDaoImplTest {
 
     @Test
     public void testGetAllArtistsEmptyDb() throws DaoException {
-        List<Artist> expected = new ArrayList<>();
-        assertEquals(expected.size(), 0);
         List<Artist> actual = getArtistDao().getAll();
         assertEquals(actual.size(), 0);
-
-        assertArrayEquals(expected.toArray(), actual.toArray());
     }
 
     @Test
@@ -198,8 +194,6 @@ public class ArtistDaoImplTest {
 
     @Test
     public void testFindArtistByNameOnEmptyDb() throws DaoException {
-        List<Artist> expected = new ArrayList<>();
-        assertEquals(expected.size(), 0);
         List<Artist> actual = getArtistDao().getAll();
         assertEquals(actual.size(), 0);
 
