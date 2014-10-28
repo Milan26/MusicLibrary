@@ -24,12 +24,8 @@ public class SongDaoImpl extends AbstractGenericDao<Song> implements SongDao {
 
     @Override
     public List<Song> findSongByTitle(final String title) throws DaoException {
-        try {
-            return getEntityManager().createQuery("SELECT s FROM Song s WHERE lower(s.title) LIKE lower('%" + title +
-                    "%')", Song.class).getResultList();
-        } catch (Exception exception) {
-            throw new DaoException(exception);
-        }
+        return getEntityManager().createQuery("SELECT s FROM Song s WHERE lower(s.title) LIKE lower('%" + title +
+                "%')", Song.class).getResultList();
     }
 
 }

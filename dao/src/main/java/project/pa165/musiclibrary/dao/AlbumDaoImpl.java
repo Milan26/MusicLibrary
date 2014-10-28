@@ -24,12 +24,8 @@ public class AlbumDaoImpl extends AbstractGenericDao<Album> implements AlbumDao 
 
     @Override
     public List<Album> findAlbumByTitle(final String title) throws DaoException {
-        try {
-            return getEntityManager().createQuery("SELECT a FROM Album a WHERE lower(a.title) LIKE lower('%" + title
-                    + "%')", Album.class).getResultList();
-        } catch (Exception exception) {
-            throw new DaoException(exception);
-        }
+        return getEntityManager().createQuery("SELECT a FROM Album a WHERE lower(a.title) LIKE lower('%" + title +
+                "%')", Album.class).getResultList();
     }
 
 }

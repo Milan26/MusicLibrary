@@ -37,53 +37,33 @@ public abstract class AbstractGenericDao<T> implements GenericDao<T> {
 
     @Override
     public void create(final T t) throws DaoException {
-        try {
-            getEntityManager().persist(t);
-        } catch (Exception exception) {
-            throw new DaoException(exception);
-        }
+        getEntityManager().persist(t);
     }
 
     @Override
     public void update(final T t) throws DaoException {
-        try {
-            getEntityManager().merge(t);
-        } catch (Exception exception) {
-            throw new DaoException(exception);
-        }
+        getEntityManager().merge(t);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public void delete(final Long id) throws DaoException {
         final T obj = find(id);
-        try {
-            if (obj != null) {
-                getEntityManager().remove(obj);
-            }
-        } catch (Exception exception) {
-            throw new DaoException(exception);
+        if (obj != null) {
+            getEntityManager().remove(obj);
         }
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public T find(final Long id) throws DaoException {
-        try {
-            return getEntityManager().find(type, id);
-        } catch (Exception exception) {
-            throw new DaoException(exception);
-        }
+        return getEntityManager().find(type, id);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public List<T> getAll() throws DaoException {
-        try {
-            return getEntityManager().createQuery("FROM " + type.getName(), type).getResultList();
-        } catch (Exception exception) {
-            throw new DaoException(exception);
-        }
+        return getEntityManager().createQuery("FROM " + type.getName(), type).getResultList();
     }
 
 }

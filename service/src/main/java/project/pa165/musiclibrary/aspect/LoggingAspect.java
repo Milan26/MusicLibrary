@@ -19,9 +19,9 @@ import java.util.Arrays;
  * @author Milan
  */
 @Aspect
-public class LoggerAspect {
+public class LoggingAspect {
 
-    private final Logger LOG = LoggerFactory.getLogger(LoggerAspect.class);
+    private final Logger LOG = LoggerFactory.getLogger(LoggingAspect.class);
 
     @Around(value = "execution(* project.pa165.musiclibrary..*(..)) )")
     public Object onMethodExecution(ProceedingJoinPoint joinPoint) {

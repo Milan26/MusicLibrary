@@ -1,12 +1,11 @@
 package project.pa165.musiclibrary.exception;
 
+import org.springframework.dao.DataAccessException;
+
 /**
  * @author Milan
  */
-public class DaoException extends Exception {
-    public DaoException() {
-        super();
-    }
+public class DaoException extends DataAccessException {
 
     public DaoException(String message) {
         super(message);
@@ -14,9 +13,5 @@ public class DaoException extends Exception {
 
     public DaoException(String message, Throwable cause) {
         super(message, cause);
-    }
-
-    public DaoException(Throwable cause) {
-        super(cause);
     }
 }
