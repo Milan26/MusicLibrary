@@ -3,6 +3,7 @@ package project.pa165.musiclibrary.dao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -61,7 +62,7 @@ public class UserDaoImplTest {
         deepAssert(user1, actual);
     }
 
-    @Test(expected = DaoException.class)
+    @Test(expected = DataAccessException.class)
     public void testCreateUserNull() throws DaoException {
         getUserDao().create(null);
     }
@@ -74,7 +75,7 @@ public class UserDaoImplTest {
         assertNull(getUserDao().find(user1.getId()));
     }
 
-    @Test(expected = DaoException.class)
+    @Test(expected = DataAccessException.class)
     public void testDeleteUserNull() throws DaoException {
         getUserDao().delete(null);
     }
@@ -96,7 +97,7 @@ public class UserDaoImplTest {
         deepAssert(user1, actual);
     }
 
-    @Test(expected = DaoException.class)
+    @Test(expected = DataAccessException.class)
     public void testUpdateUserNull() throws DaoException {
         getUserDao().update(null);
     }
@@ -110,7 +111,7 @@ public class UserDaoImplTest {
         assertEquals(user1, actual);
     }
 
-    @Test(expected = DaoException.class)
+    @Test(expected = DataAccessException.class)
     public void testFindUserWithNullId() throws DaoException {
         getUserDao().find(user1.getId());
     }

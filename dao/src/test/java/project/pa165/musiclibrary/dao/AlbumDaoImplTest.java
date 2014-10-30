@@ -4,6 +4,7 @@ import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -63,7 +64,7 @@ public class AlbumDaoImplTest {
         deepAssert(album1, actual);
     }
 
-    @Test(expected = DaoException.class)
+    @Test(expected = DataAccessException.class)
     public void testCreateAlbumNull() throws DaoException {
         getAlbumDao().create(null);
     }
@@ -76,7 +77,7 @@ public class AlbumDaoImplTest {
         assertNull(getAlbumDao().find(album1.getId()));
     }
 
-    @Test(expected = DaoException.class)
+    @Test(expected = DataAccessException.class)
     public void testDeleteAlbumNull() throws DaoException {
         getAlbumDao().delete(null);
     }
@@ -98,7 +99,7 @@ public class AlbumDaoImplTest {
         deepAssert(album1, actual);
     }
 
-    @Test(expected = DaoException.class)
+    @Test(expected = DataAccessException.class)
     public void testUpdateAlbumNull() throws DaoException {
         getAlbumDao().update(null);
     }
@@ -112,7 +113,7 @@ public class AlbumDaoImplTest {
         assertEquals(album1, actual);
     }
 
-    @Test(expected = DaoException.class)
+    @Test(expected = DataAccessException.class)
     public void testFindAlbumWithNullId() throws DaoException {
         getAlbumDao().find(album1.getId());
     }

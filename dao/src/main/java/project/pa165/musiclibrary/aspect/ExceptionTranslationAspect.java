@@ -17,7 +17,7 @@ public class ExceptionTranslationAspect {
         try {
             result = joinPoint.proceed();
         } catch (Throwable throwable) {
-            throw new DaoException("error during execution: ", throwable);
+            throw new DaoException("error during execution on dao layer", throwable);
         }
         return result;
     }

@@ -1,5 +1,6 @@
 package project.pa165.musiclibrary.dao;
 
+import org.springframework.dao.DataAccessException;
 import project.pa165.musiclibrary.exception.DaoException;
 
 import javax.persistence.EntityManager;
@@ -36,18 +37,18 @@ public abstract class AbstractGenericDao<T> implements GenericDao<T> {
     }
 
     @Override
-    public void create(final T t) throws DaoException {
+    public void create(final T t) throws DataAccessException {
         getEntityManager().persist(t);
     }
 
     @Override
-    public void update(final T t) throws DaoException {
+    public void update(final T t) throws DataAccessException {
         getEntityManager().merge(t);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public void delete(final Long id) throws DaoException {
+    public void delete(final Long id) throws DataAccessException {
         final T obj = find(id);
         if (obj != null) {
             getEntityManager().remove(obj);
@@ -56,13 +57,13 @@ public abstract class AbstractGenericDao<T> implements GenericDao<T> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public T find(final Long id) throws DaoException {
+    public T find(final Long id) throws DataAccessException {
         return getEntityManager().find(type, id);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<T> getAll() throws DaoException {
+    public List<T> getAll() throws DataAccessException {
         return getEntityManager().createQuery("FROM " + type.getName(), type).getResultList();
     }
 
