@@ -13,10 +13,9 @@
     <import resource="classpath:/db-config.xml"/>
 
     <context:annotation-config/>
-    <context:component-scan base-package="project.pa165.musiclibrary.dao"/>
+    <context:component-scan base-package="project.pa165.musiclibrary"/>
 
     <aop:aspectj-autoproxy/>
-    <bean class="project.pa165.musiclibrary.aspect.ExceptionTranslationAspect"/>
 
     <tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/>
 

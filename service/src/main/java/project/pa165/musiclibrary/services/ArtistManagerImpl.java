@@ -2,7 +2,8 @@ package project.pa165.musiclibrary.services;
 
 import project.pa165.musiclibrary.dao.ArtistDao;
 import project.pa165.musiclibrary.entities.Artist;
-import project.pa165.musiclibrary.exception.DaoException;
+import project.pa165.musiclibrary.exception.PersistenceException;
+import project.pa165.musiclibrary.exception.ServiceException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,61 +29,61 @@ public class ArtistManagerImpl implements ArtistManager {
     }
 
     @Override
-    public void createArtist(final Artist artist) {
+    public void createArtist(final Artist artist) throws ServiceException {
         try {
             getArtistDao().create(artist);
-        } catch (DaoException e) {
-            // TODO
+        } catch (PersistenceException persistenceException) {
+            throw new ServiceException(persistenceException);
         }
     }
 
     @Override
-    public void deleteArtist(final Long id) {
+    public void deleteArtist(final Long id) throws ServiceException {
         try {
             getArtistDao().delete(id);
-        } catch (DaoException e) {
-            // TODO
+        } catch (PersistenceException persistenceException) {
+            throw new ServiceException(persistenceException);
         }
     }
 
     @Override
-    public void updateArtist(final Artist artist) {
+    public void updateArtist(final Artist artist) throws ServiceException {
         try {
             getArtistDao().update(artist);
-        } catch (DaoException e) {
-            // TODO
+        } catch (PersistenceException persistenceException) {
+            throw new ServiceException(persistenceException);
         }
     }
 
     @Override
-    public Artist findArtist(final Long id) {
+    public Artist findArtist(final Long id) throws ServiceException {
         Artist artist = null;
         try {
             artist = getArtistDao().find(id);
-        } catch (DaoException e) {
-            // TODO
+        } catch (PersistenceException persistenceException) {
+            throw new ServiceException(persistenceException);
         }
         return artist;
     }
 
     @Override
-    public List<Artist> getAllArtists() {
+    public List<Artist> getAllArtists() throws ServiceException {
         List<Artist> allArtists = null;
         try {
             allArtists = getArtistDao().getAll();
-        } catch (DaoException e) {
-            // TODO
+        } catch (PersistenceException persistenceException) {
+            throw new ServiceException(persistenceException);
         }
         return allArtists;
     }
 
     @Override
-    public List<Artist> findArtistByName(final String name) {
+    public List<Artist> findArtistByName(final String name) throws ServiceException {
         List<Artist> allMatchedArtists = null;
         try {
             allMatchedArtists = getArtistDao().findArtistByName(name);
-        } catch (DaoException e) {
-            // TODO
+        } catch (PersistenceException persistenceException) {
+            throw new ServiceException(persistenceException);
         }
         return allMatchedArtists;
     }

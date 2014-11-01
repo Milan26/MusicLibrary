@@ -1,7 +1,7 @@
 package project.pa165.musiclibrary.dao;
 
 import project.pa165.musiclibrary.entities.Artist;
-import project.pa165.musiclibrary.exception.DaoException;
+import project.pa165.musiclibrary.exception.PersistenceException;
 
 import javax.inject.Named;
 import java.util.List;
@@ -23,9 +23,13 @@ public class ArtistDaoImpl extends AbstractGenericDao<Artist> implements ArtistD
     }
 
     @Override
-    public List<Artist> findArtistByName(final String name) throws DaoException {
-        return getEntityManager().createQuery("SELECT a FROM Artist a WHERE lower(a.name) like lower('%" + name +
-                "%') ", Artist.class).getResultList();
+    public List<Artist> findArtistByName(final String name) throws PersistenceException {
+        try {
+            return getEntityManager().createQuery("SELECT a FROM Artist a WHERE lower(a.name) like lower('%" + name +
+                    "%') ", Artist.class).getResultList();
+        } catch (Exception ex) {
+            throw new PersistenceException(ex);
+        }
     }
 
 }

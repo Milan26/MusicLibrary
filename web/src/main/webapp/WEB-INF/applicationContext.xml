@@ -11,14 +11,10 @@
           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 
-    <import resource="classpath:/db-config.xml"/>
-
     <context:annotation-config/>
-    <context:component-scan base-package="project.pa165.musiclibrary.dao"/>
-    <context:component-scan base-package="project.pa165.musiclibrary.services"/>
+    <context:component-scan base-package="project.pa165.musiclibrary"/>
 
     <aop:aspectj-autoproxy/>
-    <bean class="project.pa165.musiclibrary.aspect.LoggerAspect"/>
 
     <tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/>
 
@@ -30,7 +26,6 @@
         <property name="persistenceUnitName" value="musicLibraryPU"/>
         <property name="dataSource" ref="dataSource"/>
     </bean>
-
 
     <bean id="mapper" class="org.dozer.DozerBeanMapper"/>
 </beans>

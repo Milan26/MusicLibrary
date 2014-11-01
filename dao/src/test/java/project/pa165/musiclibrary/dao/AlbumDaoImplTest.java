@@ -1,16 +1,16 @@
-package project.pa165.musiclibrary.dao;
+package project.pa165.musiclibrary.dao.tests;
 
 import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.dao.DataAccessException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import project.pa165.musiclibrary.dao.AlbumDao;
 import project.pa165.musiclibrary.entities.Album;
-import project.pa165.musiclibrary.exception.DaoException;
+import project.pa165.musiclibrary.exception.PersistenceException;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
  * @author Milan
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/applicationContext-dao.xml")
+@ContextConfiguration("classpath:/applicationContext-dao-test.xml")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
@@ -52,38 +52,38 @@ public class AlbumDaoImplTest {
     }
 
     @Test
-    public void testCreateAlbum() throws DaoException {
+    public void testCreateAlbum() throws PersistenceException {
         persist(album1);
     }
 
     @Test
-    public void testCreatedAlbumProperties() throws DaoException {
+    public void testCreatedAlbumProperties() throws PersistenceException {
         persist(album1);
 
         Album actual = getAlbumDao().find(album1.getId());
         deepAssert(album1, actual);
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testCreateAlbumNull() throws DaoException {
+    @Test(expected = PersistenceException.class)
+    public void testCreateAlbumNull() throws PersistenceException {
         getAlbumDao().create(null);
     }
 
     @Test
-    public void testDeleteAlbum() throws DaoException {
+    public void testDeleteAlbum() throws PersistenceException {
         persist(album1);
 
         getAlbumDao().delete(album1.getId());
         assertNull(getAlbumDao().find(album1.getId()));
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testDeleteAlbumNull() throws DaoException {
+    @Test(expected = PersistenceException.class)
+    public void testDeleteAlbumNull() throws PersistenceException {
         getAlbumDao().delete(null);
     }
 
     @Test
-    public void testUpdateAlbum() throws DaoException {
+    public void testUpdateAlbum() throws PersistenceException {
         persist(album1);
 
         Album actual = getAlbumDao().find(album1.getId());
@@ -99,13 +99,13 @@ public class AlbumDaoImplTest {
         deepAssert(album1, actual);
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testUpdateAlbumNull() throws DaoException {
+    @Test(expected = PersistenceException.class)
+    public void testUpdateAlbumNull() throws PersistenceException {
         getAlbumDao().update(null);
     }
 
     @Test
-    public void testFindAlbum() throws DaoException {
+    public void testFindAlbum() throws PersistenceException {
         persist(album1);
 
         Album actual = getAlbumDao().find(album1.getId());
@@ -113,18 +113,18 @@ public class AlbumDaoImplTest {
         assertEquals(album1, actual);
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testFindAlbumWithNullId() throws DaoException {
+    @Test(expected = PersistenceException.class)
+    public void testFindAlbumWithNullId() throws PersistenceException {
         getAlbumDao().find(album1.getId());
     }
 
     @Test
-    public void testFindAlbumWithWrongId() throws DaoException {
+    public void testFindAlbumWithWrongId() throws PersistenceException {
         assertNull(getAlbumDao().find(5l));
     }
 
     @Test
-    public void testGetAllAlbums() throws DaoException {
+    public void testGetAllAlbums() throws PersistenceException {
         persist(album1);
         persist(album2);
 
@@ -138,13 +138,13 @@ public class AlbumDaoImplTest {
     }
 
     @Test
-    public void testGetAllAlbumsEmptyDb() throws DaoException {
+    public void testGetAllAlbumsEmptyDb() throws PersistenceException {
         List<Album> actual = getAlbumDao().getAll();
         assertEquals(0, actual.size());
     }
 
     @Test
-    public void testFindAlbumByTitleWithUniqueTitle() throws DaoException {
+    public void testFindAlbumByTitleWithUniqueTitle() throws PersistenceException {
         persist(album1);
         persist(album2);
 
@@ -163,7 +163,7 @@ public class AlbumDaoImplTest {
     }
 
     @Test
-    public void testFindAlbumByTitleWithMultipleSameTitleAlbum() throws DaoException {
+    public void testFindAlbumByTitleWithMultipleSameTitleAlbum() throws PersistenceException {
         persist(album1);
         persist(album2);
 
@@ -182,7 +182,7 @@ public class AlbumDaoImplTest {
     }
 
     @Test
-    public void testFindAlbumByTitleWithAnyMatch() throws DaoException {
+    public void testFindAlbumByTitleWithAnyMatch() throws PersistenceException {
         persist(album1);
         persist(album2);
 
@@ -196,14 +196,14 @@ public class AlbumDaoImplTest {
     }
 
     @Test
-    public void testFindAlbumByTitleOnEmptyDb() throws DaoException {
+    public void testFindAlbumByTitleOnEmptyDb() throws PersistenceException {
         List<Album> actual = getAlbumDao().getAll();
         assertEquals(actual.size(), 0);
 
         assertEquals(getAlbumDao().findAlbumByTitle("Unity").size(), 0);
     }
 
-    private void persist(Album album) throws DaoException {
+    private void persist(Album album) throws PersistenceException {
         assertNull(album.getId());
         getAlbumDao().create(album);
         assertNotNull(album.getId());

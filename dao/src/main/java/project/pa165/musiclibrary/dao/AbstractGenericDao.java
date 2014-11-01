@@ -1,7 +1,6 @@
 package project.pa165.musiclibrary.dao;
 
-import org.springframework.dao.DataAccessException;
-import project.pa165.musiclibrary.exception.DaoException;
+import project.pa165.musiclibrary.exception.PersistenceException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -37,34 +36,54 @@ public abstract class AbstractGenericDao<T> implements GenericDao<T> {
     }
 
     @Override
-    public void create(final T t) throws DataAccessException {
-        getEntityManager().persist(t);
+    public void create(final T t) throws PersistenceException {
+        try {
+            getEntityManager().persist(t);
+        } catch (Exception ex) {
+            throw new PersistenceException(ex);
+        }
     }
 
     @Override
-    public void update(final T t) throws DataAccessException {
-        getEntityManager().merge(t);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public void delete(final Long id) throws DataAccessException {
-        final T obj = find(id);
-        if (obj != null) {
-            getEntityManager().remove(obj);
+    public void update(final T t) throws PersistenceException {
+        try {
+            getEntityManager().merge(t);
+        } catch (Exception ex) {
+            throw new PersistenceException(ex);
         }
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public T find(final Long id) throws DataAccessException {
-        return getEntityManager().find(type, id);
+    public void delete(final Long id) throws PersistenceException {
+        final T obj = find(id);
+        try {
+            if (obj != null) {
+                getEntityManager().remove(obj);
+            }
+        } catch (Exception ex) {
+            throw new PersistenceException(ex);
+        }
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<T> getAll() throws DataAccessException {
-        return getEntityManager().createQuery("FROM " + type.getName(), type).getResultList();
+    public T find(final Long id) throws PersistenceException {
+        try {
+            return getEntityManager().find(type, id);
+        } catch (Exception ex) {
+            throw new PersistenceException(ex);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<T> getAll() throws PersistenceException {
+        try {
+            return getEntityManager().createQuery("FROM " + type.getName(), type).getResultList();
+        } catch (Exception ex) {
+            throw new PersistenceException(ex);
+        }
     }
 
 }

@@ -1,7 +1,7 @@
 package project.pa165.musiclibrary.dao;
 
 import project.pa165.musiclibrary.entities.Album;
-import project.pa165.musiclibrary.exception.DaoException;
+import project.pa165.musiclibrary.exception.PersistenceException;
 
 import java.util.List;
 
@@ -18,5 +18,5 @@ public interface AlbumDao extends GenericDao<Album> {
      * @param title name of album or albums
      * @return return list of all albums that satisfy given parameter
      */
-    List<Album> findAlbumByTitle(String title) throws DaoException;
+    List<Album> findAlbumByTitle(String title) throws PersistenceException;
 }

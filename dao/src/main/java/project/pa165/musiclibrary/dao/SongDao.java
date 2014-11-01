@@ -1,7 +1,7 @@
 package project.pa165.musiclibrary.dao;
 
 import project.pa165.musiclibrary.entities.Song;
-import project.pa165.musiclibrary.exception.DaoException;
+import project.pa165.musiclibrary.exception.PersistenceException;
 
 import java.util.List;
 
@@ -18,5 +18,5 @@ public interface SongDao extends GenericDao<Song> {
      * @param title name of song or songs
      * @return return list of all songs that satisfy given parameter
      */
-    List<Song> findSongByTitle(String title) throws DaoException;
+    List<Song> findSongByTitle(String title) throws PersistenceException;
 }

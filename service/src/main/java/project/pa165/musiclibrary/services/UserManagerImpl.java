@@ -2,7 +2,8 @@ package project.pa165.musiclibrary.services;
 
 import project.pa165.musiclibrary.dao.UserDao;
 import project.pa165.musiclibrary.entities.User;
-import project.pa165.musiclibrary.exception.DaoException;
+import project.pa165.musiclibrary.exception.PersistenceException;
+import project.pa165.musiclibrary.exception.ServiceException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -30,50 +31,50 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public void createUser(final User user) {
+    public void createUser(final User user) throws ServiceException {
         try {
             getUserDao().create(user);
-        } catch (DaoException e) {
-            // TODO
+        } catch (PersistenceException persistenceException) {
+            throw new ServiceException(persistenceException);
         }
     }
 
     @Override
-    public void deleteUser(final Long id) {
+    public void deleteUser(final Long id) throws ServiceException {
         try {
             getUserDao().delete(id);
-        } catch (DaoException e) {
-            // TODO
+        } catch (PersistenceException persistenceException) {
+            throw new ServiceException(persistenceException);
         }
     }
 
     @Override
-    public void updateUser(final User user) {
+    public void updateUser(final User user) throws ServiceException {
         try {
             getUserDao().update(user);
-        } catch (DaoException e) {
-            // TODO
+        } catch (PersistenceException persistenceException) {
+            throw new ServiceException(persistenceException);
         }
     }
 
     @Override
-    public User findUser(final Long id) {
+    public User findUser(final Long id) throws ServiceException {
         User user = null;
         try {
             user = getUserDao().find(id);
-        } catch (DaoException e) {
-            // TODO
+        } catch (PersistenceException persistenceException) {
+            throw new ServiceException(persistenceException);
         }
         return user;
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers() throws ServiceException {
         List<User> allUsers = null;
         try {
             allUsers = getUserDao().getAll();
-        } catch (DaoException e) {
-            // TODO
+        } catch (PersistenceException persistenceException) {
+            throw new ServiceException(persistenceException);
         }
         return allUsers;
     }

@@ -12,7 +12,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import project.pa165.musiclibrary.dao.AlbumDao;
 import project.pa165.musiclibrary.dto.AlbumDto;
 import project.pa165.musiclibrary.entities.Album;
-import project.pa165.musiclibrary.exception.DaoException;
+import project.pa165.musiclibrary.exception.PersistenceException;
+import project.pa165.musiclibrary.exception.ServiceException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,8 +23,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * @author Milan
@@ -46,7 +46,7 @@ public class AlbumManagerImplTest {
     }
 
     @Before
-    public void setup() throws DaoException {
+    public void setup() throws PersistenceException {
         MockitoAnnotations.initMocks(this);
 
         albumManager = new AlbumManagerImpl();
@@ -68,57 +68,57 @@ public class AlbumManagerImplTest {
     }
 
     @Test
-    public void testCreateAlbum() throws DaoException {
+    public void testCreateAlbum() throws PersistenceException, ServiceException {
         ArgumentCaptor<Album> argumentCaptor = ArgumentCaptor.forClass(Album.class);
         getAlbumManager().createAlbum(albumDto1);
         verify(albumDao).create(argumentCaptor.capture());
         deepAssert(album1, argumentCaptor.getValue());
     }
 
-    //    @Test(expected = DaoException.class)
-    //    public void testCreateAlbumNull() throws DaoException {
-    //        doThrow(new DaoException("album")).when(albumDao).create(null);
-    //        albumManager.createAlbum(null);
-    //        verify(albumDao).create(null);
-    //    }
+    @Test(expected = ServiceException.class)
+    public void testCreateAlbumNull() throws PersistenceException, ServiceException {
+        doThrow(new PersistenceException("album")).when(albumDao).create(null);
+        albumManager.createAlbum(null);
+        verify(albumDao).create(null);
+    }
 
     @Test
-    public void testDeleteAlbum() throws DaoException {
+    public void testDeleteAlbum() throws PersistenceException, ServiceException {
         getAlbumManager().deleteAlbum(1l);
         verify(albumDao).delete(1l);
     }
 
-    //    @Test(expected = DaoException.class)
-    //    public void testDeleteAlbumNull() throws DaoException {
-    //        doThrow(new DaoException("id")).when(albumDao).delete(null);
-    //        albumManager.deleteAlbum(null);
-    //        verify(albumDao).delete(null);
-    //    }
+    @Test(expected = ServiceException.class)
+    public void testDeleteAlbumNull() throws PersistenceException, ServiceException {
+        doThrow(new PersistenceException("id")).when(albumDao).delete(null);
+        albumManager.deleteAlbum(null);
+        verify(albumDao).delete(null);
+    }
 
     @Test
-    public void testUpdateAlbum() throws DaoException {
+    public void testUpdateAlbum() throws PersistenceException, ServiceException {
         ArgumentCaptor<Album> argumentCaptor = ArgumentCaptor.forClass(Album.class);
         getAlbumManager().updateAlbum(albumDto1);
         verify(albumDao).update(argumentCaptor.capture());
         deepAssert(album1, argumentCaptor.getValue());
     }
 
-    //    @Test(expected = DaoException.class)
-    //    public void testUpdateAlbumNull() throws DaoException {
-    //        doThrow(new DaoException("album")).when(albumDao).update(null);
-    //        albumManager.updateAlbum(null);
-    //        verify(albumDao).update(null);
-    //    }
+    @Test(expected = ServiceException.class)
+    public void testUpdateAlbumNull() throws PersistenceException, ServiceException {
+        doThrow(new PersistenceException("album")).when(albumDao).update(null);
+        albumManager.updateAlbum(null);
+        verify(albumDao).update(null);
+    }
 
     @Test
-    public void testFindAlbum() throws DaoException {
+    public void testFindAlbum() throws PersistenceException, ServiceException {
         AlbumDto result = getAlbumManager().findAlbum(1l);
         verify(albumDao).find(1l);
         deepAssert(albumDto1, result);
     }
 
     @Test
-    public void testFindAlbumEmptyDb() throws DaoException {
+    public void testFindAlbumEmptyDb() throws PersistenceException, ServiceException {
         when(albumDao.find(any(Long.class))).thenReturn(null);
 
         AlbumDto result = getAlbumManager().findAlbum(1l);
@@ -127,14 +127,14 @@ public class AlbumManagerImplTest {
     }
 
     @Test
-    public void testFindAlbumWrongId() throws DaoException {
+    public void testFindAlbumWrongId() throws PersistenceException, ServiceException {
         AlbumDto result = getAlbumManager().findAlbum(3l);
         verify(albumDao).find(3l);
         assertNull(result);
     }
 
     @Test
-    public void testGetAllAlbums() throws DaoException {
+    public void testGetAllAlbums() throws PersistenceException, ServiceException {
         List<AlbumDto> allAlbums = Arrays.asList(albumDto1, albumDto2);
         List<AlbumDto> result = getAlbumManager().getAllAlbums();
 
@@ -145,7 +145,7 @@ public class AlbumManagerImplTest {
     }
 
     @Test
-    public void testGetAllAlbumsEmptyDb() throws DaoException {
+    public void testGetAllAlbumsEmptyDb() throws PersistenceException, ServiceException {
         when(albumDao.getAll()).thenReturn(new ArrayList<Album>());
 
         List<AlbumDto> result = getAlbumManager().getAllAlbums();
@@ -156,7 +156,7 @@ public class AlbumManagerImplTest {
     }
 
     @Test
-    public void testFindAlbumByTitleWithUniqueTitle() throws DaoException {
+    public void testFindAlbumByTitleWithUniqueTitle() throws PersistenceException, ServiceException {
         List<Album> allAlbums = Arrays.asList(album1);
         when(albumDao.findAlbumByTitle(any(String.class))).thenReturn(allAlbums);
 
@@ -169,7 +169,7 @@ public class AlbumManagerImplTest {
     }
 
     @Test
-    public void testFindAlbumByTitleWithMultipleSameTitleAlbum() throws DaoException {
+    public void testFindAlbumByTitleWithMultipleSameTitleAlbum() throws PersistenceException, ServiceException {
         List<Album> allAlbums = Arrays.asList(album1, album2);
         when(albumDao.findAlbumByTitle(any(String.class))).thenReturn(allAlbums);
 
@@ -182,7 +182,7 @@ public class AlbumManagerImplTest {
     }
 
     @Test
-    public void testFindAlbumByTitleEmptyDb() throws DaoException {
+    public void testFindAlbumByTitleEmptyDb() throws PersistenceException, ServiceException {
         when(albumDao.findAlbumByTitle(any(String.class))).thenReturn(new ArrayList<Album>());
 
         List<AlbumDto> result = getAlbumManager().findAlbumByTitle("Unity");

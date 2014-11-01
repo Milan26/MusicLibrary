@@ -1,19 +1,18 @@
-package project.pa165.musiclibrary.dao;
+package project.pa165.musiclibrary.dao.tests;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.dao.DataAccessException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import project.pa165.musiclibrary.dao.UserDao;
 import project.pa165.musiclibrary.entities.User;
-import project.pa165.musiclibrary.exception.DaoException;
+import project.pa165.musiclibrary.exception.PersistenceException;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,7 +22,7 @@ import static org.junit.Assert.*;
  * @author Martin
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/applicationContext-dao.xml")
+@ContextConfiguration("classpath:/applicationContext-dao-test.xml")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
@@ -50,38 +49,38 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void testCreateUser() throws DaoException {
+    public void testCreateUser() throws PersistenceException {
         persist(user1);
     }
 
     @Test
-    public void testCreatedUserProperties() throws DaoException {
+    public void testCreatedUserProperties() throws PersistenceException {
         persist(user1);
 
         User actual = getUserDao().find(user1.getId());
         deepAssert(user1, actual);
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testCreateUserNull() throws DaoException {
+    @Test(expected = PersistenceException.class)
+    public void testCreateUserNull() throws PersistenceException {
         getUserDao().create(null);
     }
 
     @Test
-    public void testDeleteUser() throws DaoException {
+    public void testDeleteUser() throws PersistenceException {
         persist(user1);
 
         getUserDao().delete(user1.getId());
         assertNull(getUserDao().find(user1.getId()));
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testDeleteUserNull() throws DaoException {
+    @Test(expected = PersistenceException.class)
+    public void testDeleteUserNull() throws PersistenceException {
         getUserDao().delete(null);
     }
 
     @Test
-    public void testUpdateUser() throws DaoException {
+    public void testUpdateUser() throws PersistenceException {
         persist(user1);
 
         User actual = getUserDao().find(user1.getId());
@@ -97,13 +96,13 @@ public class UserDaoImplTest {
         deepAssert(user1, actual);
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testUpdateUserNull() throws DaoException {
+    @Test(expected = PersistenceException.class)
+    public void testUpdateUserNull() throws PersistenceException {
         getUserDao().update(null);
     }
 
     @Test
-    public void testFindUser() throws DaoException {
+    public void testFindUser() throws PersistenceException {
         persist(user1);
 
         User actual = getUserDao().find(user1.getId());
@@ -111,18 +110,18 @@ public class UserDaoImplTest {
         assertEquals(user1, actual);
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testFindUserWithNullId() throws DaoException {
+    @Test(expected = PersistenceException.class)
+    public void testFindUserWithNullId() throws PersistenceException {
         getUserDao().find(user1.getId());
     }
 
     @Test
-    public void testFindUserWithWrongId() throws DaoException {
+    public void testFindUserWithWrongId() throws PersistenceException {
         assertNull(getUserDao().find(5l));
     }
 
     @Test
-    public void testGetAllUsers() throws DaoException {
+    public void testGetAllUsers() throws PersistenceException {
         persist(user1);
         persist(user2);
 
@@ -136,12 +135,12 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void testGetAllAlbumsEmptyDb() throws DaoException {
+    public void testGetAllAlbumsEmptyDb() throws PersistenceException {
         List<User> actual = getUserDao().getAll();
         assertEquals(actual.size(), 0);
     }
 
-    private void persist(User user) throws DaoException {
+    private void persist(User user) throws PersistenceException {
         assertNull(user.getId());
         getUserDao().create(user);
         assertNotNull(user.getId());

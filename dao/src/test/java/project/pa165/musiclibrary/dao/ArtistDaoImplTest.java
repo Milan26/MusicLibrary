@@ -1,15 +1,15 @@
-package project.pa165.musiclibrary.dao;
+package project.pa165.musiclibrary.dao.tests;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.dao.DataAccessException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import project.pa165.musiclibrary.dao.ArtistDao;
 import project.pa165.musiclibrary.entities.Artist;
-import project.pa165.musiclibrary.exception.DaoException;
+import project.pa165.musiclibrary.exception.PersistenceException;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
  * @author Alex
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/applicationContext-dao.xml")
+@ContextConfiguration("classpath:/applicationContext-dao-test.xml")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
@@ -50,38 +50,38 @@ public class ArtistDaoImplTest {
     }
 
     @Test
-    public void testCreateArtist() throws DaoException {
+    public void testCreateArtist() throws PersistenceException {
         persist(artist1);
     }
 
     @Test
-    public void testCreatedArtistProperties() throws DaoException {
+    public void testCreatedArtistProperties() throws PersistenceException {
         persist(artist1);
 
         Artist actual = getArtistDao().find(artist1.getId());
         deepAssert(artist1, actual);
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testCreateArtistNull() throws DaoException {
+    @Test(expected = PersistenceException.class)
+    public void testCreateArtistNull() throws PersistenceException {
         getArtistDao().create(null);
     }
 
     @Test
-    public void testDeleteArtist() throws DaoException {
+    public void testDeleteArtist() throws PersistenceException {
         persist(artist1);
 
         getArtistDao().delete(artist1.getId());
         assertNull(getArtistDao().find(artist1.getId()));
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testDeleteArtistNull() throws DaoException {
+    @Test(expected = PersistenceException.class)
+    public void testDeleteArtistNull() throws PersistenceException {
         getArtistDao().delete(null);
     }
 
     @Test
-    public void testUpdateArtist() throws DaoException {
+    public void testUpdateArtist() throws PersistenceException {
         persist(artist1);
 
         Artist actual = getArtistDao().find(artist1.getId());
@@ -97,13 +97,13 @@ public class ArtistDaoImplTest {
         deepAssert(artist1, actual);
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testUpdateArtistNull() throws DaoException {
+    @Test(expected = PersistenceException.class)
+    public void testUpdateArtistNull() throws PersistenceException {
         getArtistDao().update(null);
     }
 
     @Test
-    public void testFindArtist() throws DaoException {
+    public void testFindArtist() throws PersistenceException {
         persist(artist1);
 
         Artist actual = getArtistDao().find(artist1.getId());
@@ -111,18 +111,18 @@ public class ArtistDaoImplTest {
         assertEquals(artist1, actual);
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testFindArtistWithNullId() throws DaoException {
+    @Test(expected = PersistenceException.class)
+    public void testFindArtistWithNullId() throws PersistenceException {
         getArtistDao().find(artist1.getId());
     }
 
     @Test
-    public void testFindArtistWithWrongId() throws DaoException {
+    public void testFindArtistWithWrongId() throws PersistenceException {
         assertNull(getArtistDao().find(5l));
     }
 
     @Test
-    public void testGetAllArtists() throws DaoException {
+    public void testGetAllArtists() throws PersistenceException {
         persist(artist1);
         persist(artist2);
 
@@ -136,13 +136,13 @@ public class ArtistDaoImplTest {
     }
 
     @Test
-    public void testGetAllArtistsEmptyDb() throws DaoException {
+    public void testGetAllArtistsEmptyDb() throws PersistenceException {
         List<Artist> actual = getArtistDao().getAll();
         assertEquals(actual.size(), 0);
     }
 
     @Test
-    public void testFindArtistByNameWithUniqueName() throws DaoException {
+    public void testFindArtistByNameWithUniqueName() throws PersistenceException {
         persist(artist1);
         persist(artist2);
 
@@ -161,7 +161,7 @@ public class ArtistDaoImplTest {
     }
 
     @Test
-    public void testFindArtistByNameWithMultipleSameNameArtist() throws DaoException {
+    public void testFindArtistByNameWithMultipleSameNameArtist() throws PersistenceException {
         persist(artist1);
         persist(artist2);
 
@@ -180,7 +180,7 @@ public class ArtistDaoImplTest {
     }
 
     @Test
-    public void testFindArtistByNameWithAnyMatch() throws DaoException {
+    public void testFindArtistByNameWithAnyMatch() throws PersistenceException {
         persist(artist1);
         persist(artist2);
 
@@ -194,14 +194,14 @@ public class ArtistDaoImplTest {
     }
 
     @Test
-    public void testFindArtistByNameOnEmptyDb() throws DaoException {
+    public void testFindArtistByNameOnEmptyDb() throws PersistenceException {
         List<Artist> actual = getArtistDao().getAll();
         assertEquals(actual.size(), 0);
 
         assertEquals(getArtistDao().findArtistByName("Unity").size(), 0);
     }
 
-    private void persist(Artist artist) throws DaoException {
+    private void persist(Artist artist) throws PersistenceException {
         assertNull(artist.getId());
         getArtistDao().create(artist);
         assertNotNull(artist.getId());
