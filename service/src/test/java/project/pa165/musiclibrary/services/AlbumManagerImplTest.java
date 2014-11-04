@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -22,7 +23,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 /**
@@ -39,6 +39,7 @@ public class AlbumManagerImplTest {
     @Mock
     private AlbumDao albumDao;
 
+    @InjectMocks
     private AlbumManagerImpl albumManager;
 
     public AlbumManagerImpl getAlbumManager() {
@@ -49,8 +50,6 @@ public class AlbumManagerImplTest {
     public void setup() throws PersistenceException {
         MockitoAnnotations.initMocks(this);
 
-        albumManager = new AlbumManagerImpl();
-        albumManager.setAlbumDao(albumDao);
         albumManager.setDozerBeanMapper(new DozerBeanMapper());
 
         album1 = createAlbum(1l, "Unity", new LocalDate(1991, 2, 6).toDate(), "http://pathtocoverart.com", "album");

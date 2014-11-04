@@ -1,4 +1,4 @@
-package project.pa165.musiclibrary.dao.tests;
+package project.pa165.musiclibrary.dao;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -7,7 +7,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
-import project.pa165.musiclibrary.dao.ArtistDao;
 import project.pa165.musiclibrary.entities.Artist;
 import project.pa165.musiclibrary.exception.PersistenceException;
 
