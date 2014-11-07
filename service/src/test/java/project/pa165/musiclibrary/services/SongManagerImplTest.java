@@ -128,6 +128,13 @@ public class SongManagerImplTest {
         assertNull(result);
     }
 
+    @Test(expected = ServiceException.class)
+    public void testFindSongWithNullId() throws PersistenceException, ServiceException {
+        doThrow(new PersistenceException("id")).when(songDao).find(null);
+        getSongManager().findSong(null);
+        verify(songDao).find(null);
+    }
+
     @Test
     public void testGetAllSongs() throws PersistenceException, ServiceException {
         List<SongDto> allSongs = Arrays.asList(songDto1, songDto2);
@@ -148,6 +155,13 @@ public class SongManagerImplTest {
         verify(songDao).getAll();
 
         assertEquals(0, result.size());
+    }
+
+    @Test(expected = ServiceException.class)
+    public void testGetAllSongsWithExceptionOnPersistence() throws PersistenceException, ServiceException {
+        doThrow(new PersistenceException()).when(songDao).getAll();
+        getSongManager().getAllSongs();
+        verify(songDao).getAll();
     }
 
     @Test
