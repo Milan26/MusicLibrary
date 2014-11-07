@@ -9,12 +9,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
+import project.pa165.musiclibrary.dao.UserDao;
+import project.pa165.musiclibrary.dto.UserDto;
+import project.pa165.musiclibrary.entities.User;
 import project.pa165.musiclibrary.exception.PersistenceException;
 import project.pa165.musiclibrary.exception.ServiceException;
-
-import project.pa165.musiclibrary.entities.User;
-import project.pa165.musiclibrary.dto.UserDto;
-import project.pa165.musiclibrary.dao.UserDao;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,56 +43,6 @@ public class UserManagerImplTest {
     public UserManagerImpl getUserManager() {
         return userManager;
     }
-    
-    private User createUser(Long id, String email, String firstName, String lastName, String password, String role) {
-        User user = new User();
-        user.setId(id);
-        user.setEmail(email);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setPassword(password);
-        user.setRole(role);
-        return user;
-    }
-    
-    private UserDto createUserDto(Long id, String email, String firstName, String lastName, String password, String role) {
-        UserDto userDto = new UserDto();
-        userDto.setId(id);
-        userDto.setEmail(email);
-        userDto.setFirstName(firstName);
-        userDto.setLastName(lastName);
-        userDto.setPassword(password);
-        userDto.setRole(role);
-        return userDto;
-    }
-    
-    private void deepAssert(User user1, User user2) {
-        assertEquals(user1.getId(), user2.getId());
-        assertEquals(user1.getEmail(), user2.getEmail());
-        assertEquals(user1.getFirstName(), user2.getFirstName());
-        assertEquals(user1.getLastName(), user2.getLastName());
-        assertEquals(user1.getPassword(), user2.getPassword());
-        assertEquals(user1.getRole(), user2.getRole());
-    }
-
-    private void deepAssert(UserDto userDto1, UserDto userDto2) {
-        assertEquals(userDto1.getId(), userDto2.getId());
-        assertEquals(userDto1.getEmail(), userDto2.getEmail());
-        assertEquals(userDto1.getFirstName(), userDto2.getFirstName());
-        assertEquals(userDto1.getLastName(), userDto2.getLastName());
-        assertEquals(userDto1.getPassword(), userDto2.getPassword());
-        assertEquals(userDto1.getRole(), userDto2.getRole());
-    }
-
-    private void deepAssert(Object[] arr1, Object[] arr2) {
-        assertEquals(arr1.length, arr2.length);
-
-        for (int i = 0; i < arr1.length; i++) {
-            UserDto userDto1 = (UserDto) arr1[i];
-            UserDto userDto2 = (UserDto) arr2[i];
-            deepAssert(userDto1, userDto2);
-        }
-    }
 
     @Before
     public void setup() throws PersistenceException {
@@ -103,7 +52,7 @@ public class UserManagerImplTest {
 
         user1 = createUser(1l, "martinzahuta@gmail.com", "Martin", "Zahuta", "8+VV6L076X@1{<n", "canEdit");
         user2 = createUser(2l, "john@doe.com", "John", "Doe", "q1NF=1e5A.-B7qv", "canView");
-        
+
         userDto1 = createUserDto(1l, "martinzahuta@gmail.com", "Martin", "Zahuta", "8+VV6L076X@1{<n", "canEdit");
         userDto2 = createUserDto(2l, "john@doe.com", "John", "Doe", "q1NF=1e5A.-B7qv", "canView");
 
@@ -193,5 +142,56 @@ public class UserManagerImplTest {
         List<UserDto> result = getUserManager().getAllUsers();
         verify(userDao).getAll();
         assertEquals(0, result.size());
+    }
+
+    private User createUser(Long id, String email, String firstName, String lastName, String password, String role) {
+        User user = new User();
+        user.setId(id);
+        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPassword(password);
+        user.setRole(role);
+        return user;
+    }
+
+    private UserDto createUserDto(Long id, String email, String firstName, String lastName, String password,
+                                  String role) {
+        UserDto userDto = new UserDto();
+        userDto.setId(id);
+        userDto.setEmail(email);
+        userDto.setFirstName(firstName);
+        userDto.setLastName(lastName);
+        userDto.setPassword(password);
+        userDto.setRole(role);
+        return userDto;
+    }
+
+    private void deepAssert(User user1, User user2) {
+        assertEquals(user1.getId(), user2.getId());
+        assertEquals(user1.getEmail(), user2.getEmail());
+        assertEquals(user1.getFirstName(), user2.getFirstName());
+        assertEquals(user1.getLastName(), user2.getLastName());
+        assertEquals(user1.getPassword(), user2.getPassword());
+        assertEquals(user1.getRole(), user2.getRole());
+    }
+
+    private void deepAssert(UserDto userDto1, UserDto userDto2) {
+        assertEquals(userDto1.getId(), userDto2.getId());
+        assertEquals(userDto1.getEmail(), userDto2.getEmail());
+        assertEquals(userDto1.getFirstName(), userDto2.getFirstName());
+        assertEquals(userDto1.getLastName(), userDto2.getLastName());
+        assertEquals(userDto1.getPassword(), userDto2.getPassword());
+        assertEquals(userDto1.getRole(), userDto2.getRole());
+    }
+
+    private void deepAssert(Object[] arr1, Object[] arr2) {
+        assertEquals(arr1.length, arr2.length);
+
+        for (int i = 0; i < arr1.length; i++) {
+            UserDto userDto1 = (UserDto) arr1[i];
+            UserDto userDto2 = (UserDto) arr2[i];
+            deepAssert(userDto1, userDto2);
+        }
     }
 }

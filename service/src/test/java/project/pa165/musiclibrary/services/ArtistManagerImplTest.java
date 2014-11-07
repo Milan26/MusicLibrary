@@ -1,11 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package project.pa165.musiclibrary.services;
 
 import org.dozer.DozerBeanMapper;
-import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +17,6 @@ import project.pa165.musiclibrary.exception.ServiceException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -30,11 +24,11 @@ import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
 
 /**
- *
  * @author Matúš
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ArtistManagerImplTest {
+
     private Artist artist1;
     private Artist artist2;
     private ArtistDto artistDto1;
@@ -49,13 +43,11 @@ public class ArtistManagerImplTest {
     public ArtistManagerImpl getArtistManager() {
         return artistManager;
     }
-    
+
     @Before
     public void setup() throws PersistenceException {
         MockitoAnnotations.initMocks(this);
 
-        artistManager = new ArtistManagerImpl();
-        artistManager.setArtistDao(artistDao);
         artistManager.setDozerBeanMapper(new DozerBeanMapper());
 
         artist1 = createArtist(1l, "Alfa", "Testing artist1");
@@ -69,7 +61,7 @@ public class ArtistManagerImplTest {
 
         when(artistDao.getAll()).thenReturn(Arrays.asList(artist1, artist2));
     }
-    
+
     @Test
     public void testCreateArtist() throws PersistenceException, ServiceException {
         ArgumentCaptor<Artist> argumentCaptor = ArgumentCaptor.forClass(Artist.class);

@@ -33,11 +33,11 @@ public class UserManagerImpl implements UserManager {
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
-    
+
     public DozerBeanMapper getDozerBeanMapper() {
         return dozerBeanMapper;
     }
-    
+
     @Inject
     public void setDozerBeanMapper(DozerBeanMapper dozerBeanMapper) {
         this.dozerBeanMapper = dozerBeanMapper;
@@ -97,7 +97,7 @@ public class UserManagerImpl implements UserManager {
 
         return getMappedUserDtoCollection(allUsers);
     }
-    
+
     private List<UserDto> getMappedUserDtoCollection(List<User> users) {
         List<UserDto> mappedCollection = new ArrayList<>();
         for (User user : users) {

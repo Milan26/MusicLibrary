@@ -1,7 +1,8 @@
 package project.pa165.musiclibrary.services;
 
-import java.util.ArrayList;
+import org.dozer.DozerBeanMapper;
 import project.pa165.musiclibrary.dao.SongDao;
+import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.entities.Song;
 import project.pa165.musiclibrary.exception.PersistenceException;
 import project.pa165.musiclibrary.exception.ServiceException;
@@ -9,9 +10,8 @@ import project.pa165.musiclibrary.exception.ServiceException;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
-import org.dozer.DozerBeanMapper;
-import project.pa165.musiclibrary.dto.SongDto;
 
 /**
  * @author Alex
@@ -31,7 +31,7 @@ public class SongManagerImpl implements SongManager {
     public void setSongDao(SongDao songDao) {
         this.songDao = songDao;
     }
-    
+
     public DozerBeanMapper getDozerBeanMapper() {
         return dozerBeanMapper;
     }

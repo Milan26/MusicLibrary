@@ -1,17 +1,17 @@
 package project.pa165.musiclibrary.services;
 
-import java.util.ArrayList;
+import org.dozer.DozerBeanMapper;
 import project.pa165.musiclibrary.dao.ArtistDao;
 import project.pa165.musiclibrary.dto.ArtistDto;
+import project.pa165.musiclibrary.entities.Artist;
 import project.pa165.musiclibrary.exception.PersistenceException;
 import project.pa165.musiclibrary.exception.ServiceException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
-import org.dozer.DozerBeanMapper;
-import project.pa165.musiclibrary.entities.Artist;
 
 /**
  * @author Matúš
@@ -22,7 +22,7 @@ public class ArtistManagerImpl implements ArtistManager {
 
     private ArtistDao artistDao;
     private DozerBeanMapper dozerBeanMapper;
-    
+
     public ArtistDao getArtistDao() {
         return artistDao;
     }
@@ -31,11 +31,11 @@ public class ArtistManagerImpl implements ArtistManager {
     public void setArtistDao(ArtistDao artistDao) {
         this.artistDao = artistDao;
     }
-    
+
     public DozerBeanMapper getDozerBeanMapper() {
         return dozerBeanMapper;
     }
-    
+
     @Inject
     public void setDozerBeanMapper(DozerBeanMapper dozerBeanMapper) {
         this.dozerBeanMapper = dozerBeanMapper;
@@ -44,8 +44,8 @@ public class ArtistManagerImpl implements ArtistManager {
     @Override
     public void createArtist(final ArtistDto artistDto) throws ServiceException {
         Artist artist = null;
-        if(artistDto != null) artist = getDozerBeanMapper().map(artistDto, Artist.class);
-        
+        if (artistDto != null) artist = getDozerBeanMapper().map(artistDto, Artist.class);
+
         try {
             getArtistDao().create(artist);
         } catch (PersistenceException persistenceException) {
@@ -65,7 +65,7 @@ public class ArtistManagerImpl implements ArtistManager {
     @Override
     public void updateArtist(final ArtistDto artistDto) throws ServiceException {
         Artist artist = null;
-        if(artistDto != null) artist = getDozerBeanMapper().map(artistDto, Artist.class);
+        if (artistDto != null) artist = getDozerBeanMapper().map(artistDto, Artist.class);
         try {
             getArtistDao().update(artist);
         } catch (PersistenceException persistenceException) {
@@ -105,7 +105,7 @@ public class ArtistManagerImpl implements ArtistManager {
         }
         return getMappedArtistDtoCollection(allMatchedArtists);
     }
-    
+
     private List<ArtistDto> getMappedArtistDtoCollection(List<Artist> artists) {
         List<ArtistDto> mappedCollection = new ArrayList<>();
         for (Artist artist : artists) {

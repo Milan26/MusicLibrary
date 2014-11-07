@@ -1,23 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project.pa165.musiclibrary.services;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import org.dozer.DozerBeanMapper;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.mockito.ArgumentCaptor;
-import static org.mockito.Matchers.any;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import project.pa165.musiclibrary.dao.SongDao;
 import project.pa165.musiclibrary.dto.SongDto;
@@ -26,35 +14,41 @@ import project.pa165.musiclibrary.entities.Song;
 import project.pa165.musiclibrary.exception.PersistenceException;
 import project.pa165.musiclibrary.exception.ServiceException;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
+
 /**
- *
  * @author Alex
  */
 public class SongManagerImplTest {
-    
+
     private Song song1;
     private Song song2;
     private SongDto songDto1;
     private SongDto songDto2;
-    
+
     @Mock
     private SongDao songDao;
-    
+
+    @InjectMocks
     private SongManagerImpl songManager;
 
     public SongManagerImpl getSongManager() {
         return songManager;
     }
-    
+
     @Before
     public void setUp() throws PersistenceException {
         MockitoAnnotations.initMocks(this);
 
-        songManager = new SongManagerImpl();
-        songManager.setSongDao(songDao);
         songManager.setDozerBeanMapper(new DozerBeanMapper());
 
-        
         song1 = createSong("Walk", (short) 1, 200, Genre.ROCK, 320, "test");
         song2 = createSong("Arlandria", (short) 2, 300, Genre.HOLIDAY, 128, "test");
         songDto1 = createSongDto("Walk", (short) 1, 200, Genre.ROCK, 320, "test");
@@ -66,8 +60,8 @@ public class SongManagerImplTest {
 
         when(songDao.getAll()).thenReturn(Arrays.asList(song1, song2));
     }
-    
-    
+
+
     @Test
     public void testCreateSong() throws PersistenceException, ServiceException {
         ArgumentCaptor<Song> argumentCaptor = ArgumentCaptor.forClass(Song.class);
@@ -82,7 +76,7 @@ public class SongManagerImplTest {
         songManager.createSong(null);
         verify(songDao).create(null);
     }
-    
+
     @Test
     public void testDeleteSong() throws PersistenceException, ServiceException {
         getSongManager().deleteSong(1l);
@@ -110,7 +104,7 @@ public class SongManagerImplTest {
         songManager.updateSong(null);
         verify(songDao).update(null);
     }
-    
+
     @Test
     public void testFindSong() throws PersistenceException, ServiceException {
         SongDto result = getSongManager().findSong(1l);
@@ -192,8 +186,9 @@ public class SongManagerImplTest {
 
         assertEquals(0, result.size());
     }
-    
-    private SongDto createSongDto(String title, Short trackNumber, Integer length, Genre genre, Integer bitrate, String note) {
+
+    private SongDto createSongDto(String title, Short trackNumber, Integer length, Genre genre, Integer bitrate,
+                                  String note) {
         SongDto song = new SongDto();
         song.setTitle(title);
         song.setTrackNumber(trackNumber);
@@ -204,7 +199,8 @@ public class SongManagerImplTest {
         return song;
     }
 
-    private Song createSong(String title, Short trackNumber, Integer length, Genre genre, Integer bitrate, String note) {
+    private Song createSong(String title, Short trackNumber, Integer length, Genre genre, Integer bitrate,
+                            String note) {
         Song song = new Song();
         song.setTitle(title);
         song.setTrackNumber(trackNumber);
@@ -244,5 +240,5 @@ public class SongManagerImplTest {
             deepAssert(song1, song2);
         }
     }
-    
+
 }

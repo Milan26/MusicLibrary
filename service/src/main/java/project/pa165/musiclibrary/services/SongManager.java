@@ -1,10 +1,9 @@
 package project.pa165.musiclibrary.services;
 
-import project.pa165.musiclibrary.entities.Song;
+import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.exception.ServiceException;
 
 import java.util.List;
-import project.pa165.musiclibrary.dto.SongDto;
 
 /**
  * @author Alex
@@ -13,7 +12,7 @@ public interface SongManager {
     /**
      * Insert given song.
      *
-     * @param song song to be inserted
+     * @param songDto song to be inserted
      */
     void createSong(SongDto songDto) throws ServiceException;
 
@@ -27,7 +26,7 @@ public interface SongManager {
     /**
      * Update given song.
      *
-     * @param song song to be updated
+     * @param songDto song to be updated
      */
     void updateSong(SongDto songDto) throws ServiceException;
 
