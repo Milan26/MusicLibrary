@@ -128,6 +128,13 @@ public class ArtistManagerImplTest {
         assertNull(result);
     }
 
+    @Test(expected = ServiceException.class)
+    public void testFindArtistWithNullId() throws PersistenceException, ServiceException {
+        doThrow(new PersistenceException("id")).when(artistDao).find(null);
+        getArtistManager().findArtist(null);
+        verify(artistDao).find(null);
+    }
+
     @Test
     public void testGetAllArtists() throws PersistenceException, ServiceException {
         List<ArtistDto> allArtists = Arrays.asList(artistDto1, artistDto2);
@@ -150,8 +157,15 @@ public class ArtistManagerImplTest {
         assertEquals(0, result.size());
     }
 
+    @Test(expected = ServiceException.class)
+    public void testGetAllArtistsWithExceptionOnPersistence() throws PersistenceException, ServiceException {
+        doThrow(new PersistenceException()).when(artistDao).getAll();
+        getArtistManager().getAllArtists();
+        verify(artistDao).getAll();
+    }
+
     @Test
-    public void testFindArtistByTitleWithUniqueTitle() throws PersistenceException, ServiceException {
+    public void testFindArtistByNameWithUniqueTitle() throws PersistenceException, ServiceException {
         List<Artist> allArtists = Arrays.asList(artist1);
         when(artistDao.findArtistByName(any(String.class))).thenReturn(allArtists);
 
@@ -164,7 +178,7 @@ public class ArtistManagerImplTest {
     }
 
     @Test
-    public void testFindArtistByTitleWithMultipleSameTitleAlbum() throws PersistenceException, ServiceException {
+    public void testFindArtistByNameWithMultipleSameTitleAlbum() throws PersistenceException, ServiceException {
         List<Artist> allArtists = Arrays.asList(artist1, artist2);
         when(artistDao.findArtistByName(any(String.class))).thenReturn(allArtists);
 
@@ -177,7 +191,7 @@ public class ArtistManagerImplTest {
     }
 
     @Test
-    public void testFindArtistByTitleEmptyDb() throws PersistenceException, ServiceException {
+    public void testFindArtistByNameEmptyDb() throws PersistenceException, ServiceException {
         when(artistDao.findArtistByName(any(String.class))).thenReturn(new ArrayList<Artist>());
 
         List<ArtistDto> result = getArtistManager().findArtistByName("Unity");

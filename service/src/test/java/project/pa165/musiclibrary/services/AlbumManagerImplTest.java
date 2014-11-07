@@ -132,6 +132,13 @@ public class AlbumManagerImplTest {
         assertNull(result);
     }
 
+    @Test(expected = ServiceException.class)
+    public void testFindAlbumWithNullId() throws PersistenceException, ServiceException {
+        doThrow(new PersistenceException("id")).when(albumDao).find(null);
+        getAlbumManager().findAlbum(null);
+        verify(albumDao).find(null);
+    }
+
     @Test
     public void testGetAllAlbums() throws PersistenceException, ServiceException {
         List<AlbumDto> allAlbums = Arrays.asList(albumDto1, albumDto2);
@@ -152,6 +159,13 @@ public class AlbumManagerImplTest {
         verify(albumDao).getAll();
 
         assertEquals(0, result.size());
+    }
+
+    @Test(expected = ServiceException.class)
+    public void testGetAllAlbumsWithExceptionOnPersistence() throws PersistenceException, ServiceException {
+        doThrow(new PersistenceException()).when(albumDao).getAll();
+        getAlbumManager().getAllAlbums();
+        verify(albumDao).getAll();
     }
 
     @Test

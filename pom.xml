@@ -52,6 +52,12 @@
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
+                    <instrumentation>
+                        <ignores>
+                            <ignore>project.pa165.musiclibrary.exception.*</ignore>
+                            <ignore>project.pa165.musiclibrary.aspect.*</ignore>
+                        </ignores>
+                    </instrumentation>
                     <format>xml</format>
                     <maxmem>256m</maxmem>
                     <!-- aggregated reports for multi-module projects -->

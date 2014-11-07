@@ -127,6 +127,13 @@ public class UserManagerImplTest {
         assertNull(result);
     }
 
+    @Test(expected = ServiceException.class)
+    public void testFindUserWithNullId() throws PersistenceException, ServiceException {
+        doThrow(new PersistenceException("id")).when(userDao).find(null);
+        getUserManager().findUser(null);
+        verify(userDao).find(null);
+    }
+
     @Test
     public void testGetAllUsers() throws PersistenceException, ServiceException {
         List<UserDto> allUsers = Arrays.asList(userDto1, userDto2);
