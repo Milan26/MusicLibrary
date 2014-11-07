@@ -4,6 +4,7 @@ import project.pa165.musiclibrary.entities.Song;
 import project.pa165.musiclibrary.exception.ServiceException;
 
 import java.util.List;
+import project.pa165.musiclibrary.dto.SongDto;
 
 /**
  * @author Alex
@@ -14,7 +15,7 @@ public interface SongManager {
      *
      * @param song song to be inserted
      */
-    void createSong(Song song) throws ServiceException;
+    void createSong(SongDto songDto) throws ServiceException;
 
     /**
      * Delete song by given id.
@@ -28,7 +29,7 @@ public interface SongManager {
      *
      * @param song song to be updated
      */
-    void updateSong(Song song) throws ServiceException;
+    void updateSong(SongDto songDto) throws ServiceException;
 
     /**
      * Get song by given id.
@@ -36,14 +37,14 @@ public interface SongManager {
      * @param id identification of song to be found
      * @return found song
      */
-    Song findSong(Long id) throws ServiceException;
+    SongDto findSong(Long id) throws ServiceException;
 
     /**
      * Get all songs.
      *
      * @return list of all songs
      */
-    List<Song> getAllSongs() throws ServiceException;
+    List<SongDto> getAllSongs() throws ServiceException;
 
     /**
      * Get all songs with same title as given parameter.
@@ -51,5 +52,5 @@ public interface SongManager {
      * @param title name of song or songs
      * @return return list of all songs that satisfy given parameter
      */
-    List<Song> findSongByTitle(String title) throws ServiceException;
+    List<SongDto> findSongByTitle(String title) throws ServiceException;
 }

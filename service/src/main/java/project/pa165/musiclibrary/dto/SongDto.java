@@ -4,7 +4,7 @@ import project.pa165.musiclibrary.entities.Genre;
 
 
 /**
- * @author Milan
+ * @author Alex
  */
 public class SongDto {
 
@@ -19,6 +19,42 @@ public class SongDto {
     private AlbumDto albumDto;
 
     public SongDto() {
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setTrackNumber(Short trackNumber) {
+        this.trackNumber = trackNumber;
+    }
+
+    public void setLength(Integer length) {
+        this.length = length;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public void setBitrate(Integer bitrate) {
+        this.bitrate = bitrate;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public void setArtistDto(ArtistDto artistDto) {
+        this.artistDto = artistDto;
+    }
+
+    public void setAlbumDto(AlbumDto albumDto) {
+        this.albumDto = albumDto;
     }
 
     public Long getId() {

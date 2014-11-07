@@ -1,5 +1,6 @@
 package project.pa165.musiclibrary.services;
 
+import java.util.ArrayList;
 import project.pa165.musiclibrary.dao.SongDao;
 import project.pa165.musiclibrary.entities.Song;
 import project.pa165.musiclibrary.exception.PersistenceException;
@@ -9,6 +10,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 import java.util.List;
+import org.dozer.DozerBeanMapper;
+import project.pa165.musiclibrary.dto.SongDto;
 
 /**
  * @author Alex
@@ -18,6 +21,7 @@ import java.util.List;
 public class SongManagerImpl implements SongManager {
 
     private SongDao songDao;
+    private DozerBeanMapper dozerBeanMapper;
 
     public SongDao getSongDao() {
         return songDao;
@@ -27,9 +31,20 @@ public class SongManagerImpl implements SongManager {
     public void setSongDao(SongDao songDao) {
         this.songDao = songDao;
     }
+    
+    public DozerBeanMapper getDozerBeanMapper() {
+        return dozerBeanMapper;
+    }
+
+    @Inject
+    public void setDozerBeanMapper(DozerBeanMapper dozerBeanMapper) {
+        this.dozerBeanMapper = dozerBeanMapper;
+    }
 
     @Override
-    public void createSong(final Song song) throws ServiceException {
+    public void createSong(final SongDto songDto) throws ServiceException {
+        Song song = null;
+        if (songDto != null) song = getDozerBeanMapper().map(songDto, Song.class);
         try {
             getSongDao().create(song);
         } catch (PersistenceException persistenceException) {
@@ -47,7 +62,9 @@ public class SongManagerImpl implements SongManager {
     }
 
     @Override
-    public void updateSong(final Song song) throws ServiceException {
+    public void updateSong(final SongDto songDto) throws ServiceException {
+        Song song = null;
+        if (songDto != null) song = getDozerBeanMapper().map(songDto, Song.class);
         try {
             getSongDao().update(song);
         } catch (PersistenceException persistenceException) {
@@ -56,35 +73,46 @@ public class SongManagerImpl implements SongManager {
     }
 
     @Override
-    public Song findSong(final Long id) throws ServiceException {
+    public SongDto findSong(final Long id) throws ServiceException {
         Song song = null;
         try {
             song = getSongDao().find(id);
         } catch (PersistenceException persistenceException) {
             throw new ServiceException(persistenceException);
         }
-        return song;
+
+        return song != null ? getDozerBeanMapper().map(song, SongDto.class) : null;
     }
 
     @Override
-    public List<Song> getAllSongs() throws ServiceException {
+    public List<SongDto> getAllSongs() throws ServiceException {
         List<Song> allSongs = null;
         try {
             allSongs = getSongDao().getAll();
         } catch (PersistenceException persistenceException) {
             throw new ServiceException(persistenceException);
         }
-        return allSongs;
+
+        return getMappedSongDtoCollection(allSongs);
     }
 
     @Override
-    public List<Song> findSongByTitle(final String title) throws ServiceException {
+    public List<SongDto> findSongByTitle(final String title) throws ServiceException {
         List<Song> allMatchedSongs = null;
         try {
             allMatchedSongs = getSongDao().findSongByTitle(title);
         } catch (PersistenceException persistenceException) {
             throw new ServiceException(persistenceException);
         }
-        return allMatchedSongs;
+
+        return getMappedSongDtoCollection(allMatchedSongs);
+    }
+
+    private List<SongDto> getMappedSongDtoCollection(List<Song> songs) {
+        List<SongDto> mappedCollection = new ArrayList<>();
+        for (Song song : songs) {
+            mappedCollection.add(getDozerBeanMapper().map(song, SongDto.class));
+        }
+        return mappedCollection;
     }
 }
