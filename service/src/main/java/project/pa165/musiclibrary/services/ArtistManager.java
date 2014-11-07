@@ -1,20 +1,21 @@
 package project.pa165.musiclibrary.services;
 
-import project.pa165.musiclibrary.entities.Artist;
+import project.pa165.musiclibrary.dto.ArtistDto;
 import project.pa165.musiclibrary.exception.ServiceException;
 
 import java.util.List;
+
 
 /**
  * @author Matúš
  */
 public interface ArtistManager {
     /**
-     * Insert given artist.
+     * Insert given artistDto.
      *
-     * @param artist artist to be inserted
+     * @param artistDto artistDto to be inserted
      */
-    void createArtist(Artist artist) throws ServiceException;
+    void createArtist(ArtistDto artistDto) throws ServiceException;
 
     /**
      * Delete artist by given id.
@@ -24,11 +25,11 @@ public interface ArtistManager {
     void deleteArtist(Long id) throws ServiceException;
 
     /**
-     * Update given artist.
+     * Update given artistDto.
      *
-     * @param artist artist to be updated
+     * @param artistDto artistDto to be updated
      */
-    void updateArtist(Artist artist) throws ServiceException;
+    void updateArtist(ArtistDto artistDto) throws ServiceException;
 
     /**
      * Get artist by given id.
@@ -36,14 +37,14 @@ public interface ArtistManager {
      * @param id identification of artist to be found
      * @return found artist
      */
-    Artist findArtist(Long id) throws ServiceException;
+    ArtistDto findArtist(Long id) throws ServiceException;
 
     /**
      * Get all artists.
      *
      * @return list of all artists
      */
-    List<Artist> getAllArtists() throws ServiceException;
+    List<ArtistDto> getAllArtists() throws ServiceException;
 
     /**
      * Get all artists with same title as given parameter.
@@ -51,5 +52,5 @@ public interface ArtistManager {
      * @param name name of artist or artists
      * @return return list of all artists that satisfy given parameter
      */
-    List<Artist> findArtistByName(String name) throws ServiceException;
+    List<ArtistDto> findArtistByName(String name) throws ServiceException;
 }
