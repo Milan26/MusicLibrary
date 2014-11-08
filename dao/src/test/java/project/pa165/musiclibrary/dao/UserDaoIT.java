@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
-public class UserDaoImplTest {
+public class UserDaoIT {
 
     private User user1;
     private User user2;

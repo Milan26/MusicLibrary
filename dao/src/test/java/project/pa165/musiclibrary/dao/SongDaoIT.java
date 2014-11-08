@@ -1,5 +1,6 @@
 package project.pa165.musiclibrary.dao;
 
+import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,6 +8,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import project.pa165.musiclibrary.entities.Album;
+import project.pa165.musiclibrary.entities.Artist;
 import project.pa165.musiclibrary.entities.Genre;
 import project.pa165.musiclibrary.entities.Song;
 import project.pa165.musiclibrary.exception.PersistenceException;
@@ -15,6 +18,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -27,7 +31,7 @@ import static org.junit.Assert.*;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
-public class SongDaoImplTest {
+public class SongDaoIT {
 
     private Song song1;
     private Song song2;
@@ -202,6 +206,20 @@ public class SongDaoImplTest {
         assertEquals(getSongDao().findSongByTitle("Unity").size(), 0);
     }
 
+    @Test
+    public void testSongJdbcMapping() throws PersistenceException {
+        Artist artist = createArtist("Alfa", "Testing artist");
+        Album album = createAlbum("Unity", new LocalDate(1991, 2, 6).toDate(), "http://pathtocoverart.com", "album");
+
+        song1.setArtist(artist);
+        song1.setAlbum(album);
+
+        persist(song1);
+        Song song = getSongDao().find(song1.getId());
+
+        deepAssert(song1, song);
+    }
+
     private void persist(Song song) throws PersistenceException {
         assertNull(song.getId());
         getSongDao().create(song);
@@ -218,6 +236,22 @@ public class SongDaoImplTest {
         song.setBitrate(bitrate);
         song.setNote(note);
         return song;
+    }
+
+    private Artist createArtist(String name, String note) {
+        Artist artist = new Artist();
+        artist.setName(name);
+        artist.setNote(note);
+        return artist;
+    }
+
+    private Album createAlbum(String title, Date releaseDate, String coverArt, String note) {
+        Album album = new Album();
+        album.setTitle(title);
+        album.setReleaseDate(releaseDate);
+        album.setCoverArt(coverArt);
+        album.setNote(note);
+        return album;
     }
 
     private void deepAssert(Song song1, Song song2) {

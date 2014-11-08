@@ -8,6 +8,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import project.pa165.musiclibrary.entities.Artist;
+import project.pa165.musiclibrary.entities.Genre;
+import project.pa165.musiclibrary.entities.Song;
 import project.pa165.musiclibrary.exception.PersistenceException;
 
 import javax.inject.Inject;
@@ -26,7 +28,7 @@ import static org.junit.Assert.*;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
-public class ArtistDaoImplTest {
+public class ArtistDaoIT {
 
     private Artist artist1;
     private Artist artist2;
@@ -200,6 +202,21 @@ public class ArtistDaoImplTest {
         assertEquals(getArtistDao().findArtistByName("Unity").size(), 0);
     }
 
+    @Test
+    public void testArtistJdbcMapping() throws PersistenceException {
+        Song song1 = createSong("Hey Ho HooHo", (short) 1, 200, Genre.HOLIDAY, 320, "test");
+        Song song2 = createSong("Oh yea", (short) 2, 300, Genre.INDIE, 128, "test");
+        List<Song> songs = Arrays.asList(song1, song2);
+        artist1.setSongs(songs);
+
+        persist(artist1);
+        Artist artist = getArtistDao().find(artist1.getId());
+
+        assertEquals(songs.size(), artist.getSongs().size());
+        assertArrayEquals(songs.toArray(), artist.getSongs().toArray());
+        deepAssert(artist1, artist);
+    }
+
     private void persist(Artist artist) throws PersistenceException {
         assertNull(artist.getId());
         getArtistDao().create(artist);
@@ -213,10 +230,23 @@ public class ArtistDaoImplTest {
         return artist;
     }
 
+    private Song createSong(String title, Short trackNumber, Integer length, Genre genre, Integer bitrate,
+                            String note) {
+        Song song = new Song();
+        song.setTitle(title);
+        song.setTrackNumber(trackNumber);
+        song.setLength(length);
+        song.setGenre(genre);
+        song.setBitrate(bitrate);
+        song.setNote(note);
+        return song;
+    }
+
     private void deepAssert(Artist artist1, Artist artist2) {
         assertEquals(artist1.getId(), artist2.getId());
         assertEquals(artist1.getName(), artist2.getName());
         assertEquals(artist1.getNote(), artist2.getNote());
+        assertEquals(artist1.getSongs(), artist2.getSongs());
     }
 
     private void deepAssert(Object[] arr1, Object[] arr2) {

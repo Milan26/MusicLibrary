@@ -9,6 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import project.pa165.musiclibrary.entities.Album;
+import project.pa165.musiclibrary.entities.Genre;
+import project.pa165.musiclibrary.entities.Song;
 import project.pa165.musiclibrary.exception.PersistenceException;
 
 import javax.inject.Inject;
@@ -28,7 +30,7 @@ import static org.junit.Assert.*;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
-public class AlbumDaoImplTest {
+public class AlbumDaoIT {
 
     private Album album1;
     private Album album2;
@@ -202,6 +204,21 @@ public class AlbumDaoImplTest {
         assertEquals(getAlbumDao().findAlbumByTitle("Unity").size(), 0);
     }
 
+    @Test
+    public void testAlbumJdbcMapping() throws PersistenceException {
+        Song song1 = createSong("Hey Ho HooHo", (short) 1, 200, Genre.HOLIDAY, 320, "test");
+        Song song2 = createSong("Oh yea", (short) 2, 300, Genre.INDIE, 128, "test");
+        List<Song> songs = Arrays.asList(song1, song2);
+        album1.setSongs(songs);
+
+        persist(album1);
+        Album album = getAlbumDao().find(album1.getId());
+
+        assertEquals(songs.size(), album.getSongs().size());
+        assertArrayEquals(songs.toArray(), album.getSongs().toArray());
+        deepAssert(album1, album);
+    }
+
     private void persist(Album album) throws PersistenceException {
         assertNull(album.getId());
         getAlbumDao().create(album);
@@ -217,12 +234,25 @@ public class AlbumDaoImplTest {
         return album;
     }
 
+    private Song createSong(String title, Short trackNumber, Integer length, Genre genre, Integer bitrate,
+                            String note) {
+        Song song = new Song();
+        song.setTitle(title);
+        song.setTrackNumber(trackNumber);
+        song.setLength(length);
+        song.setGenre(genre);
+        song.setBitrate(bitrate);
+        song.setNote(note);
+        return song;
+    }
+
     private void deepAssert(Album album1, Album album2) {
         assertEquals(album1.getId(), album2.getId());
         assertEquals(album1.getTitle(), album2.getTitle());
         assertEquals(album1.getReleaseDate(), album2.getReleaseDate());
         assertEquals(album1.getCoverArt(), album2.getCoverArt());
         assertEquals(album1.getNote(), album2.getNote());
+        assertEquals(album1.getSongs(), album2.getSongs());
     }
 
     private void deepAssert(Object[] arr1, Object[] arr2) {
