@@ -239,7 +239,7 @@ public class AlbumDaoIT {
         Song song = new Song();
         song.setTitle(title);
         song.setTrackNumber(trackNumber);
-        song.setLength(length);
+        song.setDuration(length);
         song.setGenre(genre);
         song.setBitrate(bitrate);
         song.setNote(note);
