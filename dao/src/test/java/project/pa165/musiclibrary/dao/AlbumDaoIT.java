@@ -234,8 +234,8 @@ public class AlbumDaoIT {
         return album;
     }
 
-    private Song createSong(String title, Short trackNumber, Integer length, Genre genre, Integer bitrate,
-                            String note) {
+    private Song createSong(String title, Short trackNumber, Integer length, Genre genre, Integer bitrate, String
+            note) {
         Song song = new Song();
         song.setTitle(title);
         song.setTrackNumber(trackNumber);

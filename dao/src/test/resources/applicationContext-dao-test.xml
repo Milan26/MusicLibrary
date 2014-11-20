@@ -24,7 +24,7 @@
     </bean>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="musicLibraryPU"/>
+        <property name="persistenceUnitName" value="musicLibraryPU-test"/>
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
