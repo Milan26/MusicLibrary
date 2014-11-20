@@ -206,19 +206,19 @@ public class SongManagerImplTest {
         SongDto song = new SongDto();
         song.setTitle(title);
         song.setTrackNumber(trackNumber);
-        song.setLength(length);
+        song.setDuration(length);
         song.setGenre(genre);
         song.setBitrate(bitrate);
         song.setNote(note);
         return song;
     }
 
-    private Song createSong(String title, Short trackNumber, Integer length, Genre genre, Integer bitrate,
-                            String note) {
+    private Song createSong(String title, Short trackNumber, Integer length, Genre genre, Integer bitrate, String
+            note) {
         Song song = new Song();
         song.setTitle(title);
         song.setTrackNumber(trackNumber);
-        song.setLength(length);
+        song.setDuration(length);
         song.setGenre(genre);
         song.setBitrate(bitrate);
         song.setNote(note);
@@ -229,7 +229,7 @@ public class SongManagerImplTest {
         assertEquals(song1.getId(), song2.getId());
         assertEquals(song1.getTitle(), song2.getTitle());
         assertEquals(song1.getTrackNumber(), song2.getTrackNumber());
-        assertEquals(song1.getLength(), song2.getLength());
+        assertEquals(song1.getDuration(), song2.getDuration());
         assertEquals(song1.getGenre(), song2.getGenre());
         assertEquals(song1.getBitrate(), song2.getBitrate());
         assertEquals(song1.getNote(), song2.getNote());
@@ -239,7 +239,7 @@ public class SongManagerImplTest {
         assertEquals(song1.getId(), song2.getId());
         assertEquals(song1.getTitle(), song2.getTitle());
         assertEquals(song1.getTrackNumber(), song2.getTrackNumber());
-        assertEquals(song1.getLength(), song2.getLength());
+        assertEquals(song1.getDuration(), song2.getDuration());
         assertEquals(song1.getGenre(), song2.getGenre());
         assertEquals(song1.getBitrate(), song2.getBitrate());
         assertEquals(song1.getNote(), song2.getNote());

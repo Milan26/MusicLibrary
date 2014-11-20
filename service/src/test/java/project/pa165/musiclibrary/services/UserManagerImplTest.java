@@ -162,8 +162,8 @@ public class UserManagerImplTest {
         return user;
     }
 
-    private UserDto createUserDto(Long id, String email, String firstName, String lastName, String password,
-                                  String role) {
+    private UserDto createUserDto(Long id, String email, String firstName, String lastName, String password, String
+            role) {
         UserDto userDto = new UserDto();
         userDto.setId(id);
         userDto.setEmail(email);

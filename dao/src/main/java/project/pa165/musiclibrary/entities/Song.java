@@ -24,7 +24,7 @@ public class Song implements Serializable {
     private Short trackNumber;
 
     @Column(nullable = false)
-    private Integer length;
+    private Integer duration;
 
     @Enumerated
     @Column(nullable = false)
@@ -66,12 +66,12 @@ public class Song implements Serializable {
         this.trackNumber = trackNumber;
     }
 
-    public Integer getLength() {
-        return length;
+    public Integer getDuration() {
+        return duration;
     }
 
-    public void setLength(Integer length) {
-        this.length = length;
+    public void setDuration(Integer length) {
+        this.duration = length;
     }
 
     public Genre getGenre() {
@@ -133,7 +133,7 @@ public class Song implements Serializable {
 
     @Override
     public String toString() {
-        return "Song{" + "id=" + id + ", title=" + title + ", trackNumber=" + trackNumber + ", length=" + length + "," +
+        return "Song{" + "id=" + id + ", title=" + title + ", trackNumber=" + trackNumber + ", duration=" + duration + "," +
                 " genre=" + genre + ", bitrate=" + bitrate + ", note=" + note + ", artist=" + artist + ", " +
                 "album=" + album + '}';
     }

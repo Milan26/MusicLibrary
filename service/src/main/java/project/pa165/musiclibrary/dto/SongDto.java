@@ -11,7 +11,7 @@ public class SongDto {
     private Long id;
     private String title;
     private Short trackNumber;
-    private Integer length;
+    private Integer duration;
     private Genre genre;
     private Integer bitrate;
     private String note;
@@ -45,12 +45,12 @@ public class SongDto {
         this.trackNumber = trackNumber;
     }
 
-    public Integer getLength() {
-        return length;
+    public Integer getDuration() {
+        return duration;
     }
 
-    public void setLength(Integer length) {
-        this.length = length;
+    public void setDuration(Integer duration) {
+        this.duration = duration;
     }
 
     public Genre getGenre() {
