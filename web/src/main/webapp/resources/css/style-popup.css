@@ -1,0 +1,85 @@
+@import url('http://fonts.googleapis.com/css?family=Sigmar+One');
+
+/**
+ * @author Milan
+ */
+
+#black_overlay {
+    display: none;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 1001;
+    -moz-opacity: 0.8;
+    opacity: .80;
+}
+
+#popup_box {
+    display: none;
+    position: absolute;
+    top: 15%;
+    left: 25%;
+    width: 50%;
+    height: 65%;
+    padding: 16px;
+    border: 10px solid #FFFFFF;
+    background-color: #7C7F8F;
+    z-index: 1002;
+    overflow: auto;
+}
+
+#info {
+    display: table;
+    width: 100%;
+    height: 30%;
+    color: #FFFFFF;
+}
+
+#info img {
+    width: 200px;
+    height: 200px;
+}
+
+#info div {
+    display: table-cell;
+    vertical-align: top;
+    padding-left: 20px;
+}
+
+#info div h3, h2 {
+    font-family: 'Sigmar One', cursive;
+    font-size: 28px;
+}
+
+#info div h2 {
+    font-family: 'Sigmar One', cursive;
+    font-size: 20px;
+}
+
+table th {
+    border-bottom: #FFFFFF solid 5px;
+    text-align: center;
+}
+
+table td {
+    border-bottom: #FFFFFF solid 1px;
+    text-align: center;
+}
+
+table tr {
+
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    color: #FFFFFF;
+}
+
+.title {
+    padding-left: 30px;
+}
+

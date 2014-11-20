@@ -1,0 +1,152 @@
+/**
+ * @author Milan
+ */
+
+/*********************************************************************************/
+/* Item                                                                          */
+/*********************************************************************************/
+
+.item {
+    height: 13em;
+    display: inline-block;
+    border: solid 5px #fff;
+}
+
+.item.thumb {
+    display: inline-block;
+    position: relative;
+    background: #1a1f2c;
+    background: rgba(255, 255, 255, 0.25);
+    cursor: default;
+    min-width: 180px;
+    min-height: 180px;
+}
+
+.item.thumb h2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #1a1f2c;
+    width: 100%;
+    padding: 1em;
+    font-weight: 400;
+    line-height: 1em;
+    z-index: 2;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: medium;
+}
+
+.item.thumb img {
+    display: block;
+    z-index: 1;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+/*********************************************************************************/
+/* Reel                                                                          */
+/*********************************************************************************/
+
+#reel {
+    position: relative;
+    text-align: justify;
+    overflow: hidden;
+    border: solid 5px #fff;
+    background: #fff;
+}
+
+#reel .item {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    margin-right: auto;
+    vertical-align: top;
+    float: left;
+}
+
+/*********************************************************************************/
+/* Helper Functions                                                              */
+/*********************************************************************************/
+
+#helper_functions {
+    float: left;
+    width: 480px;
+    height: 150px;
+    vertical-align: middle;
+    display: table;
+    font-family: 'Sigmar One', cursive;
+    border-left: solid #FFFFFF 10px;
+}
+
+#helper_functions div {
+    width: 100%;
+}
+
+/* SearchBar */
+#searchBar {
+    background-color: #AC5C5D;
+    height: 55%;
+    padding-left: 40px;
+
+}
+
+#searchBar div {
+    display: table-cell;
+}
+
+#searchBar input {
+    height: 40px;
+}
+
+/* GenrePicker */
+#genrePicker {
+    background-color: #438479;
+    padding-left: 40px;
+    border-top: solid #FFFFFF 10px;
+}
+
+#genrePicker div {
+    display: table-cell;
+}
+
+/*********************************************************************************/
+/* Paging                                                                        */
+/*********************************************************************************/
+
+.holder {
+    text-align: center;
+}
+
+.holder a {
+    font-size: 15px;
+    cursor: pointer;
+    margin: 0 5px;
+    color: #333;
+    font-family: 'Sigmar One', cursive;
+}
+
+.holder a.jp-previous {
+    margin-right: 15px;
+}
+
+.holder a.jp-next {
+    margin-left: 15px;
+}
+
+.holder a.jp-current, a.jp-current:hover {
+    color: #FF4242;
+    font-weight: bold;
+}
+
+.holder a.jp-disabled, a.jp-disabled:hover {
+    color: #9C9495;
+}
+
+.holder a.jp-current, a.jp-current:hover, .holder a.jp-disabled, a.jp-disabled:hover {
+    cursor: default;
+    background: none;
+}
+
+.holder span {
+    margin: 0 5px;
+}
