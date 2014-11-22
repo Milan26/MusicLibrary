@@ -37,9 +37,11 @@ public class Song implements Serializable {
     private String note;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "artist_id")
     private Artist artist;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "album_id")
     private Album album;
 
     public Long getId() {
@@ -133,7 +135,8 @@ public class Song implements Serializable {
 
     @Override
     public String toString() {
-        return "Song{" + "id=" + id + ", title=" + title + ", trackNumber=" + trackNumber + ", duration=" + duration + "," +
+        return "Song{" + "id=" + id + ", title=" + title + ", trackNumber=" + trackNumber + ", duration=" + duration
+                + "," +
                 " genre=" + genre + ", bitrate=" + bitrate + ", note=" + note + ", artist=" + artist + ", " +
                 "album=" + album + '}';
     }

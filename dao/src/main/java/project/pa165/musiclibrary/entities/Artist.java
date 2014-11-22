@@ -25,7 +25,7 @@ public class Artist implements Serializable {
     @Column
     private String note;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
     private List<Song> songs;
 
     public Long getId() {
