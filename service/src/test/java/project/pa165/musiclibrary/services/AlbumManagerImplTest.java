@@ -56,8 +56,8 @@ public class AlbumManagerImplTest {
         album2 = createAlbum(2l, "Hello Uni", new LocalDate(2001, 1, 1).toDate(), "http://blabla.com", "I am hungry");
         albumDto1 = createAlbumDto(1l, "Unity", new LocalDate(1991, 2, 6).toDate(), "http://pathtocoverart.com",
                 "album");
-        albumDto2 = createAlbumDto(2l, "Hello Uni", new LocalDate(2001, 1, 1).toDate(), "http://blabla.com", "I am " +
-                "hungry");
+        albumDto2 = createAlbumDto(2l, "Hello Uni", new LocalDate(2001, 1, 1).toDate(), "http://blabla.com", "I am "
+                + "hungry");
 
         when(albumDao.find(1l)).thenReturn(album1);
         when(albumDao.find(2l)).thenReturn(album2);

@@ -21,7 +21,7 @@
         <property name="basename" value="label"/>
     </bean>
 
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
     <mvc:annotation-driven/>
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
 
 </beans>

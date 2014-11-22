@@ -1,9 +1,7 @@
 package project.pa165.musiclibrary.servlet;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.AlbumDto;
 import project.pa165.musiclibrary.entities.Genre;
 import project.pa165.musiclibrary.exception.ServiceException;
@@ -45,6 +43,21 @@ public class LibraryController {
     @ModelAttribute("genres")
     public List<Genre> allGenres() throws ServiceException {
         return new ArrayList<>(Arrays.asList(Genre.values()));
+    }
+
+    @RequestMapping(value = "/getAlbums", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<AlbumDto> getAlbums(@RequestParam("term") String term) throws ServiceException {
+        return getAlbumManager().findAlbumByTitle(term);
+    }
+
+    @RequestMapping(value = "/getAlbum", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    AlbumDto getAlbum(@RequestParam("id") Long id) throws ServiceException {
+        AlbumDto album = getAlbumManager().findAlbum(id);
+        return album;
     }
 
 }

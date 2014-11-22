@@ -1,11 +1,78 @@
+/*********************************************************************************/
+/* Helper functions                                                              */
+/*********************************************************************************/
+
+/*** Popup box ***/
+
+/* Cached variables */
+var info,
+    songs,
+    black_overlay,
+    popup_box;
+
+function preparePopup() {
+    info.html('');
+    $("#songs tbody").remove();
+    songs.append(" <tbody></tbody> ");
+}
+
 function showPopup() {
-    $('#black_overlay').css('display', 'block');
-    $('#popup_box').css('display', 'block');
+    black_overlay.css('display', 'block');
+    popup_box.css('display', 'block');
 }
 function hidePopup() {
-    $('#black_overlay').css('display', 'none');
-    $('#popup_box').css('display', 'none');
+    black_overlay.css('display', 'none');
+    popup_box.css('display', 'none');
 }
+
+function appendRowsToSongsTable(songs) {
+    for (var i = 0; i < songs.length; i++) {
+        $("#songs tbody").append(" <tr> " +
+            " <td> " + songs[i].trackNumber + " </td> " +
+            " <td class='title'> " + songs[i].title + " </td> " +
+            " <td> " + songs[i].duration + " </td> " +
+            " <td> " + songs[i].bitrate + " </td> " +
+            " <td> " + songs[i].genre + " </td> " +
+            " </tr> "
+        )
+    }
+}
+
+function appendAlbumInfo(album) {
+    $("#info").append(
+        " <img src= " + album.coverArt + " + /> " +
+        " <div> " +
+        " <h3>Artist</h3> " +
+        " <h2> " + album.title + "</h2> " +
+        " <p> " + album.note + "</p>" +
+        " </div> ");
+}
+
+function getAlbum(id) {
+    preparePopup();
+
+    $.ajax({
+        type: "GET",
+        url: "/music/getAlbum?id=" + id,
+        dataType: "json",
+
+        success: function (album) {
+            appendAlbumInfo(album);
+            appendRowsToSongsTable(album.songs);
+            showPopup();
+        },
+
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Status: " + textStatus);
+            alert("Error: " + errorThrown);
+        }
+    });
+}
+
+/*** Item width ***/
+
+/* Cached variables */
+var thumbs;
 
 function calculateItemWidth(idealWidth) {
     var width = $(window).width();
@@ -16,23 +83,31 @@ function calculateItemWidth(idealWidth) {
 }
 
 function setItemWidth(itemWidth) {
-    $('.thumb').css('width', itemWidth);
-    $('.thumb').css('height', itemWidth);
+    thumbs.css('width', itemWidth);
+    thumbs.css('height', itemWidth);
 }
+
+/*********************************************************************************/
+/* Main                                                                          */
+/*********************************************************************************/
 
 $(document).ready(function () {
 
+    thumbs = $('.thumb');
+    info = $("#info");
+    songs = $("#songs");
+    black_overlay = $('#black_overlay');
+    popup_box = $('#popup_box');
+
+    /* Set width of thumbs */
     setItemWidth(calculateItemWidth(224));
 
     /* Hide popup */
     $(document).keyup(function (e) {
         /*  if (e.keyCode == 13) { $('.save').click(); }     // enter*/
+        // esc
         if (e.keyCode == 27) {
             hidePopup();
-        }   // esc
-    });
-    /* Show popup */
-    $('.item').click(function () {
-        showPopup();
+        }
     });
 });
