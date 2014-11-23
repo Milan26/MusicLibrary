@@ -63,9 +63,21 @@ INSERT INTO Album (title,releaseDate,coverArt,note) VALUES ('Slash','2011-1-25',
 INSERT INTO Album (title,releaseDate,coverArt,note) VALUES ('Now, Then & Forever','2011-1-25','http://a1.mzstatic.com/us/r30/Music/v4/35/cf/d2/35cfd216-d78d-ae31-3de6-e1d58d481fb3/886444171359.600x600-75.jpg','coment');
 INSERT INTO Album (title,releaseDate,coverArt,note) VALUES ('Holy Fire','2011-1-25','http://a5.mzstatic.com/us/r30/Music/v4/c7/0c/c9/c70cc9b1-ad6e-4cfa-e81b-49bacce6c5ba/825646535835.600x600-75.jpg','coment');
 
-INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('Flaws',1,180,0,1);
+INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('Flaws',1,257,0,1);
 INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('For He''s A Jolly Good Felon',2,180,0,1);
-INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('For All These Times Son, For All These Times',3,180,0,1);
+INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('For All These Times Son, For All These Times',3,201,0,1);
+INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('Fire it up',4,263,0,1);
+INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('Grace',5,124,0,1);
+INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('The Hardest Button To Button',6,244,0,1);
+INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('Gravity',7,193,0,1);
+INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('Heretic',8,166,0,1);
+INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('Human',9,224,0,1);
+INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('I lived',10,254,0,1);
+INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('Its time',11,146,0,1);
+INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('Learn to fly',12,111,0,1);
+INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('99%',13,217,0,1);
+INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('Asylum',14,280,0,1);
+INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('The Bay',15,181,0,1);
 INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('Fly On The Wall',1,180,1,2);
 INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('The Flame In All Of Us',2,180,1,2);
 INSERT INTO Song (title,trackNumber,duration,genre, album_id) VALUES ('First of Me',1,180,2,3);

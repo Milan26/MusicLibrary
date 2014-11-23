@@ -17,12 +17,18 @@ function preparePopup() {
 }
 
 function showPopup() {
-    black_overlay.css('display', 'block');
-    popup_box.css('display', 'block');
+    black_overlay.show();
+    popup_box.show();
 }
 function hidePopup() {
-    black_overlay.css('display', 'none');
-    popup_box.css('display', 'none');
+    black_overlay.hide();
+    popup_box.hide();
+}
+
+function getTime(seconds) {
+    var minutes = parseInt(seconds/60);
+    var left_seconds = (seconds%60);
+    return minutes + ":" + (left_seconds < 10 ? "0" + left_seconds : left_seconds);
 }
 
 function appendRowsToSongsTable(songs) {
@@ -30,8 +36,7 @@ function appendRowsToSongsTable(songs) {
         $("#songs tbody").append(" <tr> " +
             " <td> " + songs[i].trackNumber + " </td> " +
             " <td class='title'> " + songs[i].title + " </td> " +
-            " <td> " + songs[i].duration + " </td> " +
-            " <td> " + songs[i].bitrate + " </td> " +
+            " <td> " + getTime(songs[i].duration) + " </td> " +
             " <td> " + songs[i].genre + " </td> " +
             " </tr> "
         )
@@ -42,9 +47,8 @@ function appendAlbumInfo(album) {
     $("#info").append(
         " <img src= " + album.coverArt + " + /> " +
         " <div> " +
-        " <h3>Artist</h3> " +
-        " <h2> " + album.title + "</h2> " +
-        " <p> " + album.note + "</p>" +
+        " <h3> " + album.title + " </h3> " +
+        " <h2> " + "Artist" + "</h2> " +
         " </div> ");
 }
 

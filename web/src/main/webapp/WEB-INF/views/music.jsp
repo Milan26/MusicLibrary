@@ -7,7 +7,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <f:message var="title" key="music.title"/>
-<my:layout title="${title}">
+<f:message var="header_title" key="header.music.title"/>
+<f:message var="header_subtitle" key="header.music.subtitle"/>
+<my:layout title="${title}" header_title="${header_title}" header_subtitle="${header_subtitle}">
     <jsp:attribute name="head">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-popup.css"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-music.css"/>
@@ -59,17 +61,20 @@
         <div id="popup_box">
             <div id="info">
             </div>
-            <table id="songs">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th><f:message key="song.title"/></th>
-                    <th><f:message key="song.duration"/></th>
-                    <th><f:message key="song.bitrate"/></th>
-                    <th><f:message key="song.genre"/></th>
-                </tr>
-                </thead>
-            </table>
+            <div id="table_wrapper">
+                <div id="table_scroll" class="scrollbar">
+                    <table id="songs">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th><f:message key="song.title"/></th>
+                            <th><f:message key="song.duration"/></th>
+                            <th><f:message key="song.genre"/></th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         </div>
     </jsp:attribute>
 </my:layout>

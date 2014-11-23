@@ -2,6 +2,8 @@
 <%@tag description="Template" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 
 <%@attribute name="title" required="true" %>
+<%@attribute name="header_title" required="true" %>
+<%@attribute name="header_subtitle" required="false" %>
 <%@attribute name="head" fragment="true" required="false" %>
 <%@attribute name="body" fragment="true" required="false" %>
 <%@attribute name="header" fragment="true" required="false" %>
@@ -59,9 +61,8 @@
         <div id="header_wrapper">
             <div id="header">
                 <div class="inner">
-                    <h1>MUSIC</h1>
-
-                    <p>browse by all genres</p>
+                    <h1>${header_title}</h1>
+                    <p>${header_subtitle}</p>
                 </div>
             </div>
             <jsp:invoke fragment="header"/>

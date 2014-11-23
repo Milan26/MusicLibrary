@@ -7,8 +7,8 @@
 #black_overlay {
     display: none;
     position: absolute;
-    top: 0%;
-    left: 0%;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background-color: black;
@@ -19,49 +19,48 @@
 
 #popup_box {
     display: none;
-    position: absolute;
-    top: 15%;
-    left: 25%;
-    width: 50%;
-    height: 65%;
+    position: fixed;
+    top: 25%;
+    left: 20%;
+    width: 60%;
+    height: 35%;
+    min-height: 350px;
     padding: 16px;
     border: 10px solid #FFFFFF;
-    background-color: #7C7F8F;
+    background-color: rgba(222,222,222,.5);
     z-index: 1002;
-    overflow: auto;
+    overflow: hidden;
 }
 
 #info {
-    display: table;
-    width: 100%;
-    height: 30%;
-    color: #FFFFFF;
+    float: left;
+    width: 30%;
+    height: 100%;
 }
 
 #info img {
-    width: 200px;
-    height: 200px;
+    height: 80%;
+    width: 90%;
 }
 
 #info div {
-    display: table-cell;
-    vertical-align: top;
-    padding-left: 20px;
+    height: 20%;
 }
 
 #info div h3, h2 {
     font-family: 'Sigmar One', cursive;
-    font-size: 28px;
+    font-size: 20px;
 }
 
 #info div h2 {
     font-family: 'Sigmar One', cursive;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 table th {
     border-bottom: #FFFFFF solid 5px;
     text-align: center;
+    font-weight: bold;
 }
 
 table td {
@@ -69,17 +68,46 @@ table td {
     text-align: center;
 }
 
-table tr {
-
+#songs {
+    width: 100%;
+    color: #ffffff;
 }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-    color: #FFFFFF;
+#table_wrapper {
+    float: left;
+    position: relative;
+    width: 68%;
+    height: 100%;
+}
+
+#table_scroll {
+    overflow: auto;
+    height: 100%;
 }
 
 .title {
-    padding-left: 30px;
+    text-align: left;
+    padding-left: 50px;
 }
 
+/*********************************************************************************/
+/* Scrollbar                                                                     */
+/*********************************************************************************/
+
+#table_scroll::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+#table_scroll::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+#table_scroll::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #ECB428;
+}

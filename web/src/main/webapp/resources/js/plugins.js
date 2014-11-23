@@ -30,7 +30,7 @@ $(document).ready(function () {
         perPage: 32,
         startPage: 1,
         startRange: 1,
-        midRange: 5,
+        midRange: 7,
         endRange: 1
     });
 });
