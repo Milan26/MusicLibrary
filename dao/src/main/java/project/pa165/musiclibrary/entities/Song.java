@@ -26,7 +26,7 @@ public class Song implements Serializable {
     @Column(nullable = false)
     private Integer duration;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Genre genre;
 

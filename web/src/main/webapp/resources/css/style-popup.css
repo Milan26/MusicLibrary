@@ -25,6 +25,7 @@
     width: 60%;
     height: 35%;
     min-height: 350px;
+    max-height: 500px;
     padding: 16px;
     border: 10px solid #FFFFFF;
     background-color: rgba(222,222,222,.5);

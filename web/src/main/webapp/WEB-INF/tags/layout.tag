@@ -16,6 +16,7 @@
 <html lang="${pageContext.request.locale}">
 <%-- HEAD --%>
 <head>
+    <title>${title}</title>
     <meta charset="utf-8" content="text/html">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="">
