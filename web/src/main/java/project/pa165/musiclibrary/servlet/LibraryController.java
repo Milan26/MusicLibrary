@@ -56,8 +56,7 @@ public class LibraryController {
     public
     @ResponseBody
     AlbumDto getAlbum(@RequestParam("id") Long id) throws ServiceException {
-        AlbumDto album = getAlbumManager().findAlbum(id);
-        return album;
+        return getAlbumManager().findAlbum(id);
     }
 
 }

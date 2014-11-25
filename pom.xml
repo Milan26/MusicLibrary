@@ -27,7 +27,7 @@
         <commons.version>1.4</commons.version>
         <javaee.version>7.0</javaee.version>
         <joda-time.version>2.5</joda-time.version>
-        <jackson.version>1.9.13</jackson.version>
+        <jackson.version>2.4.3</jackson.version>
     </properties>
 
     <build>
@@ -156,5 +156,10 @@
             <version>${joda-time.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
     </dependencies>
 </project>

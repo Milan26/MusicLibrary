@@ -26,8 +26,8 @@ function hidePopup() {
 }
 
 function getTime(seconds) {
-    var minutes = parseInt(seconds/60);
-    var left_seconds = (seconds%60);
+    var minutes = parseInt(seconds / 60);
+    var left_seconds = (seconds % 60);
     return minutes + ":" + (left_seconds < 10 ? "0" + left_seconds : left_seconds);
 }
 
@@ -48,7 +48,6 @@ function appendAlbumInfo(album) {
         " <img src= " + album.coverArt + " + /> " +
         " <div> " +
         " <h3> " + album.title + " </h3> " +
-        " <h2> " + "Artist" + "</h2> " +
         " </div> ");
 }
 

@@ -1,11 +1,14 @@
 package project.pa165.musiclibrary.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import project.pa165.musiclibrary.entities.Genre;
 
 
 /**
  * @author Alex
  */
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class SongDto {
 
     private Long id;
@@ -15,8 +18,8 @@ public class SongDto {
     private Genre genre;
     private Integer bitrate;
     private String note;
-    private ArtistDto artistDto;
-    private AlbumDto albumDto;
+    private ArtistDto artist;
+    private AlbumDto album;
 
     public SongDto() {
     }
@@ -77,19 +80,19 @@ public class SongDto {
         this.note = note;
     }
 
-    public ArtistDto getArtistDto() {
-        return artistDto;
+    public ArtistDto getArtist() {
+        return artist;
     }
 
-    public void setArtistDto(ArtistDto artistDto) {
-        this.artistDto = artistDto;
+    public void setArtist(ArtistDto artist) {
+        this.artist = artist;
     }
 
-    public AlbumDto getAlbumDto() {
-        return albumDto;
+    public AlbumDto getAlbum() {
+        return album;
     }
 
-    public void setAlbumDto(AlbumDto albumDto) {
-        this.albumDto = albumDto;
+    public void setAlbum(AlbumDto album) {
+        this.album = album;
     }
 }

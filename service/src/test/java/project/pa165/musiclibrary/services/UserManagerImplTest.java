@@ -30,7 +30,6 @@ import static org.mockito.Mockito.*;
 public class UserManagerImplTest {
 
     private User user1;
-    private User user2;
     private UserDto userDto1;
     private UserDto userDto2;
 
@@ -51,7 +50,7 @@ public class UserManagerImplTest {
         userManager.setDozerBeanMapper(new DozerBeanMapper());
 
         user1 = createUser(1l, "martinzahuta@gmail.com", "Martin", "Zahuta", "8+VV6L076X@1{<n", "canEdit");
-        user2 = createUser(2l, "john@doe.com", "John", "Doe", "q1NF=1e5A.-B7qv", "canView");
+        User user2 = createUser(2l, "john@doe.com", "John", "Doe", "q1NF=1e5A.-B7qv", "canView");
 
         userDto1 = createUserDto(1l, "martinzahuta@gmail.com", "Martin", "Zahuta", "8+VV6L076X@1{<n", "canEdit");
         userDto2 = createUserDto(2l, "john@doe.com", "John", "Doe", "q1NF=1e5A.-B7qv", "canView");

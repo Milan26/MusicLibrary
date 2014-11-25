@@ -1,10 +1,14 @@
 package project.pa165.musiclibrary.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.List;
 
 /**
  * @author Milan
  */
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class ArtistDto {
 
     private Long id;

@@ -42,7 +42,7 @@
     <jsp:attribute name="content">
         <div id="gallery_wrapper">
             <div class="holder"></div>
-            <div id="reel" class="clear">
+            <div id="reel">
                 <ul id="gallery">
                     <c:forEach items="${albums}" var="album">
                         <li class="item thumb">
