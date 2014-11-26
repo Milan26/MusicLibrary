@@ -29,7 +29,7 @@
     background: #1a1f2c;
     width: 100%;
     padding: 1em;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 1em;
     z-index: 2;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -70,12 +70,12 @@
 
 #helper_functions {
     float: left;
-    width: 480px;
+    width: 450px;
     height: 150px;
-    vertical-align: middle;
-    display: table;
     font-family: 'Sigmar One', cursive;
     border-left: solid #FFFFFF 10px;
+    display: block;
+    overflow: auto;
 }
 
 #helper_functions div {
@@ -85,13 +85,12 @@
 /* SearchBar */
 #searchBar {
     background-color: #AC5C5D;
-    height: 55%;
     padding-left: 40px;
-
+    height: 55%;
 }
 
 #searchBar div {
-    display: table-cell;
+    height: 100%;
 }
 
 #searchBar input {
@@ -103,10 +102,19 @@
     background-color: #438479;
     padding-left: 40px;
     border-top: solid #FFFFFF 10px;
+    height: 45%;
+    position: relative;
+    overflow: hidden;
 }
 
 #genrePicker div {
-    display: table-cell;
+    height: 100%;
+    position: absolute;
+    top: 25%;
+}
+
+#genrePicker div > select {
+    margin-right: 11px;
 }
 
 /*********************************************************************************/

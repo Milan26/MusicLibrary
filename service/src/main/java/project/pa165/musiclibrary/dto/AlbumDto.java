@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Milan
  */
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class AlbumDto {
 
     private Long id;

@@ -240,7 +240,7 @@ public class SongDaoIT {
 
     private Artist createArtist(String name, String note) {
         Artist artist = new Artist();
-        artist.setName(name);
+        artist.setAlias(name);
         artist.setNote(note);
         return artist;
     }

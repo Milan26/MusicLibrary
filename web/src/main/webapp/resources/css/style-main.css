@@ -26,9 +26,7 @@ body {
     background-image: url('../img/overlay.png'), -o-linear-gradient(top, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.65)), url('../img/bg.jpg');
     background-image: url('../img/overlay.png'), -ms-linear-gradient(top, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.65)), url('../img/bg.jpg');
     background-image: url('../img/overlay.png'), linear-gradient(top, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.65)), url('../img/bg.jpg');
-    background-position: top left, bottom left, auto;
     background-size: auto, 100% 100%, cover;
-    background-repeat: repeat, no-repeat, auto;
 }
 
 body {
@@ -61,6 +59,10 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: -0.05em;
 }
 
+label {
+    color: #ffffff;
+}
+
 /*********************************************************************************/
 /* Wrapper                                                                       */
 /*********************************************************************************/
@@ -81,6 +83,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #gallery_wrapper {
     display: inline-block;
+    width: 100%;
 }
 
 /*********************************************************************************/
@@ -142,7 +145,8 @@ h1, h2, h3, h4, h5, h6 {
 
 #header_wrapper {
     float: left;
-    border: solid #FFFFFF 10px;
+    background-color: #ffffff;
+    padding: 10px;
     text-align: left;
     cursor: default;
 }
@@ -159,6 +163,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
     float: left;
     height: 150px;
+    width: 262px;
 }
 
 #header:before {

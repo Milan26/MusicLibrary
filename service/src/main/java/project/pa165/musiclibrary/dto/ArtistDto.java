@@ -1,6 +1,7 @@
 package project.pa165.musiclibrary.dto;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.List;
@@ -8,12 +9,13 @@ import java.util.List;
 /**
  * @author Milan
  */
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ArtistDto {
 
     private Long id;
-    private String name;
+    private String alias;
     private String note;
+    @JsonIgnore
     private List<SongDto> songs;
 
     public ArtistDto() {
@@ -27,12 +29,12 @@ public class ArtistDto {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAlias() {
+        return alias;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     public String getNote() {

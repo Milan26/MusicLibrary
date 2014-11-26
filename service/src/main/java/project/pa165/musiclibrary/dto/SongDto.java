@@ -8,7 +8,7 @@ import project.pa165.musiclibrary.entities.Genre;
 /**
  * @author Alex
  */
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class SongDto {
 
     private Long id;

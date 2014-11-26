@@ -28,7 +28,7 @@
     max-height: 500px;
     padding: 16px;
     border: 10px solid #FFFFFF;
-    background-color: rgba(222,222,222,.5);
+    background-color: rgba(222, 222, 222, .5);
     z-index: 1002;
     overflow: hidden;
 }
@@ -69,7 +69,7 @@ table td {
     text-align: center;
 }
 
-#songs {
+#album_songs {
     width: 100%;
     color: #ffffff;
 }
@@ -95,20 +95,17 @@ table td {
 /* Scrollbar                                                                     */
 /*********************************************************************************/
 
-#table_scroll::-webkit-scrollbar-track
-{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+#table_scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #F5F5F5;
 }
 
-#table_scroll::-webkit-scrollbar
-{
+#table_scroll::-webkit-scrollbar {
     width: 12px;
     background-color: #F5F5F5;
 }
 
-#table_scroll::-webkit-scrollbar-thumb
-{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+#table_scroll::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
     background-color: #ECB428;
 }

@@ -1,0 +1,12 @@
+#gallery_wrapper {
+    margin-top: 28px;
+}
+
+#songs {
+    cursor: default;
+}
+
+.dataTables_filter {
+    display: none;
+}
+

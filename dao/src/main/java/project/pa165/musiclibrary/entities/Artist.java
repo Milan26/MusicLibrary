@@ -20,7 +20,7 @@ public class Artist implements Serializable {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String alias;
 
     @Column
     private String note;
@@ -36,12 +36,12 @@ public class Artist implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAlias() {
+        return alias;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     public String getNote() {
@@ -79,6 +79,6 @@ public class Artist implements Serializable {
 
     @Override
     public String toString() {
-        return "Artist{" + "id=" + id + ", name=" + name + ", note=" + note + ", songs=" + songs + '}';
+        return "Artist{" + "id=" + id + ", alias=" + alias + ", note=" + note + ", songs=" + songs + '}';
     }
 }

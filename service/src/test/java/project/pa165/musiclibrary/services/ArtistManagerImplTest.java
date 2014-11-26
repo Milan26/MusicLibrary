@@ -204,7 +204,7 @@ public class ArtistManagerImplTest {
     private ArtistDto createArtistDto(Long id, String name, String note) {
         ArtistDto artist = new ArtistDto();
         artist.setId(id);
-        artist.setName(name);
+        artist.setAlias(name);
         artist.setNote(note);
         return artist;
     }
@@ -212,20 +212,20 @@ public class ArtistManagerImplTest {
     private Artist createArtist(Long id, String name, String note) {
         Artist artist = new Artist();
         artist.setId(id);
-        artist.setName(name);
+        artist.setAlias(name);
         artist.setNote(note);
         return artist;
     }
 
     private void deepAssert(Artist artist1, Artist artist2) {
         assertEquals(artist1.getId(), artist2.getId());
-        assertEquals(artist1.getName(), artist2.getName());
+        assertEquals(artist1.getAlias(), artist2.getAlias());
         assertEquals(artist1.getNote(), artist2.getNote());
     }
 
     private void deepAssert(ArtistDto artist1, ArtistDto artist2) {
         assertEquals(artist1.getId(), artist2.getId());
-        assertEquals(artist1.getName(), artist2.getName());
+        assertEquals(artist1.getAlias(), artist2.getAlias());
         assertEquals(artist1.getNote(), artist2.getNote());
     }
 

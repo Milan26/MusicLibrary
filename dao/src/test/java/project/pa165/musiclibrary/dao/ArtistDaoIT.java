@@ -86,10 +86,10 @@ public class ArtistDaoIT {
         persist(artist1);
 
         Artist actual = getArtistDao().find(artist1.getId());
-        assertNotEquals("Updated", actual.getName());
+        assertNotEquals("Updated", actual.getAlias());
         assertNotEquals("Updated note", actual.getNote());
 
-        artist1.setName("Updated");
+        artist1.setAlias("Updated");
         artist1.setNote("Updated note");
 
         getArtistDao().update(artist1);
@@ -147,8 +147,8 @@ public class ArtistDaoIT {
         persist(artist1);
         persist(artist2);
 
-        artist1.setName("I am Unique");
-        artist2.setName("I am not");
+        artist1.setAlias("I am Unique");
+        artist2.setAlias("I am not");
         getArtistDao().update(artist1);
         getArtistDao().update(artist2);
 
@@ -166,8 +166,8 @@ public class ArtistDaoIT {
         persist(artist1);
         persist(artist2);
 
-        artist1.setName("I am Unique");
-        artist2.setName("I am not so UniQuE, or maybe I am");
+        artist1.setAlias("I am Unique");
+        artist2.setAlias("I am not so UniQuE, or maybe I am");
         getArtistDao().update(artist1);
         getArtistDao().update(artist2);
 
@@ -225,7 +225,7 @@ public class ArtistDaoIT {
 
     private Artist createArtist(String name, String note) {
         Artist artist = new Artist();
-        artist.setName(name);
+        artist.setAlias(name);
         artist.setNote(note);
         return artist;
     }
@@ -244,7 +244,7 @@ public class ArtistDaoIT {
 
     private void deepAssert(Artist artist1, Artist artist2) {
         assertEquals(artist1.getId(), artist2.getId());
-        assertEquals(artist1.getName(), artist2.getName());
+        assertEquals(artist1.getAlias(), artist2.getAlias());
         assertEquals(artist1.getNote(), artist2.getNote());
         assertEquals(artist1.getSongs(), artist2.getSongs());
     }

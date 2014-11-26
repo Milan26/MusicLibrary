@@ -63,6 +63,7 @@
             <div id="header">
                 <div class="inner">
                     <h1>${header_title}</h1>
+
                     <p>${header_subtitle}</p>
                 </div>
             </div>
