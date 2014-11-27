@@ -27,10 +27,6 @@ $(document).ready(function () {
 
     /* Hide popup */
     $(document).keyup(function (e) {
-        // enter
-        if (e.keyCode == 13) {
-            hidePopup();
-        }
         // esc
         if (e.keyCode == 27) {
             hidePopup();

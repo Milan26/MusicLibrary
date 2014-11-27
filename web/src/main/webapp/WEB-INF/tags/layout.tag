@@ -49,7 +49,13 @@
         </div>
         <div class="right">
             <ul>
-                <li><a href="#"><f:message key="navigation.user"/></a></li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/user"><f:message key="navigation.user"/></a>
+                    <ul>
+                        <li><a href="${pageContext.request.contextPath}/user"><f:message key="navigation.user.profile"/></a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/settings"><f:message key="navigation.user.settings"/></a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <div class="mid">

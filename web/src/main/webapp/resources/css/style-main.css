@@ -81,11 +81,6 @@ label {
     -webkit-filter: blur(3px);
 }
 
-#gallery_wrapper {
-    display: inline-block;
-    width: 100%;
-}
-
 /*********************************************************************************/
 /* Navigation                                                                    */
 /*********************************************************************************/
@@ -107,11 +102,11 @@ label {
 /* Left */
 #nav .left {
     float: left;
+    width: 30%;
 }
 
 #nav .left ul li {
     float: left;
-
     margin-right: 20px;
 }
 
@@ -119,6 +114,23 @@ label {
 #nav .right {
     float: right;
     text-align: right;
+    width: 8%;
+    min-width: 146px;
+    overflow: hidden;
+}
+
+#nav .right ul ul {
+    display: none;
+    text-align: right;
+    font-size: medium;
+    padding: 10px;
+    z-index: 1000;
+    position: relative;
+}
+
+#nav .right ul li:hover > ul {
+    display: block;
+    background-color: rgba(220, 200, 200, .5);
 }
 
 /* Mid */
@@ -127,6 +139,7 @@ label {
     font-family: 'Dancing Script', cursive;
     text-align: center;
     cursor: default;
+    width: auto;
 }
 
 /*********************************************************************************/
