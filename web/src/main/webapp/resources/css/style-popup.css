@@ -48,14 +48,9 @@
     height: 20%;
 }
 
-#info div h3, h2 {
+#info div h3 {
     font-family: 'Sigmar One', cursive;
     font-size: 20px;
-}
-
-#info div h2 {
-    font-family: 'Sigmar One', cursive;
-    font-size: 16px;
 }
 
 table th {

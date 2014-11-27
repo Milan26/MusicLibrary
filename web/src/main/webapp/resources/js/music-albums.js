@@ -27,11 +27,12 @@ function appendRowsToSongsTable(songs) {
 }
 
 function appendAlbumInfo(album) {
+    var releaseDate = $.datepicker.formatDate('MM dd, yy', new Date(album.releaseDate));
     $("#info").append(
         " <img src= " + album.coverArt + " /> " +
         " <div> " +
         " <h3> " + album.title + " </h3> " +
-        " <h2> " + album.releaseDate + " </h2> " +
+        " <h5>" + releaseDate + " </h5> " +
         " </div> ");
 }
 
@@ -56,14 +57,36 @@ function getAlbum(id) {
     });
 }
 
+/*** Item width ***/
+
+/* Cached variables */
+var thumbs;
+
+function calculateItemWidth(idealWidth) {
+    var width = $("#gallery").width();
+    var numberOfItemsPerRow = width / idealWidth;
+    return (width / Math.floor(numberOfItemsPerRow));
+}
+
+function setItemWidth(itemWidth) {
+    thumbs.css('width', itemWidth -.1);
+    thumbs.css('height', itemWidth -.1);
+}
 
 /*********************************************************************************/
 /* Main                                                                          */
 /*********************************************************************************/
 
 $(document).ready(function () {
+    thumbs = $('.thumb');
     info = $("#info");
     songs = $("#album_songs");
+
+    setItemWidth(calculateItemWidth(224));
+    /* Set width of thumbs */
+    $( window ).resize(function() {
+        setItemWidth(calculateItemWidth(224));
+    });
 
     $("#views option:first").prop("selected", true);
 });

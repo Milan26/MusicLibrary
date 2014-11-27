@@ -10,3 +10,14 @@
     display: none;
 }
 
+.paginate_button {
+    border: transparent;
+    background: #ECB428 !important;
+}
+.paginate_button.current {
+    background: #d64760 !important;
+}
+.paginate_button:hover {
+    background-color: #d64760 !important;
+}
+
