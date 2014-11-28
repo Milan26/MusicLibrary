@@ -27,7 +27,7 @@
     </bean>
 
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
-        <property name="defaultLocale" value="sk"/>
+        <property name="defaultLocale" value="en"/>
     </bean>
 
     <mvc:annotation-driven/>

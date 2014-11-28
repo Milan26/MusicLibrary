@@ -25,7 +25,7 @@ public class ArtistDaoImpl extends AbstractGenericDao<Artist> implements ArtistD
     @Override
     public List<Artist> findArtistByName(final String name) throws PersistenceException {
         try {
-            return getEntityManager().createQuery("SELECT a FROM Artist a WHERE lower(a.name) like lower('%" + name +
+            return getEntityManager().createQuery("SELECT a FROM Artist a WHERE lower(a.alias) like lower('%" + name +
                     "%') ", Artist.class).getResultList();
         } catch (Exception ex) {
             throw new PersistenceException(ex);
