@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <meta charset="UTF-8" />
 
+=======
+>>>>>>> origin/master
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>

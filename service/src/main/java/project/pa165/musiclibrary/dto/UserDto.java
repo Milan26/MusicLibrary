@@ -1,5 +1,9 @@
 package project.pa165.musiclibrary.dto;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.Size;
 
 /**
  * @author Milan
@@ -7,9 +11,13 @@ package project.pa165.musiclibrary.dto;
 public class UserDto {
 
     private Long id;
+    @NotEmpty @Email
     private String email;
+    @NotEmpty @Size(max = 40)
     private String firstName;
+    @Size(max = 40)
     private String lastName;
+    @Size(min = 6, max = 26)
     private String password;
     private String role;
 

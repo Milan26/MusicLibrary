@@ -103,3 +103,5 @@ INSERT INTO Song (title,trackNumber,duration,genre, album_id, artist_id) VALUES 
 INSERT INTO Song (title,trackNumber,duration,genre, album_id, artist_id) VALUES ('Piece by Piece',4,180,'JAZZ',6,6);
 INSERT INTO Song (title,trackNumber,duration,genre, album_id, artist_id) VALUES ('Requiem',5,180,'JAZZ',6,6);
 INSERT INTO Song (title,trackNumber,duration,genre, album_id, artist_id) VALUES ('Rain',6,180,'JAZZ',6,6);
+
+INSERT INTO XUser (email,firstName,lastName,password) VALUES ('kvetinac@gmail.com','Peter','Maly','frgr99rg7');

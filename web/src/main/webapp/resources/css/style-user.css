@@ -1,0 +1,50 @@
+@import url('http://fonts.googleapis.com/css?family=Sigmar+One');
+
+#content_wrapper {
+    display: inline-block;
+    width: 100%;
+    background: #ffffff;
+    padding: 10px;
+    margin-top: 28px;
+    text-align: left;
+    color: #4C4C4C;
+}
+
+#content_wrapper form {
+    padding: 10px;
+    background-color: rgba(222, 222, 222, .5);
+}
+
+#content_wrapper form label {
+    margin-right: 20px;
+    color: #000000;
+    font-family: 'Sigmar One', cursive;
+}
+
+.submit_btn {
+    margin-top: 15px;
+    color: #ffffff;
+    background: #ECB428;
+    border: transparent;
+    height: 30px;
+    font-family: 'Sigmar One', cursive;
+}
+
+.submit_btn:hover {
+    color: #d64760;
+}
+
+.message {
+    font-family: 'Sigmar One', cursive;
+    text-align: center;
+}
+.message * {
+    background: #ECB428;
+}
+
+.error {
+    color: #ff0000;
+    font-size: medium;
+    font-weight: bold;
+    margin-left: 20px;
+}

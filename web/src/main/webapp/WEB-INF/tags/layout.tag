@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@tag description="Template" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@tag description="Template" language="java" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 
 <%@attribute name="title" required="true" %>
 <%@attribute name="header_title" required="true" %>
@@ -53,7 +53,7 @@
                     <a href="${pageContext.request.contextPath}/user"><f:message key="navigation.user"/></a>
                     <ul>
                         <li><a href="${pageContext.request.contextPath}/user"><f:message key="navigation.user.profile"/></a></li>
-                        <li><a href="${pageContext.request.contextPath}/user/settings"><f:message key="navigation.user.settings"/></a></li>
+                        <%--<li><a href="${pageContext.request.contextPath}/user/settings"><f:message key="navigation.user.settings"/></a></li>--%>
                     </ul>
                 </li>
             </ul>
