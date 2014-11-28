@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<%@tag description="Template" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 
 <%@attribute name="header_subtitle" required="true" %>
 <%@attribute name="head" fragment="true" required="false" %>
