@@ -1,5 +1,7 @@
 package project.pa165.musiclibrary.controller;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,7 @@ import project.pa165.musiclibrary.services.UserManager;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.util.Locale;
 
 
 /**
@@ -24,6 +27,7 @@ import javax.validation.Valid;
 public class UserManagementController {
 
     private UserManager userManager;
+    private MessageSource messageSource;
 
     public UserManager getUserManager() {
         return userManager;
@@ -32,6 +36,15 @@ public class UserManagementController {
     @Inject
     public void setUserManager(UserManager userManager) {
         this.userManager = userManager;
+    }
+
+    public MessageSource getMessageSource() {
+        return messageSource;
+    }
+
+    @Inject
+    public void setMessageSource(MessageSource messageSource) {
+        this.messageSource = messageSource;
     }
 
     /**
@@ -50,7 +63,8 @@ public class UserManagementController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String updateUserSettings(@Valid @ModelAttribute("user") UserDto user,
                                      BindingResult bindingResult,
-                                     RedirectAttributes redirectAttributes)
+                                     RedirectAttributes redirectAttributes,
+                                     Locale locale)
             throws ServiceException, UserNotFoundException {
         // JUST TEMPORARY
         UserDto u = getUser();
@@ -61,7 +75,10 @@ public class UserManagementController {
         }
         copyEmptyFields(u, user);
         getUserManager().updateUser(user);
-        redirectAttributes.addFlashAttribute("message", "Profile updated");
+        redirectAttributes.addFlashAttribute(
+                "message",
+                getMessageSource().getMessage(new DefaultMessageSourceResolvable("user.profile.submit.success"), locale)
+        );
         return "redirect:/user";
     }
 
