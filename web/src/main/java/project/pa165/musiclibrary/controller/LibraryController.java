@@ -20,7 +20,6 @@ import java.util.List;
  * @author Milan
  */
 @Controller
-@RequestMapping("/music")
 public class LibraryController {
 
     private AlbumManager albumManager;
@@ -59,17 +58,22 @@ public class LibraryController {
         return new ArrayList<>(Arrays.asList(Genre.values()));
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/about", method = RequestMethod.GET)
+    public String about() {
+        return "about";
+    }
+
+    @RequestMapping(value = "/music", method = RequestMethod.GET)
     public String browseMusic() {
         return browseMusicByAlbums();
     }
 
-    @RequestMapping(value = "/albums", method = RequestMethod.GET)
+    @RequestMapping(value = "/music/albums", method = RequestMethod.GET)
     public String browseMusicByAlbums() {
         return "albums";
     }
 
-    @RequestMapping(value = "/songs", method = RequestMethod.GET)
+    @RequestMapping(value = "/music/songs", method = RequestMethod.GET)
     public String browseMusicBySongs() {
         return "songs";
     }

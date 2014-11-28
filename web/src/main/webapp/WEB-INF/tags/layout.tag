@@ -44,7 +44,7 @@
             <ul>
                 <li><a href="${pageContext.request.contextPath}/index.jsp"><f:message key="navigation.home"/></a></li>
                 <li><a href="${pageContext.request.contextPath}/music"><f:message key="navigation.music"/></a></li>
-                <li><a href="#"><f:message key="navigation.about"/></a></li>
+                <li><a href="${pageContext.request.contextPath}/about"><f:message key="navigation.about"/></a></li>
             </ul>
         </div>
         <div class="right">

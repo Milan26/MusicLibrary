@@ -179,13 +179,6 @@ label {
     width: 262px;
 }
 
-#header:before {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-}
-
 #header .inner {
     display: inline-block;
     vertical-align: middle;
