@@ -1,14 +1,14 @@
 package project.pa165.musiclibrary.services;
 
 import org.dozer.DozerBeanMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import project.pa165.musiclibrary.dao.UserDao;
 import project.pa165.musiclibrary.dto.UserDto;
 import project.pa165.musiclibrary.entities.User;
 import project.pa165.musiclibrary.exception.PersistenceException;
 import project.pa165.musiclibrary.exception.ServiceException;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Martin
  */
-@Named
+@Service
 @Transactional
 public class UserManagerImpl implements UserManager {
 
@@ -29,7 +29,7 @@ public class UserManagerImpl implements UserManager {
         return userDao;
     }
 
-    @Inject
+    @Autowired
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
@@ -38,7 +38,7 @@ public class UserManagerImpl implements UserManager {
         return dozerBeanMapper;
     }
 
-    @Inject
+    @Autowired
     public void setDozerBeanMapper(DozerBeanMapper dozerBeanMapper) {
         this.dozerBeanMapper = dozerBeanMapper;
     }

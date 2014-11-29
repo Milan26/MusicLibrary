@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@tag description="Template" language="java" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@tag description="Template" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 
 <%@attribute name="title" required="true" %>
 <%@attribute name="header_title" required="true" %>

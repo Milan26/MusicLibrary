@@ -1,5 +1,6 @@
 package project.pa165.musiclibrary.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,6 @@ import project.pa165.musiclibrary.exception.ServiceException;
 import project.pa165.musiclibrary.services.AlbumManager;
 import project.pa165.musiclibrary.services.SongManager;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +29,7 @@ public class LibraryController {
         return albumManager;
     }
 
-    @Inject
+    @Autowired
     public void setAlbumManager(AlbumManager albumManager) {
         this.albumManager = albumManager;
     }
@@ -38,7 +38,7 @@ public class LibraryController {
         return songManager;
     }
 
-    @Inject
+    @Autowired
     public void setSongManager(SongManager songManager) {
         this.songManager = songManager;
     }
@@ -56,6 +56,11 @@ public class LibraryController {
     @ModelAttribute("genres")
     public List<Genre> allGenres() throws ServiceException {
         return new ArrayList<>(Arrays.asList(Genre.values()));
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index() {
+        return "albums";
     }
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)

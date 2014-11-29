@@ -1,5 +1,6 @@
 package project.pa165.musiclibrary.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,6 @@ import project.pa165.musiclibrary.exception.ServiceException;
 import project.pa165.musiclibrary.exception.UserNotFoundException;
 import project.pa165.musiclibrary.services.UserManager;
 
-import javax.inject.Inject;
 import javax.validation.Valid;
 import java.util.Locale;
 
@@ -33,7 +33,7 @@ public class UserManagementController {
         return userManager;
     }
 
-    @Inject
+    @Autowired
     public void setUserManager(UserManager userManager) {
         this.userManager = userManager;
     }
@@ -42,7 +42,7 @@ public class UserManagementController {
         return messageSource;
     }
 
-    @Inject
+    @Autowired
     public void setMessageSource(MessageSource messageSource) {
         this.messageSource = messageSource;
     }
