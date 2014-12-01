@@ -56,7 +56,7 @@ public class UserManagementController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String viewUser() {
+    public String user() {
         return "user-profile";
     }
 

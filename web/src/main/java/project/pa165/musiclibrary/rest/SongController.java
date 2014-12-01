@@ -1,10 +1,13 @@
 package project.pa165.musiclibrary.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.exception.ServiceException;
+import project.pa165.musiclibrary.exception.SongNotFoundException;
 import project.pa165.musiclibrary.services.SongManager;
+import project.pa165.musiclibrary.util.ErrorInfo;
 
 import java.util.List;
 
@@ -32,7 +35,17 @@ public class SongController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public SongDto getAlbumById(@PathVariable("id") Long id) throws ServiceException {
-        return getSongManager().findSong(id);
+    public SongDto getAlbumById(@PathVariable("id") Long id) throws ServiceException, SongNotFoundException {
+        SongDto song = getSongManager().findSong(id);
+        if (song == null)
+            throw new SongNotFoundException(id.toString());
+        return song;
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(SongNotFoundException.class)
+    public @ResponseBody
+    ErrorInfo handleSongNotFoundException() {
+        return new ErrorInfo(404, "Song could not be found");
     }
 }
