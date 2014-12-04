@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import project.pa165.musiclibrary.dto.AlbumDto;
 import project.pa165.musiclibrary.exception.AlbumNotFoundException;
-import project.pa165.musiclibrary.services.AlbumManager;
+import project.pa165.musiclibrary.services.AlbumService;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -30,7 +30,7 @@ public class AlbumControllerTest {
 
     private MockMvc mockMvc;
     @Mock
-    private AlbumManager albumManager;
+    private AlbumService albumService;
     @InjectMocks
     private AlbumController albumController;
 
@@ -44,8 +44,8 @@ public class AlbumControllerTest {
         AlbumDto album2 = createAlbumDto(2l, "Hello Uni", new LocalDate(2001, 1, 1).toDate(),
                 "http://blabla.com", "I am hungry");
 
-        when(albumManager.findAlbumByTitle("uni")).thenReturn(Arrays.asList(album1, album2));
-        when(albumManager.findAlbum(1l)).thenReturn(album1);
+        when(albumService.findAlbumByTitle("uni")).thenReturn(Arrays.asList(album1, album2));
+        when(albumService.findAlbum(1l)).thenReturn(album1);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class AlbumControllerTest {
                 .andExpect(jsonPath("$[1].coverArt").value("http://blabla.com"))
                 .andExpect(jsonPath("$[1].note").value("I am hungry"))
                 .andExpect(jsonPath("$[1].songs").value(nullValue()));
-        verify(albumManager).findAlbumByTitle(term);
+        verify(albumService).findAlbumByTitle(term);
     }
 
     @Test
@@ -82,19 +82,19 @@ public class AlbumControllerTest {
                 .andExpect(jsonPath("$.coverArt").value("http://pathtocoverart.com"))
                 .andExpect(jsonPath("$.note").value("album"))
                 .andExpect(jsonPath("$.songs").value(nullValue()));
-        verify(albumManager).findAlbum(id);
+        verify(albumService).findAlbum(id);
     }
 
     @Test
     public void testGetAlbumByIdNoMatch() throws Exception {
-        when(albumManager.findAlbum(any(Long.class))).thenThrow(new AlbumNotFoundException());
+        when(albumService.findAlbum(any(Long.class))).thenThrow(new AlbumNotFoundException());
         Long id = 1l;
         mockMvc.perform(get("/music/albums/" + id))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.status").value(404))
                 .andExpect(jsonPath("$.message").value("Album could not be found"));
-        verify(albumManager).findAlbum(id);
+        verify(albumService).findAlbum(id);
     }
 
     private AlbumDto createAlbumDto(Long id, String title, Date releaseDate, String coverArt, String note) {

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.exception.ServiceException;
 import project.pa165.musiclibrary.exception.SongNotFoundException;
-import project.pa165.musiclibrary.services.SongManager;
+import project.pa165.musiclibrary.services.SongService;
 import project.pa165.musiclibrary.util.ErrorInfo;
 
 import java.util.List;
@@ -18,25 +18,25 @@ import java.util.List;
 @RequestMapping(value = "/music/songs")
 public class SongController {
 
-    private SongManager songManager;
+    private SongService songService;
 
-    public SongManager getSongManager() {
-        return songManager;
+    public SongService getSongService() {
+        return songService;
     }
 
     @Autowired
-    public void setSongManager(SongManager songManager) {
-        this.songManager = songManager;
+    public void setSongService(SongService songService) {
+        this.songService = songService;
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public List<SongDto> getAlbumsByTerm(@RequestParam("term") String term) throws ServiceException {
-        return getSongManager().findSongByTitle(term);
+        return getSongService().findSongByTitle(term);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public SongDto getAlbumById(@PathVariable("id") Long id) throws ServiceException, SongNotFoundException {
-        SongDto song = getSongManager().findSong(id);
+        SongDto song = getSongService().findSong(id);
         if (song == null)
             throw new SongNotFoundException(id.toString());
         return song;

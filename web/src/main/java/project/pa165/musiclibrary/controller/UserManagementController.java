@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.pa165.musiclibrary.dto.UserDto;
 import project.pa165.musiclibrary.exception.ServiceException;
 import project.pa165.musiclibrary.exception.UserNotFoundException;
-import project.pa165.musiclibrary.services.UserManager;
+import project.pa165.musiclibrary.services.UserService;
 
 import javax.validation.Valid;
 import java.util.Locale;
@@ -26,16 +26,16 @@ import java.util.Locale;
 @RequestMapping("/user")
 public class UserManagementController {
 
-    private UserManager userManager;
+    private UserService userService;
     private MessageSource messageSource;
 
-    public UserManager getUserManager() {
-        return userManager;
+    public UserService getUserService() {
+        return userService;
     }
 
     @Autowired
-    public void setUserManager(UserManager userManager) {
-        this.userManager = userManager;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
     public MessageSource getMessageSource() {
@@ -52,7 +52,7 @@ public class UserManagementController {
      */
     @ModelAttribute("user")
     public UserDto getUser() throws ServiceException {
-        return getUserManager().findUser(1l);
+        return getUserService().findUser(1l);
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -74,7 +74,7 @@ public class UserManagementController {
             return "user-edit";
         }
         copyEmptyFields(u, user);
-        getUserManager().updateUser(user);
+        getUserService().updateUser(user);
         redirectAttributes.addFlashAttribute(
                 "message",
                 getMessageSource().getMessage(new DefaultMessageSourceResolvable("user.profile.submit.success"), locale)

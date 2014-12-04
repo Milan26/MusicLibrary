@@ -10,9 +10,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import project.pa165.musiclibrary.dto.SongDto;
-import project.pa165.musiclibrary.entities.Genre;
+import project.pa165.musiclibrary.util.Genre;
 import project.pa165.musiclibrary.exception.SongNotFoundException;
-import project.pa165.musiclibrary.services.SongManager;
+import project.pa165.musiclibrary.services.SongService;
 
 import java.util.Arrays;
 
@@ -31,7 +31,7 @@ public class SongControllerTest {
 
     private MockMvc mockMvc;
     @Mock
-    private SongManager songManager;
+    private SongService songService;
     @InjectMocks
     private SongController songController;
 
@@ -43,8 +43,8 @@ public class SongControllerTest {
         SongDto song1 = createSong(1l, "Walk", (short) 1, 200, Genre.ROCK, 320, "test");
         SongDto song2 = createSong(2l, "Arlandria Walking", (short) 2, 300, Genre.HOLIDAY, 128, "just song");
 
-        when(songManager.findSongByTitle("walk")).thenReturn(Arrays.asList(song1, song2));
-        when(songManager.findSong(1l)).thenReturn(song1);
+        when(songService.findSongByTitle("walk")).thenReturn(Arrays.asList(song1, song2));
+        when(songService.findSong(1l)).thenReturn(song1);
     }
 
     @Test
@@ -72,7 +72,7 @@ public class SongControllerTest {
                 .andExpect(jsonPath("$[1].note").value("just song"))
                 .andExpect(jsonPath("$[1].artist").value(nullValue()))
                 .andExpect(jsonPath("$[1].album").value(nullValue()));
-        verify(songManager).findSongByTitle(term);
+        verify(songService).findSongByTitle(term);
     }
 
     @Test
@@ -90,19 +90,19 @@ public class SongControllerTest {
                 .andExpect(jsonPath("$.note").value("test"))
                 .andExpect(jsonPath("$.artist").value(nullValue()))
                 .andExpect(jsonPath("$.album").value(nullValue()));
-        verify(songManager).findSong(id);
+        verify(songService).findSong(id);
     }
 
     @Test
     public void testGetSongByIdNoMatch() throws Exception {
-        when(songManager.findSong(any(Long.class))).thenThrow(new SongNotFoundException());
+        when(songService.findSong(any(Long.class))).thenThrow(new SongNotFoundException());
         Long id = 1l;
         mockMvc.perform(get("/music/songs/" + id))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.status").value(404))
                 .andExpect(jsonPath("$.message").value("Song could not be found"));
-        verify(songManager).findSong(id);
+        verify(songService).findSong(id);
     }
 
     private SongDto createSong(Long id, String title, Short trackNumber, Integer length,

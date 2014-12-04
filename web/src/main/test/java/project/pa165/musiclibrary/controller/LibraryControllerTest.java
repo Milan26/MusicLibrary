@@ -13,10 +13,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import project.pa165.musiclibrary.dto.AlbumDto;
 import project.pa165.musiclibrary.dto.SongDto;
-import project.pa165.musiclibrary.entities.Genre;
+import project.pa165.musiclibrary.util.Genre;
 import project.pa165.musiclibrary.exception.ServiceException;
-import project.pa165.musiclibrary.services.AlbumManager;
-import project.pa165.musiclibrary.services.SongManager;
+import project.pa165.musiclibrary.services.AlbumService;
+import project.pa165.musiclibrary.services.SongService;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -39,9 +39,9 @@ public class LibraryControllerTest {
 
     private MockMvc mockMvc;
     @Mock
-    private AlbumManager albumManager;
+    private AlbumService albumService;
     @Mock
-    private SongManager songManager;
+    private SongService songService;
     @InjectMocks
     private LibraryController libraryController;
 
@@ -60,8 +60,8 @@ public class LibraryControllerTest {
         song1 = createSongDto("Walk", (short) 1, 200, Genre.ROCK, 320, "test");
         song2 = createSongDto("Arlandria", (short) 2, 300, Genre.HOLIDAY, 128, "test");
 
-        when(albumManager.getAllAlbums()).thenReturn(Arrays.asList(album1, album2));
-        when(songManager.getAllSongs()).thenReturn(Arrays.asList(song1, song2));
+        when(albumService.getAllAlbums()).thenReturn(Arrays.asList(album1, album2));
+        when(songService.getAllSongs()).thenReturn(Arrays.asList(song1, song2));
     }
 
     @Test
@@ -81,8 +81,8 @@ public class LibraryControllerTest {
                 .andExpect(model().attributeDoesNotExist("songs"))
                 .andExpect(model().attributeExists("albums"))
                 .andExpect(model().attribute("albums", Arrays.asList(album1, album2)));
-        verify(albumManager).getAllAlbums();
-        verifyNoMoreInteractions(albumManager);
+        verify(albumService).getAllAlbums();
+        verifyNoMoreInteractions(albumService);
     }
 
     @Test
@@ -93,8 +93,8 @@ public class LibraryControllerTest {
                 .andExpect(model().attributeDoesNotExist("albums"))
                 .andExpect(model().attributeExists("songs"))
                 .andExpect(model().attribute("songs", Arrays.asList(song1, song2)));
-        verify(songManager).getAllSongs();
-        verifyNoMoreInteractions(songManager);
+        verify(songService).getAllSongs();
+        verifyNoMoreInteractions(songService);
     }
 
     private AlbumDto createAlbumDto(Long id, String title, Date releaseDate, String coverArt, String note) {

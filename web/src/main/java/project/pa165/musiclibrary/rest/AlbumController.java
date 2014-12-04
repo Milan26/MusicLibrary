@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.AlbumDto;
 import project.pa165.musiclibrary.exception.AlbumNotFoundException;
 import project.pa165.musiclibrary.exception.ServiceException;
-import project.pa165.musiclibrary.services.AlbumManager;
+import project.pa165.musiclibrary.services.AlbumService;
 import project.pa165.musiclibrary.util.ErrorInfo;
 
 import java.util.List;
@@ -18,25 +18,25 @@ import java.util.List;
 @RequestMapping(value = "/music/albums")
 public class AlbumController {
 
-    private AlbumManager albumManager;
+    private AlbumService albumService;
 
-    public AlbumManager getAlbumManager() {
-        return albumManager;
+    public AlbumService getAlbumService() {
+        return albumService;
     }
 
     @Autowired
-    public void setAlbumManager(AlbumManager albumManager) {
-        this.albumManager = albumManager;
+    public void setAlbumService(AlbumService albumService) {
+        this.albumService = albumService;
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public List<AlbumDto> getAlbumsByTerm(@RequestParam("term") String term) throws ServiceException {
-        return getAlbumManager().findAlbumByTitle(term);
+        return getAlbumService().findAlbumByTitle(term);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public AlbumDto getAlbumById(@PathVariable("id") Long id) throws ServiceException, AlbumNotFoundException {
-        AlbumDto album = getAlbumManager().findAlbum(id);
+        AlbumDto album = getAlbumService().findAlbum(id);
         if (album == null)
             throw new AlbumNotFoundException(id.toString());
         return album;

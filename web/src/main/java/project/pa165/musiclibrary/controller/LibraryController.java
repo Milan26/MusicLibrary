@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import project.pa165.musiclibrary.dto.AlbumDto;
 import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.exception.ServiceException;
-import project.pa165.musiclibrary.services.AlbumManager;
-import project.pa165.musiclibrary.services.SongManager;
+import project.pa165.musiclibrary.services.AlbumService;
+import project.pa165.musiclibrary.services.SongService;
 
 import java.util.List;
 
@@ -19,25 +19,25 @@ import java.util.List;
 @Controller
 public class LibraryController {
 
-    private AlbumManager albumManager;
-    private SongManager songManager;
+    private AlbumService albumService;
+    private SongService songService;
 
-    public AlbumManager getAlbumManager() {
-        return albumManager;
+    public AlbumService getAlbumService() {
+        return albumService;
     }
 
     @Autowired
-    public void setAlbumManager(AlbumManager albumManager) {
-        this.albumManager = albumManager;
+    public void setAlbumService(AlbumService albumService) {
+        this.albumService = albumService;
     }
 
-    public SongManager getSongManager() {
-        return songManager;
+    public SongService getSongService() {
+        return songService;
     }
 
     @Autowired
-    public void setSongManager(SongManager songManager) {
-        this.songManager = songManager;
+    public void setSongService(SongService songService) {
+        this.songService = songService;
     }
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)
@@ -45,17 +45,7 @@ public class LibraryController {
         return "about";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String browseMusicRoot(Model model) throws ServiceException {
-        return browseMusicByAlbums(model);
-    }
-
-    @RequestMapping(value = "/music", method = RequestMethod.GET)
-    public String browseMusic(Model model) throws ServiceException {
-        return browseMusicByAlbums(model);
-    }
-
-    @RequestMapping(value = "/music/albums", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/music", "/music/albums"}, method = RequestMethod.GET)
     public String browseMusicByAlbums(Model model) throws ServiceException {
         model.addAttribute("albums", allAlbums());
         return "albums";
@@ -68,10 +58,10 @@ public class LibraryController {
     }
 
     private List<AlbumDto> allAlbums() throws ServiceException {
-        return getAlbumManager().getAllAlbums();
+        return getAlbumService().getAllAlbums();
     }
 
     private List<SongDto> allSongs() throws ServiceException {
-        return getSongManager().getAllSongs();
+        return getSongService().getAllSongs();
     }
 }
