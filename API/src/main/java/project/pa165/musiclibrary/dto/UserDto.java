@@ -11,9 +11,11 @@ import javax.validation.constraints.Size;
 public class UserDto {
 
     private Long id;
-    @NotEmpty @Email
+    @NotEmpty
+    @Email
     private String email;
-    @NotEmpty @Size(max = 40)
+    @NotEmpty
+    @Size(max = 40)
     private String firstName;
     @Size(max = 40)
     private String lastName;

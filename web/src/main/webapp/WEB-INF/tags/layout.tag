@@ -52,7 +52,8 @@
                 <li>
                     <a href="${pageContext.request.contextPath}/user"><f:message key="navigation.user"/></a>
                     <ul>
-                        <li><a href="${pageContext.request.contextPath}/user"><f:message key="navigation.user.profile"/></a></li>
+                        <li><a href="${pageContext.request.contextPath}/user"><f:message
+                                key="navigation.user.profile"/></a></li>
                         <%--<li><a href="${pageContext.request.contextPath}/user/settings"><f:message key="navigation.user.settings"/></a></li>--%>
                     </ul>
                 </li>
@@ -69,6 +70,7 @@
             <div id="header">
                 <div class="inner">
                     <h1>${header_title}</h1>
+
                     <p>${header_subtitle}</p>
                 </div>
             </div>

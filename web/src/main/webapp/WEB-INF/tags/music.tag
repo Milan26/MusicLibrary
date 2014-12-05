@@ -42,11 +42,11 @@
                         <option value="${pageContext.request.contextPath}/music/songs"><f:message
                                 key="header.view.songs"/></option>
                     </select>
-                    <%--<label for="genres" hidden="hidden"><f:message key="header.genre.label"/>:</label>--%>
-                    <%--<form:select id="genres" path="genres" hidden="true">--%>
+                        <%--<label for="genres" hidden="hidden"><f:message key="header.genre.label"/>:</label>--%>
+                        <%--<form:select id="genres" path="genres" hidden="true">--%>
                         <%--<form:option value="ALL"/>--%>
                         <%--<form:options items="${genres}"/>--%>
-                    <%--</form:select>--%>
+                        <%--</form:select>--%>
                 </div>
             </div>
         </div>

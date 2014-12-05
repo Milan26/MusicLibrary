@@ -12,6 +12,7 @@
 <my:layout title="${title}" header_title="${header_title}" header_subtitle="${header_subtitle}">
     <jsp:attribute name="head">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-user.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-common.css"/>
     </jsp:attribute>
     <jsp:attribute name="content">
         <div id="content_wrapper">

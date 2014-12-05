@@ -38,11 +38,11 @@ public class Song implements Serializable {
     @Column
     private String note;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "artist_id")
     private Artist artist;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "album_id")
     private Album album;
 
@@ -137,9 +137,17 @@ public class Song implements Serializable {
 
     @Override
     public String toString() {
-        return "Song{" + "id=" + id + ", title=" + title + ", trackNumber=" + trackNumber + ", duration=" + duration
-                + "," +
-                " genre=" + genre + ", bitrate=" + bitrate + ", note=" + note + ", artist=" + artist + ", " +
-                "album=" + album + '}';
+        final StringBuilder sb = new StringBuilder("Song{");
+        sb.append("id=").append(id);
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", trackNumber=").append(trackNumber);
+        sb.append(", duration=").append(duration);
+        sb.append(", genre=").append(genre);
+        sb.append(", bitrate=").append(bitrate);
+        sb.append(", note='").append(note).append('\'');
+        sb.append(", artist=").append(artist);
+        sb.append(", album=").append(album);
+        sb.append('}');
+        return sb.toString();
     }
 }

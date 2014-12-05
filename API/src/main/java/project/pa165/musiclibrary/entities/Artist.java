@@ -25,7 +25,7 @@ public class Artist implements Serializable {
     @Column
     private String note;
 
-    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "artist", cascade = CascadeType.REMOVE)
     private List<Song> songs;
 
     public Long getId() {
@@ -79,6 +79,11 @@ public class Artist implements Serializable {
 
     @Override
     public String toString() {
-        return "Artist{" + "id=" + id + ", alias=" + alias + ", note=" + note + ", songs=" + songs + '}';
+        final StringBuilder sb = new StringBuilder("Artist{");
+        sb.append("id=").append(id);
+        sb.append(", alias='").append(alias).append('\'');
+        sb.append(", note='").append(note).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

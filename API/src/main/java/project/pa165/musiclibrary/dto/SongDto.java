@@ -2,7 +2,12 @@ package project.pa165.musiclibrary.dto;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.validator.constraints.NotEmpty;
 import project.pa165.musiclibrary.util.Genre;
+
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 /**
@@ -12,11 +17,19 @@ import project.pa165.musiclibrary.util.Genre;
 public class SongDto {
 
     private Long id;
+    @NotEmpty
     private String title;
+    @NotNull
+    @Digits(integer = 2, fraction = 0)
     private Short trackNumber;
+    @NotNull
+    @Digits(integer = 4, fraction = 0)
     private Integer duration;
+    @NotNull
     private Genre genre;
+    @Digits(integer = 4, fraction = 0)
     private Integer bitrate;
+    @Size(max = 255)
     private String note;
     private ArtistDto artist;
     private AlbumDto album;

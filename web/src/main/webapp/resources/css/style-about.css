@@ -11,15 +11,19 @@
 #content_wrapper * {
     color: #000000;
 }
+
 #content_wrapper a {
     color: #999999;
 }
+
 #content_wrapper a:hover {
     color: #d64760;
 }
+
 #content_wrapper h1 {
     font-weight: bold;
 }
+
 #content_wrapper h3 {
     font-weight: 500;
 }
@@ -35,6 +39,7 @@
     padding: 10px;
     display: table-cell;
 }
+
 .member img {
     width: 100px;
     height: 100px;

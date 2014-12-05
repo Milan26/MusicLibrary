@@ -69,8 +69,8 @@ function calculateItemWidth(idealWidth) {
 }
 
 function setItemWidth(itemWidth) {
-    thumbs.css('width', itemWidth -.1);
-    thumbs.css('height', itemWidth -.1);
+    thumbs.css('width', itemWidth - .1);
+    thumbs.css('height', itemWidth - .1);
 }
 
 /*********************************************************************************/
@@ -84,7 +84,7 @@ $(document).ready(function () {
 
     setItemWidth(calculateItemWidth(224));
     /* Set width of thumbs */
-    $( window ).resize(function() {
+    $(window).resize(function () {
         setItemWidth(calculateItemWidth(224));
     });
 

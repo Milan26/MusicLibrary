@@ -3,7 +3,9 @@ package project.pa165.musiclibrary.dto;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -13,7 +15,9 @@ import java.util.List;
 public class ArtistDto {
 
     private Long id;
+    @NotEmpty
     private String alias;
+    @Size(max = 255)
     private String note;
     @JsonIgnore
     private List<SongDto> songs;

@@ -33,7 +33,7 @@ public class Album implements Serializable {
     @Column
     private String note;
 
-    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "album", cascade = CascadeType.REMOVE)
     private List<Song> songs;
 
     public Long getId() {
@@ -103,7 +103,13 @@ public class Album implements Serializable {
 
     @Override
     public String toString() {
-        return "Album{" + "id=" + id + ", title=" + title + ", releaseDate=" + releaseDate + ", " +
-                "coverArt=" + coverArt + ", note=" + note + ", songs=" + songs + '}';
+        final StringBuilder sb = new StringBuilder("Album{");
+        sb.append("id=").append(id);
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", releaseDate=").append(releaseDate);
+        sb.append(", coverArt='").append(coverArt).append('\'');
+        sb.append(", note='").append(note).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
