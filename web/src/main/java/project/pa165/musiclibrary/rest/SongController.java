@@ -1,6 +1,5 @@
 package project.pa165.musiclibrary.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.SongDto;
@@ -9,6 +8,7 @@ import project.pa165.musiclibrary.exception.SongNotFoundException;
 import project.pa165.musiclibrary.services.SongService;
 import project.pa165.musiclibrary.util.ErrorInfo;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -24,7 +24,7 @@ public class SongController {
         return songService;
     }
 
-    @Autowired
+    @Inject
     public void setSongService(SongService songService) {
         this.songService = songService;
     }

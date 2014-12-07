@@ -1,9 +1,9 @@
 package project.pa165.musiclibrary.dao;
 
-import org.springframework.stereotype.Repository;
 import project.pa165.musiclibrary.entities.Album;
 import project.pa165.musiclibrary.exception.PersistenceException;
 
+import javax.inject.Named;
 import java.util.List;
 
 /**
@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Milan
  */
-@Repository
+@Named
 public class AlbumDaoImpl extends AbstractGenericDao<Album> implements AlbumDao {
 
     /**

@@ -3,7 +3,6 @@ package project.pa165.musiclibrary.dao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -11,6 +10,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import project.pa165.musiclibrary.entities.User;
 import project.pa165.musiclibrary.exception.PersistenceException;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +36,7 @@ public class UserDaoIT {
         return userDao;
     }
 
-    @Autowired
+    @Inject
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }

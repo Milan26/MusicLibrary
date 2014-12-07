@@ -1,6 +1,5 @@
 package project.pa165.musiclibrary.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.AlbumDto;
@@ -9,6 +8,7 @@ import project.pa165.musiclibrary.exception.ServiceException;
 import project.pa165.musiclibrary.services.AlbumService;
 import project.pa165.musiclibrary.util.ErrorInfo;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -24,7 +24,7 @@ public class AlbumController {
         return albumService;
     }
 
-    @Autowired
+    @Inject
     public void setAlbumService(AlbumService albumService) {
         this.albumService = albumService;
     }

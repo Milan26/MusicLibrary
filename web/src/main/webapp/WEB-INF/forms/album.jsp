@@ -13,6 +13,8 @@
         <tr>
             <th><form:label path="releaseDate"><f:message key="album.releaseDate"/><c:out
                     value=" (dd-mm-yyyy):"/></form:label></th>
+            <%--<f:formatDate pattern="dd-MM-yyyy" type="date" value="${releaseDate}" var="formattedDate"/>--%>
+            <%--value="${formattedDate}"--%>
             <td><form:input path="releaseDate"/></td>
             <td><form:errors path="releaseDate" cssClass="error"/></td>
         </tr>

@@ -1,6 +1,5 @@
 package project.pa165.musiclibrary.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
@@ -20,6 +19,7 @@ import project.pa165.musiclibrary.services.ArtistService;
 import project.pa165.musiclibrary.services.SongService;
 import project.pa165.musiclibrary.services.UserService;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 import java.util.Locale;
 
@@ -40,7 +40,7 @@ public class AdministrationController {
         return albumService;
     }
 
-    @Autowired
+    @Inject
     public void setAlbumService(AlbumService albumService) {
         this.albumService = albumService;
     }
@@ -49,7 +49,7 @@ public class AdministrationController {
         return artistService;
     }
 
-    @Autowired
+    @Inject
     public void setArtistService(ArtistService artistService) {
         this.artistService = artistService;
     }
@@ -58,7 +58,7 @@ public class AdministrationController {
         return songService;
     }
 
-    @Autowired
+    @Inject
     public void setSongService(SongService songService) {
         this.songService = songService;
     }
@@ -67,7 +67,7 @@ public class AdministrationController {
         return userService;
     }
 
-    @Autowired
+    @Inject
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
@@ -76,7 +76,7 @@ public class AdministrationController {
         return messageSource;
     }
 
-    @Autowired
+    @Inject
     public void setMessageSource(MessageSource messageSource) {
         this.messageSource = messageSource;
     }

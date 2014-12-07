@@ -4,7 +4,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.stereotype.Repository;
 import project.pa165.musiclibrary.exception.PersistenceException;
 import project.pa165.musiclibrary.exception.ServiceException;
 
@@ -12,7 +11,6 @@ import project.pa165.musiclibrary.exception.ServiceException;
  * @author Milan
  */
 @Aspect
-@Repository
 public class ExceptionTranslationAspect {
 
     @Pointcut("execution(* project.pa165.musiclibrary.services..*(..))")

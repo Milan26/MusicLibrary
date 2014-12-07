@@ -1,6 +1,5 @@
 package project.pa165.musiclibrary.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +10,7 @@ import project.pa165.musiclibrary.exception.ServiceException;
 import project.pa165.musiclibrary.services.AlbumService;
 import project.pa165.musiclibrary.services.SongService;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -26,7 +26,7 @@ public class LibraryController {
         return albumService;
     }
 
-    @Autowired
+    @Inject
     public void setAlbumService(AlbumService albumService) {
         this.albumService = albumService;
     }
@@ -35,7 +35,7 @@ public class LibraryController {
         return songService;
     }
 
-    @Autowired
+    @Inject
     public void setSongService(SongService songService) {
         this.songService = songService;
     }
