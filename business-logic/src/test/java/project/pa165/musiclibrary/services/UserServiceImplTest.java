@@ -37,17 +37,17 @@ public class UserServiceImplTest {
     private UserDao userDao;
 
     @InjectMocks
-    private UserServiceImpl userManager;
+    private UserServiceImpl userService;
 
-    public UserServiceImpl getUserManager() {
-        return userManager;
+    public UserServiceImpl getUserService() {
+        return userService;
     }
 
     @Before
     public void setup() throws PersistenceException {
         MockitoAnnotations.initMocks(this);
 
-        userManager.setDozerBeanMapper(new DozerBeanMapper());
+        userService.setDozerBeanMapper(new DozerBeanMapper());
 
         user1 = createUser(1l, "martinzahuta@gmail.com", "Martin", "Zahuta", "8+VV6L076X@1{<n", "canEdit");
         User user2 = createUser(2l, "john@doe.com", "John", "Doe", "q1NF=1e5A.-B7qv", "canView");
@@ -64,7 +64,7 @@ public class UserServiceImplTest {
     @Test
     public void testCreateUser() throws PersistenceException, ServiceException {
         ArgumentCaptor<User> argumentCaptor = ArgumentCaptor.forClass(User.class);
-        getUserManager().createUser(userDto1);
+        getUserService().createUser(userDto1);
         verify(userDao).create(argumentCaptor.capture());
         deepAssert(user1, argumentCaptor.getValue());
     }
@@ -72,27 +72,27 @@ public class UserServiceImplTest {
     @Test(expected = ServiceException.class)
     public void testCreateNullUser() throws PersistenceException, ServiceException {
         doThrow(new PersistenceException("user")).when(userDao).create(null);
-        userManager.createUser(null);
+        userService.createUser(null);
         verify(userDao).create(null);
     }
 
     @Test
     public void testDeleteUser() throws PersistenceException, ServiceException {
-        getUserManager().deleteUser(1l);
+        getUserService().deleteUser(1l);
         verify(userDao).delete(1l);
     }
 
     @Test(expected = ServiceException.class)
     public void testDeleteNullUser() throws PersistenceException, ServiceException {
         doThrow(new PersistenceException("id")).when(userDao).delete(null);
-        userManager.deleteUser(null);
+        userService.deleteUser(null);
         verify(userDao).delete(null);
     }
 
     @Test
     public void testUpdateUser() throws PersistenceException, ServiceException {
         ArgumentCaptor<User> argumentCaptor = ArgumentCaptor.forClass(User.class);
-        getUserManager().updateUser(userDto1);
+        getUserService().updateUser(userDto1);
         verify(userDao).update(argumentCaptor.capture());
         deepAssert(user1, argumentCaptor.getValue());
     }
@@ -100,13 +100,13 @@ public class UserServiceImplTest {
     @Test(expected = ServiceException.class)
     public void testUpdateNullUser() throws PersistenceException, ServiceException {
         doThrow(new PersistenceException("user")).when(userDao).update(null);
-        userManager.updateUser(null);
+        userService.updateUser(null);
         verify(userDao).update(null);
     }
 
     @Test
     public void testFindUser() throws PersistenceException, ServiceException {
-        UserDto result = getUserManager().findUser(1l);
+        UserDto result = getUserService().findUser(1l);
         verify(userDao).find(1l);
         deepAssert(userDto1, result);
     }
@@ -114,14 +114,14 @@ public class UserServiceImplTest {
     @Test
     public void testFindUserOnEmptyDb() throws PersistenceException, ServiceException {
         when(userDao.find(any(Long.class))).thenReturn(null);
-        UserDto result = getUserManager().findUser(1l);
+        UserDto result = getUserService().findUser(1l);
         verify(userDao).find(1l);
         assertNull(result);
     }
 
     @Test
     public void testFindUserByWrongId() throws PersistenceException, ServiceException {
-        UserDto result = getUserManager().findUser(3l);
+        UserDto result = getUserService().findUser(3l);
         verify(userDao).find(3l);
         assertNull(result);
     }
@@ -129,14 +129,14 @@ public class UserServiceImplTest {
     @Test(expected = ServiceException.class)
     public void testFindUserWithNullId() throws PersistenceException, ServiceException {
         doThrow(new PersistenceException("id")).when(userDao).find(null);
-        getUserManager().findUser(null);
+        getUserService().findUser(null);
         verify(userDao).find(null);
     }
 
     @Test
     public void testGetAllUsers() throws PersistenceException, ServiceException {
         List<UserDto> allUsers = Arrays.asList(userDto1, userDto2);
-        List<UserDto> result = getUserManager().getAllUsers();
+        List<UserDto> result = getUserService().getAllUsers();
         verify(userDao).getAll();
         assertEquals(2, result.size());
         deepAssert(allUsers.toArray(), result.toArray());
@@ -145,7 +145,7 @@ public class UserServiceImplTest {
     @Test
     public void testGetAllUsersOnEmptyDb() throws PersistenceException, ServiceException {
         when(userDao.getAll()).thenReturn(new ArrayList<User>());
-        List<UserDto> result = getUserManager().getAllUsers();
+        List<UserDto> result = getUserService().getAllUsers();
         verify(userDao).getAll();
         assertEquals(0, result.size());
     }

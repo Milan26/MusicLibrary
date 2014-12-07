@@ -1,6 +1,5 @@
 package project.pa165.musiclibrary.controller;
 
-import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +18,6 @@ import project.pa165.musiclibrary.services.AlbumService;
 import project.pa165.musiclibrary.services.SongService;
 
 import java.util.Arrays;
-import java.util.Date;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -55,8 +53,8 @@ public class LibraryControllerTest {
 
         this.mockMvc = MockMvcBuilders.standaloneSetup(libraryController).setViewResolvers(viewResolver).build();
 
-        album1 = createAlbumDto(1l, "Unity", new LocalDate(1991, 2, 6).toDate(), "http://pathtocoverart.com", "album");
-        album2 = createAlbumDto(2l, "Hello Uni", new LocalDate(2001, 1, 1).toDate(), "http://blabla.com", "I am hungry");
+        album1 = createAlbumDto(1l, "Unity", "2-6-1991", "http://pathtocoverart.com", "album");
+        album2 = createAlbumDto(2l, "Hello Uni", "1-1-2001", "http://blabla.com", "note2");
         song1 = createSongDto("Walk", (short) 1, 200, Genre.ROCK, 320, "test");
         song2 = createSongDto("Arlandria", (short) 2, 300, Genre.HOLIDAY, 128, "test");
 
@@ -97,7 +95,7 @@ public class LibraryControllerTest {
         verifyNoMoreInteractions(songService);
     }
 
-    private AlbumDto createAlbumDto(Long id, String title, Date releaseDate, String coverArt, String note) {
+    private AlbumDto createAlbumDto(Long id, String title, String releaseDate, String coverArt, String note) {
         AlbumDto album = new AlbumDto();
         album.setId(id);
         album.setTitle(title);
