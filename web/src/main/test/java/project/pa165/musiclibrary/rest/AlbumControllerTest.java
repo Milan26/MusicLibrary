@@ -39,10 +39,8 @@ public class AlbumControllerTest {
         MockitoAnnotations.initMocks(this);
         this.mockMvc = MockMvcBuilders.standaloneSetup(albumController).build();
 
-        AlbumDto album1 = createAlbumDto(1l, "Unity", new LocalDate(2011, 1, 25).toDate(),
-                "http://pathtocoverart.com", "album");
-        AlbumDto album2 = createAlbumDto(2l, "Hello Uni", new LocalDate(2001, 1, 1).toDate(),
-                "http://blabla.com", "I am hungry");
+        AlbumDto album1 = createAlbumDto(1l, "Unity", "2-6-1991", "http://pathtocoverart.com", "album");
+        AlbumDto album2 = createAlbumDto(2l, "Hello Uni", "1-1-2001", "http://blabla.com", "note2");
 
         when(albumService.findAlbumByTitle("uni")).thenReturn(Arrays.asList(album1, album2));
         when(albumService.findAlbum(1l)).thenReturn(album1);
@@ -57,15 +55,15 @@ public class AlbumControllerTest {
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].title").value("Unity"))
-                .andExpect(jsonPath("$[0].releaseDate").value(new LocalDate(2011, 1, 25).toDate().getTime()))
+                .andExpect(jsonPath("$[0].releaseDate").value("2-6-1991"))
                 .andExpect(jsonPath("$[0].coverArt").value("http://pathtocoverart.com"))
                 .andExpect(jsonPath("$[0].note").value("album"))
                 .andExpect(jsonPath("$[0].songs").value(nullValue()))
                 .andExpect(jsonPath("$[1].id").value(2))
                 .andExpect(jsonPath("$[1].title").value("Hello Uni"))
-                .andExpect(jsonPath("$[1].releaseDate").value(new LocalDate(2001, 1, 1).toDate().getTime()))
+                .andExpect(jsonPath("$[1].releaseDate").value("1-1-2001"))
                 .andExpect(jsonPath("$[1].coverArt").value("http://blabla.com"))
-                .andExpect(jsonPath("$[1].note").value("I am hungry"))
+                .andExpect(jsonPath("$[1].note").value("note2"))
                 .andExpect(jsonPath("$[1].songs").value(nullValue()));
         verify(albumService).findAlbumByTitle(term);
     }
@@ -78,7 +76,7 @@ public class AlbumControllerTest {
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.title").value("Unity"))
-                .andExpect(jsonPath("$.releaseDate").value(1295910000000l))
+                .andExpect(jsonPath("$.releaseDate").value("2-6-1991"))
                 .andExpect(jsonPath("$.coverArt").value("http://pathtocoverart.com"))
                 .andExpect(jsonPath("$.note").value("album"))
                 .andExpect(jsonPath("$.songs").value(nullValue()));
@@ -97,7 +95,7 @@ public class AlbumControllerTest {
         verify(albumService).findAlbum(id);
     }
 
-    private AlbumDto createAlbumDto(Long id, String title, Date releaseDate, String coverArt, String note) {
+    private AlbumDto createAlbumDto(Long id, String title, String releaseDate, String coverArt, String note) {
         AlbumDto album = new AlbumDto();
         album.setId(id);
         album.setTitle(title);

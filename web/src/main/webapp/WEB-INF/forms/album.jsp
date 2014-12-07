@@ -11,10 +11,10 @@
             <td><form:errors path="title" cssClass="error"/></td>
         </tr>
         <tr>
-            <th><form:label path="releaseDate"><f:message key="album.releaseDate"/><c:out
-                    value=" (dd-mm-yyyy):"/></form:label></th>
-            <%--<f:formatDate pattern="dd-MM-yyyy" type="date" value="${releaseDate}" var="formattedDate"/>--%>
-            <%--value="${formattedDate}"--%>
+            <th><form:label path="releaseDate">
+                <f:message key="album.releaseDate"/>
+                <c:out value=" (dd-mm-yyyy):"/>
+            </form:label></th>
             <td><form:input path="releaseDate"/></td>
             <td><form:errors path="releaseDate" cssClass="error"/></td>
         </tr>

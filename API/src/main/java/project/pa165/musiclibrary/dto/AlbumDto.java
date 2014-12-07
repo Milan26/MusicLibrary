@@ -3,12 +3,9 @@ package project.pa165.musiclibrary.dto;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.validator.constraints.NotEmpty;
-//import org.springframework.format.annotation.DateTimeFormat;
+import project.pa165.musiclibrary.util.Date;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,10 +17,9 @@ public class AlbumDto {
     private Long id;
     @NotEmpty
     private String title;
-//    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    @NotNull
-    @Past
-    private Date releaseDate;
+    @NotEmpty
+    @Date
+    private String releaseDate;
     private String coverArt;
     @Size(max = 255)
     private String note;
@@ -48,11 +44,11 @@ public class AlbumDto {
         this.title = title;
     }
 
-    public Date getReleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 

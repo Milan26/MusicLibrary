@@ -40,24 +40,27 @@ public class AlbumServiceImplTest {
     private AlbumDao albumDao;
 
     @InjectMocks
-    private AlbumServiceImpl albumManager;
+    private AlbumServiceImpl albumService;
 
-    public AlbumServiceImpl getAlbumManager() {
-        return albumManager;
+    public AlbumServiceImpl getAlbumService() {
+        return albumService;
     }
 
     @Before
     public void setup() throws PersistenceException {
         MockitoAnnotations.initMocks(this);
 
-        albumManager.setDozerBeanMapper(new DozerBeanMapper());
+        List<String> myMappingFiles = new ArrayList<>();
+        myMappingFiles.add("dozer-mapping.xml");
+        DozerBeanMapper mapper = new DozerBeanMapper();
+        mapper.setMappingFiles(myMappingFiles);
+
+        albumService.setDozerBeanMapper(mapper);
 
         album1 = createAlbum(1l, "Unity", new LocalDate(1991, 2, 6).toDate(), "http://pathtocoverart.com", "album");
-        album2 = createAlbum(2l, "Hello Uni", new LocalDate(2001, 1, 1).toDate(), "http://blabla.com", "I am hungry");
-        albumDto1 = createAlbumDto(1l, "Unity", new LocalDate(1991, 2, 6).toDate(), "http://pathtocoverart.com",
-                "album");
-        albumDto2 = createAlbumDto(2l, "Hello Uni", new LocalDate(2001, 1, 1).toDate(), "http://blabla.com", "I am "
-                + "hungry");
+        album2 = createAlbum(2l, "Hello Uni", new LocalDate(2001, 1, 1).toDate(), "http://blabla.com", "note2");
+        albumDto1 = createAlbumDto(1l, "Unity", "06-02-1991", "http://pathtocoverart.com", "album");
+        albumDto2 = createAlbumDto(2l, "Hello Uni", "01-01-2001", "http://blabla.com", "note2");
 
         when(albumDao.find(1l)).thenReturn(album1);
         when(albumDao.find(2l)).thenReturn(album2);
@@ -69,7 +72,7 @@ public class AlbumServiceImplTest {
     @Test
     public void testCreateAlbum() throws PersistenceException, ServiceException {
         ArgumentCaptor<Album> argumentCaptor = ArgumentCaptor.forClass(Album.class);
-        getAlbumManager().createAlbum(albumDto1);
+        getAlbumService().createAlbum(albumDto1);
         verify(albumDao).create(argumentCaptor.capture());
         deepAssert(album1, argumentCaptor.getValue());
     }
@@ -77,27 +80,27 @@ public class AlbumServiceImplTest {
     @Test(expected = ServiceException.class)
     public void testCreateAlbumNull() throws PersistenceException, ServiceException {
         doThrow(new PersistenceException("album")).when(albumDao).create(null);
-        albumManager.createAlbum(null);
+        albumService.createAlbum(null);
         verify(albumDao).create(null);
     }
 
     @Test
     public void testDeleteAlbum() throws PersistenceException, ServiceException {
-        getAlbumManager().deleteAlbum(1l);
+        getAlbumService().deleteAlbum(1l);
         verify(albumDao).delete(1l);
     }
 
     @Test(expected = ServiceException.class)
     public void testDeleteAlbumNull() throws PersistenceException, ServiceException {
         doThrow(new PersistenceException("id")).when(albumDao).delete(null);
-        albumManager.deleteAlbum(null);
+        albumService.deleteAlbum(null);
         verify(albumDao).delete(null);
     }
 
     @Test
     public void testUpdateAlbum() throws PersistenceException, ServiceException {
         ArgumentCaptor<Album> argumentCaptor = ArgumentCaptor.forClass(Album.class);
-        getAlbumManager().updateAlbum(albumDto1);
+        getAlbumService().updateAlbum(albumDto1);
         verify(albumDao).update(argumentCaptor.capture());
         deepAssert(album1, argumentCaptor.getValue());
     }
@@ -105,13 +108,13 @@ public class AlbumServiceImplTest {
     @Test(expected = ServiceException.class)
     public void testUpdateAlbumNull() throws PersistenceException, ServiceException {
         doThrow(new PersistenceException("album")).when(albumDao).update(null);
-        albumManager.updateAlbum(null);
+        albumService.updateAlbum(null);
         verify(albumDao).update(null);
     }
 
     @Test
     public void testFindAlbum() throws PersistenceException, ServiceException {
-        AlbumDto result = getAlbumManager().findAlbum(1l);
+        AlbumDto result = getAlbumService().findAlbum(1l);
         verify(albumDao).find(1l);
         deepAssert(albumDto1, result);
     }
@@ -120,14 +123,14 @@ public class AlbumServiceImplTest {
     public void testFindAlbumEmptyDb() throws PersistenceException, ServiceException {
         when(albumDao.find(any(Long.class))).thenReturn(null);
 
-        AlbumDto result = getAlbumManager().findAlbum(1l);
+        AlbumDto result = getAlbumService().findAlbum(1l);
         verify(albumDao).find(1l);
         assertNull(result);
     }
 
     @Test
     public void testFindAlbumWrongId() throws PersistenceException, ServiceException {
-        AlbumDto result = getAlbumManager().findAlbum(3l);
+        AlbumDto result = getAlbumService().findAlbum(3l);
         verify(albumDao).find(3l);
         assertNull(result);
     }
@@ -135,14 +138,14 @@ public class AlbumServiceImplTest {
     @Test(expected = ServiceException.class)
     public void testFindAlbumWithNullId() throws PersistenceException, ServiceException {
         doThrow(new PersistenceException("id")).when(albumDao).find(null);
-        getAlbumManager().findAlbum(null);
+        getAlbumService().findAlbum(null);
         verify(albumDao).find(null);
     }
 
     @Test
     public void testGetAllAlbums() throws PersistenceException, ServiceException {
         List<AlbumDto> allAlbums = Arrays.asList(albumDto1, albumDto2);
-        List<AlbumDto> result = getAlbumManager().getAllAlbums();
+        List<AlbumDto> result = getAlbumService().getAllAlbums();
 
         verify(albumDao).getAll();
 
@@ -154,7 +157,7 @@ public class AlbumServiceImplTest {
     public void testGetAllAlbumsEmptyDb() throws PersistenceException, ServiceException {
         when(albumDao.getAll()).thenReturn(new ArrayList<Album>());
 
-        List<AlbumDto> result = getAlbumManager().getAllAlbums();
+        List<AlbumDto> result = getAlbumService().getAllAlbums();
 
         verify(albumDao).getAll();
 
@@ -164,7 +167,7 @@ public class AlbumServiceImplTest {
     @Test(expected = ServiceException.class)
     public void testGetAllAlbumsWithExceptionOnPersistence() throws PersistenceException, ServiceException {
         doThrow(new PersistenceException()).when(albumDao).getAll();
-        getAlbumManager().getAllAlbums();
+        getAlbumService().getAllAlbums();
         verify(albumDao).getAll();
     }
 
@@ -173,7 +176,7 @@ public class AlbumServiceImplTest {
         List<Album> allAlbums = Arrays.asList(album1);
         when(albumDao.findAlbumByTitle(any(String.class))).thenReturn(allAlbums);
 
-        List<AlbumDto> result = getAlbumManager().findAlbumByTitle("Unity");
+        List<AlbumDto> result = getAlbumService().findAlbumByTitle("Unity");
 
         verify(albumDao).findAlbumByTitle("Unity");
 
@@ -186,7 +189,7 @@ public class AlbumServiceImplTest {
         List<Album> allAlbums = Arrays.asList(album1, album2);
         when(albumDao.findAlbumByTitle(any(String.class))).thenReturn(allAlbums);
 
-        List<AlbumDto> result = getAlbumManager().findAlbumByTitle("uni");
+        List<AlbumDto> result = getAlbumService().findAlbumByTitle("uni");
 
         verify(albumDao).findAlbumByTitle("uni");
 
@@ -198,14 +201,14 @@ public class AlbumServiceImplTest {
     public void testFindAlbumByTitleEmptyDb() throws PersistenceException, ServiceException {
         when(albumDao.findAlbumByTitle(any(String.class))).thenReturn(new ArrayList<Album>());
 
-        List<AlbumDto> result = getAlbumManager().findAlbumByTitle("Unity");
+        List<AlbumDto> result = getAlbumService().findAlbumByTitle("Unity");
 
         verify(albumDao).findAlbumByTitle("Unity");
 
         assertEquals(0, result.size());
     }
 
-    private AlbumDto createAlbumDto(Long id, String title, Date releaseDate, String coverArt, String note) {
+    private AlbumDto createAlbumDto(Long id, String title, String releaseDate, String coverArt, String note) {
         AlbumDto album = new AlbumDto();
         album.setId(id);
         album.setTitle(title);

@@ -27,12 +27,11 @@ function appendRowsToSongsTable(songs) {
 }
 
 function appendAlbumInfo(album) {
-    var releaseDate = $.datepicker.formatDate('dd.mm.yy', new Date(album.releaseDate));
     $("#info").append(
         " <img src= " + album.coverArt + " /> " +
         " <div> " +
         " <h3> " + album.title + " </h3> " +
-        " <h5>" + releaseDate + " </h5> " +
+        " <h5>" + album.releaseDate + " </h5> " +
         " </div> ");
 }
 
