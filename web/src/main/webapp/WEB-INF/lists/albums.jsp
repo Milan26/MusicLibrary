@@ -18,7 +18,7 @@
         <tr>
             <td><c:out value="${album.id}"/></td>
             <td><c:out value="${album.title}"/></td>
-            <td><c:out value="${album.releaseDate}"/></td>
+            <td><f:formatDate pattern="dd-MM-yyyy" value="${album.releaseDate}"/></td>
             <td><img src="<c:out value='${album.coverArt}'/>"/></td>
             <td><c:out value="${album.note}"/></td>
             <td>
