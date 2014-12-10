@@ -11,7 +11,7 @@ import project.pa165.musiclibrary.dao.SongDao;
 import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.util.Genre;
 import project.pa165.musiclibrary.entities.Song;
-import project.pa165.musiclibrary.exception.PersistenceException;
+import project.pa165.musiclibrary.exception.ServiceException;
 import project.pa165.musiclibrary.exception.ServiceException;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class SongServiceImplTest {
     }
 
     @Before
-    public void setUp() throws PersistenceException {
+    public void setUp() throws ServiceException {
         MockitoAnnotations.initMocks(this);
 
         songService.setDozerBeanMapper(new DozerBeanMapper());
@@ -62,7 +62,7 @@ public class SongServiceImplTest {
 
 
     @Test
-    public void testCreateSong() throws PersistenceException, ServiceException {
+    public void testCreateSong() {
         ArgumentCaptor<Song> argumentCaptor = ArgumentCaptor.forClass(Song.class);
         getSongService().createSong(songDto1);
         verify(songDao).create(argumentCaptor.capture());
@@ -70,27 +70,27 @@ public class SongServiceImplTest {
     }
 
     @Test(expected = ServiceException.class)
-    public void testCreateSongNull() throws PersistenceException, ServiceException {
-        doThrow(new PersistenceException("song")).when(songDao).create(null);
+    public void testCreateSongNull() {
+        doThrow(new ServiceException("song")).when(songDao).create(null);
         songService.createSong(null);
         verify(songDao).create(null);
     }
 
     @Test
-    public void testDeleteSong() throws PersistenceException, ServiceException {
+    public void testDeleteSong() {
         getSongService().deleteSong(1l);
         verify(songDao).delete(1l);
     }
 
     @Test(expected = ServiceException.class)
-    public void testDeleteSongNull() throws PersistenceException, ServiceException {
-        doThrow(new PersistenceException("id")).when(songDao).delete(null);
+    public void testDeleteSongNull() {
+        doThrow(new ServiceException("id")).when(songDao).delete(null);
         songService.deleteSong(null);
         verify(songDao).delete(null);
     }
 
     @Test
-    public void testUpdateSong() throws PersistenceException, ServiceException {
+    public void testUpdateSong() {
         ArgumentCaptor<Song> argumentCaptor = ArgumentCaptor.forClass(Song.class);
         getSongService().updateSong(songDto1);
         verify(songDao).update(argumentCaptor.capture());
@@ -98,21 +98,21 @@ public class SongServiceImplTest {
     }
 
     @Test(expected = ServiceException.class)
-    public void testUpdateSongNull() throws PersistenceException, ServiceException {
-        doThrow(new PersistenceException("song")).when(songDao).update(null);
+    public void testUpdateSongNull() {
+        doThrow(new ServiceException("song")).when(songDao).update(null);
         songService.updateSong(null);
         verify(songDao).update(null);
     }
 
     @Test
-    public void testFindSong() throws PersistenceException, ServiceException {
+    public void testFindSong() {
         SongDto result = getSongService().findSong(1l);
         verify(songDao).find(1l);
         deepAssert(songDto1, result);
     }
 
     @Test
-    public void testFindSongEmptyDb() throws PersistenceException, ServiceException {
+    public void testFindSongEmptyDb() {
         when(songDao.find(any(Long.class))).thenReturn(null);
 
         SongDto result = getSongService().findSong(1l);
@@ -121,21 +121,21 @@ public class SongServiceImplTest {
     }
 
     @Test
-    public void testFindSongWrongId() throws PersistenceException, ServiceException {
+    public void testFindSongWrongId() {
         SongDto result = getSongService().findSong(3l);
         verify(songDao).find(3l);
         assertNull(result);
     }
 
     @Test(expected = ServiceException.class)
-    public void testFindSongWithNullId() throws PersistenceException, ServiceException {
-        doThrow(new PersistenceException("id")).when(songDao).find(null);
+    public void testFindSongWithNullId() {
+        doThrow(new ServiceException("id")).when(songDao).find(null);
         getSongService().findSong(null);
         verify(songDao).find(null);
     }
 
     @Test
-    public void testGetAllSongs() throws PersistenceException, ServiceException {
+    public void testGetAllSongs() {
         List<SongDto> allSongs = Arrays.asList(songDto1, songDto2);
         List<SongDto> result = getSongService().getAllSongs();
 
@@ -146,7 +146,7 @@ public class SongServiceImplTest {
     }
 
     @Test
-    public void testGetAllSongsEmptyDb() throws PersistenceException, ServiceException {
+    public void testGetAllSongsEmptyDb() {
         when(songDao.getAll()).thenReturn(new ArrayList<Song>());
 
         List<SongDto> result = getSongService().getAllSongs();
@@ -157,14 +157,14 @@ public class SongServiceImplTest {
     }
 
     @Test(expected = ServiceException.class)
-    public void testGetAllSongsWithExceptionOnPersistence() throws PersistenceException, ServiceException {
-        doThrow(new PersistenceException()).when(songDao).getAll();
+    public void testGetAllSongsWithExceptionOnPersistence() {
+        doThrow(new ServiceException()).when(songDao).getAll();
         getSongService().getAllSongs();
         verify(songDao).getAll();
     }
 
     @Test
-    public void testFindSongByTitleWithUniqueTitle() throws PersistenceException, ServiceException {
+    public void testFindSongByTitleWithUniqueTitle() {
         List<Song> allSongs = Arrays.asList(song1);
         when(songDao.findSongByTitle(any(String.class))).thenReturn(allSongs);
 
@@ -177,7 +177,7 @@ public class SongServiceImplTest {
     }
 
     @Test
-    public void testFindSongByTitleWithMultipleSameTitleSong() throws PersistenceException, ServiceException {
+    public void testFindSongByTitleWithMultipleSameTitleSong() {
         List<Song> allSongs = Arrays.asList(song1, song2);
         when(songDao.findSongByTitle(any(String.class))).thenReturn(allSongs);
 
@@ -190,7 +190,7 @@ public class SongServiceImplTest {
     }
 
     @Test
-    public void testFindSongByTitleEmptyDb() throws PersistenceException, ServiceException {
+    public void testFindSongByTitleEmptyDb() {
         when(songDao.findSongByTitle(any(String.class))).thenReturn(new ArrayList<Song>());
 
         List<SongDto> result = getSongService().findSongByTitle("Walk");

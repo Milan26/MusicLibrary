@@ -1,7 +1,6 @@
 package project.pa165.musiclibrary.dao;
 
 import project.pa165.musiclibrary.entities.Artist;
-import project.pa165.musiclibrary.exception.PersistenceException;
 
 import java.util.List;
 
@@ -18,6 +17,5 @@ public interface ArtistDao extends GenericDao<Artist> {
      * @param name name of artist or artists
      * @return return list of all artists that satisfy given parameter
      */
-    List<Artist> findArtistByName(String name) throws PersistenceException;
-
+    List<Artist> findArtistByName(String name);
 }

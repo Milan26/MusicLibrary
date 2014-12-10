@@ -15,21 +15,21 @@ public interface ArtistService {
      *
      * @param artistDto artistDto to be inserted
      */
-    void createArtist(ArtistDto artistDto) throws ServiceException;
+    void createArtist(ArtistDto artistDto);
 
     /**
      * Delete artist by given id.
      *
      * @param id identification of artist to be deleted
      */
-    void deleteArtist(Long id) throws ServiceException;
+    void deleteArtist(Long id);
 
     /**
      * Update given artistDto.
      *
      * @param artistDto artistDto to be updated
      */
-    void updateArtist(ArtistDto artistDto) throws ServiceException;
+    void updateArtist(ArtistDto artistDto);
 
     /**
      * Get artist by given id.
@@ -37,14 +37,14 @@ public interface ArtistService {
      * @param id identification of artist to be found
      * @return found artist
      */
-    ArtistDto findArtist(Long id) throws ServiceException;
+    ArtistDto findArtist(Long id);
 
     /**
      * Get all artists.
      *
      * @return list of all artists
      */
-    List<ArtistDto> getAllArtists() throws ServiceException;
+    List<ArtistDto> getAllArtists();
 
     /**
      * Get all artists with same title as given parameter.
@@ -52,5 +52,5 @@ public interface ArtistService {
      * @param name name of artist or artists
      * @return return list of all artists that satisfy given parameter
      */
-    List<ArtistDto> findArtistByName(String name) throws ServiceException;
+    List<ArtistDto> findArtistByName(String name);
 }

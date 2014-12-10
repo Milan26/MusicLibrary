@@ -4,8 +4,6 @@ import org.dozer.DozerBeanMapper;
 import project.pa165.musiclibrary.dao.ArtistDao;
 import project.pa165.musiclibrary.dto.ArtistDto;
 import project.pa165.musiclibrary.entities.Artist;
-import project.pa165.musiclibrary.exception.PersistenceException;
-import project.pa165.musiclibrary.exception.ServiceException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -42,68 +40,38 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public void createArtist(final ArtistDto artistDto) throws ServiceException {
+    public void createArtist(final ArtistDto artistDto) {
         Artist artist = null;
         if (artistDto != null) artist = getDozerBeanMapper().map(artistDto, Artist.class);
-
-        try {
-            getArtistDao().create(artist);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
+        getArtistDao().create(artist);
     }
 
     @Override
-    public void deleteArtist(final Long id) throws ServiceException {
-        try {
-            getArtistDao().delete(id);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
+    public void deleteArtist(final Long id) {
+        getArtistDao().delete(id);
     }
 
     @Override
-    public void updateArtist(final ArtistDto artistDto) throws ServiceException {
+    public void updateArtist(final ArtistDto artistDto) {
         Artist artist = null;
         if (artistDto != null) artist = getDozerBeanMapper().map(artistDto, Artist.class);
-        try {
-            getArtistDao().update(artist);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
+        getArtistDao().update(artist);
     }
 
     @Override
-    public ArtistDto findArtist(final Long id) throws ServiceException {
-        Artist artist = null;
-        try {
-            artist = getArtistDao().find(id);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
+    public ArtistDto findArtist(final Long id) {
+        Artist artist = getArtistDao().find(id);
         return artist != null ? getDozerBeanMapper().map(artist, ArtistDto.class) : null;
     }
 
     @Override
-    public List<ArtistDto> getAllArtists() throws ServiceException {
-        List<Artist> allArtists = null;
-        try {
-            allArtists = getArtistDao().getAll();
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
-        return getMappedArtistDtoCollection(allArtists);
+    public List<ArtistDto> getAllArtists() {
+        return getMappedArtistDtoCollection(getArtistDao().getAll());
     }
 
     @Override
-    public List<ArtistDto> findArtistByName(final String name) throws ServiceException {
-        List<Artist> allMatchedArtists = null;
-        try {
-            allMatchedArtists = getArtistDao().findArtistByName(name);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
-        return getMappedArtistDtoCollection(allMatchedArtists);
+    public List<ArtistDto> findArtistByName(final String name) {
+        return getMappedArtistDtoCollection(getArtistDao().findArtistByName(name));
     }
 
     private List<ArtistDto> getMappedArtistDtoCollection(List<Artist> artists) {
