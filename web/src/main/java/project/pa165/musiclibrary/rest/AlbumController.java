@@ -3,6 +3,7 @@ package project.pa165.musiclibrary.rest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.AlbumDto;
+import project.pa165.musiclibrary.entities.Album;
 import project.pa165.musiclibrary.exception.AlbumNotFoundException;
 import project.pa165.musiclibrary.exception.ServiceException;
 import project.pa165.musiclibrary.services.AlbumService;

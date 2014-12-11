@@ -1,6 +1,5 @@
 package project.pa165.musiclibrary.rest;
 
-import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +14,6 @@ import project.pa165.musiclibrary.exception.AlbumNotFoundException;
 import project.pa165.musiclibrary.services.AlbumService;
 
 import java.util.Arrays;
-import java.util.Date;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.nullValue;
