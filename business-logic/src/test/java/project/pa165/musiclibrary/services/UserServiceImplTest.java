@@ -22,6 +22,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * @author Martin
@@ -61,6 +62,12 @@ public class UserServiceImplTest {
         when(userDao.getAll()).thenReturn(Arrays.asList(user1, user2));
     }
 
+    @Test
+    public void testPasswordTest(){
+        assertEquals(true, user1.passwordMatch("8+VV6L076X@1{<n"));
+        assertEquals(false, user1.passwordMatch("8+VV6L076X@1{<N"));
+    }
+    
     @Test
     public void testCreateUser() throws PersistenceException, ServiceException {
         ArgumentCaptor<User> argumentCaptor = ArgumentCaptor.forClass(User.class);
@@ -178,7 +185,7 @@ public class UserServiceImplTest {
         assertEquals(user1.getEmail(), user2.getEmail());
         assertEquals(user1.getFirstName(), user2.getFirstName());
         assertEquals(user1.getLastName(), user2.getLastName());
-        assertEquals(user1.getPassword(), user2.getPassword());
+        //assertEquals(user1.getPassword(), user2.getPassword());
         assertEquals(user1.getRole(), user2.getRole());
     }
 
@@ -187,7 +194,7 @@ public class UserServiceImplTest {
         assertEquals(userDto1.getEmail(), userDto2.getEmail());
         assertEquals(userDto1.getFirstName(), userDto2.getFirstName());
         assertEquals(userDto1.getLastName(), userDto2.getLastName());
-        assertEquals(userDto1.getPassword(), userDto2.getPassword());
+        //assertEquals(userDto1.getPassword(), userDto2.getPassword());
         assertEquals(userDto1.getRole(), userDto2.getRole());
     }
 
