@@ -2,6 +2,9 @@
 
 <img src="https://travis-ci.org/Milan26/MusicLibrary.svg?branch=master"/>
 
+Client part of application: [MusicLibrary-Client](https://github.com/Milan26/MusicLibrary-Client) <br/>
+More about client application on given link.
+
 ##Installation
 
 ###Prerequisites
