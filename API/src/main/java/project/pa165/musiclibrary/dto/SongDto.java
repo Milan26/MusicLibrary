@@ -1,6 +1,7 @@
 package project.pa165.musiclibrary.dto;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.validator.constraints.NotEmpty;
 import project.pa165.musiclibrary.util.Genre;
@@ -8,13 +9,17 @@ import project.pa165.musiclibrary.util.Genre;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 
 /**
  * @author Alex
  */
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class SongDto {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class SongDto implements Serializable {
+
+    private static final long serialVersionUID = 11478481165L;
 
     private Long id;
     @NotEmpty
