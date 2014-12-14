@@ -15,10 +15,6 @@ public class User implements Serializable {
     
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     private static final long serialVersionUID = 1L;
-
-    /*public User(){
-        this.encoder = new BCryptPasswordEncoder();
-    }*/
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,7 +29,7 @@ public class User implements Serializable {
     @Column(nullable = false, length = 40)
     private String lastName;
 
-    @Column(nullable = false, length = 26)
+    @Column(nullable = false)
     private String password;
 
     @Column
@@ -70,10 +66,6 @@ public class User implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
-    public BCryptPasswordEncoder getEncoder(){
-        return encoder;
-    }
 
     public String getPassword() {
         return password;
@@ -81,11 +73,6 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = encoder.encode(password);
-        //this.password = password;
-    }
-    
-    public boolean passwordMatch(String rawPassword){
-        return encoder.matches(rawPassword, this.getPassword());
     }
 
     public String getRole() {

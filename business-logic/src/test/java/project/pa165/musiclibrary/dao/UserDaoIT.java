@@ -3,6 +3,7 @@ package project.pa165.musiclibrary.dao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -137,6 +138,18 @@ public class UserDaoIT {
     public void testGetAllAlbumsEmptyDb() throws PersistenceException {
         List<User> actual = getUserDao().getAll();
         assertEquals(actual.size(), 0);
+    }
+
+    @Test
+    public void testPasswordEncoder() throws PersistenceException {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String plainPassword = "password";
+        user1.setPassword(plainPassword);
+
+        persist(user1);
+
+        assertNotEquals(plainPassword, user1.getPassword());
+        assertTrue(encoder.matches(plainPassword, user1.getPassword()));
     }
 
     private void persist(User user) throws PersistenceException {
