@@ -4,11 +4,14 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * @author Milan
  */
-public class UserDto {
+public class UserDto implements Serializable {
+
+    private static final long serialVersionUID = 54648787984L;
 
     private Long id;
     @NotEmpty

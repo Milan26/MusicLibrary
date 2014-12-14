@@ -1,18 +1,23 @@
 package project.pa165.musiclibrary.dto;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.validator.constraints.NotEmpty;
 import project.pa165.musiclibrary.util.Date;
 
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author Milan
  */
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class AlbumDto {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class AlbumDto implements Serializable {
+
+    private static final long serialVersionUID = 2148461549153L;
 
     private Long id;
     @NotEmpty
