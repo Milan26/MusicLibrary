@@ -21,7 +21,7 @@ function getSong(id) {
 
     $.ajax({
         type: "GET",
-        url: "/music/songs/" + id,
+        url: "songs/" + id,
         dataType: "json",
 
         success: function (song) {

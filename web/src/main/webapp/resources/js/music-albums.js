@@ -41,7 +41,7 @@ function getAlbum(id) {
 
     $.ajax({
         type: "GET",
-        url: "music/albums/" + id,
+        url: "albums/" + id,
         dataType: "json",
 
         success: function (album) {

@@ -15,7 +15,7 @@ import java.util.List;
  * @author Milan
  */
 @RestController
-@RequestMapping(value = "/music/songs")
+@RequestMapping(value = "/songs")
 public class SongController {
 
     private SongService songService;
