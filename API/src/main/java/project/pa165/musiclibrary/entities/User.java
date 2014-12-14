@@ -2,6 +2,7 @@ package project.pa165.musiclibrary.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * User Entity.
@@ -11,9 +12,10 @@ import java.io.Serializable;
 @Entity
 @Table(name = "XUser")
 public class User implements Serializable {
-
+    
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -27,7 +29,7 @@ public class User implements Serializable {
     @Column(nullable = false, length = 40)
     private String lastName;
 
-    @Column(nullable = false, length = 26)
+    @Column(nullable = false)
     private String password;
 
     @Column
@@ -70,7 +72,7 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = encoder.encode(password);
     }
 
     public String getRole() {

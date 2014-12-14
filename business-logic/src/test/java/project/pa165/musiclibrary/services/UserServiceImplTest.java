@@ -22,6 +22,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * @author Martin
@@ -30,6 +31,7 @@ import static org.mockito.Mockito.*;
 public class UserServiceImplTest {
 
     private User user1;
+    private User user2;
     private UserDto userDto1;
     private UserDto userDto2;
 
@@ -49,18 +51,18 @@ public class UserServiceImplTest {
 
         userService.setDozerBeanMapper(new DozerBeanMapper());
 
-        user1 = createUser(1l, "martinzahuta@gmail.com", "Martin", "Zahuta", "8+VV6L076X@1{<n", "canEdit");
-        User user2 = createUser(2l, "john@doe.com", "John", "Doe", "q1NF=1e5A.-B7qv", "canView");
+        user1 = createUser(1l, "martinzahuta@gmail.com", "Martin", "Zahuta", "password", "canEdit");
+        user2 = createUser(2l, "john@doe.com", "John", "Doe", "123456", "canView");
 
-        userDto1 = createUserDto(1l, "martinzahuta@gmail.com", "Martin", "Zahuta", "8+VV6L076X@1{<n", "canEdit");
-        userDto2 = createUserDto(2l, "john@doe.com", "John", "Doe", "q1NF=1e5A.-B7qv", "canView");
+        userDto1 = createUserDto(1l, "martinzahuta@gmail.com", "Martin", "Zahuta", "password", "canEdit");
+        userDto2 = createUserDto(2l, "john@doe.com", "John", "Doe", "123456", "canView");
 
         when(userDao.find(1l)).thenReturn(user1);
         when(userDao.find(2l)).thenReturn(user2);
         when(userDao.find(3l)).thenReturn(null);
         when(userDao.getAll()).thenReturn(Arrays.asList(user1, user2));
     }
-
+    
     @Test
     public void testCreateUser() throws PersistenceException, ServiceException {
         ArgumentCaptor<User> argumentCaptor = ArgumentCaptor.forClass(User.class);
@@ -178,7 +180,6 @@ public class UserServiceImplTest {
         assertEquals(user1.getEmail(), user2.getEmail());
         assertEquals(user1.getFirstName(), user2.getFirstName());
         assertEquals(user1.getLastName(), user2.getLastName());
-        assertEquals(user1.getPassword(), user2.getPassword());
         assertEquals(user1.getRole(), user2.getRole());
     }
 
@@ -187,7 +188,6 @@ public class UserServiceImplTest {
         assertEquals(userDto1.getEmail(), userDto2.getEmail());
         assertEquals(userDto1.getFirstName(), userDto2.getFirstName());
         assertEquals(userDto1.getLastName(), userDto2.getLastName());
-        assertEquals(userDto1.getPassword(), userDto2.getPassword());
         assertEquals(userDto1.getRole(), userDto2.getRole());
     }
 
