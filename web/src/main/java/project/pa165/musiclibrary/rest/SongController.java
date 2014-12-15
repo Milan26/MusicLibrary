@@ -15,7 +15,7 @@ import java.util.List;
  * @author Milan
  */
 @RestController
-@RequestMapping(value = "/music/songs")
+@RequestMapping(value = "/songs")
 public class SongController {
 
     private SongService songService;
@@ -47,5 +47,26 @@ public class SongController {
     public @ResponseBody
     ErrorInfo handleSongNotFoundException() {
         return new ErrorInfo(404, "Song could not be found");
+    }
+    
+    @RequestMapping(method = RequestMethod.POST)
+    public void createSong(@RequestBody SongDto songDto) throws ServiceException{
+        songService.createSong(songDto);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET)
+    public void getSong(Long id) throws ServiceException{
+        songService.findSong(id);
+    }
+    
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void deleteSong(@PathVariable("id") Long id) throws ServiceException{
+        songService.deleteSong(id);
+        
+    }
+    
+    @RequestMapping(method = RequestMethod.PUT)
+    public void updateSong(@RequestBody SongDto songDto) throws ServiceException{
+        songService.updateSong(songDto);
     }
 }
