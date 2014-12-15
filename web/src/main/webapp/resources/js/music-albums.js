@@ -109,7 +109,7 @@ $(document).ready(function () {
         delay: 500,
         //define callback to format results
         source: function (request, response) {
-            $.getJSON("/music/albums/search", request, function (result) {
+            $.getJSON("albums/search", request, function (result) {
                 response($.map(result, function (item) {
                     return {
                         // custom property for select handler

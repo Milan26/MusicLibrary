@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
-public class ArtistDaoIT {
+public class ArtistDaoImplTest {
 
     private Artist artist1;
     private Artist artist2;

@@ -31,7 +31,7 @@ import static org.junit.Assert.*;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
-public class SongDaoIT {
+public class SongDaoImplTest {
 
     private Song song1;
     private Song song2;

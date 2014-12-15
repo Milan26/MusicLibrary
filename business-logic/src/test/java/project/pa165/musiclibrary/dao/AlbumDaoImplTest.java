@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
-public class AlbumDaoIT {
+public class AlbumDaoImplTest {
 
     private Album album1;
     private Album album2;
