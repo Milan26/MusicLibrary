@@ -273,8 +273,6 @@
                 <version>${aspectj.version}</version>
             </dependency>
 
-
-
             <!-- Commons, DateSource -->
             <dependency>
                 <groupId>commons-dbcp</groupId>
