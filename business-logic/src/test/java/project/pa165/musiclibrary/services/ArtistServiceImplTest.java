@@ -12,7 +12,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import project.pa165.musiclibrary.dao.ArtistDao;
 import project.pa165.musiclibrary.dto.ArtistDto;
 import project.pa165.musiclibrary.entities.Artist;
-import project.pa165.musiclibrary.exception.PersistenceException;
+import project.pa165.musiclibrary.exception.ServiceException;
 import project.pa165.musiclibrary.exception.ServiceException;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class ArtistServiceImplTest {
     }
 
     @Before
-    public void setup() throws PersistenceException {
+    public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
 
         artistService.setDozerBeanMapper(new DozerBeanMapper());
@@ -63,7 +63,7 @@ public class ArtistServiceImplTest {
     }
 
     @Test
-    public void testCreateArtist() throws PersistenceException, ServiceException {
+    public void testCreateArtist() {
         ArgumentCaptor<Artist> argumentCaptor = ArgumentCaptor.forClass(Artist.class);
         getArtistService().createArtist(artistDto1);
         verify(artistDao).create(argumentCaptor.capture());
@@ -71,27 +71,27 @@ public class ArtistServiceImplTest {
     }
 
     @Test(expected = ServiceException.class)
-    public void testCreateArtistNull() throws PersistenceException, ServiceException {
-        doThrow(new PersistenceException("artist")).when(artistDao).create(null);
+    public void testCreateArtistNull() {
+        doThrow(new ServiceException("artist")).when(artistDao).create(null);
         artistService.createArtist(null);
         verify(artistDao).create(null);
     }
 
     @Test
-    public void testDeleteArtist() throws PersistenceException, ServiceException {
+    public void testDeleteArtist() {
         getArtistService().deleteArtist(1l);
         verify(artistDao).delete(1l);
     }
 
     @Test(expected = ServiceException.class)
-    public void testDeleteArtistNull() throws PersistenceException, ServiceException {
-        doThrow(new PersistenceException("id")).when(artistDao).delete(null);
+    public void testDeleteArtistNull() {
+        doThrow(new ServiceException("id")).when(artistDao).delete(null);
         artistService.deleteArtist(null);
         verify(artistDao).delete(null);
     }
 
     @Test
-    public void testUpdateArtist() throws PersistenceException, ServiceException {
+    public void testUpdateArtist() {
         ArgumentCaptor<Artist> argumentCaptor = ArgumentCaptor.forClass(Artist.class);
         getArtistService().updateArtist(artistDto1);
         verify(artistDao).update(argumentCaptor.capture());
@@ -99,21 +99,21 @@ public class ArtistServiceImplTest {
     }
 
     @Test(expected = ServiceException.class)
-    public void testUpdateArtistNull() throws PersistenceException, ServiceException {
-        doThrow(new PersistenceException("album")).when(artistDao).update(null);
+    public void testUpdateArtistNull() {
+        doThrow(new ServiceException("album")).when(artistDao).update(null);
         artistService.updateArtist(null);
         verify(artistDao).update(null);
     }
 
     @Test
-    public void testFindArtist() throws PersistenceException, ServiceException {
+    public void testFindArtist() {
         ArtistDto result = getArtistService().findArtist(1l);
         verify(artistDao).find(1l);
         deepAssert(artistDto1, result);
     }
 
     @Test
-    public void testFindArtistEmptyDb() throws PersistenceException, ServiceException {
+    public void testFindArtistEmptyDb() {
         when(artistDao.find(any(Long.class))).thenReturn(null);
 
         ArtistDto result = getArtistService().findArtist(1l);
@@ -122,21 +122,21 @@ public class ArtistServiceImplTest {
     }
 
     @Test
-    public void testFindArtistWrongId() throws PersistenceException, ServiceException {
+    public void testFindArtistWrongId() {
         ArtistDto result = getArtistService().findArtist(3l);
         verify(artistDao).find(3l);
         assertNull(result);
     }
 
     @Test(expected = ServiceException.class)
-    public void testFindArtistWithNullId() throws PersistenceException, ServiceException {
-        doThrow(new PersistenceException("id")).when(artistDao).find(null);
+    public void testFindArtistWithNullId() {
+        doThrow(new ServiceException("id")).when(artistDao).find(null);
         getArtistService().findArtist(null);
         verify(artistDao).find(null);
     }
 
     @Test
-    public void testGetAllArtists() throws PersistenceException, ServiceException {
+    public void testGetAllArtists() {
         List<ArtistDto> allArtists = Arrays.asList(artistDto1, artistDto2);
         List<ArtistDto> result = getArtistService().getAllArtists();
 
@@ -147,7 +147,7 @@ public class ArtistServiceImplTest {
     }
 
     @Test
-    public void testGetAllArtistsEmptyDb() throws PersistenceException, ServiceException {
+    public void testGetAllArtistsEmptyDb() {
         when(artistDao.getAll()).thenReturn(new ArrayList<Artist>());
 
         List<ArtistDto> result = getArtistService().getAllArtists();
@@ -158,14 +158,14 @@ public class ArtistServiceImplTest {
     }
 
     @Test(expected = ServiceException.class)
-    public void testGetAllArtistsWithExceptionOnPersistence() throws PersistenceException, ServiceException {
-        doThrow(new PersistenceException()).when(artistDao).getAll();
+    public void testGetAllArtistsWithExceptionOnPersistence() {
+        doThrow(new ServiceException()).when(artistDao).getAll();
         getArtistService().getAllArtists();
         verify(artistDao).getAll();
     }
 
     @Test
-    public void testFindArtistByNameWithUniqueTitle() throws PersistenceException, ServiceException {
+    public void testFindArtistByNameWithUniqueTitle() {
         List<Artist> allArtists = Arrays.asList(artist1);
         when(artistDao.findArtistByName(any(String.class))).thenReturn(allArtists);
 
@@ -178,7 +178,7 @@ public class ArtistServiceImplTest {
     }
 
     @Test
-    public void testFindArtistByNameWithMultipleSameTitleAlbum() throws PersistenceException, ServiceException {
+    public void testFindArtistByNameWithMultipleSameTitleAlbum() {
         List<Artist> allArtists = Arrays.asList(artist1, artist2);
         when(artistDao.findArtistByName(any(String.class))).thenReturn(allArtists);
 
@@ -191,7 +191,7 @@ public class ArtistServiceImplTest {
     }
 
     @Test
-    public void testFindArtistByNameEmptyDb() throws PersistenceException, ServiceException {
+    public void testFindArtistByNameEmptyDb() {
         when(artistDao.findArtistByName(any(String.class))).thenReturn(new ArrayList<Artist>());
 
         List<ArtistDto> result = getArtistService().findArtistByName("Unity");

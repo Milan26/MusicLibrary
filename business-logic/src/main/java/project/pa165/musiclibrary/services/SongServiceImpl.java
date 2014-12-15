@@ -4,8 +4,6 @@ import org.dozer.DozerBeanMapper;
 import project.pa165.musiclibrary.dao.SongDao;
 import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.entities.Song;
-import project.pa165.musiclibrary.exception.PersistenceException;
-import project.pa165.musiclibrary.exception.ServiceException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -42,70 +40,38 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public void createSong(final SongDto songDto) throws ServiceException {
+    public void createSong(final SongDto songDto) {
         Song song = null;
         if (songDto != null) song = getDozerBeanMapper().map(songDto, Song.class);
-        try {
-            getSongDao().create(song);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
+        getSongDao().create(song);
     }
 
     @Override
-    public void deleteSong(final Long id) throws ServiceException {
-        try {
-            getSongDao().delete(id);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
+    public void deleteSong(final Long id) {
+        getSongDao().delete(id);
     }
 
     @Override
-    public void updateSong(final SongDto songDto) throws ServiceException {
+    public void updateSong(final SongDto songDto) {
         Song song = null;
         if (songDto != null) song = getDozerBeanMapper().map(songDto, Song.class);
-        try {
-            getSongDao().update(song);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
+        getSongDao().update(song);
     }
 
     @Override
-    public SongDto findSong(final Long id) throws ServiceException {
-        Song song = null;
-        try {
-            song = getSongDao().find(id);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
-
+    public SongDto findSong(final Long id) {
+        Song song = getSongDao().find(id);
         return song != null ? getDozerBeanMapper().map(song, SongDto.class) : null;
     }
 
     @Override
-    public List<SongDto> getAllSongs() throws ServiceException {
-        List<Song> allSongs = null;
-        try {
-            allSongs = getSongDao().getAll();
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
-
-        return getMappedSongDtoCollection(allSongs);
+    public List<SongDto> getAllSongs() {
+        return getMappedSongDtoCollection(getSongDao().getAll());
     }
 
     @Override
-    public List<SongDto> findSongByTitle(final String title) throws ServiceException {
-        List<Song> allMatchedSongs = null;
-        try {
-            allMatchedSongs = getSongDao().findSongByTitle(title);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
-
-        return getMappedSongDtoCollection(allMatchedSongs);
+    public List<SongDto> findSongByTitle(final String title) {
+        return getMappedSongDtoCollection(getSongDao().findSongByTitle(title));
     }
 
     private List<SongDto> getMappedSongDtoCollection(List<Song> songs) {
