@@ -49,12 +49,12 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void testCreateUser() throws PersistenceException {
+    public void testCreateUser() {
         persist(user1);
     }
 
     @Test
-    public void testCreatedUserProperties() throws PersistenceException {
+    public void testCreatedUserProperties() {
         persist(user1);
 
         User actual = getUserDao().find(user1.getId());
@@ -62,12 +62,12 @@ public class UserDaoImplTest {
     }
 
     @Test(expected = PersistenceException.class)
-    public void testCreateUserNull() throws PersistenceException {
+    public void testCreateUserNull() {
         getUserDao().create(null);
     }
 
     @Test
-    public void testDeleteUser() throws PersistenceException {
+    public void testDeleteUser() {
         persist(user1);
 
         getUserDao().delete(user1.getId());
@@ -75,12 +75,12 @@ public class UserDaoImplTest {
     }
 
     @Test(expected = PersistenceException.class)
-    public void testDeleteUserNull() throws PersistenceException {
+    public void testDeleteUserNull() {
         getUserDao().delete(null);
     }
 
     @Test
-    public void testUpdateUser() throws PersistenceException {
+    public void testUpdateUser() {
         persist(user1);
 
         User actual = getUserDao().find(user1.getId());
@@ -97,12 +97,12 @@ public class UserDaoImplTest {
     }
 
     @Test(expected = PersistenceException.class)
-    public void testUpdateUserNull() throws PersistenceException {
+    public void testUpdateUserNull() {
         getUserDao().update(null);
     }
 
     @Test
-    public void testFindUser() throws PersistenceException {
+    public void testFindUser() {
         persist(user1);
 
         User actual = getUserDao().find(user1.getId());
@@ -111,17 +111,17 @@ public class UserDaoImplTest {
     }
 
     @Test(expected = PersistenceException.class)
-    public void testFindUserWithNullId() throws PersistenceException {
+    public void testFindUserWithNullId() {
         getUserDao().find(user1.getId());
     }
 
     @Test
-    public void testFindUserWithWrongId() throws PersistenceException {
+    public void testFindUserWithWrongId() {
         assertNull(getUserDao().find(5l));
     }
 
     @Test
-    public void testGetAllUsers() throws PersistenceException {
+    public void testGetAllUsers() {
         persist(user1);
         persist(user2);
 
@@ -135,13 +135,13 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void testGetAllAlbumsEmptyDb() throws PersistenceException {
+    public void testGetAllAlbumsEmptyDb() {
         List<User> actual = getUserDao().getAll();
         assertEquals(actual.size(), 0);
     }
 
     @Test
-    public void testPasswordEncoder() throws PersistenceException {
+    public void testPasswordEncoder() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String plainPassword = "password";
         user1.setPassword(plainPassword);
@@ -152,7 +152,7 @@ public class UserDaoImplTest {
         assertTrue(encoder.matches(plainPassword, user1.getPassword()));
     }
 
-    private void persist(User user) throws PersistenceException {
+    private void persist(User user) {
         assertNull(user.getId());
         getUserDao().create(user);
         assertNotNull(user.getId());

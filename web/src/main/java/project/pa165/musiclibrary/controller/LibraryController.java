@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import project.pa165.musiclibrary.dto.AlbumDto;
 import project.pa165.musiclibrary.dto.SongDto;
-import project.pa165.musiclibrary.exception.ServiceException;
 import project.pa165.musiclibrary.services.AlbumService;
 import project.pa165.musiclibrary.services.SongService;
 
@@ -46,22 +45,22 @@ public class LibraryController {
     }
 
     @RequestMapping(value = {"/", "/music", "/music/albums"}, method = RequestMethod.GET)
-    public String browseMusicByAlbums(Model model) throws ServiceException {
+    public String browseMusicByAlbums(Model model) {
         model.addAttribute("albums", allAlbums());
         return "albums";
     }
 
     @RequestMapping(value = "/music/songs", method = RequestMethod.GET)
-    public String browseMusicBySongs(Model model) throws ServiceException {
+    public String browseMusicBySongs(Model model) {
         model.addAttribute("songs", allSongs());
         return "songs";
     }
 
-    private List<AlbumDto> allAlbums() throws ServiceException {
+    private List<AlbumDto> allAlbums() {
         return getAlbumService().getAllAlbums();
     }
 
-    private List<SongDto> allSongs() throws ServiceException {
+    private List<SongDto> allSongs() {
         return getSongService().getAllSongs();
     }
 }

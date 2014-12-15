@@ -7,17 +7,20 @@ import org.aspectj.lang.annotation.Pointcut;
 import project.pa165.musiclibrary.exception.PersistenceException;
 import project.pa165.musiclibrary.exception.ServiceException;
 
+import javax.inject.Named;
+
 /**
  * @author Milan
  */
 @Aspect
+@Named
 public class ExceptionTranslationAspect {
 
-    @Pointcut("execution(* project.pa165.musiclibrary.services..*(..))")
+    @Pointcut("execution(* project.pa165.musiclibrary.dao..*(..))")
     public void DataAccessOperation() {
     }
 
-    @Pointcut("execution(* project.pa165.musiclibrary.dao..*(..))")
+    @Pointcut("execution(* project.pa165.musiclibrary.services..*(..))")
     public void ServiceLayerOperation() {
     }
 

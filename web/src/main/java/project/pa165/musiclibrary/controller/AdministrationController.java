@@ -10,7 +10,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.pa165.musiclibrary.dto.AlbumDto;
 import project.pa165.musiclibrary.dto.ArtistDto;
 import project.pa165.musiclibrary.dto.SongDto;
-import project.pa165.musiclibrary.exception.ServiceException;
 import project.pa165.musiclibrary.services.AlbumService;
 import project.pa165.musiclibrary.services.ArtistService;
 import project.pa165.musiclibrary.services.SongService;
@@ -84,7 +83,7 @@ public class AdministrationController {
     }
 
     @RequestMapping(value = "/albums", method = RequestMethod.GET)
-    public ModelAndView adminAlbums() throws ServiceException {
+    public ModelAndView adminAlbums() {
         ModelAndView model = new ModelAndView();
         model.addObject("albums", getAlbumService().getAllAlbums());
         model.setViewName("admin");
@@ -92,13 +91,13 @@ public class AdministrationController {
     }
 
     @RequestMapping(value = "/albums/delete/{id}", method = RequestMethod.POST)
-    public String adminAlbumsDelete(@PathVariable("id") Long id) throws ServiceException {
+    public String adminAlbumsDelete(@PathVariable("id") Long id) {
         getAlbumService().deleteAlbum(id);
         return "redirect:/admin/albums";
     }
 
     @RequestMapping(value = "/albums/update/{id}", method = RequestMethod.GET)
-    public ModelAndView adminGetAlbum(@PathVariable("id") Long id) throws ServiceException {
+    public ModelAndView adminGetAlbum(@PathVariable("id") Long id) {
         ModelAndView model = new ModelAndView();
         AlbumDto album = getAlbumService().findAlbum(id);
         model.addObject("album", album);
@@ -112,7 +111,7 @@ public class AdministrationController {
                                    @Valid @ModelAttribute("album") AlbumDto modelAlbum,
                                    BindingResult bindingResult,
                                    RedirectAttributes redirectAttributes,
-                                   Locale locale) throws ServiceException {
+                                   Locale locale) {
 
         if (bindingResult.hasErrors()) return "admin-edit";
         AlbumDto album = getAlbumService().findAlbum(id);
@@ -124,7 +123,7 @@ public class AdministrationController {
     }
 
     @RequestMapping(value = "/albums/update", method = RequestMethod.GET)
-    public ModelAndView adminGetAlbum() throws ServiceException {
+    public ModelAndView adminGetAlbum() {
         ModelAndView model = new ModelAndView();
         model.addObject("album", new AlbumDto());
         model.setViewName("admin-edit");
@@ -135,7 +134,7 @@ public class AdministrationController {
     public String adminAlbumUpdate(@Valid @ModelAttribute("album") AlbumDto modelAlbum,
                                    BindingResult bindingResult,
                                    RedirectAttributes redirectAttributes,
-                                   Locale locale) throws ServiceException {
+                                   Locale locale) {
 
         if (bindingResult.hasErrors()) return "admin-edit";
         getAlbumService().createAlbum(modelAlbum);
@@ -145,7 +144,7 @@ public class AdministrationController {
     }
 
     @RequestMapping(value = "/artists", method = RequestMethod.GET)
-    public ModelAndView adminArtists() throws ServiceException {
+    public ModelAndView adminArtists() {
         ModelAndView model = new ModelAndView();
         model.addObject("artists", getArtistService().getAllArtists());
         model.setViewName("admin");
@@ -153,13 +152,13 @@ public class AdministrationController {
     }
 
     @RequestMapping(value = "/artists/delete/{id}", method = RequestMethod.POST)
-    public String adminArtistsDelete(@PathVariable("id") Long id) throws ServiceException {
+    public String adminArtistsDelete(@PathVariable("id") Long id) {
         getArtistService().deleteArtist(id);
         return "redirect:/admin/artists";
     }
 
     @RequestMapping(value = "/artists/update/{id}", method = RequestMethod.GET)
-    public ModelAndView adminGetArtist(@PathVariable("id") Long id) throws ServiceException {
+    public ModelAndView adminGetArtist(@PathVariable("id") Long id) {
         ModelAndView model = new ModelAndView();
         model.addObject("artist", getArtistService().findArtist(id));
         //        model.addObject("songs", getSongService().getAllSongs());
@@ -172,7 +171,7 @@ public class AdministrationController {
                                     @Valid @ModelAttribute("artist") ArtistDto modelArtist,
                                     BindingResult bindingResult,
                                     RedirectAttributes redirectAttributes,
-                                    Locale locale) throws ServiceException {
+                                    Locale locale) {
 
         if (bindingResult.hasErrors()) return "admin-edit";
 
@@ -186,7 +185,7 @@ public class AdministrationController {
     }
 
     @RequestMapping(value = "/artists/update", method = RequestMethod.GET)
-    public ModelAndView adminGetArtist() throws ServiceException {
+    public ModelAndView adminGetArtist() {
         ModelAndView model = new ModelAndView();
         model.addObject("artist", new ArtistDto());
         model.setViewName("admin-edit");
@@ -197,7 +196,7 @@ public class AdministrationController {
     public String adminArtistUpdate(@Valid @ModelAttribute("artist") ArtistDto modelArtist,
                                     BindingResult bindingResult,
                                     RedirectAttributes redirectAttributes,
-                                    Locale locale) throws ServiceException {
+                                    Locale locale) {
 
         if (bindingResult.hasErrors()) return "admin-edit";
         getArtistService().createArtist(modelArtist);
@@ -207,7 +206,7 @@ public class AdministrationController {
     }
 
     @RequestMapping(value = "/songs", method = RequestMethod.GET)
-    public ModelAndView adminSongs() throws ServiceException {
+    public ModelAndView adminSongs() {
         ModelAndView model = new ModelAndView();
         model.addObject("songs", getSongService().getAllSongs());
         model.setViewName("admin");
@@ -215,13 +214,13 @@ public class AdministrationController {
     }
 
     @RequestMapping(value = "/songs/delete/{id}", method = RequestMethod.POST)
-    public String adminSongsDelete(@PathVariable("id") Long id) throws ServiceException {
+    public String adminSongsDelete(@PathVariable("id") Long id) {
         getSongService().deleteSong(id);
         return "redirect:/admin/songs";
     }
 
     @RequestMapping(value = "/songs/update/{id}", method = RequestMethod.GET)
-    public ModelAndView adminGetSong(@PathVariable("id") Long id) throws ServiceException {
+    public ModelAndView adminGetSong(@PathVariable("id") Long id) {
         ModelAndView model = new ModelAndView();
         model.addObject("song", getSongService().findSong(id));
         model.addObject("artists", getArtistService().getAllArtists());
@@ -235,7 +234,7 @@ public class AdministrationController {
                                   @Valid @ModelAttribute("song") SongDto modelSong,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes,
-                                  Locale locale) throws ServiceException {
+                                  Locale locale) {
 
         if (bindingResult.hasErrors()) return "admin-edit";
 
@@ -249,7 +248,7 @@ public class AdministrationController {
     }
 
     @RequestMapping(value = "/songs/update", method = RequestMethod.GET)
-    public ModelAndView adminGetSong() throws ServiceException {
+    public ModelAndView adminGetSong() {
         ModelAndView model = new ModelAndView();
         model.addObject("song", new SongDto());
         model.addObject("artists", getArtistService().getAllArtists());
@@ -262,7 +261,7 @@ public class AdministrationController {
     public String adminSongUpdate(@Valid @ModelAttribute("song") SongDto modelSong,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes,
-                                  Locale locale) throws ServiceException {
+                                  Locale locale) {
 
         if (bindingResult.hasErrors()) {
             return "admin-edit";
@@ -274,7 +273,7 @@ public class AdministrationController {
     }
 
     //    @RequestMapping(value = "/users", method = RequestMethod.GET)
-    //    public ModelAndView adminUsers() throws ServiceException {
+    //    public ModelAndView adminUsers() {
     //        ModelAndView model = new ModelAndView();
     //        model.addObject("users", getUserService().getAllUsers());
     //        model.setViewName("admin");
@@ -291,7 +290,7 @@ public class AdministrationController {
         modelArtist.setSongs(artist.getSongs());
     }
 
-    private void copyHiddenFields(SongDto song, SongDto modelSong) throws ServiceException {
+    private void copyHiddenFields(SongDto song, SongDto modelSong) {
         modelSong.setId(song.getId());
         modelSong.setAlbum(getAlbumService().findAlbum(modelSong.getAlbum().getId()));
         modelSong.setArtist(getArtistService().findArtist(modelSong.getArtist().getId()));

@@ -1,7 +1,6 @@
 package project.pa165.musiclibrary.services;
 
 import project.pa165.musiclibrary.dto.AlbumDto;
-import project.pa165.musiclibrary.exception.ServiceException;
 
 import java.util.List;
 
@@ -15,21 +14,21 @@ public interface AlbumService {
      *
      * @param albumDto albumDto to be inserted
      */
-    void createAlbum(AlbumDto albumDto) throws ServiceException;
+    void createAlbum(AlbumDto albumDto);
 
     /**
      * Delete album by given id.
      *
      * @param id identification of album to be deleted
      */
-    void deleteAlbum(Long id) throws ServiceException;
+    void deleteAlbum(Long id);
 
     /**
      * Update given albumDto.
      *
      * @param albumDto albumDto to be updated
      */
-    void updateAlbum(AlbumDto albumDto) throws ServiceException;
+    void updateAlbum(AlbumDto albumDto);
 
     /**
      * Get album by given id.
@@ -37,14 +36,14 @@ public interface AlbumService {
      * @param id identification of album to be found
      * @return found album
      */
-    AlbumDto findAlbum(Long id) throws ServiceException;
+    AlbumDto findAlbum(Long id);
 
     /**
      * Get all albums.
      *
      * @return list of all albums
      */
-    List<AlbumDto> getAllAlbums() throws ServiceException;
+    List<AlbumDto> getAllAlbums();
 
     /**
      * Get all albums with same title as given parameter.
@@ -52,5 +51,5 @@ public interface AlbumService {
      * @param title name of album or albums
      * @return return list of all albums that satisfy given parameter
      */
-    List<AlbumDto> findAlbumByTitle(String title) throws ServiceException;
+    List<AlbumDto> findAlbumByTitle(String title);
 }

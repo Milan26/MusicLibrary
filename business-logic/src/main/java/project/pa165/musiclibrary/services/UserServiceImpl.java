@@ -4,8 +4,6 @@ import org.dozer.DozerBeanMapper;
 import project.pa165.musiclibrary.dao.UserDao;
 import project.pa165.musiclibrary.dto.UserDto;
 import project.pa165.musiclibrary.entities.User;
-import project.pa165.musiclibrary.exception.PersistenceException;
-import project.pa165.musiclibrary.exception.ServiceException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -44,58 +42,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUser(final UserDto userDto) throws ServiceException {
+    public void createUser(final UserDto userDto) {
         User user = null;
         if (userDto != null) user = getDozerBeanMapper().map(userDto, User.class);
-        try {
-            getUserDao().create(user);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
+        getUserDao().create(user);
     }
 
     @Override
-    public void deleteUser(final Long id) throws ServiceException {
-        try {
-            getUserDao().delete(id);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
+    public void deleteUser(final Long id) {
+        getUserDao().delete(id);
     }
 
     @Override
-    public void updateUser(final UserDto userDto) throws ServiceException {
+    public void updateUser(final UserDto userDto) {
         User user = null;
         if (userDto != null) user = getDozerBeanMapper().map(userDto, User.class);
-        try {
-            getUserDao().update(user);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
+        getUserDao().update(user);
     }
 
     @Override
-    public UserDto findUser(final Long id) throws ServiceException {
-        User user = null;
-        try {
-            user = getUserDao().find(id);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
-
+    public UserDto findUser(final Long id) {
+        User user = getUserDao().find(id);
         return user != null ? getDozerBeanMapper().map(user, UserDto.class) : null;
     }
 
     @Override
-    public List<UserDto> getAllUsers() throws ServiceException {
-        List<User> allUsers = null;
-        try {
-            allUsers = getUserDao().getAll();
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
-
-        return getMappedUserDtoCollection(allUsers);
+    public List<UserDto> getAllUsers() {
+        return getMappedUserDtoCollection(getUserDao().getAll());
     }
 
     private List<UserDto> getMappedUserDtoCollection(List<User> users) {

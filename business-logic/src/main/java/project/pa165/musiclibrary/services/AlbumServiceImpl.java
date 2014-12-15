@@ -4,8 +4,6 @@ import org.dozer.DozerBeanMapper;
 import project.pa165.musiclibrary.dao.AlbumDao;
 import project.pa165.musiclibrary.dto.AlbumDto;
 import project.pa165.musiclibrary.entities.Album;
-import project.pa165.musiclibrary.exception.PersistenceException;
-import project.pa165.musiclibrary.exception.ServiceException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -44,70 +42,38 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public void createAlbum(final AlbumDto albumDto) throws ServiceException {
+    public void createAlbum(final AlbumDto albumDto) {
         Album album = null;
         if (albumDto != null) album = getDozerBeanMapper().map(albumDto, Album.class);
-        try {
-            getAlbumDao().create(album);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
+        getAlbumDao().create(album);
     }
 
     @Override
-    public void deleteAlbum(final Long id) throws ServiceException {
-        try {
-            getAlbumDao().delete(id);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
+    public void deleteAlbum(final Long id) {
+        getAlbumDao().delete(id);
     }
 
     @Override
-    public void updateAlbum(final AlbumDto albumDto) throws ServiceException {
+    public void updateAlbum(final AlbumDto albumDto) {
         Album album = null;
         if (albumDto != null) album = getDozerBeanMapper().map(albumDto, Album.class);
-        try {
-            getAlbumDao().update(album);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
+        getAlbumDao().update(album);
     }
 
     @Override
-    public AlbumDto findAlbum(final Long id) throws ServiceException {
-        Album album = null;
-        try {
-            album = getAlbumDao().find(id);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
-
+    public AlbumDto findAlbum(final Long id) {
+        Album album = getAlbumDao().find(id);
         return album != null ? getDozerBeanMapper().map(album, AlbumDto.class) : null;
     }
 
     @Override
-    public List<AlbumDto> getAllAlbums() throws ServiceException {
-        List<Album> allAlbums = null;
-        try {
-            allAlbums = getAlbumDao().getAll();
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
-
-        return getMappedAlbumDtoCollection(allAlbums);
+    public List<AlbumDto> getAllAlbums() {
+        return getMappedAlbumDtoCollection(getAlbumDao().getAll());
     }
 
     @Override
-    public List<AlbumDto> findAlbumByTitle(final String title) throws ServiceException {
-        List<Album> allMatchedAlbums = null;
-        try {
-            allMatchedAlbums = getAlbumDao().findAlbumByTitle(title);
-        } catch (PersistenceException persistenceException) {
-            throw new ServiceException(persistenceException);
-        }
-
-        return getMappedAlbumDtoCollection(allMatchedAlbums);
+    public List<AlbumDto> findAlbumByTitle(final String title) {
+        return getMappedAlbumDtoCollection(getAlbumDao().findAlbumByTitle(title));
     }
 
     private List<AlbumDto> getMappedAlbumDtoCollection(List<Album> albums) {

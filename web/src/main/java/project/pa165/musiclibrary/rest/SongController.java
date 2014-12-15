@@ -3,7 +3,6 @@ package project.pa165.musiclibrary.rest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.SongDto;
-import project.pa165.musiclibrary.exception.ServiceException;
 import project.pa165.musiclibrary.exception.SongNotFoundException;
 import project.pa165.musiclibrary.services.SongService;
 import project.pa165.musiclibrary.util.ErrorInfo;
@@ -30,41 +29,41 @@ public class SongController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public void getAllSongs() throws ServiceException{
+    public void getAllSongs() {
         songService.getAllSongs();
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public List<SongDto> getSongsByTerm(@RequestParam("term") String term) throws ServiceException {
+    public List<SongDto> getSongsByTerm(@RequestParam("term") String term) {
         return getSongService().findSongByTitle(term);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public SongDto getSongById(@PathVariable("id") Long id) throws ServiceException, SongNotFoundException {
+    public SongDto getSongById(@PathVariable("id") Long id) throws SongNotFoundException {
         SongDto song = getSongService().findSong(id);
-        if (song == null)
-            throw new SongNotFoundException(id.toString());
+        if (song == null) throw new SongNotFoundException(id.toString());
         return song;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void deleteSong(@PathVariable("id") Long id) throws ServiceException{
+    public void deleteSong(@PathVariable("id") Long id) {
         songService.deleteSong(id);
     }
-    
+
     @RequestMapping(method = RequestMethod.POST)
-    public void createSong(@RequestBody SongDto songDto) throws ServiceException{
+    public void createSong(@RequestBody SongDto songDto) {
         songService.createSong(songDto);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public void updateSong(@RequestBody SongDto songDto) throws ServiceException{
+    public void updateSong(@RequestBody SongDto songDto) {
         songService.updateSong(songDto);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(SongNotFoundException.class)
-    public @ResponseBody
+    public
+    @ResponseBody
     ErrorInfo handleSongNotFoundException() {
         return new ErrorInfo(404, "Song could not be found");
     }

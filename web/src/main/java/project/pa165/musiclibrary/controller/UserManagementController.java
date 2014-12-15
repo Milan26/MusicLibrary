@@ -51,7 +51,7 @@ public class UserManagementController {
      *  THIS IS JUST TEMPORAL, TO SHOW USER FUNCTIONALITY
      */
     @ModelAttribute("user")
-    public UserDto getUser() throws ServiceException {
+    public UserDto getUser() {
         return getUserService().findUser(1l);
     }
 

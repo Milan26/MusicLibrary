@@ -1,7 +1,5 @@
 package project.pa165.musiclibrary.dao;
 
-import project.pa165.musiclibrary.exception.PersistenceException;
-
 import java.util.List;
 
 /**
@@ -17,21 +15,21 @@ public interface GenericDao<T> {
      *
      * @param t object to be inserted
      */
-    void create(T t) throws PersistenceException;
+    void create(T t);
 
     /**
      * Update object of type T.
      *
      * @param t object to be updated
      */
-    void update(T t) throws PersistenceException;
+    void update(T t);
 
     /**
      * Delete object with given id.
      *
      * @param id identification of object to be deleted
      */
-    void delete(Long id) throws PersistenceException;
+    void delete(Long id);
 
     /**
      * Get object of type T with given id.
@@ -39,13 +37,12 @@ public interface GenericDao<T> {
      * @param id identification of object to be found
      * @return found object
      */
-    T find(Long id) throws PersistenceException;
+    T find(Long id);
 
     /**
      * Get all objects of type T.
      *
      * @return list of all object
      */
-    List<T> getAll() throws PersistenceException;
-
+    List<T> getAll();
 }

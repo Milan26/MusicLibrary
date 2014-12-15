@@ -54,11 +54,11 @@ public class SongDaoImplTest {
     }
 
     @Test
-    public void testCreateSong() throws PersistenceException {
+    public void testCreateSong() {
         persist(song1);
     }
 
-    public void testCreatedSongProperties() throws PersistenceException {
+    public void testCreatedSongProperties() {
         persist(song1);
 
         Song actual = getSongDao().find(song1.getId());
@@ -66,12 +66,12 @@ public class SongDaoImplTest {
     }
 
     @Test(expected = PersistenceException.class)
-    public void testCreateSongNull() throws PersistenceException {
+    public void testCreateSongNull() {
         getSongDao().create(null);
     }
 
     @Test
-    public void testDeleteSong() throws PersistenceException {
+    public void testDeleteSong() {
         persist(song1);
 
         getSongDao().delete(song1.getId());
@@ -79,12 +79,12 @@ public class SongDaoImplTest {
     }
 
     @Test(expected = PersistenceException.class)
-    public void testDeleteSongNull() throws PersistenceException {
+    public void testDeleteSongNull() {
         getSongDao().delete(null);
     }
 
     @Test
-    public void testUpdateSong() throws PersistenceException {
+    public void testUpdateSong() {
         persist(song1);
 
         Song actual = getSongDao().find(song1.getId());
@@ -103,12 +103,12 @@ public class SongDaoImplTest {
     }
 
     @Test(expected = PersistenceException.class)
-    public void testUpdateSongNull() throws PersistenceException {
+    public void testUpdateSongNull() {
         getSongDao().update(null);
     }
 
     @Test
-    public void testFindSong() throws PersistenceException {
+    public void testFindSong() {
         persist(song1);
 
         Song actual = getSongDao().find(song1.getId());
@@ -117,17 +117,17 @@ public class SongDaoImplTest {
     }
 
     @Test(expected = PersistenceException.class)
-    public void testFindAlbumWithNullId() throws PersistenceException {
+    public void testFindAlbumWithNullId() {
         getSongDao().find(song1.getId());
     }
 
     @Test
-    public void testFindAlbumWithWrongId() throws PersistenceException {
+    public void testFindAlbumWithWrongId() {
         assertNull(getSongDao().find(5l));
     }
 
     @Test
-    public void testGetAllSongs() throws PersistenceException {
+    public void testGetAllSongs() {
         persist(song1);
         persist(song2);
 
@@ -141,13 +141,13 @@ public class SongDaoImplTest {
     }
 
     @Test
-    public void testGetAllAlbumsEmptyDb() throws PersistenceException {
+    public void testGetAllAlbumsEmptyDb() {
         List<Song> actual = getSongDao().getAll();
         assertEquals(actual.size(), 0);
     }
 
     @Test
-    public void testFindSongByTitleWithUniqueTitle() throws PersistenceException {
+    public void testFindSongByTitleWithUniqueTitle() {
         persist(song1);
         persist(song2);
 
@@ -166,7 +166,7 @@ public class SongDaoImplTest {
     }
 
     @Test
-    public void testFindAlbumByTitleWithMultipleSameTitleAlbum() throws PersistenceException {
+    public void testFindAlbumByTitleWithMultipleSameTitleAlbum() {
         persist(song1);
         persist(song2);
 
@@ -185,7 +185,7 @@ public class SongDaoImplTest {
     }
 
     @Test
-    public void testFindAlbumByTitleWithAnyMatch() throws PersistenceException {
+    public void testFindAlbumByTitleWithAnyMatch() {
         persist(song1);
         persist(song2);
 
@@ -199,7 +199,7 @@ public class SongDaoImplTest {
     }
 
     @Test
-    public void testFindAlbumByTitleOnEmptyDb() throws PersistenceException {
+    public void testFindAlbumByTitleOnEmptyDb() {
         List<Song> actual = getSongDao().getAll();
         assertEquals(actual.size(), 0);
 
@@ -207,7 +207,7 @@ public class SongDaoImplTest {
     }
 
     @Test
-    public void testSongJdbcMapping() throws PersistenceException {
+    public void testSongJdbcMapping() {
         Artist artist = createArtist("Alfa", "Testing artist");
         Album album = createAlbum("Unity", new LocalDate(1991, 2, 6).toDate(), "http://pathtocoverart.com", "album");
 
@@ -220,7 +220,7 @@ public class SongDaoImplTest {
         deepAssert(song1, song);
     }
 
-    private void persist(Song song) throws PersistenceException {
+    private void persist(Song song) {
         assertNull(song.getId());
         getSongDao().create(song);
         assertNotNull(song.getId());

@@ -3,7 +3,7 @@ package project.pa165.musiclibrary.exception;
 /**
  * @author Milan
  */
-public class ServiceException extends Exception {
+public class ServiceException extends RuntimeException {
 
     public ServiceException() {
 
