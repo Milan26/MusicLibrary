@@ -29,17 +29,37 @@ public class SongController {
         this.songService = songService;
     }
 
+    @RequestMapping(method = RequestMethod.GET)
+    public void getAllSongs() throws ServiceException{
+        songService.getAllSongs();
+    }
+
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public List<SongDto> getAlbumsByTerm(@RequestParam("term") String term) throws ServiceException {
+    public List<SongDto> getSongsByTerm(@RequestParam("term") String term) throws ServiceException {
         return getSongService().findSongByTitle(term);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public SongDto getAlbumById(@PathVariable("id") Long id) throws ServiceException, SongNotFoundException {
+    public SongDto getSongById(@PathVariable("id") Long id) throws ServiceException, SongNotFoundException {
         SongDto song = getSongService().findSong(id);
         if (song == null)
             throw new SongNotFoundException(id.toString());
         return song;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deleteSong(@PathVariable("id") Long id) throws ServiceException{
+        songService.deleteSong(id);
+    }
+    
+    @RequestMapping(method = RequestMethod.POST)
+    public void createSong(@RequestBody SongDto songDto) throws ServiceException{
+        songService.createSong(songDto);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public void updateSong(@RequestBody SongDto songDto) throws ServiceException{
+        songService.updateSong(songDto);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -47,31 +67,5 @@ public class SongController {
     public @ResponseBody
     ErrorInfo handleSongNotFoundException() {
         return new ErrorInfo(404, "Song could not be found");
-    }
-    
-    @RequestMapping(method = RequestMethod.POST)
-    public void createSong(@RequestBody SongDto songDto) throws ServiceException{
-        songService.createSong(songDto);
-    }
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public void getSong(Long id) throws ServiceException{
-        songService.findSong(id);
-    }
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void deleteSong(@PathVariable("id") Long id) throws ServiceException{
-        songService.deleteSong(id);
-        
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT)
-    public void updateSong(@RequestBody SongDto songDto) throws ServiceException{
-        songService.updateSong(songDto);
-    }
-    
-    @RequestMapping(method = RequestMethod.GET)
-    public void getAllSongs() throws ServiceException{
-        songService.getAllSongs();
     }
 }
