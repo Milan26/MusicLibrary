@@ -54,12 +54,12 @@ public class SongController {
         songService.createSong(songDto);
     }
     
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public void getSong(Long id) throws ServiceException{
         songService.findSong(id);
     }
     
-    @RequestMapping(method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteSong(@PathVariable("id") Long id) throws ServiceException{
         songService.deleteSong(id);
         
@@ -68,5 +68,10 @@ public class SongController {
     @RequestMapping(method = RequestMethod.PUT)
     public void updateSong(@RequestBody SongDto songDto) throws ServiceException{
         songService.updateSong(songDto);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET)
+    public void getAllSongs() throws ServiceException{
+        songService.getAllSongs();
     }
 }
