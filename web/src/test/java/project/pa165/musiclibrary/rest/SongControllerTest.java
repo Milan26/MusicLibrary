@@ -50,7 +50,7 @@ public class SongControllerTest {
     @Test
     public void testGetSongsByTerm() throws Exception {
         String term = "walk";
-        mockMvc.perform(get("/music/songs/search" + "?term=" + term))
+        mockMvc.perform(get("/songs/search" + "?term=" + term))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -78,7 +78,7 @@ public class SongControllerTest {
     @Test
     public void testGetSongById() throws Exception {
         Long id = 1l;
-        mockMvc.perform(get("/music/songs/" + id))
+        mockMvc.perform(get("/songs/" + id))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.id").value(1))
@@ -97,7 +97,7 @@ public class SongControllerTest {
     public void testGetSongByIdNoMatch() throws Exception {
         when(songService.findSong(any(Long.class))).thenThrow(new SongNotFoundException());
         Long id = 1l;
-        mockMvc.perform(get("/music/songs/" + id))
+        mockMvc.perform(get("/songs/" + id))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.status").value(404))

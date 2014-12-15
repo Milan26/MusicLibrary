@@ -47,7 +47,7 @@ public class AlbumControllerTest {
     @Test
     public void testGetAlbumsByTerm() throws Exception {
         String term = "uni";
-        mockMvc.perform(get("/music/albums/search" + "?term=" + term))
+        mockMvc.perform(get("/albums/search" + "?term=" + term))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -69,7 +69,7 @@ public class AlbumControllerTest {
     @Test
     public void testGetAlbumById() throws Exception {
         Long id = 1l;
-        mockMvc.perform(get("/music/albums/" + id))
+        mockMvc.perform(get("/albums/" + id))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.id").value(1))
@@ -85,7 +85,7 @@ public class AlbumControllerTest {
     public void testGetAlbumByIdNoMatch() throws Exception {
         when(albumService.findAlbum(any(Long.class))).thenThrow(new AlbumNotFoundException());
         Long id = 1l;
-        mockMvc.perform(get("/music/albums/" + id))
+        mockMvc.perform(get("/albums/" + id))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.status").value(404))
