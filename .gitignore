@@ -107,3 +107,5 @@ hs_err_pid*
 
 ### Custom
 *.log
+/web/target/
+/business-logic/target/
