@@ -48,4 +48,30 @@ public class SongController {
     ErrorInfo handleSongNotFoundException() {
         return new ErrorInfo(404, "Song could not be found");
     }
+    
+    @RequestMapping(method = RequestMethod.POST)
+    public void createSong(@RequestBody SongDto songDto) throws ServiceException{
+        songService.createSong(songDto);
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public void getSong(Long id) throws ServiceException{
+        songService.findSong(id);
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deleteSong(@PathVariable("id") Long id) throws ServiceException{
+        songService.deleteSong(id);
+        
+    }
+    
+    @RequestMapping(method = RequestMethod.PUT)
+    public void updateSong(@RequestBody SongDto songDto) throws ServiceException{
+        songService.updateSong(songDto);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET)
+    public void getAllSongs() throws ServiceException{
+        songService.getAllSongs();
+    }
 }
