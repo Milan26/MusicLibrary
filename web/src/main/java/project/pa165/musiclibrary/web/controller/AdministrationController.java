@@ -1,6 +1,7 @@
 package project.pa165.musiclibrary.web.controller;
 
 import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,7 +14,6 @@ import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.services.AlbumService;
 import project.pa165.musiclibrary.services.ArtistService;
 import project.pa165.musiclibrary.services.SongService;
-import project.pa165.musiclibrary.services.UserService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -29,7 +29,6 @@ public class AdministrationController {
     private AlbumService albumService;
     private ArtistService artistService;
     private SongService songService;
-    private UserService userService;
     private MessageSource messageSource;
 
     public AlbumService getAlbumService() {
@@ -59,15 +58,6 @@ public class AdministrationController {
         this.songService = songService;
     }
 
-    public UserService getUserService() {
-        return userService;
-    }
-
-    @Inject
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
     public MessageSource getMessageSource() {
         return messageSource;
     }
@@ -83,7 +73,7 @@ public class AdministrationController {
     }
 
     @RequestMapping(value = "/albums", method = RequestMethod.GET)
-    public ModelAndView adminAlbums() {
+    public ModelAndView allAlbums() {
         ModelAndView model = new ModelAndView();
         model.addObject("albums", getAlbumService().getAllAlbums());
         model.setViewName("admin");
@@ -91,60 +81,45 @@ public class AdministrationController {
     }
 
     @RequestMapping(value = "/albums/delete/{id}", method = RequestMethod.POST)
-    public String adminAlbumsDelete(@PathVariable("id") Long id) {
+    public String deleteAlbum(@PathVariable("id") Long id) {
         getAlbumService().deleteAlbum(id);
         return "redirect:/admin/albums";
     }
 
-    @RequestMapping(value = "/albums/update/{id}", method = RequestMethod.GET)
-    public ModelAndView adminGetAlbum(@PathVariable("id") Long id) {
-        ModelAndView model = new ModelAndView();
-        AlbumDto album = getAlbumService().findAlbum(id);
-        model.addObject("album", album);
-        //        model.addObject("songs", getSongService().getAllSongs());
-        model.setViewName("admin-edit");
-        return model;
-    }
-
-    @RequestMapping(value = "/albums/update/{id}", method = RequestMethod.POST)
-    public String adminAlbumUpdate(@PathVariable("id") Long id,
-                                   @Valid @ModelAttribute("album") AlbumDto modelAlbum,
-                                   BindingResult bindingResult,
-                                   RedirectAttributes redirectAttributes,
-                                   Locale locale) {
-
-        if (bindingResult.hasErrors()) return "admin-edit";
-        AlbumDto album = getAlbumService().findAlbum(id);
-        copyHiddenFields(album, modelAlbum);
-        getAlbumService().updateAlbum(modelAlbum);
-        redirectAttributes.addFlashAttribute("message",
-                getMessageSource().getMessage(new DefaultMessageSourceResolvable("admin.album.edit.success"), locale));
-        return "redirect:/admin/albums";
-    }
-
     @RequestMapping(value = "/albums/update", method = RequestMethod.GET)
-    public ModelAndView adminGetAlbum() {
+    public ModelAndView getAlbum(@RequestParam(value = "id", required = false) Long id) {
         ModelAndView model = new ModelAndView();
-        model.addObject("album", new AlbumDto());
+        if (id == null) {
+            model.addObject("album", new AlbumDto());
+        } else {
+            model.addObject("album", getAlbumService().findAlbum(id));
+        }
         model.setViewName("admin-edit");
         return model;
     }
 
     @RequestMapping(value = "/albums/update", method = RequestMethod.POST)
-    public String adminAlbumUpdate(@Valid @ModelAttribute("album") AlbumDto modelAlbum,
+    public String updateAlbum(@RequestParam(value = "id", required = false) Long id,
+                                   @Valid @ModelAttribute("album") AlbumDto modelAlbum,
                                    BindingResult bindingResult,
                                    RedirectAttributes redirectAttributes,
                                    Locale locale) {
-
         if (bindingResult.hasErrors()) return "admin-edit";
-        getAlbumService().createAlbum(modelAlbum);
-        redirectAttributes.addFlashAttribute("message",
-                getMessageSource().getMessage(new DefaultMessageSourceResolvable("admin.album.create.success"), locale));
+        MessageSourceResolvable source;
+        if (id == null) {
+            getAlbumService().createAlbum(modelAlbum);
+            source = new DefaultMessageSourceResolvable("admin.album.create.success");
+        } else {
+            copyHiddenFields(getAlbumService().findAlbum(id), modelAlbum);
+            getAlbumService().updateAlbum(modelAlbum);
+            source = new DefaultMessageSourceResolvable("admin.album.edit.success");
+        }
+        redirectAttributes.addFlashAttribute("message", getMessageSource().getMessage(source, locale));
         return "redirect:/admin/albums";
     }
 
     @RequestMapping(value = "/artists", method = RequestMethod.GET)
-    public ModelAndView adminArtists() {
+    public ModelAndView allArtists() {
         ModelAndView model = new ModelAndView();
         model.addObject("artists", getArtistService().getAllArtists());
         model.setViewName("admin");
@@ -152,61 +127,45 @@ public class AdministrationController {
     }
 
     @RequestMapping(value = "/artists/delete/{id}", method = RequestMethod.POST)
-    public String adminArtistsDelete(@PathVariable("id") Long id) {
+    public String deleteArtist(@PathVariable("id") Long id) {
         getArtistService().deleteArtist(id);
         return "redirect:/admin/artists";
     }
 
-    @RequestMapping(value = "/artists/update/{id}", method = RequestMethod.GET)
-    public ModelAndView adminGetArtist(@PathVariable("id") Long id) {
-        ModelAndView model = new ModelAndView();
-        model.addObject("artist", getArtistService().findArtist(id));
-        //        model.addObject("songs", getSongService().getAllSongs());
-        model.setViewName("admin-edit");
-        return model;
-    }
-
-    @RequestMapping(value = "/artists/update/{id}", method = RequestMethod.POST)
-    public String adminArtistUpdate(@PathVariable("id") Long id,
-                                    @Valid @ModelAttribute("artist") ArtistDto modelArtist,
-                                    BindingResult bindingResult,
-                                    RedirectAttributes redirectAttributes,
-                                    Locale locale) {
-
-        if (bindingResult.hasErrors()) return "admin-edit";
-
-        ArtistDto artist = getArtistService().findArtist(id);
-        copyHiddenFields(artist, modelArtist);
-        getArtistService().updateArtist(modelArtist);
-        redirectAttributes.addFlashAttribute("message",
-                getMessageSource().getMessage(new DefaultMessageSourceResolvable("admin.artist.edit.success"), locale));
-
-        return "redirect:/admin/artists";
-    }
-
     @RequestMapping(value = "/artists/update", method = RequestMethod.GET)
-    public ModelAndView adminGetArtist() {
+    public ModelAndView getArtist(@RequestParam(value = "id", required = false) Long id) {
         ModelAndView model = new ModelAndView();
-        model.addObject("artist", new ArtistDto());
+        if (id == null) {
+            model.addObject("artist", new ArtistDto());
+        } else {
+            model.addObject("artist", getArtistService().findArtist(id));
+        }
         model.setViewName("admin-edit");
         return model;
     }
 
     @RequestMapping(value = "/artists/update", method = RequestMethod.POST)
-    public String adminArtistUpdate(@Valid @ModelAttribute("artist") ArtistDto modelArtist,
-                                    BindingResult bindingResult,
-                                    RedirectAttributes redirectAttributes,
-                                    Locale locale) {
-
+    public String updateArtist(@RequestParam(value = "id", required = false) Long id,
+                              @Valid @ModelAttribute("artist") ArtistDto modelArtist,
+                              BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes,
+                              Locale locale) {
         if (bindingResult.hasErrors()) return "admin-edit";
-        getArtistService().createArtist(modelArtist);
-        redirectAttributes.addFlashAttribute("message",
-                getMessageSource().getMessage(new DefaultMessageSourceResolvable("admin.artist.create.success"), locale));
+        MessageSourceResolvable source;
+        if (id == null) {
+            getArtistService().createArtist(modelArtist);
+            source = new DefaultMessageSourceResolvable("admin.artist.create.success");
+        } else {
+            copyHiddenFields(getArtistService().findArtist(id), modelArtist);
+            getArtistService().updateArtist(modelArtist);
+            source = new DefaultMessageSourceResolvable("admin.artist.edit.success");
+        }
+        redirectAttributes.addFlashAttribute("message", getMessageSource().getMessage(source, locale));
         return "redirect:/admin/artists";
     }
 
     @RequestMapping(value = "/songs", method = RequestMethod.GET)
-    public ModelAndView adminSongs() {
+    public ModelAndView allSongs() {
         ModelAndView model = new ModelAndView();
         model.addObject("songs", getSongService().getAllSongs());
         model.setViewName("admin");
@@ -214,43 +173,19 @@ public class AdministrationController {
     }
 
     @RequestMapping(value = "/songs/delete/{id}", method = RequestMethod.POST)
-    public String adminSongsDelete(@PathVariable("id") Long id) {
+    public String deleteSong(@PathVariable("id") Long id) {
         getSongService().deleteSong(id);
         return "redirect:/admin/songs";
     }
 
-    @RequestMapping(value = "/songs/update/{id}", method = RequestMethod.GET)
-    public ModelAndView adminGetSong(@PathVariable("id") Long id) {
-        ModelAndView model = new ModelAndView();
-        model.addObject("song", getSongService().findSong(id));
-        model.addObject("artists", getArtistService().getAllArtists());
-        model.addObject("albums", getAlbumService().getAllAlbums());
-        model.setViewName("admin-edit");
-        return model;
-    }
-
-    @RequestMapping(value = "/songs/update/{id}", method = RequestMethod.POST)
-    public String adminSongUpdate(@PathVariable("id") Long id,
-                                  @Valid @ModelAttribute("song") SongDto modelSong,
-                                  BindingResult bindingResult,
-                                  RedirectAttributes redirectAttributes,
-                                  Locale locale) {
-
-        if (bindingResult.hasErrors()) return "admin-edit";
-
-        SongDto song = getSongService().findSong(id);
-        copyHiddenFields(song, modelSong);
-        getSongService().updateSong(modelSong);
-        redirectAttributes.addFlashAttribute("message",
-                getMessageSource().getMessage(new DefaultMessageSourceResolvable("admin.song.edit.success"), locale));
-
-        return "redirect:/admin/songs";
-    }
-
     @RequestMapping(value = "/songs/update", method = RequestMethod.GET)
-    public ModelAndView adminGetSong() {
+    public ModelAndView getSong(@RequestParam(value = "id", required = false) Long id) {
         ModelAndView model = new ModelAndView();
-        model.addObject("song", new SongDto());
+        if (id == null) {
+            model.addObject("song", new SongDto());
+        } else {
+            model.addObject("song", getSongService().findSong(id));
+        }
         model.addObject("artists", getArtistService().getAllArtists());
         model.addObject("albums", getAlbumService().getAllAlbums());
         model.setViewName("admin-edit");
@@ -258,27 +193,24 @@ public class AdministrationController {
     }
 
     @RequestMapping(value = "/songs/update", method = RequestMethod.POST)
-    public String adminSongUpdate(@Valid @ModelAttribute("song") SongDto modelSong,
-                                  BindingResult bindingResult,
-                                  RedirectAttributes redirectAttributes,
-                                  Locale locale) {
-
-        if (bindingResult.hasErrors()) {
-            return "admin-edit";
+    public String updateArtist(@RequestParam(value = "id", required = false) Long id,
+                               @Valid @ModelAttribute("song") SongDto modelSong,
+                               BindingResult bindingResult,
+                               RedirectAttributes redirectAttributes,
+                               Locale locale) {
+        if (bindingResult.hasErrors()) return "admin-edit";
+        MessageSourceResolvable source;
+        if (id == null) {
+            getSongService().createSong(modelSong);
+            source = new DefaultMessageSourceResolvable("admin.song.create.success");
+        } else {
+            copyHiddenFields(getSongService().findSong(id), modelSong);
+            getSongService().updateSong(modelSong);
+            source = new DefaultMessageSourceResolvable("admin.song.edit.success");
         }
-        getSongService().createSong(modelSong);
-        redirectAttributes.addFlashAttribute("message",
-                getMessageSource().getMessage(new DefaultMessageSourceResolvable("admin.song.create.success"), locale));
+        redirectAttributes.addFlashAttribute("message", getMessageSource().getMessage(source, locale));
         return "redirect:/admin/songs";
     }
-
-    //    @RequestMapping(value = "/users", method = RequestMethod.GET)
-    //    public ModelAndView adminUsers() {
-    //        ModelAndView model = new ModelAndView();
-    //        model.addObject("users", getUserService().getAllUsers());
-    //        model.setViewName("admin");
-    //        return model;
-    //    }
 
     private void copyHiddenFields(AlbumDto album, AlbumDto modelAlbum) {
         modelAlbum.setId(album.getId());

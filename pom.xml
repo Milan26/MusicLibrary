@@ -109,7 +109,7 @@
                             <exclude>project/pa165/musiclibrary/exception/**/*.class</exclude>
                             <exclude>project/pa165/musiclibrary/dto/**/*.class</exclude>
                             <exclude>project/pa165/musiclibrary/entities/**/*.class</exclude>
-                            <exclude>project/pa165/musiclibrary/filter/**/*.class</exclude>
+                            <exclude>project/pa165/musiclibrary/web/filter/**/*.class</exclude>
                             <!-- Interfaces -->
                             <exclude>project/pa165/musiclibrary/dao/**/*Dao.class</exclude>
                             <exclude>project/pa165/musiclibrary/services/**/*Service.class</exclude>

@@ -30,7 +30,8 @@
             <td><c:out value="${song.album.id}"/></td>
             <td><c:out value="${song.note}"/></td>
             <td>
-                <form method="GET" action="${pageContext.request.contextPath}/admin/songs/update/${song.id}">
+                <form method="GET" action="${pageContext.request.contextPath}/admin/songs/update">
+                    <input type="hidden" name="id" value="${song.id}"/>
                     <input type="submit" class="submit_btn" value="<f:message key='song.submit.edit'/>">
                 </form>
             </td>

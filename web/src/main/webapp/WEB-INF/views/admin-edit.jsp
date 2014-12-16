@@ -28,9 +28,6 @@
                 <c:when test="${not empty song}">
                     <jsp:include page="../forms/song.jsp"/>
                 </c:when>
-                <%--<c:when test="${not empty user}">--%>
-                <%--<jsp:include page="../forms/user.jsp"/>--%>
-                <%--</c:when>--%>
             </c:choose>
         </div>
     </jsp:attribute>

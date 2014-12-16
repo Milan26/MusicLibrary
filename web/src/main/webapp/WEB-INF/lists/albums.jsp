@@ -22,7 +22,8 @@
             <td><img src="<c:out value='${album.coverArt}'/>"/></td>
             <td><c:out value="${album.note}"/></td>
             <td>
-                <form method="GET" action="${pageContext.request.contextPath}/admin/albums/update/${album.id}">
+                <form method="GET" action="${pageContext.request.contextPath}/admin/albums/update">
+                    <input type="hidden" name="id" value="${album.id}"/>
                     <input type="submit" class="submit_btn" value="<f:message key='album.submit.edit'/>">
                 </form>
             </td>

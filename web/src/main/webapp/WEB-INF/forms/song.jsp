@@ -2,8 +2,7 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<form:form method="POST" action="${pageContext.request.contextPath}/admin/songs/update/${song.id}"
-           modelAttribute="song">
+<form:form method="POST" action="${pageContext.request.contextPath}/admin/songs/update" modelAttribute="song">
     <table>
         <tr>
             <th><form:label path="title"><f:message key="song.title"/>:</form:label></th>
@@ -55,4 +54,5 @@
         </tr>
     </table>
     <input class="submit_btn" type="submit" value="<f:message key='song.submit'/>"/>
+    <input type="hidden" name="id" value="${song.id}"/>
 </form:form>

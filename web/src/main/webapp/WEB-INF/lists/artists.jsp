@@ -18,7 +18,8 @@
             <td><c:out value="${artist.alias}"/></td>
             <td><c:out value="${artist.note}"/></td>
             <td>
-                <form method="GET" action="${pageContext.request.contextPath}/admin/artists/update/${artist.id}">
+                <form method="GET" action="${pageContext.request.contextPath}/admin/artists/update">
+                    <input type="hidden" name="id" value="${artist.id}"/>
                     <input type="submit" class="submit_btn" value="<f:message key='artist.submit.edit'/>">
                 </form>
             </td>

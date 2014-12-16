@@ -1,7 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isErrorPage="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="${pageContext.request.locale}">
 <head>
@@ -20,13 +18,13 @@
     <span class="status-code">${pageContext.errorData.statusCode}</span>
   </div>
   <div>
-    <h1><f:message key="error.page.whoops"/></h1>
-    <p><f:message key="error.page.code.default"/></p>
+    <h1>WHOOPS!</h1>
+    <p>Something Went Horribly Wrong</p>
     <p>
-      <f:message key="error.page.msg1"/>
-      <a href="javascript:history.go(-1)"><f:message key="error.page.history"/></a>
-      <f:message key="error.page.msg2"/>
-      <a href="${pageContext.request.contextPath}/index.jsp"><f:message key="error.page.homepage"/></a>
+      Go back to the
+      <a href="javascript:history.go(-1)">previous page</a>
+       or visit our
+      <a href="${pageContext.request.contextPath}/index.jsp">homepage</a>
     </p>
   </div>
 </div>
