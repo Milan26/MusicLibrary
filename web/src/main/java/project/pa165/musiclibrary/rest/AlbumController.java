@@ -59,7 +59,7 @@ public class AlbumController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public void updateAlbum(@RequestBody AlbumDto albumDto) throws ServiceException{
+    public void updateSong(@RequestBody AlbumDto albumDto) throws ServiceException{
         albumService.updateAlbum(albumDto);
     }
 
