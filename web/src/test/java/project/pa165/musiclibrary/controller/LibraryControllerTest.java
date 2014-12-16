@@ -13,9 +13,9 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import project.pa165.musiclibrary.dto.AlbumDto;
 import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.util.Genre;
-import project.pa165.musiclibrary.exception.ServiceException;
 import project.pa165.musiclibrary.services.AlbumService;
 import project.pa165.musiclibrary.services.SongService;
+import project.pa165.musiclibrary.web.controller.LibraryController;
 
 import java.util.Arrays;
 
@@ -44,7 +44,7 @@ public class LibraryControllerTest {
     private LibraryController libraryController;
 
     @Before
-    public void setup() throws ServiceException {
+    public void setup() {
         MockitoAnnotations.initMocks(this);
 
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();

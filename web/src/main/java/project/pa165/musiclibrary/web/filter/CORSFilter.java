@@ -1,4 +1,4 @@
-package project.pa165.musiclibrary.filter;
+package project.pa165.musiclibrary.web.filter;
 
 import javax.inject.Named;
 import javax.servlet.*;

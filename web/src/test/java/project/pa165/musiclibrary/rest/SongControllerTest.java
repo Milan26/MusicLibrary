@@ -13,6 +13,7 @@ import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.util.Genre;
 import project.pa165.musiclibrary.exception.SongNotFoundException;
 import project.pa165.musiclibrary.services.SongService;
+import project.pa165.musiclibrary.web.rest.SongController;
 
 import java.util.Arrays;
 

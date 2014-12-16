@@ -1,4 +1,4 @@
-package project.pa165.musiclibrary.rest;
+package project.pa165.musiclibrary.web.rest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

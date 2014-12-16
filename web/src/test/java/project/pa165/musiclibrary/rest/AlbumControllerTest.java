@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import project.pa165.musiclibrary.dto.AlbumDto;
 import project.pa165.musiclibrary.exception.AlbumNotFoundException;
 import project.pa165.musiclibrary.services.AlbumService;
+import project.pa165.musiclibrary.web.rest.AlbumController;
 
 import java.util.Arrays;
 

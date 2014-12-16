@@ -1,4 +1,4 @@
-package project.pa165.musiclibrary.controller;
+package project.pa165.musiclibrary.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

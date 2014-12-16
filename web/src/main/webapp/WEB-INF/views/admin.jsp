@@ -1,4 +1,5 @@
-<%@page pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ page pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ page errorPage="error-pages/default.jsp" %>
 
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

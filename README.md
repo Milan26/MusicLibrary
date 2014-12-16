@@ -28,8 +28,9 @@ More about client application on given link.
 ####Running the web module
 
 * Start your Apache Derby server (previous steps)
-* Use command below:
+* Use commands below:
 ```sh
+	mvn clean install
 	mvn tomcat7:run
 ```
 * Now you can open browser and type [http://localhost:8080/pa165](http://localhost:8080/pa165)

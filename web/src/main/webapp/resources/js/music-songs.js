@@ -44,7 +44,6 @@ $(document).ready(function () {
     info = $("#info");
 
     $("#views option:last").prop("selected", true);
-    //$("#genres").prop("disabled", false);
 
     $("#holder").prop("hidden", true);
 });
