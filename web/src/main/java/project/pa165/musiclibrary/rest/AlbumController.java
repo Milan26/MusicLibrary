@@ -27,6 +27,11 @@ public class AlbumController {
     public void setAlbumService(AlbumService albumService) {
         this.albumService = albumService;
     }
+    
+    @RequestMapping(method = RequestMethod.GET)
+    public void getAllAlbums() {
+        albumService.getAllAlbums();
+    }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public List<AlbumDto> getAlbumsByTerm(@RequestParam("term") String term) {
@@ -38,6 +43,21 @@ public class AlbumController {
         AlbumDto album = getAlbumService().findAlbum(id);
         if (album == null) throw new AlbumNotFoundException(id.toString());
         return album;
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deleteAlbum(@PathVariable("id") Long id) {
+        albumService.deleteAlbum(id);
+    }
+    
+    @RequestMapping(method = RequestMethod.POST)
+    public void createAlbum(@RequestBody AlbumDto albumDto) {
+        albumService.createAlbum(albumDto);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public void updateAlbum(@RequestBody AlbumDto albumDto) {
+        albumService.updateAlbum(albumDto);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
