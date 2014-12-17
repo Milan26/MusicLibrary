@@ -67,11 +67,6 @@ public class AdministrationController {
         this.messageSource = messageSource;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String admin() {
-        return "admin";
-    }
-
     @RequestMapping(value = "/albums", method = RequestMethod.GET)
     public ModelAndView allAlbums() {
         ModelAndView model = new ModelAndView();

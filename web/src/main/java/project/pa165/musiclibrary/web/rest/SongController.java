@@ -2,6 +2,7 @@ package project.pa165.musiclibrary.web.rest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.exception.SongBadRequestException;
@@ -54,6 +55,7 @@ public class SongController {
         songService.deleteSong(id);
     }
 
+    @ResponseStatus(value = HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
     public void createSong(@Valid @RequestBody SongDto song, Errors errors) {
         if (song == null || errors.hasErrors())
@@ -77,7 +79,7 @@ public class SongController {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(SongBadRequestException.class)
+    @ExceptionHandler({SongBadRequestException.class, MethodArgumentNotValidException.class})
     public
     @ResponseBody
     ErrorInfo handleSongBadRequestException() {

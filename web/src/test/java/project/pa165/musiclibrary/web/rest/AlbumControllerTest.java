@@ -152,7 +152,7 @@ public class AlbumControllerTest {
         mockMvc.perform(post("/albums")
                 .content(convertObjectToJsonBytes(album1))
                 .contentType("application/json;charset=UTF-8"))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
         verify(albumService).createAlbum(any(AlbumDto.class));
         verifyNoMoreInteractions(albumService);
     }

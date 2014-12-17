@@ -2,6 +2,7 @@ package project.pa165.musiclibrary.web.rest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.AlbumDto;
 import project.pa165.musiclibrary.exception.AlbumBadRequestException;
@@ -53,19 +54,20 @@ public class AlbumController {
         if (getAlbumService().findAlbum(id) == null) throw new AlbumNotFoundException(id.toString());
         albumService.deleteAlbum(id);
     }
-    
+
+    @ResponseStatus(value = HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
-    public void createAlbum(@Valid @RequestBody AlbumDto albumDto, Errors errors) {
-        if (albumDto == null || errors.hasErrors())
+    public void createAlbum(@Valid @RequestBody AlbumDto album, Errors errors) {
+        if (album == null || errors.hasErrors())
             throw new AlbumBadRequestException("Failed to map JSON to AlbumDto");
-        albumService.createAlbum(albumDto);
+        albumService.createAlbum(album);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public void updateAlbum(@Valid @RequestBody AlbumDto albumDto, Errors errors) {
-        if (albumDto == null || errors.hasErrors())
+    public void updateAlbum(@Valid @RequestBody AlbumDto album, Errors errors) {
+        if (album == null || errors.hasErrors())
             throw new AlbumBadRequestException("Failed to map JSON to AlbumDto");
-        albumService.updateAlbum(albumDto);
+        albumService.updateAlbum(album);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -77,7 +79,7 @@ public class AlbumController {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(AlbumBadRequestException.class)
+    @ExceptionHandler(value = {AlbumBadRequestException.class, MethodArgumentNotValidException.class})
     public
     @ResponseBody
     ErrorInfo handleAlbumBadRequestException() {

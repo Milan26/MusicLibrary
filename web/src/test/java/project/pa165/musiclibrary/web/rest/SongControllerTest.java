@@ -168,17 +168,17 @@ public class SongControllerTest {
     }
 
     @Test
-    public void testCreateAlbum() throws Exception {
+    public void testCreateSong() throws Exception {
         mockMvc.perform(post("/songs")
                 .content(convertObjectToJsonBytes(song1))
                 .contentType("application/json;charset=UTF-8"))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
         verify(songService).createSong(any(SongDto.class));
         verifyNoMoreInteractions(songService);
     }
 
     @Test
-    public void testCreateAlbumNull() throws Exception {
+    public void testCreateSongNull() throws Exception {
         mockMvc.perform(post("/songs")
                 .content(convertObjectToJsonBytes(null))
                 .contentType("application/json;charset=UTF-8"))
@@ -190,7 +190,7 @@ public class SongControllerTest {
     }
 
     @Test
-    public void testUpdateAlbum() throws Exception {
+    public void testUpdateSong() throws Exception {
         mockMvc.perform(put("/songs")
                 .content(convertObjectToJsonBytes(song1))
                 .contentType("application/json;charset=UTF-8"))
@@ -200,7 +200,7 @@ public class SongControllerTest {
     }
 
     @Test
-    public void testUpdateAlbumNull() throws Exception {
+    public void testUpdateSongNull() throws Exception {
         mockMvc.perform(put("/songs")
                 .content(convertObjectToJsonBytes(null))
                 .contentType("application/json;charset=UTF-8"))
