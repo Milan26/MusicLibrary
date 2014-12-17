@@ -1,13 +1,16 @@
 package project.pa165.musiclibrary.web.rest;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.AlbumDto;
+import project.pa165.musiclibrary.exception.AlbumBadRequestException;
 import project.pa165.musiclibrary.exception.AlbumNotFoundException;
 import project.pa165.musiclibrary.services.AlbumService;
 import project.pa165.musiclibrary.util.ErrorInfo;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -29,8 +32,8 @@ public class AlbumController {
     }
     
     @RequestMapping(method = RequestMethod.GET)
-    public void getAllAlbums() {
-        albumService.getAllAlbums();
+    public List<AlbumDto> getAllAlbums() {
+        return albumService.getAllAlbums();
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -47,16 +50,21 @@ public class AlbumController {
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteAlbum(@PathVariable("id") Long id) {
+        if (getAlbumService().findAlbum(id) == null) throw new AlbumNotFoundException(id.toString());
         albumService.deleteAlbum(id);
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    public void createAlbum(@RequestBody AlbumDto albumDto) {
+    public void createAlbum(@Valid @RequestBody AlbumDto albumDto, Errors errors) {
+        if (albumDto == null || errors.hasErrors())
+            throw new AlbumBadRequestException("Failed to map JSON to AlbumDto");
         albumService.createAlbum(albumDto);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public void updateAlbum(@RequestBody AlbumDto albumDto) {
+    public void updateAlbum(@Valid @RequestBody AlbumDto albumDto, Errors errors) {
+        if (albumDto == null || errors.hasErrors())
+            throw new AlbumBadRequestException("Failed to map JSON to AlbumDto");
         albumService.updateAlbum(albumDto);
     }
 
@@ -66,5 +74,13 @@ public class AlbumController {
     @ResponseBody
     ErrorInfo handleAlbumNotFoundException() {
         return new ErrorInfo(404, "Album could not be found");
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(AlbumBadRequestException.class)
+    public
+    @ResponseBody
+    ErrorInfo handleAlbumBadRequestException() {
+        return new ErrorInfo(400, "Album\'s method with bad request");
     }
 }

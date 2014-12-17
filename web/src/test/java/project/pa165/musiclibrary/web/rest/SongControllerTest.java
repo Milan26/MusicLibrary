@@ -1,5 +1,7 @@
 package project.pa165.musiclibrary.web.rest;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,22 +15,26 @@ import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.util.Genre;
 import project.pa165.musiclibrary.exception.SongNotFoundException;
 import project.pa165.musiclibrary.services.SongService;
-import project.pa165.musiclibrary.web.rest.SongController;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SongControllerTest {
+
+    private SongDto song1;
+    private SongDto song2;
 
     private MockMvc mockMvc;
     @Mock
@@ -41,17 +47,47 @@ public class SongControllerTest {
         MockitoAnnotations.initMocks(this);
         this.mockMvc = MockMvcBuilders.standaloneSetup(songController).build();
 
-        SongDto song1 = createSong(1l, "Walk", (short) 1, 200, Genre.ROCK, 320, "test");
-        SongDto song2 = createSong(2l, "Arlandria Walking", (short) 2, 300, Genre.HOLIDAY, 128, "just song");
+        song1 = createSong(1l, "Walk", (short) 1, 200, Genre.ROCK, 320, "test");
+        song2 = createSong(2l, "Arlandria Walking", (short) 2, 300, Genre.HOLIDAY, 128, "just song");
 
+        when(songService.getAllSongs()).thenReturn(Arrays.asList(song1, song2));
         when(songService.findSongByTitle("walk")).thenReturn(Arrays.asList(song1, song2));
         when(songService.findSong(1l)).thenReturn(song1);
     }
 
     @Test
+    public void getAllSongs() throws Exception {
+        mockMvc.perform(get("/songs"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].id").value(1))
+                .andExpect(jsonPath("$[0].title").value("Walk"))
+                .andExpect(jsonPath("$[0].trackNumber").value(1))
+                .andExpect(jsonPath("$[0].duration").value(200))
+                .andExpect(jsonPath("$[0].genre").value(Genre.ROCK.toString()))
+                .andExpect(jsonPath("$[0].bitrate").value(320))
+                .andExpect(jsonPath("$[0].note").value("test"))
+                .andExpect(jsonPath("$[0].artist").value(nullValue()))
+                .andExpect(jsonPath("$[0].album").value(nullValue()))
+                .andExpect(jsonPath("$[1].id").value(2))
+                .andExpect(jsonPath("$[1].title").value("Arlandria Walking"))
+                .andExpect(jsonPath("$[1].trackNumber").value(2))
+                .andExpect(jsonPath("$[1].duration").value(300))
+                .andExpect(jsonPath("$[1].genre").value(Genre.HOLIDAY.toString()))
+                .andExpect(jsonPath("$[1].bitrate").value(128))
+                .andExpect(jsonPath("$[1].note").value("just song"))
+                .andExpect(jsonPath("$[1].artist").value(nullValue()))
+                .andExpect(jsonPath("$[1].album").value(nullValue()));
+        verify(songService).getAllSongs();
+        verifyNoMoreInteractions(songService);
+    }
+
+    @Test
     public void testGetSongsByTerm() throws Exception {
         String term = "walk";
-        mockMvc.perform(get("/songs/search" + "?term=" + term))
+        mockMvc.perform(get("/songs/search")
+                .param("term", term))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -74,6 +110,7 @@ public class SongControllerTest {
                 .andExpect(jsonPath("$[1].artist").value(nullValue()))
                 .andExpect(jsonPath("$[1].album").value(nullValue()));
         verify(songService).findSongByTitle(term);
+        verifyNoMoreInteractions(songService);
     }
 
     @Test
@@ -92,6 +129,7 @@ public class SongControllerTest {
                 .andExpect(jsonPath("$.artist").value(nullValue()))
                 .andExpect(jsonPath("$.album").value(nullValue()));
         verify(songService).findSong(id);
+        verifyNoMoreInteractions(songService);
     }
 
     @Test
@@ -104,6 +142,73 @@ public class SongControllerTest {
                 .andExpect(jsonPath("$.status").value(404))
                 .andExpect(jsonPath("$.message").value("Song could not be found"));
         verify(songService).findSong(id);
+        verifyNoMoreInteractions(songService);
+    }
+
+    @Test
+    public void testDeleteSong() throws Exception {
+        Long id = 1l;
+        mockMvc.perform(delete("/songs/" + id))
+                .andExpect(status().isOk());
+        verify(songService).findSong(id);
+        verify(songService).deleteSong(id);
+        verifyNoMoreInteractions(songService);
+    }
+
+    @Test
+    public void testDeleteSongIdNoMatch() throws Exception {
+        Long id = 2l;
+        mockMvc.perform(delete("/songs/" + id))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.status").value(404))
+                .andExpect(jsonPath("$.message").value("Song could not be found"));
+        verify(songService).findSong(id);
+        verifyNoMoreInteractions(songService);
+    }
+
+    @Test
+    public void testCreateAlbum() throws Exception {
+        mockMvc.perform(post("/songs")
+                .content(convertObjectToJsonBytes(song1))
+                .contentType("application/json;charset=UTF-8"))
+                .andExpect(status().isOk());
+        verify(songService).createSong(any(SongDto.class));
+        verifyNoMoreInteractions(songService);
+    }
+
+    @Test
+    public void testCreateAlbumNull() throws Exception {
+        mockMvc.perform(post("/songs")
+                .content(convertObjectToJsonBytes(null))
+                .contentType("application/json;charset=UTF-8"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.message").value("Song\'s method with bad request"));
+        verifyZeroInteractions(songService);
+    }
+
+    @Test
+    public void testUpdateAlbum() throws Exception {
+        mockMvc.perform(put("/songs")
+                .content(convertObjectToJsonBytes(song1))
+                .contentType("application/json;charset=UTF-8"))
+                .andExpect(status().isOk());
+        verify(songService).updateSong(any(SongDto.class));
+        verifyNoMoreInteractions(songService);
+    }
+
+    @Test
+    public void testUpdateAlbumNull() throws Exception {
+        mockMvc.perform(put("/songs")
+                .content(convertObjectToJsonBytes(null))
+                .contentType("application/json;charset=UTF-8"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.message").value("Song\'s method with bad request"));
+        verifyZeroInteractions(songService);
     }
 
     private SongDto createSong(Long id, String title, Short trackNumber, Integer length,
@@ -117,5 +222,11 @@ public class SongControllerTest {
         song.setBitrate(bitrate);
         song.setNote(note);
         return song;
+    }
+
+    public static byte[] convertObjectToJsonBytes(Object object) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        return mapper.writeValueAsBytes(object);
     }
 }

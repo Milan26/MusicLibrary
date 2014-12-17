@@ -62,8 +62,8 @@ public class AdministrationControllerTest {
 
         album1 = createAlbumDto(1l, "Unity", "2-6-1991", "http://pathtocoverart.com", "album");
         album2 = createAlbumDto(2l, "Hello Uni", "1-1-2001", "http://blabla.com", "note2");
-        song1 = createSongDto("Walk", (short) 1, 200, Genre.ROCK, 320, "test");
-        song2 = createSongDto("Arlandria", (short) 2, 300, Genre.HOLIDAY, 128, "test");
+        song1 = createSongDto(1l, "Walk", (short) 1, 200, Genre.ROCK, 320, "test");
+        song2 = createSongDto(2l, "Arlandria", (short) 2, 300, Genre.HOLIDAY, 128, "test");
         artist1 = createArtistDto(1l, "Alfa", "Testing artist1");
         artist2 = createArtistDto(2l, "Beta", "Testing artist2");
 
@@ -320,8 +320,9 @@ public class AdministrationControllerTest {
         return album;
     }
 
-    private SongDto createSongDto(String title, Short trackNumber, Integer length, Genre genre, Integer bitrate, String note) {
+    private SongDto createSongDto(Long id, String title, Short trackNumber, Integer length, Genre genre, Integer bitrate, String note) {
         SongDto song = new SongDto();
+        song.setId(id);
         song.setTitle(title);
         song.setTrackNumber(trackNumber);
         song.setDuration(length);
