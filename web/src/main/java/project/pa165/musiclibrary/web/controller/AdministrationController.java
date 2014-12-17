@@ -100,18 +100,18 @@ public class AdministrationController {
 
     @RequestMapping(value = "/albums/update", method = RequestMethod.POST)
     public String updateAlbum(@RequestParam(value = "id", required = false) Long id,
-                                   @Valid @ModelAttribute("album") AlbumDto modelAlbum,
+                                   @Valid @ModelAttribute("album") AlbumDto album,
                                    BindingResult bindingResult,
                                    RedirectAttributes redirectAttributes,
                                    Locale locale) {
         if (bindingResult.hasErrors()) return "admin-edit";
         MessageSourceResolvable source;
         if (id == null) {
-            getAlbumService().createAlbum(modelAlbum);
+            getAlbumService().createAlbum(album);
             source = new DefaultMessageSourceResolvable("admin.album.create.success");
         } else {
-            copyHiddenFields(getAlbumService().findAlbum(id), modelAlbum);
-            getAlbumService().updateAlbum(modelAlbum);
+            copyHiddenFields(getAlbumService().findAlbum(id), album);
+            getAlbumService().updateAlbum(album);
             source = new DefaultMessageSourceResolvable("admin.album.edit.success");
         }
         redirectAttributes.addFlashAttribute("message", getMessageSource().getMessage(source, locale));
@@ -146,18 +146,18 @@ public class AdministrationController {
 
     @RequestMapping(value = "/artists/update", method = RequestMethod.POST)
     public String updateArtist(@RequestParam(value = "id", required = false) Long id,
-                              @Valid @ModelAttribute("artist") ArtistDto modelArtist,
+                              @Valid @ModelAttribute("artist") ArtistDto artist,
                               BindingResult bindingResult,
                               RedirectAttributes redirectAttributes,
                               Locale locale) {
         if (bindingResult.hasErrors()) return "admin-edit";
         MessageSourceResolvable source;
         if (id == null) {
-            getArtistService().createArtist(modelArtist);
+            getArtistService().createArtist(artist);
             source = new DefaultMessageSourceResolvable("admin.artist.create.success");
         } else {
-            copyHiddenFields(getArtistService().findArtist(id), modelArtist);
-            getArtistService().updateArtist(modelArtist);
+            copyHiddenFields(getArtistService().findArtist(id), artist);
+            getArtistService().updateArtist(artist);
             source = new DefaultMessageSourceResolvable("admin.artist.edit.success");
         }
         redirectAttributes.addFlashAttribute("message", getMessageSource().getMessage(source, locale));
@@ -193,19 +193,19 @@ public class AdministrationController {
     }
 
     @RequestMapping(value = "/songs/update", method = RequestMethod.POST)
-    public String updateArtist(@RequestParam(value = "id", required = false) Long id,
-                               @Valid @ModelAttribute("song") SongDto modelSong,
+    public String updateSong(@RequestParam(value = "id", required = false) Long id,
+                               @Valid @ModelAttribute("song") SongDto song,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes,
                                Locale locale) {
         if (bindingResult.hasErrors()) return "admin-edit";
         MessageSourceResolvable source;
         if (id == null) {
-            getSongService().createSong(modelSong);
+            getSongService().createSong(song);
             source = new DefaultMessageSourceResolvable("admin.song.create.success");
         } else {
-            copyHiddenFields(getSongService().findSong(id), modelSong);
-            getSongService().updateSong(modelSong);
+            copyHiddenFields(getSongService().findSong(id), song);
+            getSongService().updateSong(song);
             source = new DefaultMessageSourceResolvable("admin.song.edit.success");
         }
         redirectAttributes.addFlashAttribute("message", getMessageSource().getMessage(source, locale));
@@ -224,7 +224,9 @@ public class AdministrationController {
 
     private void copyHiddenFields(SongDto song, SongDto modelSong) {
         modelSong.setId(song.getId());
-        modelSong.setAlbum(getAlbumService().findAlbum(modelSong.getAlbum().getId()));
-        modelSong.setArtist(getArtistService().findArtist(modelSong.getArtist().getId()));
+        if (modelSong.getAlbum() != null)
+            modelSong.setAlbum(getAlbumService().findAlbum(modelSong.getAlbum().getId()));
+        if (modelSong.getArtist() != null)
+            modelSong.setArtist(getArtistService().findArtist(modelSong.getArtist().getId()));
     }
 }

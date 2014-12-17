@@ -1,4 +1,4 @@
-package project.pa165.musiclibrary.rest;
+package project.pa165.musiclibrary.web.rest;
 
 import org.junit.Before;
 import org.junit.Test;

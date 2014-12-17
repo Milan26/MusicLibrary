@@ -1,4 +1,4 @@
-package project.pa165.musiclibrary.rest;
+package project.pa165.musiclibrary.web.rest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +12,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import project.pa165.musiclibrary.dto.AlbumDto;
 import project.pa165.musiclibrary.exception.AlbumNotFoundException;
 import project.pa165.musiclibrary.services.AlbumService;
-import project.pa165.musiclibrary.web.rest.AlbumController;
 
 import java.util.Arrays;
 

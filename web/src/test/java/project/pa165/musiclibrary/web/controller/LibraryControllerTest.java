@@ -1,4 +1,4 @@
-package project.pa165.musiclibrary.controller;
+package project.pa165.musiclibrary.web.controller;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +15,6 @@ import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.util.Genre;
 import project.pa165.musiclibrary.services.AlbumService;
 import project.pa165.musiclibrary.services.SongService;
-import project.pa165.musiclibrary.web.controller.LibraryController;
 
 import java.util.Arrays;
 
