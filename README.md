@@ -1,6 +1,7 @@
 #MusicLibrary
 
-<img src="https://travis-ci.org/Milan26/music-library.svg?branch=master"/>
+[![Build Status](https://travis-ci.org/Milan26/music-library.svg?branch=master)](https://travis-ci.org/Milan26/music-library)
+[![Coverage Status](https://img.shields.io/coveralls/Milan26/music-library.svg)](https://coveralls.io/r/Milan26/music-library?branch=master)
 
 Client part of application: [MusicLibrary-Client](https://github.com/Milan26/music-library-client) <br/>
 More about client application on given link.
