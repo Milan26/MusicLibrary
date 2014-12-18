@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.util.Genre;
-import project.pa165.musiclibrary.exception.SongNotFoundException;
 import project.pa165.musiclibrary.services.SongService;
 
 import java.io.IOException;
@@ -23,7 +22,6 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -133,37 +131,12 @@ public class SongControllerTest {
     }
 
     @Test
-    public void testGetSongByIdNoMatch() throws Exception {
-        when(songService.findSong(any(Long.class))).thenThrow(new SongNotFoundException());
-        Long id = 1l;
-        mockMvc.perform(get("/songs/" + id))
-                .andExpect(status().isNotFound())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$.status").value(404))
-                .andExpect(jsonPath("$.message").value("Song could not be found"));
-        verify(songService).findSong(id);
-        verifyNoMoreInteractions(songService);
-    }
-
-    @Test
     public void testDeleteSong() throws Exception {
         Long id = 1l;
         mockMvc.perform(delete("/songs/" + id))
                 .andExpect(status().isOk());
         verify(songService).findSong(id);
         verify(songService).deleteSong(id);
-        verifyNoMoreInteractions(songService);
-    }
-
-    @Test
-    public void testDeleteSongIdNoMatch() throws Exception {
-        Long id = 2l;
-        mockMvc.perform(delete("/songs/" + id))
-                .andExpect(status().isNotFound())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$.status").value(404))
-                .andExpect(jsonPath("$.message").value("Song could not be found"));
-        verify(songService).findSong(id);
         verifyNoMoreInteractions(songService);
     }
 
@@ -178,18 +151,6 @@ public class SongControllerTest {
     }
 
     @Test
-    public void testCreateSongNull() throws Exception {
-        mockMvc.perform(post("/songs")
-                .content(convertObjectToJsonBytes(null))
-                .contentType("application/json;charset=UTF-8"))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$.status").value(400))
-                .andExpect(jsonPath("$.message").value("Song\'s method with bad request"));
-        verifyZeroInteractions(songService);
-    }
-
-    @Test
     public void testUpdateSong() throws Exception {
         mockMvc.perform(put("/songs")
                 .content(convertObjectToJsonBytes(song1))
@@ -197,18 +158,6 @@ public class SongControllerTest {
                 .andExpect(status().isOk());
         verify(songService).updateSong(any(SongDto.class));
         verifyNoMoreInteractions(songService);
-    }
-
-    @Test
-    public void testUpdateSongNull() throws Exception {
-        mockMvc.perform(put("/songs")
-                .content(convertObjectToJsonBytes(null))
-                .contentType("application/json;charset=UTF-8"))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$.status").value(400))
-                .andExpect(jsonPath("$.message").value("Song\'s method with bad request"));
-        verifyZeroInteractions(songService);
     }
 
     private SongDto createSong(Long id, String title, Short trackNumber, Integer length,

@@ -15,13 +15,14 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Documented
 @Pattern.List({
-        @Pattern(regexp = "(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-((19|20)\\d\\d)")
+        @Pattern(regexp = "(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-((19|20)\\d\\d)" ,
+        message = "must match pattern dd-MM-yyyy")
 })
 @Target({ FIELD, METHOD, ANNOTATION_TYPE })
 @Retention(RUNTIME)
 @Constraint(validatedBy = DateValidator.class)
 public @interface Date {
-    String message() default "wrong format, only supported format is dd-MM-yyyy";
+    String message() default "not valid date";
 
     Class<?>[] groups() default { };
 

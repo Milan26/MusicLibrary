@@ -20,7 +20,6 @@
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/ui-lightness/jquery-ui.min.css">
 
         <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/music.js"></script>
 
         <jsp:invoke fragment="head"/>

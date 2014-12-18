@@ -12,7 +12,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import project.pa165.musiclibrary.dto.AlbumDto;
-import project.pa165.musiclibrary.exception.AlbumNotFoundException;
 import project.pa165.musiclibrary.services.AlbumService;
 
 import java.io.IOException;
@@ -113,37 +112,12 @@ public class AlbumControllerTest {
     }
 
     @Test
-    public void testGetAlbumByIdNoMatch() throws Exception {
-        when(albumService.findAlbum(any(Long.class))).thenThrow(new AlbumNotFoundException());
-        Long id = 2l;
-        mockMvc.perform(get("/albums/" + id))
-                .andExpect(status().isNotFound())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$.status").value(404))
-                .andExpect(jsonPath("$.message").value("Album could not be found"));
-        verify(albumService).findAlbum(id);
-        verifyNoMoreInteractions(albumService);
-    }
-
-    @Test
     public void testDeleteAlbum() throws Exception {
         Long id = 1l;
         mockMvc.perform(delete("/albums/" + id))
                 .andExpect(status().isOk());
         verify(albumService).findAlbum(id);
         verify(albumService).deleteAlbum(id);
-        verifyNoMoreInteractions(albumService);
-    }
-
-    @Test
-    public void testDeleteAlbumIdNoMatch() throws Exception {
-        Long id = 2l;
-        mockMvc.perform(delete("/albums/" + id))
-                .andExpect(status().isNotFound())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$.status").value(404))
-                .andExpect(jsonPath("$.message").value("Album could not be found"));
-        verify(albumService).findAlbum(id);
         verifyNoMoreInteractions(albumService);
     }
 
@@ -158,18 +132,6 @@ public class AlbumControllerTest {
     }
 
     @Test
-    public void testCreateAlbumNull() throws Exception {
-        mockMvc.perform(post("/albums")
-                .content(convertObjectToJsonBytes(null))
-                .contentType("application/json;charset=UTF-8"))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$.status").value(400))
-                .andExpect(jsonPath("$.message").value("Album\'s method with bad request"));
-        verifyZeroInteractions(albumService);
-    }
-
-    @Test
     public void testUpdateAlbum() throws Exception {
         mockMvc.perform(put("/albums")
                 .content(convertObjectToJsonBytes(album1))
@@ -177,18 +139,6 @@ public class AlbumControllerTest {
                 .andExpect(status().isOk());
         verify(albumService).updateAlbum(any(AlbumDto.class));
         verifyNoMoreInteractions(albumService);
-    }
-
-    @Test
-    public void testUpdateAlbumNull() throws Exception {
-        mockMvc.perform(put("/albums")
-                .content(convertObjectToJsonBytes(null))
-                .contentType("application/json;charset=UTF-8"))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$.status").value(400))
-                .andExpect(jsonPath("$.message").value("Album\'s method with bad request"));
-        verifyZeroInteractions(albumService);
     }
 
     private AlbumDto createAlbumDto(Long id, String title, String releaseDate, String coverArt, String note) {

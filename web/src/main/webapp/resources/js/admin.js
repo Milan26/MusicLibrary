@@ -1,6 +1,3 @@
-/**
- * Created by Milan
- */
 $(document).ready(function () {
     var dataTable = $('#data-table').dataTable({
         "dom": '<"top"lp<"clear">>rt<"bottom"if<"clear">>',

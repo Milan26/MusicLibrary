@@ -2,7 +2,6 @@ package project.pa165.musiclibrary.web.rest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.exception.SongBadRequestException;
@@ -59,14 +58,14 @@ public class SongController {
     @RequestMapping(method = RequestMethod.POST)
     public void createSong(@Valid @RequestBody SongDto song, Errors errors) {
         if (song == null || errors.hasErrors())
-            throw new SongBadRequestException("Failed to map JSON to SongDto");
+            throw new SongBadRequestException("Failed to map JSON to SongDto", errors);
         songService.createSong(song);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
     public void updateSong(@Valid @RequestBody SongDto song, Errors errors) {
         if (song == null || errors.hasErrors())
-            throw new SongBadRequestException("Failed to map JSON to SongDto");
+            throw new SongBadRequestException("Failed to map JSON to SongDto", errors);
         songService.updateSong(song);
     }
 
@@ -74,15 +73,7 @@ public class SongController {
     @ExceptionHandler(SongNotFoundException.class)
     public
     @ResponseBody
-    ErrorInfo handleSongNotFoundException() {
-        return new ErrorInfo(404, "Song could not be found");
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({SongBadRequestException.class, MethodArgumentNotValidException.class})
-    public
-    @ResponseBody
-    ErrorInfo handleSongBadRequestException() {
-        return new ErrorInfo(400, "Song\'s method with bad request");
+    ErrorInfo handleSongNotFoundException(SongNotFoundException ex) {
+        return new ErrorInfo(404, ex.getMessage());
     }
 }

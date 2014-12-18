@@ -2,7 +2,6 @@ package project.pa165.musiclibrary.web.rest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.AlbumDto;
 import project.pa165.musiclibrary.exception.AlbumBadRequestException;
@@ -58,15 +57,15 @@ public class AlbumController {
     @ResponseStatus(value = HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
     public void createAlbum(@Valid @RequestBody AlbumDto album, Errors errors) {
-        if (album == null || errors.hasErrors())
-            throw new AlbumBadRequestException("Failed to map JSON to AlbumDto");
+        if (errors.hasErrors())
+            throw new AlbumBadRequestException("Failed to map JSON to AlbumDto", errors);
         albumService.createAlbum(album);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
     public void updateAlbum(@Valid @RequestBody AlbumDto album, Errors errors) {
-        if (album == null || errors.hasErrors())
-            throw new AlbumBadRequestException("Failed to map JSON to AlbumDto");
+        if (errors.hasErrors())
+            throw new AlbumBadRequestException("Failed to map JSON to AlbumDto", errors);
         albumService.updateAlbum(album);
     }
 
@@ -74,15 +73,7 @@ public class AlbumController {
     @ExceptionHandler(AlbumNotFoundException.class)
     public
     @ResponseBody
-    ErrorInfo handleAlbumNotFoundException() {
-        return new ErrorInfo(404, "Album could not be found");
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = {AlbumBadRequestException.class, MethodArgumentNotValidException.class})
-    public
-    @ResponseBody
-    ErrorInfo handleAlbumBadRequestException() {
-        return new ErrorInfo(400, "Album\'s method with bad request");
+    ErrorInfo handleAlbumNotFoundException(AlbumNotFoundException ex) {
+        return new ErrorInfo(404, ex.getMessage());
     }
 }
