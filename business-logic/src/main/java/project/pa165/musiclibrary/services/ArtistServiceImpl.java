@@ -69,11 +69,6 @@ public class ArtistServiceImpl implements ArtistService {
         return getMappedArtistDtoCollection(getArtistDao().getAll());
     }
 
-    @Override
-    public List<ArtistDto> findArtistByName(final String name) {
-        return getMappedArtistDtoCollection(getArtistDao().findArtistByName(name));
-    }
-
     private List<ArtistDto> getMappedArtistDtoCollection(List<Artist> artists) {
         List<ArtistDto> mappedCollection = new ArrayList<>();
         for (Artist artist : artists) {

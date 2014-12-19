@@ -140,67 +140,7 @@ public class ArtistDaoImplTest {
     public void testGetAllArtistsEmptyDb() {
         List<Artist> actual = getArtistDao().getAll();
         assertEquals(actual.size(), 0);
-    }
-
-    @Test
-    public void testFindArtistByNameWithUniqueName() {
-        persist(artist1);
-        persist(artist2);
-
-        artist1.setAlias("I am Unique");
-        artist2.setAlias("I am not");
-        getArtistDao().update(artist1);
-        getArtistDao().update(artist2);
-
-        assertEquals(getArtistDao().getAll().size(), 2);
-
-        List<Artist> expected = Arrays.asList(artist1);
-        List<Artist> actual = getArtistDao().findArtistByName("unique");
-
-        assertArrayEquals(expected.toArray(), actual.toArray());
-        deepAssert(expected.toArray(), actual.toArray());
-    }
-
-    @Test
-    public void testFindArtistByNameWithMultipleSameNameArtist() {
-        persist(artist1);
-        persist(artist2);
-
-        artist1.setAlias("I am Unique");
-        artist2.setAlias("I am not so UniQuE, or maybe I am");
-        getArtistDao().update(artist1);
-        getArtistDao().update(artist2);
-
-        assertEquals(getArtistDao().getAll().size(), 2);
-
-        List<Artist> expected = Arrays.asList(artist1, artist2);
-        List<Artist> actual = getArtistDao().findArtistByName("unique");
-
-        assertArrayEquals(expected.toArray(), actual.toArray());
-        deepAssert(expected.toArray(), actual.toArray());
-    }
-
-    @Test
-    public void testFindArtistByNameWithAnyMatch() {
-        persist(artist1);
-        persist(artist2);
-
-        assertEquals(getArtistDao().getAll().size(), 2);
-
-        List<Artist> expected = new ArrayList<>();
-        List<Artist> actual = getArtistDao().findArtistByName("alhamra");
-
-        assertArrayEquals(expected.toArray(), actual.toArray());
-        deepAssert(expected.toArray(), actual.toArray());
-    }
-
-    @Test
-    public void testFindArtistByNameOnEmptyDb() {
-        List<Artist> actual = getArtistDao().getAll();
-        assertEquals(actual.size(), 0);
-
-        assertEquals(getArtistDao().findArtistByName("Unity").size(), 0);
-    }
+    }   
 
     @Test
     public void testArtistJdbcMapping() {

@@ -17,5 +17,5 @@ public interface ArtistDao extends GenericDao<Artist> {
      * @param name name of artist or artists
      * @return return list of all artists that satisfy given parameter
      */
-    List<Artist> findArtistByName(String name);
+   
 }

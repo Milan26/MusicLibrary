@@ -20,12 +20,4 @@ public class ArtistDaoImpl extends AbstractGenericDao<Artist> implements ArtistD
         super();
         setType(Artist.class);
     }
-
-    @Override
-    public List<Artist> findArtistByName(final String name) {
-        return getEntityManager().createQuery(
-                "SELECT a FROM Artist a WHERE lower(a.alias) like lower('%" + name + "%') ",
-                Artist.class).getResultList();
-    }
-
 }

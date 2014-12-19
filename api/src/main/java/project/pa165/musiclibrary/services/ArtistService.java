@@ -44,12 +44,4 @@ public interface ArtistService {
      * @return list of all artists
      */
     List<ArtistDto> getAllArtists();
-
-    /**
-     * Get all artists with same title as given parameter.
-     *
-     * @param name name of artist or artists
-     * @return return list of all artists that satisfy given parameter
-     */
-    List<ArtistDto> findArtistByName(String name);
 }

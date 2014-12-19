@@ -164,43 +164,6 @@ public class ArtistServiceImplTest {
         verify(artistDao).getAll();
     }
 
-    @Test
-    public void testFindArtistByNameWithUniqueTitle() {
-        List<Artist> allArtists = Arrays.asList(artist1);
-        when(artistDao.findArtistByName(any(String.class))).thenReturn(allArtists);
-
-        List<ArtistDto> result = getArtistService().findArtistByName("Unity");
-
-        verify(artistDao).findArtistByName("Unity");
-
-        assertEquals(1, result.size());
-        deepAssert(Arrays.asList(artistDto1).toArray(), result.toArray());
-    }
-
-    @Test
-    public void testFindArtistByNameWithMultipleSameTitleAlbum() {
-        List<Artist> allArtists = Arrays.asList(artist1, artist2);
-        when(artistDao.findArtistByName(any(String.class))).thenReturn(allArtists);
-
-        List<ArtistDto> result = getArtistService().findArtistByName("uni");
-
-        verify(artistDao).findArtistByName("uni");
-
-        assertEquals(2, result.size());
-        deepAssert(Arrays.asList(artistDto1, artistDto2).toArray(), result.toArray());
-    }
-
-    @Test
-    public void testFindArtistByNameEmptyDb() {
-        when(artistDao.findArtistByName(any(String.class))).thenReturn(new ArrayList<Artist>());
-
-        List<ArtistDto> result = getArtistService().findArtistByName("Unity");
-
-        verify(artistDao).findArtistByName("Unity");
-
-        assertEquals(0, result.size());
-    }
-
     private ArtistDto createArtistDto(Long id, String name, String note) {
         ArtistDto artist = new ArtistDto();
         artist.setId(id);
