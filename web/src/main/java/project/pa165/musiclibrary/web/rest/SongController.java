@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.exception.BadRequestException;
 import project.pa165.musiclibrary.exception.SongNotFoundException;
+import project.pa165.musiclibrary.services.AlbumService;
+import project.pa165.musiclibrary.services.ArtistService;
 import project.pa165.musiclibrary.services.SongService;
 import project.pa165.musiclibrary.util.ErrorInfo;
 import project.pa165.musiclibrary.util.Genre;
@@ -22,6 +24,8 @@ import java.util.List;
 @RequestMapping(value = "/songs")
 public class SongController {
 
+    private ArtistService artistService;
+    private AlbumService albumService;
     private SongService songService;
 
     public SongService getSongService() {
@@ -31,6 +35,24 @@ public class SongController {
     @Inject
     public void setSongService(SongService songService) {
         this.songService = songService;
+    }
+
+    public ArtistService getArtistService() {
+        return artistService;
+    }
+
+    @Inject
+    public void setArtistService(ArtistService artistService) {
+        this.artistService = artistService;
+    }
+
+    public AlbumService getAlbumService() {
+        return albumService;
+    }
+
+    @Inject
+    public void setAlbumService(AlbumService albumService) {
+        this.albumService = albumService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -69,10 +91,14 @@ public class SongController {
         songService.createSong(song);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public void updateSong(@Valid @RequestBody SongDto song, Errors errors) {
+    @RequestMapping(value = "/{album_id}/{artist_id}", method = RequestMethod.PUT)
+    public void updateSong(@PathVariable("album_id") Long albumId, @PathVariable("artist_id") Long artistId,
+            @Valid @RequestBody SongDto song, Errors errors) {
         if (errors.hasErrors())
             throw new BadRequestException("Failed to map JSON to SongDto", errors);
+        if (albumId != null) song.setAlbum(getAlbumService().findAlbum(albumId));
+        if (artistId != null) song.setArtist(getArtistService().findArtist(artistId));
+
         songService.updateSong(song);
     }
 

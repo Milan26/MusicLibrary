@@ -12,6 +12,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import project.pa165.musiclibrary.dto.SongDto;
+import project.pa165.musiclibrary.services.AlbumService;
+import project.pa165.musiclibrary.services.ArtistService;
 import project.pa165.musiclibrary.util.Genre;
 import project.pa165.musiclibrary.services.SongService;
 
@@ -37,6 +39,10 @@ public class SongControllerTest {
     private MockMvc mockMvc;
     @Mock
     private SongService songService;
+    @Mock
+    private AlbumService albumService;
+    @Mock
+    private ArtistService artistService;
     @InjectMocks
     private SongController songController;
 
@@ -152,12 +158,18 @@ public class SongControllerTest {
 
     @Test
     public void testUpdateSong() throws Exception {
-        mockMvc.perform(put("/songs")
+        Long album_id = 1l;
+        Long artist_id = 1l;
+        mockMvc.perform(put("/songs/" + album_id + "/" + artist_id)
                 .content(convertObjectToJsonBytes(song1))
                 .contentType("application/json;charset=UTF-8"))
                 .andExpect(status().isOk());
+        verify(albumService).findAlbum(album_id);
+        verify(artistService).findArtist(artist_id);
         verify(songService).updateSong(any(SongDto.class));
         verifyNoMoreInteractions(songService);
+        verifyNoMoreInteractions(albumService);
+        verifyNoMoreInteractions(artistService);
     }
 
     private SongDto createSong(Long id, String title, Short trackNumber, Integer length,

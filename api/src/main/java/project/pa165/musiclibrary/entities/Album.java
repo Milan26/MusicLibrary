@@ -2,7 +2,6 @@ package project.pa165.musiclibrary.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class Album implements Serializable {
     @Column
     private String note;
 
-    @OneToMany(mappedBy = "album", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "album", cascade = {CascadeType.REMOVE})
     private List<Song> songs;
 
     public Long getId() {
@@ -76,7 +75,7 @@ public class Album implements Serializable {
         this.note = note;
     }
 
-    public Collection<Song> getSongs() {
+    public List<Song> getSongs() {
         return songs;
     }
 
