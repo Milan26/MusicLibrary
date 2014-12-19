@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
@@ -25,6 +26,7 @@ public class ArtistDto implements Serializable {
     @Size(max = 255)
     private String note;
     @JsonIgnore
+    @Valid
     private List<SongDto> songs;
 
     public ArtistDto() {

@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.AlbumDto;
-import project.pa165.musiclibrary.exception.AlbumBadRequestException;
+import project.pa165.musiclibrary.exception.BadRequestException;
 import project.pa165.musiclibrary.exception.AlbumNotFoundException;
 import project.pa165.musiclibrary.services.AlbumService;
 import project.pa165.musiclibrary.util.ErrorInfo;
@@ -58,14 +58,14 @@ public class AlbumController {
     @RequestMapping(method = RequestMethod.POST)
     public void createAlbum(@Valid @RequestBody AlbumDto album, Errors errors) {
         if (errors.hasErrors())
-            throw new AlbumBadRequestException("Failed to map JSON to AlbumDto", errors);
+            throw new BadRequestException("Failed to map JSON to AlbumDto", errors);
         albumService.createAlbum(album);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
     public void updateAlbum(@Valid @RequestBody AlbumDto album, Errors errors) {
         if (errors.hasErrors())
-            throw new AlbumBadRequestException("Failed to map JSON to AlbumDto", errors);
+            throw new BadRequestException("Failed to map JSON to AlbumDto", errors);
         albumService.updateAlbum(album);
     }
 

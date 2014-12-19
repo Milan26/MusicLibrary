@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.validator.constraints.NotEmpty;
 import project.pa165.musiclibrary.util.Date;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
@@ -28,6 +29,7 @@ public class AlbumDto implements Serializable {
     private String coverArt;
     @Size(max = 255)
     private String note;
+    @Valid
     private List<SongDto> songs;
 
     public AlbumDto() {

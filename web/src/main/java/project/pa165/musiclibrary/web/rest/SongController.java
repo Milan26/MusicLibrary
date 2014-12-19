@@ -4,13 +4,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import project.pa165.musiclibrary.dto.SongDto;
-import project.pa165.musiclibrary.exception.SongBadRequestException;
+import project.pa165.musiclibrary.exception.BadRequestException;
 import project.pa165.musiclibrary.exception.SongNotFoundException;
 import project.pa165.musiclibrary.services.SongService;
 import project.pa165.musiclibrary.util.ErrorInfo;
+import project.pa165.musiclibrary.util.Genre;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -36,6 +38,11 @@ public class SongController {
         return songService.getAllSongs();
     }
 
+    @RequestMapping(value = "/genres", method = RequestMethod.GET)
+    public List<Genre> getAllGenres() {
+        return Arrays.asList(Genre.values());
+    }
+
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public List<SongDto> getSongsByTerm(@RequestParam("term") String term) {
         return getSongService().findSongByTitle(term);
@@ -57,15 +64,15 @@ public class SongController {
     @ResponseStatus(value = HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
     public void createSong(@Valid @RequestBody SongDto song, Errors errors) {
-        if (song == null || errors.hasErrors())
-            throw new SongBadRequestException("Failed to map JSON to SongDto", errors);
+        if (errors.hasErrors())
+            throw new BadRequestException("Failed to map JSON to SongDto", errors);
         songService.createSong(song);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
     public void updateSong(@Valid @RequestBody SongDto song, Errors errors) {
-        if (song == null || errors.hasErrors())
-            throw new SongBadRequestException("Failed to map JSON to SongDto", errors);
+        if (errors.hasErrors())
+            throw new BadRequestException("Failed to map JSON to SongDto", errors);
         songService.updateSong(song);
     }
 

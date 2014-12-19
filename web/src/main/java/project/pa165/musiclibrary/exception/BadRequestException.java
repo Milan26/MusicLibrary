@@ -5,7 +5,7 @@ import org.springframework.validation.Errors;
 /**
  * @author Milan
  */
-public class SongBadRequestException extends RuntimeException {
+public class BadRequestException extends RuntimeException {
 
     private Errors errors;
 
@@ -13,7 +13,7 @@ public class SongBadRequestException extends RuntimeException {
         return errors;
     }
 
-    public SongBadRequestException(String message, Errors errors) {
+    public BadRequestException(String message, Errors errors) {
         super(message);
         this.errors = errors;
     }

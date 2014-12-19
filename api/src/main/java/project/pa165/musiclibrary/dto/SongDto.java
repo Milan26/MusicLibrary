@@ -6,11 +6,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.validator.constraints.NotEmpty;
 import project.pa165.musiclibrary.util.Genre;
 
+import javax.validation.Valid;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-
 
 /**
  * @author Alex
@@ -26,17 +27,22 @@ public class SongDto implements Serializable {
     private String title;
     @NotNull
     @Digits(integer = 2, fraction = 0)
+    @DecimalMin(value = "1")
     private Short trackNumber;
     @NotNull
     @Digits(integer = 4, fraction = 0)
+    @DecimalMin(value = "1")
     private Integer duration;
     @NotNull
     private Genre genre;
     @Digits(integer = 4, fraction = 0)
+    @DecimalMin(value = "1")
     private Integer bitrate;
     @Size(max = 255)
     private String note;
+    @Valid
     private ArtistDto artist;
+    @Valid
     private AlbumDto album;
 
     public SongDto() {

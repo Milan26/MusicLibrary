@@ -21,8 +21,8 @@ import java.util.List;
 @ControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(AlbumBadRequestException.class)
-    public ResponseEntity<Object> handleAlbumBadRequest(AlbumBadRequestException badRequestEx, WebRequest request) {
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<Object> handleAlbumBadRequest(BadRequestException badRequestEx, WebRequest request) {
 
         List<FieldErrorInfo> fieldErrorsInfo = new ArrayList<>();
 
