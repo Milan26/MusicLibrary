@@ -50,12 +50,22 @@
         <div class="right">
             <ul>
                 <li>
-                    <a href="${pageContext.request.contextPath}/user"><f:message key="navigation.user"/></a>
-                    <ul>
-                        <li><a href="${pageContext.request.contextPath}/user">
-                            <f:message key="navigation.user.profile"/></a>
-                        </li>
-                    </ul>
+                    <c:choose>
+                        <c:when test="${not empty pageContext.request.userPrincipal}">
+                            <a href="${pageContext.request.contextPath}/user"><c:out value="${pageContext.request.userPrincipal.name}"/></a>
+                            <ul>
+                                <li><a href="${pageContext.request.contextPath}/user">
+                                    <f:message key="navigation.user.profile"/></a>
+                                </li>
+                                <li><a href="${pageContext.request.contextPath}/logout">
+                                    <f:message key="navigation.user.logout"/></a>
+                                </li>
+                            </ul>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="${pageContext.request.contextPath}/login"><f:message key='navigation.user.login'/></a>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
             </ul>
         </div>

@@ -104,4 +104,8 @@ INSERT INTO Song (title,trackNumber,duration,genre, album_id, artist_id) VALUES 
 INSERT INTO Song (title,trackNumber,duration,genre, album_id, artist_id) VALUES ('Requiem',5,180,'JAZZ',6,6);
 INSERT INTO Song (title,trackNumber,duration,genre, album_id, artist_id) VALUES ('Rain',6,180,'JAZZ',6,6);
 
-INSERT INTO XUser (email,firstName,lastName,password) VALUES ('kvetinac@gmail.com','Peter','Maly','frgr99rg7');
+INSERT INTO USERS (email,firstName,lastName,password,enabled) VALUES ('admin@admin.com','admin','admin','admin', TRUE);
+INSERT INTO USERS (email,firstName,lastName,password,enabled) VALUES ('user@user.com','user','user','user', TRUE);
+
+INSERT INTO USERROLE (ROLE, EMAIL) VALUES ('ROLE_ADMIN','admin@admin.com');
+INSERT INTO USERROLE (ROLE, EMAIL) VALUES ('ROLE_USER','user@user.com');

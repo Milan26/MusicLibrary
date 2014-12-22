@@ -5,4 +5,6 @@
 
     <import resource="classpath:applicationContext-dao.xml"/>
 
+    <import resource="securityConfig.xml"/>
+
 </beans>
