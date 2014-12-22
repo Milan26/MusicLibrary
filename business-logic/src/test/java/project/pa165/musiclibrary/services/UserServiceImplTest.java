@@ -13,7 +13,6 @@ import project.pa165.musiclibrary.dao.UserDao;
 import project.pa165.musiclibrary.dto.UserDto;
 import project.pa165.musiclibrary.entities.User;
 import project.pa165.musiclibrary.exception.ServiceException;
-import project.pa165.musiclibrary.exception.ServiceException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,11 +21,10 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
- * @author Martin
- */
+* @author Martin
+*/
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceImplTest {
 
@@ -51,18 +49,18 @@ public class UserServiceImplTest {
 
         userService.setDozerBeanMapper(new DozerBeanMapper());
 
-        user1 = createUser(1l, "martinzahuta@gmail.com", "Martin", "Zahuta", "password", "canEdit");
-        user2 = createUser(2l, "john@doe.com", "John", "Doe", "123456", "canView");
+        user1 = createUser(1l, "martinzahuta@gmail.com", "Martin", "Zahuta", "password", true);
+        user2 = createUser(2l, "john@doe.com", "John", "Doe", "123456", true);
 
-        userDto1 = createUserDto(1l, "martinzahuta@gmail.com", "Martin", "Zahuta", "password", "canEdit");
-        userDto2 = createUserDto(2l, "john@doe.com", "John", "Doe", "123456", "canView");
+        userDto1 = createUserDto(1l, "martinzahuta@gmail.com", "Martin", "Zahuta", "password", true);
+        userDto2 = createUserDto(2l, "john@doe.com", "John", "Doe", "123456", true);
 
         when(userDao.find(1l)).thenReturn(user1);
         when(userDao.find(2l)).thenReturn(user2);
         when(userDao.find(3l)).thenReturn(null);
         when(userDao.getAll()).thenReturn(Arrays.asList(user1, user2));
     }
-    
+
     @Test
     public void testCreateUser() {
         ArgumentCaptor<User> argumentCaptor = ArgumentCaptor.forClass(User.class);
@@ -152,26 +150,27 @@ public class UserServiceImplTest {
         assertEquals(0, result.size());
     }
 
-    private User createUser(Long id, String email, String firstName, String lastName, String password, String role) {
+    private User createUser(Long id, String email, String firstName, String lastName, String password,
+                            Boolean enabled) {
         User user = new User();
         user.setId(id);
         user.setEmail(email);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setPassword(password);
-        user.setRole(role);
+        user.setEnabled(enabled);
         return user;
     }
 
-    private UserDto createUserDto(Long id, String email, String firstName, String lastName, String password, String
-            role) {
+    private UserDto createUserDto(Long id, String email, String firstName, String lastName, String password,
+                                  Boolean enabled) {
         UserDto userDto = new UserDto();
         userDto.setId(id);
         userDto.setEmail(email);
         userDto.setFirstName(firstName);
         userDto.setLastName(lastName);
         userDto.setPassword(password);
-        userDto.setRole(role);
+        userDto.setEnabled(enabled);
         return userDto;
     }
 
@@ -180,7 +179,7 @@ public class UserServiceImplTest {
         assertEquals(user1.getEmail(), user2.getEmail());
         assertEquals(user1.getFirstName(), user2.getFirstName());
         assertEquals(user1.getLastName(), user2.getLastName());
-        assertEquals(user1.getRole(), user2.getRole());
+        assertEquals(user1.getEnabled(), user2.getEnabled());
     }
 
     private void deepAssert(UserDto userDto1, UserDto userDto2) {
@@ -188,7 +187,7 @@ public class UserServiceImplTest {
         assertEquals(userDto1.getEmail(), userDto2.getEmail());
         assertEquals(userDto1.getFirstName(), userDto2.getFirstName());
         assertEquals(userDto1.getLastName(), userDto2.getLastName());
-        assertEquals(userDto1.getRole(), userDto2.getRole());
+        assertEquals(userDto1.getEnabled(), userDto2.getEnabled());
     }
 
     private void deepAssert(Object[] arr1, Object[] arr2) {

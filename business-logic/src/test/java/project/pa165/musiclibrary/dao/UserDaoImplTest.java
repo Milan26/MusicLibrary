@@ -44,8 +44,8 @@ public class UserDaoImplTest {
 
     @Before
     public void setUp() {
-        user1 = createUser("Alain", "Doe", "alain@doe.com", "pAssword");
-        user2 = createUser("Marco", "Polo", "marco@polo.com", "12345");
+        user1 = createUser("Alain", "Doe", "alain@doe.com", "pAssword", true);
+        user2 = createUser("Marco", "Polo", "marco@polo.com", "12345", true);
     }
 
     @Test
@@ -158,12 +158,13 @@ public class UserDaoImplTest {
         assertNotNull(user.getId());
     }
 
-    private User createUser(String firstName, String secondName, String email, String password) {
+    private User createUser(String firstName, String secondName, String email, String password, Boolean enabled) {
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(secondName);
         user.setEmail(email);
         user.setPassword(password);
+        user.setEnabled(enabled);
         return user;
     }
 
@@ -173,6 +174,7 @@ public class UserDaoImplTest {
         assertEquals(user1.getLastName(), user2.getLastName());
         assertEquals(user1.getEmail(), user2.getEmail());
         assertEquals(user1.getPassword(), user2.getPassword());
+        assertEquals(user1.getEnabled(), user2.getEnabled());
     }
 
     private void deepAssert(Object[] arr1, Object[] arr2) {

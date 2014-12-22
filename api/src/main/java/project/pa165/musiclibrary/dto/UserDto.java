@@ -5,7 +5,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Size;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import project.pa165.musiclibrary.entities.UserRole;
+
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * @author Milan
@@ -25,7 +28,8 @@ public class UserDto implements Serializable {
     private String lastName;
     @Size(min = 6, max = 26)
     private String password;
-    private String role;
+    private Set<UserRole> userRole;
+    private Boolean enabled;
 
     public UserDto() {
     }
@@ -71,11 +75,19 @@ public class UserDto implements Serializable {
         this.password = encoder.encode(password);
     }
 
-    public String getRole() {
-        return role;
+    public Set<UserRole> getUserRole() {
+        return userRole;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setUserRole(Set<UserRole> userRole) {
+        this.userRole = userRole;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

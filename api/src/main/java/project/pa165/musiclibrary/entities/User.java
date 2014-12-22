@@ -2,6 +2,8 @@ package project.pa165.musiclibrary.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
@@ -10,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @author Milan
  */
 @Entity
-@Table(name = "XUser")
+@Table(name = "Users")
 public class User implements Serializable {
     
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -20,7 +22,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, length = 255, unique = true)
+    @Column(name = "email", nullable = false, length = 255, unique = true)
     private String email;
 
     @Column(nullable = false, length = 40)
@@ -32,8 +34,11 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    @Column
-    private String role;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<UserRole> userRole;
+
+    @Column(nullable = false)
+    private Boolean enabled;
 
     public Long getId() {
         return id;
@@ -75,12 +80,20 @@ public class User implements Serializable {
         this.password = encoder.encode(password);
     }
 
-    public String getRole() {
-        return role;
+    public Set<UserRole> getUserRole() {
+        return userRole;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setUserRole(Set<UserRole> userRole) {
+        this.userRole = userRole;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
@@ -108,7 +121,8 @@ public class User implements Serializable {
         sb.append(", firstName='").append(firstName).append('\'');
         sb.append(", lastName='").append(lastName).append('\'');
         sb.append(", password='").append(password).append('\'');
-        sb.append(", role='").append(role).append('\'');
+        sb.append(", userRole=").append(userRole);
+        sb.append(", enabled=").append(enabled);
         sb.append('}');
         return sb.toString();
     }

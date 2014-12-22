@@ -10,6 +10,7 @@
         <class>project.pa165.musiclibrary.entities.Artist</class>
         <class>project.pa165.musiclibrary.entities.Song</class>
         <class>project.pa165.musiclibrary.entities.User</class>
+        <class>project.pa165.musiclibrary.entities.UserRole</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect"/>
