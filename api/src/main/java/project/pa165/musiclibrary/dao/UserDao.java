@@ -9,4 +9,5 @@ import project.pa165.musiclibrary.entities.User;
  */
 public interface UserDao extends GenericDao<User> {
 
+    User findUserByEmail(String email);
 }

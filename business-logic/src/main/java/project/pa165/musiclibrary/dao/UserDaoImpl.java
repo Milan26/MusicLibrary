@@ -20,4 +20,10 @@ public class UserDaoImpl extends AbstractGenericDao<User> implements UserDao {
         setType(User.class);
     }
 
+    @Override
+    public User findUserByEmail(String email) {
+        return getEntityManager().createQuery("SELECT u FROM User u WHERE u.email=:email", User.class)
+                .setParameter("email", email)
+                .getSingleResult();
+    }
 }

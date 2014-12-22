@@ -71,6 +71,12 @@ public class UserServiceImpl implements UserService {
         return getMappedUserDtoCollection(getUserDao().getAll());
     }
 
+    @Override
+    public UserDto findUserByEmail(String email) {
+        User user = getUserDao().findUserByEmail(email);
+        return user != null ? getDozerBeanMapper().map(user, UserDto.class) : null;
+    }
+
     private List<UserDto> getMappedUserDtoCollection(List<User> users) {
         List<UserDto> mappedCollection = new ArrayList<>();
         for (User user : users) {

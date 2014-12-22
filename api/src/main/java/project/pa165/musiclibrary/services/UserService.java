@@ -45,4 +45,5 @@ public interface UserService {
      */
     List<UserDto> getAllUsers();
 
+    UserDto findUserByEmail(String email);
 }
