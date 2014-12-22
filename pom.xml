@@ -34,12 +34,12 @@
         <hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
         <hibernate-validator.version>5.1.3.Final</hibernate-validator.version>
 
-        <slf4j.version>1.7.7</slf4j.version>
+        <slf4j.version>1.7.9</slf4j.version>
 
         <commons.version>1.4</commons.version>
         <derby.version>10.11.1.1</derby.version>
 
-        <spring.version>4.1.2.RELEASE</spring.version>
+        <spring.version>4.1.3.RELEASE</spring.version>
         <spring-security.version>3.2.5.RELEASE</spring-security.version>
 
         <aspectj.version>1.8.4</aspectj.version>
@@ -217,6 +217,11 @@
                 <artifactId>slf4j-simple</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
 
             <!-- Spring -->
             <dependency>
@@ -246,6 +251,17 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
                 <scope>test</scope>
@@ -260,6 +276,16 @@
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-crypto</artifactId>
+                <version>${spring-security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring-security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
                 <version>${spring-security.version}</version>
             </dependency>
 
