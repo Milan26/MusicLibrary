@@ -1,5 +1,4 @@
 @import url('http://fonts.googleapis.com/css?family=Dancing+Script');
-@import url('http://fonts.googleapis.com/css?family=Sigmar+One');
 @import url(http://fonts.googleapis.com/css?family=Lobster);
 
 /*
@@ -134,6 +133,21 @@ label {
 #nav .right ul li:hover > ul {
     display: block;
     background-color: rgba(220, 200, 200, .5);
+}
+
+#nav .right ul li input {
+    /* to look like a link instead of input */
+    background:none!important;
+    border:none;
+    padding:0!important;
+    cursor: pointer;
+
+    font-family: 'Lobster', cursive;
+    color: #ffffff;
+}
+
+#nav .right ul li input:hover {
+    color: #d64760;
 }
 
 /* Mid */

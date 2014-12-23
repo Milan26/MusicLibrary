@@ -54,16 +54,21 @@
                         <c:when test="${not empty pageContext.request.userPrincipal}">
                             <a href="${pageContext.request.contextPath}/user"><c:out value="${pageContext.request.userPrincipal.name}"/></a>
                             <ul>
-                                <li><a href="${pageContext.request.contextPath}/user">
-                                    <f:message key="navigation.user.profile"/></a>
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/user">
+                                    <f:message key="navigation.user.profile"/>
+                                    </a>
                                 </li>
-                                <li><a href="${pageContext.request.contextPath}/logout">
-                                    <f:message key="navigation.user.logout"/></a>
+                                <li>
+                                    <form action="${pageContext.request.contextPath}/j_spring_security_logout" method="post" id="logoutForm">
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                        <input type="submit" value="<f:message key='navigation.user.logout'/>"/>
+                                    </form>
                                 </li>
                             </ul>
                         </c:when>
                         <c:otherwise>
-                            <a href="${pageContext.request.contextPath}/login"><f:message key='navigation.user.login'/></a>
+                            <a href="${pageContext.request.contextPath}/user/login"><f:message key='navigation.user.login'/></a>
                         </c:otherwise>
                     </c:choose>
                 </li>
