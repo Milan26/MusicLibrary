@@ -3,13 +3,17 @@ package project.pa165.musiclibrary.web.controller;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import project.pa165.musiclibrary.dto.UserDto;
 import project.pa165.musiclibrary.services.UserService;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.util.Locale;
 
 
@@ -61,54 +65,23 @@ public class UserManagementController {
         return model;
     }
 
-//    /**
-//     *  THIS IS JUST TEMPORAL, TO SHOW USER FUNCTIONALITY
-//     */
-//    @ModelAttribute("user")
-//    public UserDto getUser() {
-//        return getUserService().findUser(1l);
-//    }
-//
-//    @RequestMapping(method = RequestMethod.GET)
-//    public String user() {
-//        return "user-profile";
-//    }
-//
-//    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-//    public String updateUserSettings(@Valid @ModelAttribute("user") UserDto user,
-//                                     BindingResult bindingResult,
-//                                     RedirectAttributes redirectAttributes,
-//                                     Locale locale)
-//            throws ServiceException, UserNotFoundException {
-//        // JUST TEMPORARY
-//        UserDto u = getUser();
-////        if (user == null)
-////            throw new UserNotFoundException();
-//        if (bindingResult.hasErrors()) {
-//            return "user-edit";
-//        }
-//        copyEmptyFields(u, user);
-//        getUserService().updateUser(user);
-//        redirectAttributes.addFlashAttribute(
-//                "message",
-//                getMessageSource().getMessage(new DefaultMessageSourceResolvable("user.profile.submit.success"), locale)
-//        );
-//        return "redirect:/user";
-//    }
-//
-//    private void copyEmptyFields(UserDto userToBeUpdated, UserDto modelUser) {
-//        modelUser.setId(userToBeUpdated.getId());
-//        modelUser.setPassword(userToBeUpdated.getPassword());
-//    }
-//
-//    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-//    public String loadUserDataSettings(Model model)
-//            throws ServiceException, UserNotFoundException {
-//        // JUST TEMPORARY
-//        UserDto user = getUser();
-////        if (user == null)
-////            throw new UserNotFoundException(id.toString());
-//        model.addAttribute("user", user);
-//        return "user-edit";
-//    }
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public ModelAndView loadUserSignUp() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", new UserDto());
+        modelAndView.setViewName("user");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String saveUserSignUp(@Valid @ModelAttribute("user") UserDto user,
+                                 BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "user";
+        }
+        user.setEnabled(true);
+        getUserService().createUser(user);
+        return "redirect:/";
+    }
+
 }

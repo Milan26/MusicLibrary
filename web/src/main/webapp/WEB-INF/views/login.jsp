@@ -17,14 +17,16 @@
       <c:if test="${not empty message}"><div class="message">${message}</div></c:if>
     </div>
     <div class="content">
-      <input name="j_username" type="text" class="input username" placeholder="Email" />
+      <input name="j_username" type="text" class="input username" placeholder="Email"/>
       <div class="user-icon"></div>
-      <input name="j_password" type="password" class="input password" placeholder="Password" />
+      <input name="j_password" type="password" class="input password" placeholder="Password"/>
       <div class="pass-icon"></div>
     </div>
     <div class="footer">
-      <input type="submit" name="submit" value="Login" class="button" />
-      <input type="submit" name="submit" value="Register" class="register" />
+      <input type="submit" name="submit" value="<f:message key='navigation.user.login'/>" class="button"/>
+      <a name="register" class="register" href="${pageContext.request.contextPath}/user/signup">
+        <f:message key="user.signup.title"/>
+      </a>
     </div>
     <div class="submit">
       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
