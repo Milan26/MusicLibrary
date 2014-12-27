@@ -1,5 +1,8 @@
 package project.pa165.musiclibrary.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -11,6 +14,8 @@ import java.util.List;
  * @author Milan
  */
 public abstract class AbstractGenericDao<T> implements GenericDao<T> {
+
+    private static final Logger logger = LoggerFactory.getLogger(AbstractGenericDao.class);
 
     private Class<T> type;
     private EntityManager entityManager;
@@ -30,6 +35,7 @@ public abstract class AbstractGenericDao<T> implements GenericDao<T> {
      * @param type type of current context
      */
     public void setType(final Class<T> type) {
+        logger.debug("class={}", type);
         this.type = type;
     }
 
@@ -49,6 +55,8 @@ public abstract class AbstractGenericDao<T> implements GenericDao<T> {
         final T obj = find(id);
         if (obj != null) {
             getEntityManager().remove(obj);
+        } else {
+            logger.info("object of type={}, with id={}, does not exists", type, id);
         }
     }
 

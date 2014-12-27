@@ -145,8 +145,6 @@ public class Song implements Serializable {
         sb.append(", genre=").append(genre);
         sb.append(", bitrate=").append(bitrate);
         sb.append(", note='").append(note).append('\'');
-        sb.append(", artist=").append(artist);
-        sb.append(", album=").append(album);
         sb.append('}');
         return sb.toString();
     }
