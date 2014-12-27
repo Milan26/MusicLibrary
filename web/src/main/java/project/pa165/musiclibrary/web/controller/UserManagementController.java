@@ -1,7 +1,12 @@
 package project.pa165.musiclibrary.web.controller;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,6 +31,10 @@ public class UserManagementController {
 
     private UserService userService;
     private MessageSource messageSource;
+
+    @Inject
+    @Qualifier("authenticationManager")
+    private AuthenticationManager authenticationManager;
 
     public UserService getUserService() {
         return userService;
@@ -76,11 +85,22 @@ public class UserManagementController {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String saveUserSignUp(@Valid @ModelAttribute("user") UserDto user,
                                  BindingResult bindingResult) {
+        // Registration logic
         if (bindingResult.hasErrors()) {
             return "user";
         }
         user.setEnabled(true);
         getUserService().createUser(user);
+
+        // Login authentication logic
+        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                user.getEmail(), user.getPassword()
+        );
+        try {
+            SecurityContextHolder.getContext().setAuthentication(authenticationManager.authenticate(auth));
+        } catch (AuthenticationException authEx) {
+
+        }
         return "redirect:/";
     }
 
