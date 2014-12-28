@@ -34,7 +34,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserDto user = userService.findUserByEmail(email);
-        logger.debug("user does not exists={}, with email={}", user == null, email);
+        logger.debug("user exists={}, with email={}", user != null, email);
         return buildUserForAuthentication(user, buildUserAuthority(user.getUserRole()));
     }
 
