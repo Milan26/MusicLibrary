@@ -1,5 +1,7 @@
 package project.pa165.musiclibrary.web.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -9,11 +11,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.dto.UserDto;
 import project.pa165.musiclibrary.services.UserService;
 
@@ -28,6 +28,8 @@ import java.util.Locale;
 @Controller
 @RequestMapping("/user")
 public class UserManagementController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserManagementController.class);
 
     private UserService userService;
     private MessageSource messageSource;
@@ -99,9 +101,19 @@ public class UserManagementController {
         try {
             SecurityContextHolder.getContext().setAuthentication(authenticationManager.authenticate(auth));
         } catch (AuthenticationException authEx) {
-
+            logger.warn("failed to authenticate:", authEx);
         }
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/403", method = RequestMethod.GET)
+    public ModelAndView accessDenied(Locale locale) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("message", getMessageSource().getMessage(
+                new DefaultMessageSourceResolvable("error.page.403.msg"), locale)
+        );
+        modelAndView.setViewName("error-pages/default");
+        return modelAndView;
     }
 
 }
