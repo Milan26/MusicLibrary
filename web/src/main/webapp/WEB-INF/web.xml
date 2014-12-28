@@ -38,8 +38,13 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/rootContext.xml</param-value>
     </context-param>
+    
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!-- To enable session concurrency control -->
+    <listener>
+        <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
     </listener>
 
     <servlet>
@@ -65,10 +70,6 @@
     <!--<tracking-mode>URL</tracking-mode>-->
     <!--</session-config>-->
 
-    <error-page>
-        <error-code>404</error-code>
-        <location>/WEB-INF/views/error-pages/404.jsp</location>
-    </error-page>
     <error-page>
         <location>/WEB-INF/views/error-pages/default.jsp</location>
     </error-page>
