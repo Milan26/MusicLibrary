@@ -141,6 +141,20 @@ public class UserDaoImplTest {
     }
 
     @Test
+    public void testFindUserByEmail() {
+        persist(user1);
+
+        User result = getUserDao().findUserByEmail("alain@doe.com");
+        assertNotNull(result);
+        deepAssert(user1, result);
+    }
+
+    @Test(expected = PersistenceException.class)
+    public void testFindUserByEmailNoResult() {
+        getUserDao().findUserByEmail("email@email.com");
+    }
+
+    @Test
     public void testPasswordEncoder() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String plainPassword = "password";
