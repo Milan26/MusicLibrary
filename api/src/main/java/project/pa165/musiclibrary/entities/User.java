@@ -34,8 +34,8 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<UserRole> userRole;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<UserAuthority> userAuthorities;
 
     @Column(nullable = false)
     private Boolean enabled;
@@ -80,12 +80,12 @@ public class User implements Serializable {
         this.password = encoder.encode(password);
     }
 
-    public Set<UserRole> getUserRole() {
-        return userRole;
+    public Set<UserAuthority> getUserAuthorities() {
+        return userAuthorities;
     }
 
-    public void setUserRole(Set<UserRole> userRole) {
-        this.userRole = userRole;
+    public void setUserAuthorities(Set<UserAuthority> userAuthority) {
+        this.userAuthorities = userAuthority;
     }
 
     public Boolean getEnabled() {

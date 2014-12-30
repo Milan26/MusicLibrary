@@ -108,5 +108,10 @@ INSERT INTO Song (title,trackNumber,duration,genre, album_id, artist_id) VALUES 
 INSERT INTO USERS (email,firstName,lastName,password,enabled) VALUES ('admin@admin.com','admin','admin','$2a$11$TWCBJFqWUd8T5Lafjc3r8.QEre7ixhqixhv0tuzeBIcBIh8nVVkCe', TRUE);
 INSERT INTO USERS (email,firstName,lastName,password,enabled) VALUES ('user@user.com','user','user','$2a$11$zFbG6b4QPaPMKEbZMM1W1uhFn5YS9WLqgMw.HT0U2aMBvZTJizFV.', TRUE);
 
-INSERT INTO USERROLE (ROLE, EMAIL) VALUES ('ROLE_ADMIN','admin@admin.com');
-INSERT INTO USERROLE (ROLE, EMAIL) VALUES ('ROLE_USER','user@user.com');
+INSERT INTO USERAUTHORITY (authority, email) VALUES ('ADMIN','admin@admin.com');
+INSERT INTO USERAUTHORITY (authority, email) VALUES ('CREATE','admin@admin.com');
+INSERT INTO USERAUTHORITY (authority, email) VALUES ('DELETE','admin@admin.com');
+INSERT INTO USERAUTHORITY (authority, email) VALUES ('EDIT','admin@admin.com');
+INSERT INTO USERAUTHORITY (authority, email) VALUES ('VIEW','admin@admin.com');
+INSERT INTO USERAUTHORITY (authority, email) VALUES ('REGISTERED_USER','user@user.com');
+INSERT INTO USERAUTHORITY (authority, email) VALUES ('VIEW','user@user.com');

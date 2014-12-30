@@ -4,7 +4,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Size;
-import project.pa165.musiclibrary.entities.UserRole;
+import project.pa165.musiclibrary.entities.UserAuthority;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -27,7 +27,7 @@ public class UserDto implements Serializable {
     private String lastName;
     @Size(min = 6, max = 26)
     private String password;
-    private Set<UserRole> userRole;
+    private Set<UserAuthority> userAuthorities;
     private Boolean enabled;
 
     public UserDto() {
@@ -73,12 +73,12 @@ public class UserDto implements Serializable {
         this.password = password;
     }
 
-    public Set<UserRole> getUserRole() {
-        return userRole;
+    public Set<UserAuthority> getUserAuthorities() {
+        return userAuthorities;
     }
 
-    public void setUserRole(Set<UserRole> userRole) {
-        this.userRole = userRole;
+    public void setUserAuthorities(Set<UserAuthority> userAuthorities) {
+        this.userAuthorities = userAuthorities;
     }
 
     public Boolean getEnabled() {

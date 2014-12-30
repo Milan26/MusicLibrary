@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author Milan
  */
 @Entity
-public class UserRole implements Serializable {
+public class UserAuthority implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -20,7 +20,7 @@ public class UserRole implements Serializable {
     private User user;
 
     @Column(nullable = false)
-    private String role;
+    private String authority;
 
     public Long getId() {
         return id;
@@ -38,22 +38,22 @@ public class UserRole implements Serializable {
         this.user = user;
     }
 
-    public String getRole() {
-        return role;
+    public String getAuthority() {
+        return authority;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setAuthority(String role) {
+        this.authority = role;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserRole)) return false;
+        if (!(o instanceof UserAuthority)) return false;
 
-        UserRole userRole = (UserRole) o;
+        UserAuthority userAuthority = (UserAuthority) o;
 
-        return id.equals(userRole.id);
+        return id.equals(userAuthority.id);
     }
 
     @Override

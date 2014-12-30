@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import project.pa165.musiclibrary.dto.UserDto;
-import project.pa165.musiclibrary.entities.UserRole;
+import project.pa165.musiclibrary.entities.UserAuthority;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -35,18 +35,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserDto user = userService.findUserByEmail(email);
         logger.debug("user exists={}, with email={}", user != null, email);
-        return buildUserForAuthentication(user, buildUserAuthority(user.getUserRole()));
+        return buildUserForAuthentication(user, buildUserAuthority(user.getUserAuthorities()));
     }
 
     private User buildUserForAuthentication(UserDto user, List<GrantedAuthority> authorities) {
         return new User(user.getEmail(), user.getPassword(), user.getEnabled(), true, true, true, authorities);
     }
 
-    private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
+    private List<GrantedAuthority> buildUserAuthority(Set<UserAuthority> userAuthorities) {
         Set<GrantedAuthority> authorities = new HashSet<>();
 
-        for (UserRole userRole : userRoles) {
-            authorities.add(new SimpleGrantedAuthority(userRole.getRole()));
+        for (UserAuthority userAuthority : userAuthorities) {
+            authorities.add(new SimpleGrantedAuthority(userAuthority.getAuthority()));
         }
 
         return new ArrayList<>(authorities);
