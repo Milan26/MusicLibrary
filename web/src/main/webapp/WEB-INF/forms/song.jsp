@@ -53,6 +53,7 @@
             <td><form:errors path="note" cssClass="error"/></td>
         </tr>
     </table>
-    <input class="submit_btn" type="submit" value="<f:message key='song.submit'/>"/>
     <input type="hidden" name="id" value="${song.id}"/>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <input class="submit_btn" type="submit" value="<f:message key='song.submit'/>"/>
 </form:form>

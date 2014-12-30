@@ -17,11 +17,11 @@
     </jsp:attribute>
     <jsp:attribute name="content">
         <div id="content_wrapper">
-            <form:form method="POST" action="${pageContext.request.contextPath}/user/edit" modelAttribute="user">
+            <form:form method="POST" action="${pageContext.request.contextPath}/user/profile/edit" modelAttribute="user">
                 <table>
                     <tr>
                         <th><form:label path="email"><f:message key="user.email"/>:</form:label></th>
-                        <td><form:input path="email"/></td>
+                        <td><form:input readonly="true" path="email"/></td>
                         <td><form:errors path="email" cssClass="error"/></td>
                     </tr>
                     <tr>
@@ -36,10 +36,13 @@
                     </tr>
                     <tr>
                         <th><form:label path="password"><f:message key="user.password"/>:</form:label></th>
-                        <td><form:password path="password" showPassword="true"/></td>
+                        <td><form:password path="password" showPassword="false"/></td>
                         <td><form:errors path="password" cssClass="error"/></td>
                     </tr>
                 </table>
+                <form:hidden path="id"/>
+                <form:hidden path="enabled"/>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <input class="submit_btn" type="submit" value="<f:message key='user.profile.submit'/>"/>
             </form:form>
         </div>

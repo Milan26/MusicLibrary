@@ -37,6 +37,7 @@
         </table>
     </div>
     <div class="footer">
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
       <input type="submit" name="submit" value="<f:message key='user.profile.submit'/>" class="register" />
     </div>
   </form:form>

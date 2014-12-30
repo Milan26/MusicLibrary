@@ -52,13 +52,10 @@
                 <li>
                     <c:choose>
                         <c:when test="${not empty pageContext.request.userPrincipal}">
-                            <a href="${pageContext.request.contextPath}/user"><c:out value="${pageContext.request.userPrincipal.name}"/></a>
+                            <form method="GET" action="${pageContext.request.contextPath}/user/profile">
+                                <input type="submit" value="<c:out value='${pageContext.request.userPrincipal.name}'/>"/>
+                            </form>
                             <ul>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/user">
-                                    <f:message key="navigation.user.profile"/>
-                                    </a>
-                                </li>
                                 <li>
                                     <form action="${pageContext.request.contextPath}/j_spring_security_logout" method="post" id="logoutForm">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

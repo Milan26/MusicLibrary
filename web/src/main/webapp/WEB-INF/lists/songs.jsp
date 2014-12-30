@@ -37,6 +37,7 @@
             </td>
             <td>
                 <form method="POST" action="${pageContext.request.contextPath}/admin/songs/delete/${song.id}">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <input type="submit" class="submit_btn" value="<f:message key='song.submit.delete'/>">
                 </form>
             </td>

@@ -13,12 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import project.pa165.musiclibrary.dto.SongDto;
 import project.pa165.musiclibrary.dto.UserDto;
 import project.pa165.musiclibrary.services.UserService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Locale;
 
 
@@ -114,6 +114,32 @@ public class UserManagementController {
         );
         modelAndView.setViewName("error-pages/default");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public ModelAndView userProfile(Principal user) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", getUserService().findUserByEmail(user.getName()));
+        modelAndView.setViewName("user-profile");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/profile/edit", method = RequestMethod.GET)
+    public ModelAndView userProfileEdit(Principal user) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", getUserService().findUserByEmail(user.getName()));
+        modelAndView.setViewName("user-edit");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/profile/edit", method = RequestMethod.POST)
+    public String submitUserProfileChanges(@Valid @ModelAttribute("user") UserDto user,
+                                           BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "user-edit";
+        user.setUserAuthorities(getUserService().findUser(user.getId()).getUserAuthorities());
+        getUserService().updateUser(user);
+        return "redirect:/user/profile";
     }
 
 }

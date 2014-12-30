@@ -20,7 +20,7 @@
             <div class="message">
                 <h1>${message}</h1>
             </div>
-            <form:form method="GET" action="${pageContext.request.contextPath}/user/edit" modelAttribute="user">
+            <form:form method="GET" action="${pageContext.request.contextPath}/user/profile/edit" modelAttribute="user">
                 <table>
                     <tr>
                         <th><form:label path="email"><f:message key="user.email"/>:</form:label></th>

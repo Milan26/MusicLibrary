@@ -28,6 +28,7 @@
             <td><form:errors path="note" cssClass="error"/></td>
         </tr>
     </table>
-    <input class="submit_btn" type="submit" value="<f:message key='album.submit'/>"/>
     <input type="hidden" name="id" value="${album.id}"/>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <input class="submit_btn" type="submit" value="<f:message key='album.submit'/>"/>
 </form:form>
