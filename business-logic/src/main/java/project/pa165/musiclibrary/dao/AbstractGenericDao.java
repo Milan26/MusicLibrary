@@ -56,7 +56,7 @@ public abstract class AbstractGenericDao<T> implements GenericDao<T> {
         if (obj != null) {
             getEntityManager().remove(obj);
         } else {
-            logger.info("object of type={}, with id={}, does not exists", type, id);
+            logger.warn("object of type={}, with id={}, does not exists", type, id);
         }
     }
 

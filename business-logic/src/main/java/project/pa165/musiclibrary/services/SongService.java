@@ -1,5 +1,6 @@
 package project.pa165.musiclibrary.services;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import project.pa165.musiclibrary.dto.SongDto;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public interface SongService {
      *
      * @param songDto song to be inserted
      */
+    @PreAuthorize("hasAuthority('CREATE')")
     void createSong(SongDto songDto);
 
     /**
@@ -20,6 +22,7 @@ public interface SongService {
      *
      * @param id identification of song to be deleted
      */
+    @PreAuthorize("hasAuthority('DELETE')")
     void deleteSong(Long id);
 
     /**
@@ -27,6 +30,7 @@ public interface SongService {
      *
      * @param songDto song to be updated
      */
+    @PreAuthorize("hasAuthority('EDIT')")
     void updateSong(SongDto songDto);
 
     /**

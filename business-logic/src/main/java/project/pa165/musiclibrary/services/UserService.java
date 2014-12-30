@@ -1,5 +1,6 @@
 package project.pa165.musiclibrary.services;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import project.pa165.musiclibrary.dto.UserDto;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public interface UserService {
      *
      * @param id identification of user to be deleted
      */
+    @PreAuthorize("hasAuthority('DELETE')")
     void deleteUser(Long id);
 
     /**
@@ -28,6 +30,7 @@ public interface UserService {
      *
      * @param userDto userDto to be updated
      */
+    @PreAuthorize("authentication.principal.username.equals(#userDto.email) or hasAuthority('EDIT')")
     void updateUser(UserDto userDto);
 
     /**
@@ -36,6 +39,7 @@ public interface UserService {
      * @param id identification of user to be found
      * @return found user
      */
+    @PreAuthorize("hasAuthority('VIEW')")
     UserDto findUser(Long id);
 
     /**
@@ -43,7 +47,13 @@ public interface UserService {
      *
      * @return list of all users
      */
+    @PreAuthorize("hasAuthority('VIEW')")
     List<UserDto> getAllUsers();
 
+    /**
+     *
+     * @param email
+     * @return
+     */
     UserDto findUserByEmail(String email);
 }
