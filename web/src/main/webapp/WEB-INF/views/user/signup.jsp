@@ -13,6 +13,11 @@
 <body>
 <div id="wrapper">
   <form:form name="login-form" class="login-form signup-form" action="${pageContext.request.contextPath}/user/signup" method="POST" modelAttribute="user">
+    <div class="nav-home">
+      <a href="${pageContext.request.contextPath}/index.jsp" title="<f:message key='navigation.home'/>">
+        <c:out value="x"/>
+      </a>
+    </div>
     <div class="header">
       <h1><f:message key="user.signup.subtitle"/></h1>
     </div>

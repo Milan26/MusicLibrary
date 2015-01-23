@@ -10,6 +10,11 @@
 <body onload='document.loginForm.j_username.focus();'>
 <div id="wrapper">
   <form name="loginForm" class="login-form" action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
+    <div class="nav-home">
+      <a href="${pageContext.request.contextPath}/index.jsp" title="<f:message key='navigation.home'/>">
+        <c:out value="x"/>
+      </a>
+    </div>
     <div class="header">
       <h1><f:message key="user.login"/></h1>
       <span><f:message key="user.login.subtitle"/><span class="title"><c:out value=" MusicLib."/></span></span>
