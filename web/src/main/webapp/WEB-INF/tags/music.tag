@@ -12,10 +12,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <f:message var="title" key="music.title"/>
-<f:message var="header_title" key="header.music.title"/>
-<my:layout title="${title}" header_title="${header_title}" header_subtitle="${header_subtitle}">
+<my:layout title="${title}" header_title="${title}" header_subtitle="${header_subtitle}">
     <jsp:attribute name="head">
-
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-music.css"/>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/ui-lightness/jquery-ui.min.css">
 
@@ -34,12 +32,10 @@
             </div>
             <div id="genrePicker">
                 <div>
-                    <label for="views"><f:message key="header.view.label"/>:</label>
+                    <label for="views"><f:message key="header.views"/>:</label>
                     <select id="views">
-                        <option value="${pageContext.request.contextPath}/music"><f:message
-                                key="header.view.albums"/></option>
-                        <option value="${pageContext.request.contextPath}/music/songs"><f:message
-                                key="header.view.songs"/></option>
+                        <option value="${pageContext.request.contextPath}/music"><f:message key="label.albums"/></option>
+                        <option value="${pageContext.request.contextPath}/music/songs"><f:message key="label.songs"/></option>
                     </select>
                 </div>
             </div>

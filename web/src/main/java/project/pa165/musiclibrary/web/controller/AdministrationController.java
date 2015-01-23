@@ -103,11 +103,11 @@ public class AdministrationController {
         MessageSourceResolvable source;
         if (id == null) {
             getAlbumService().createAlbum(album);
-            source = new DefaultMessageSourceResolvable("admin.album.create.success");
+            source = new DefaultMessageSourceResolvable("create.album.success");
         } else {
             copyHiddenFields(getAlbumService().findAlbum(id), album);
             getAlbumService().updateAlbum(album);
-            source = new DefaultMessageSourceResolvable("admin.album.edit.success");
+            source = new DefaultMessageSourceResolvable("edit.album.success");
         }
         redirectAttributes.addFlashAttribute("message", getMessageSource().getMessage(source, locale));
         return "redirect:/admin/albums";
@@ -149,11 +149,11 @@ public class AdministrationController {
         MessageSourceResolvable source;
         if (id == null) {
             getArtistService().createArtist(artist);
-            source = new DefaultMessageSourceResolvable("admin.artist.create.success");
+            source = new DefaultMessageSourceResolvable("create.artist.success");
         } else {
             copyHiddenFields(getArtistService().findArtist(id), artist);
             getArtistService().updateArtist(artist);
-            source = new DefaultMessageSourceResolvable("admin.artist.edit.success");
+            source = new DefaultMessageSourceResolvable("edit.artist.success");
         }
         redirectAttributes.addFlashAttribute("message", getMessageSource().getMessage(source, locale));
         return "redirect:/admin/artists";
@@ -197,11 +197,11 @@ public class AdministrationController {
         MessageSourceResolvable source;
         if (id == null) {
             getSongService().createSong(song);
-            source = new DefaultMessageSourceResolvable("admin.song.create.success");
+            source = new DefaultMessageSourceResolvable("create.song.success");
         } else {
             copyHiddenFields(getSongService().findSong(id), song);
             getSongService().updateSong(song);
-            source = new DefaultMessageSourceResolvable("admin.song.edit.success");
+            source = new DefaultMessageSourceResolvable("edit.song.success");
         }
         redirectAttributes.addFlashAttribute("message", getMessageSource().getMessage(source, locale));
         return "redirect:/admin/songs";

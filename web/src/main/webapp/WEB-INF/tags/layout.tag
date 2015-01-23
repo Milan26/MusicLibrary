@@ -42,18 +42,18 @@
     <div id="nav">
         <div class="left">
             <ul>
-                <li><a href="${pageContext.request.contextPath}/index.jsp"><f:message key="navigation.home"/></a></li>
-                <li><a href="${pageContext.request.contextPath}/music"><f:message key="navigation.music"/></a></li>
-                <li><a href="${pageContext.request.contextPath}/about"><f:message key="navigation.about"/></a></li>
+                <li><a href="${pageContext.request.contextPath}/index.jsp"><f:message key="label.home"/></a></li>
+                <li><a href="${pageContext.request.contextPath}/music"><f:message key="label.music"/></a></li>
+                <li><a href="${pageContext.request.contextPath}/about"><f:message key="label.about"/></a></li>
                 <%--<div class="left-submenu">--%>
                     <c:if test="${not empty pageContext.request.userPrincipal}">
                         <c:if test="${pageContext.request.isUserInRole('ADMIN')}">
                             <li class="menu">
-                                <a href=""><f:message key="navigation.admin"/></a>
+                                <a href=""><f:message key="label.admin"/></a>
                                 <ul>
-                                    <li><a href="${pageContext.request.contextPath}/admin/albums"><f:message key="navigation.admin.albums"/></a></li>
-                                    <li><a href="${pageContext.request.contextPath}/admin/songs"><f:message key="navigation.admin.songs"/></a></li>
-                                    <li><a href="${pageContext.request.contextPath}/admin/artists"><f:message key="navigation.admin.artists"/></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/admin/albums"><f:message key="label.albums"/></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/admin/songs"><f:message key="label.songs"/></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/admin/artists"><f:message key="label.artists"/></a></li>
                                 </ul>
                             </li>
                         </c:if>
@@ -73,13 +73,13 @@
                                 <li>
                                     <form action="${pageContext.request.contextPath}/j_spring_security_logout" method="post" id="logoutForm">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                        <input type="submit" value="<f:message key='navigation.user.logout'/>"/>
+                                        <input type="submit" value="<f:message key='user.logout'/>"/>
                                     </form>
                                 </li>
                             </ul>
                         </c:when>
                         <c:otherwise>
-                            <a href="${pageContext.request.contextPath}/user/login"><f:message key='navigation.user.login'/></a>
+                            <a href="${pageContext.request.contextPath}/user/login"><f:message key='user.login'/></a>
                         </c:otherwise>
                     </c:choose>
                 </li>

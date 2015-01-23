@@ -8,8 +8,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <f:message var="title" key="music.title"/>
-<f:message var="header_title" key="header.admin.title"/>
-<f:message var="header_subtitle" key="header.admin.subtitle"/>
+<f:message var="header_title" key="label.admin"/>
+<f:message var="header_subtitle" key="admin.subtitle"/>
 <my:layout title="${title}" header_title="${header_title}" header_subtitle="${header_subtitle}">
     <jsp:attribute name="head">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-admin.css"/>

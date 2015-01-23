@@ -7,7 +7,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<f:message var="header_subtitle" key="header.music.albums.subtitle"/>
+<f:message var="header_subtitle" key="browse.albums"/>
 <my:music header_subtitle="${header_subtitle}">
     <jsp:attribute name="head">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-popup.css"/>
@@ -30,7 +30,7 @@
                 <table id="album_songs">
                     <thead>
                     <tr>
-                        <th>#</th>
+                        <th><c:out value="#"/></th>
                         <th><f:message key="song.title"/></th>
                         <th><f:message key="song.duration"/></th>
                         <th><f:message key="song.genre"/></th>

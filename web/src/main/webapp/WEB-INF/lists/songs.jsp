@@ -4,15 +4,15 @@
 <table id="data-table" class="compact hover row-border">
     <thead>
     <tr>
-        <td>Id</td>
-        <td>Title</td>
-        <td>Track Number</td>
-        <td>Length [s]</td>
-        <td>Bitrate</td>
-        <td>Genre</td>
-        <td>Artist Id</td>
-        <td>Album Id</td>
-        <td>Note</td>
+        <td><f:message key="song.id"/></td>
+        <td><f:message key="song.title"/></td>
+        <td><f:message key="song.trackNumber"/></td>
+        <td><f:message key="song.duration"/></td>
+        <td><f:message key="song.bitrate"/></td>
+        <td><f:message key="song.genre"/></td>
+        <td><f:message key="song.artist"/></td>
+        <td><f:message key="song.album"/></td>
+        <td><f:message key="song.note"/></td>
         <td></td>
         <td></td>
     </tr>
@@ -32,13 +32,13 @@
             <td>
                 <form method="GET" action="${pageContext.request.contextPath}/admin/songs/update">
                     <input type="hidden" name="id" value="${song.id}"/>
-                    <input type="submit" class="submit_btn" value="<f:message key='song.submit.edit'/>">
+                    <input type="submit" class="submit_btn" value="<f:message key='label.edit'/>">
                 </form>
             </td>
             <td>
                 <form method="POST" action="${pageContext.request.contextPath}/admin/songs/delete/${song.id}">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <input type="submit" class="submit_btn" value="<f:message key='song.submit.delete'/>">
+                    <input type="submit" class="submit_btn" value="<f:message key='label.delete'/>">
                 </form>
             </td>
         </tr>
@@ -47,6 +47,6 @@
 </table>
 <div>
     <form method="GET" action="${pageContext.request.contextPath}/admin/songs/update">
-        <input type="submit" class="submit_btn" value="<f:message key='song.add.submit'/>">
+        <input type="submit" class="submit_btn" value="<f:message key='label.add'/>">
     </form>
 </div>

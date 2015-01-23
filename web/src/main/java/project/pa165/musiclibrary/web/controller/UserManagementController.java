@@ -65,13 +65,13 @@ public class UserManagementController {
         ModelAndView model = new ModelAndView();
         if (error != null) {
             model.addObject("error",
-                    getMessageSource().getMessage(new DefaultMessageSourceResolvable("user.login.error"), locale));
+                    getMessageSource().getMessage(new DefaultMessageSourceResolvable("user.login.failure"), locale));
         }
         if (logout != null) {
             model.addObject("message",
-                    getMessageSource().getMessage(new DefaultMessageSourceResolvable("user.login.logout"), locale));
+                    getMessageSource().getMessage(new DefaultMessageSourceResolvable("user.logout.subtitle"), locale));
         }
-        model.setViewName("login");
+        model.setViewName("/user/login");
 
         return model;
     }
@@ -80,7 +80,7 @@ public class UserManagementController {
     public ModelAndView loadUserSignUp() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user", new UserDto());
-        modelAndView.setViewName("user");
+        modelAndView.setViewName("/user/signup");
         return modelAndView;
     }
 
@@ -89,7 +89,7 @@ public class UserManagementController {
                                  BindingResult bindingResult) {
         // Registration logic
         if (bindingResult.hasErrors()) {
-            return "user";
+            return "/user/signup";
         }
         user.setEnabled(true);
         getUserService().createUser(user);
@@ -110,7 +110,7 @@ public class UserManagementController {
     public ModelAndView accessDenied(Locale locale) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("message", getMessageSource().getMessage(
-                new DefaultMessageSourceResolvable("error.page.403.msg"), locale)
+                new DefaultMessageSourceResolvable("error.msg.403"), locale)
         );
         modelAndView.setViewName("error-pages/default");
         return modelAndView;
@@ -120,7 +120,7 @@ public class UserManagementController {
     public ModelAndView userProfile(Principal user) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user", getUserService().findUserByEmail(user.getName()));
-        modelAndView.setViewName("user-profile");
+        modelAndView.setViewName("/user/profile");
         return modelAndView;
     }
 
@@ -128,7 +128,7 @@ public class UserManagementController {
     public ModelAndView userProfileEdit(Principal user) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user", getUserService().findUserByEmail(user.getName()));
-        modelAndView.setViewName("user-edit");
+        modelAndView.setViewName("/user/edit");
         return modelAndView;
     }
 
@@ -136,7 +136,7 @@ public class UserManagementController {
     public String submitUserProfileChanges(@Valid @ModelAttribute("user") UserDto user,
                                            BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "user-edit";
+            return "/user/edit";
         user.setUserAuthorities(getUserService().findUser(user.getId()).getUserAuthorities());
         getUserService().updateUser(user);
         return "redirect:/user/profile";

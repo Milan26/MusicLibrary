@@ -4,11 +4,11 @@
 <table id="data-table" class="compact hover row-border">
     <thead>
     <tr>
-        <td>Id</td>
-        <td>Title</td>
-        <td>Release Date</td>
-        <td>Cover Art</td>
-        <td>Note</td>
+        <td><f:message key="album.id"/></td>
+        <td><f:message key="album.title"/></td>
+        <td><f:message key="album.releaseDate"/></td>
+        <td><f:message key="album.coverArt"/></td>
+        <td><f:message key="album.note"/></td>
         <td></td>
         <td></td>
     </tr>
@@ -24,13 +24,13 @@
             <td>
                 <form method="GET" action="${pageContext.request.contextPath}/admin/albums/update">
                     <input type="hidden" name="id" value="${album.id}"/>
-                    <input type="submit" class="submit_btn" value="<f:message key='album.submit.edit'/>">
+                    <input type="submit" class="submit_btn" value="<f:message key='label.edit'/>">
                 </form>
             </td>
             <td>
                 <form method="POST" action="${pageContext.request.contextPath}/admin/albums/delete/${album.id}">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <input type="submit" class="submit_btn" value="<f:message key='album.submit.delete'/>">
+                    <input type="submit" class="submit_btn" value="<f:message key='label.delete'/>">
                 </form>
             </td>
         </tr>
@@ -39,6 +39,6 @@
 </table>
 <div>
     <form method="GET" action="${pageContext.request.contextPath}/admin/albums/update">
-        <input type="submit" class="submit_btn" value="<f:message key='album.add.submit'/>">
+        <input type="submit" class="submit_btn" value="<f:message key='label.add'/>">
     </form>
 </div>

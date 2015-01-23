@@ -61,15 +61,6 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!--<session-config>-->
-    <!--<session-timeout>0</session-timeout>-->
-    <!--<cookie-config>-->
-    <!--<http-only>true</http-only>-->
-    <!--</cookie-config>-->
-    <!--<tracking-mode>COOKIE</tracking-mode>-->
-    <!--<tracking-mode>URL</tracking-mode>-->
-    <!--</session-config>-->
-
     <error-page>
         <location>/WEB-INF/views/error-pages/default.jsp</location>
     </error-page>

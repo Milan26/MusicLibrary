@@ -7,14 +7,14 @@
 
 <html>
 <head>
-  <title><f:message key="user.login.title"/></title>
+  <title><f:message key="user.signup"/></title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-login.css"/>
 </head>
 <body>
 <div id="wrapper">
   <form:form name="login-form" class="login-form signup-form" action="${pageContext.request.contextPath}/user/signup" method="POST" modelAttribute="user">
     <div class="header">
-      <h1><f:message key="user.signup.form.title"/></h1>
+      <h1><f:message key="user.signup.subtitle"/></h1>
     </div>
     <div class="content">
         <table>
@@ -38,7 +38,7 @@
     </div>
     <div class="footer">
       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-      <input type="submit" name="submit" value="<f:message key='user.profile.submit'/>" class="register" />
+      <input type="submit" name="submit" value="<f:message key='label.submit'/>" class="register" />
     </div>
   </form:form>
 </div>

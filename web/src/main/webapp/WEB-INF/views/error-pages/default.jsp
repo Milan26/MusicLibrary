@@ -34,17 +34,17 @@
         <p>${message}</p>
       </c:when>
       <c:when test="${pageContext.errorData.statusCode eq 404}">
-        <p><spring:message code="error.page.404.msg"/></p>
+        <p><spring:message code="error.msg.404"/></p>
       </c:when>
       <c:otherwise>
-        <p><spring:message code="error.page.generic.msg"/></p>
+        <p><spring:message code="error.msg.generic"/></p>
       </c:otherwise>
     </c:choose>
     <p>
-      <spring:message code="error.page.generic.msg.return.part1"/>
-      <a href="javascript:history.go(-1)"><spring:message code="error.page.generic.msg.return.part2"/></a>
-      <spring:message code="error.page.generic.msg.return.part3"/>
-      <a href="${pageContext.request.contextPath}/index.jsp"><spring:message code="error.page.generic.msg.return.part4"/></a>
+      <spring:message code="error.generic.instructions.part1"/>
+      <a href="javascript:history.go(-1)"><spring:message code="error.generic.instructions.part2"/></a>
+      <spring:message code="error.generic.instructions.part3"/>
+      <a href="${pageContext.request.contextPath}/index.jsp"><spring:message code="error.generic.instructions.part4"/></a>
     </p>
   </div>
 </div>

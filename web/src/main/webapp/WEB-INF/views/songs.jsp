@@ -7,7 +7,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<f:message var="header_subtitle" key="header.music.songs.subtitle"/>
+<f:message var="header_subtitle" key="browse.songs"/>
 <my:music header_subtitle="${header_subtitle}">
     <jsp:attribute name="head">
         <link rel="stylesheet" href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
@@ -19,11 +19,11 @@
         <table id="songs" class="compact hover row-border">
             <thead>
             <tr>
-                <td>Title</td>
-                <td>Artist</td>
-                <td>Album</td>
-                <td>Duration [s]</td>
-                <td>Genre</td>
+                <td><f:message key="song.title"/></td>
+                <td><f:message key="song.artist"/></td>
+                <td><f:message key="song.album"/></td>
+                <td><f:message key="song.duration"/><c:out value="[s]"/></td>
+                <td><f:message key="song.genre"/></td>
             </tr>
             </thead>
             <tbody>

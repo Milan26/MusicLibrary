@@ -55,5 +55,5 @@
     </table>
     <input type="hidden" name="id" value="${song.id}"/>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    <input class="submit_btn" type="submit" value="<f:message key='song.submit'/>"/>
+    <input class="submit_btn" type="submit" value="<f:message key='label.submit'/>"/>
 </form:form>

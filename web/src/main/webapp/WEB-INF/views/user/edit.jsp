@@ -1,5 +1,5 @@
 <%@ page pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<%@ page errorPage="error-pages/default.jsp" %>
+<%@ page errorPage="../error-pages/default.jsp" %>
 
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,8 +8,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <f:message var="title" key="music.title"/>
-<f:message var="header_title" key="header.user.title"/>
-<f:message var="header_subtitle" key="header.user.edit.subtitle"/>
+<f:message var="header_title" key="label.user"/>
+<f:message var="header_subtitle" key="user.edit"/>
 <my:layout title="${title}" header_title="${header_title}" header_subtitle="${header_subtitle}">
     <jsp:attribute name="head">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-user.css"/>
@@ -43,7 +43,7 @@
                 <form:hidden path="id"/>
                 <form:hidden path="enabled"/>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <input class="submit_btn" type="submit" value="<f:message key='user.profile.submit'/>"/>
+                <input class="submit_btn" type="submit" value="<f:message key='label.submit'/>"/>
             </form:form>
         </div>
     </jsp:attribute>

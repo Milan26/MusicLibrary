@@ -4,9 +4,9 @@
 <table id="data-table" class="compact hover row-border">
     <thead>
     <tr>
-        <td>Id</td>
-        <td>Name</td>
-        <td>Note</td>
+        <td><f:message key="artist.id"/></td>
+        <td><f:message key="artist.name"/></td>
+        <td><f:message key="artist.note"/></td>
         <td></td>
         <td></td>
     </tr>
@@ -20,13 +20,13 @@
             <td>
                 <form method="GET" action="${pageContext.request.contextPath}/admin/artists/update">
                     <input type="hidden" name="id" value="${artist.id}"/>
-                    <input type="submit" class="submit_btn" value="<f:message key='artist.submit.edit'/>">
+                    <input type="submit" class="submit_btn" value="<f:message key='label.edit'/>">
                 </form>
             </td>
             <td>
                 <form method="POST" action="${pageContext.request.contextPath}/admin/artists/delete/${artist.id}">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    <input type="submit" class="submit_btn" value="<f:message key='artist.submit.delete'/>">
+                    <input type="submit" class="submit_btn" value="<f:message key='label.delete'/>">
                 </form>
             </td>
         </tr>
@@ -35,6 +35,6 @@
 </table>
 <div>
     <form method="GET" action="${pageContext.request.contextPath}/admin/artists/update">
-        <input type="submit" class="submit_btn" value="<f:message key='artist.add.submit'/>">
+        <input type="submit" class="submit_btn" value="<f:message key='label.add'/>">
     </form>
 </div>

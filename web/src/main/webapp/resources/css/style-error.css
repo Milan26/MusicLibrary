@@ -1,10 +1,11 @@
-@import url('http://fonts.googleapis.com/css?family=Sigmar+One');
 @import url(http://fonts.googleapis.com/css?family=Merriweather:900);
 
 html {
     height: 100%;
     width: 100%;
-    font-family: 'Sigmar One', cursive;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: bolder;
+    font-size: 1.1em;
 }
 
 a {

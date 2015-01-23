@@ -8,8 +8,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <f:message var="title" key="music.title"/>
-<f:message var="header_title" key="header.about.title"/>
-<f:message var="header_subtitle" key="header.about.subtitle"/>
+<f:message var="header_title" key="label.about"/>
+<f:message var="header_subtitle" key="about.subtitle"/>
 <my:layout title="${title}" header_title="${header_title}" header_subtitle="${header_subtitle}">
     <jsp:attribute name="head">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-about.css"/>
@@ -23,7 +23,7 @@
                 <div class=".member_info">
                     <h1><c:out value="Milan Pánik"/></h1>
 
-                    <h3><f:message key="member.position"/></h3>
+                    <h3><f:message key="about.position"/></h3>
                     <a href="mailto:396198@mail.muni.cz">
                         <c:out value="396198@mail.muni.cz"/>
                     </a>
@@ -35,7 +35,7 @@
                 <div class=".member_info">
                     <h1><c:out value="Matúš Burda"/></h1>
 
-                    <h3><f:message key="member.position"/></h3>
+                    <h3><f:message key="about.position"/></h3>
                     <a href="mailto:374281@mail.muni.cz">
                         <c:out value="374281@mail.muni.cz"/>
                     </a>
@@ -47,7 +47,7 @@
                 <div class=".member_info">
                     <h1><c:out value="Alexander Lörinc"/></h1>
 
-                    <h3><f:message key="member.position"/></h3>
+                    <h3><f:message key="about.position"/></h3>
                     <a href="mailto:373970@mail.muni.cz">
                         <c:out value="373970@mail.muni.cz"/>
                     </a>

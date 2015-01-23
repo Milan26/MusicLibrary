@@ -30,5 +30,5 @@
     </table>
     <input type="hidden" name="id" value="${album.id}"/>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    <input class="submit_btn" type="submit" value="<f:message key='album.submit'/>"/>
+    <input class="submit_btn" type="submit" value="<f:message key='label.submit'/>"/>
 </form:form>

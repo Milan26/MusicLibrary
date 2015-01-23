@@ -4,28 +4,28 @@
 
 <html>
 <head>
-  <title><f:message key="user.login.title"/></title>
+  <title><f:message key="user.login"/></title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-login.css"/>
 </head>
 <body onload='document.loginForm.j_username.focus();'>
 <div id="wrapper">
   <form name="loginForm" class="login-form" action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
     <div class="header">
-      <h1><f:message key="user.login.title"/></h1>
-      <span><f:message key="user.login.subtitle"/><span class="title"><c:out value="MusicLib."/></span></span>
+      <h1><f:message key="user.login"/></h1>
+      <span><f:message key="user.login.subtitle"/><span class="title"><c:out value=" MusicLib."/></span></span>
       <c:if test="${not empty error}"><div class="error">${error}</div></c:if>
       <c:if test="${not empty message}"><div class="message">${message}</div></c:if>
     </div>
     <div class="content">
-      <input name="j_username" type="text" class="input username" placeholder="Email"/>
+      <input name="j_username" type="text" class="input username" placeholder="<f:message key='user.email'/>"/>
       <div class="user-icon"></div>
-      <input name="j_password" type="password" class="input password" placeholder="Password"/>
+      <input name="j_password" type="password" class="input password" placeholder="<f:message key='user.password'/>"/>
       <div class="pass-icon"></div>
     </div>
     <div class="footer">
-      <input type="submit" name="submit" value="<f:message key='navigation.user.login'/>" class="button"/>
+      <input type="submit" name="submit" value="<f:message key='user.login'/>" class="button"/>
       <a name="register" class="register" href="${pageContext.request.contextPath}/user/signup">
-        <f:message key="user.signup.title"/>
+        <f:message key="user.signup"/>
       </a>
     </div>
     <div class="submit">
