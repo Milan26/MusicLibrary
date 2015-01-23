@@ -143,7 +143,6 @@ label {
     z-index: 1000;
     position: absolute;
     border: 5px solid white;
-    width: 100px;
     background-color: #ECB428;
 }
 
@@ -157,7 +156,6 @@ label {
     border:none;
     padding:0!important;
     cursor: pointer;
-
     font-family: 'Lobster', cursive;
     color: #ffffff;
 }
@@ -253,4 +251,69 @@ label {
 
 #footer .copyright a {
     font-family: 'Dancing Script', cursive;
+}
+
+/*********************************************************************************/
+/* Other Stuff                                                                        */
+/*********************************************************************************/
+
+.submit_btn {
+    margin-top: 15px;
+    color: #ffffff;
+    background: #ECB428;
+    border: transparent;
+    font-family: 'Sigmar One', cursive;
+    padding: 5px;
+}
+
+.submit_btn:hover {
+    color: #d64760;
+}
+
+.message {
+    font-family: 'Sigmar One', cursive;
+    text-align: center;
+}
+
+.message * {
+    background: #ECB428;
+}
+
+.error {
+    color: #ff0000;
+    font-size: medium;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.dataTable td > img {
+    width: 70px;
+}
+
+#data-table_filter {
+    margin-top: 5px;
+    float: left;
+    background-color: #ECB428 !important;
+    padding: 10px;
+}
+
+.dataTables_length {
+    background-color: #ECB428 !important;
+    padding: 10px;
+    margin-top: 5px;
+    font-family: 'Sigmar One', cursive;
+}
+
+.paginate_button {
+    border: transparent !important;
+    font-family: 'Sigmar One', cursive;
+    background: #ECB428 !important;
+}
+
+.paginate_button.current {
+    background: #d64760 !important;
+}
+
+.paginate_button:hover {
+    background-color: #d64760 !important;
 }

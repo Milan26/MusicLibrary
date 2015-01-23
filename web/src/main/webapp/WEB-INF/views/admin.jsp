@@ -14,7 +14,6 @@
     <jsp:attribute name="head">
         <link rel="stylesheet" href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-admin.css"/>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-common.css"/>
         <script src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/admin.js"></script>
     </jsp:attribute>
