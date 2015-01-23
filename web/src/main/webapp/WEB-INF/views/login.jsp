@@ -9,7 +9,7 @@
 </head>
 <body onload='document.loginForm.j_username.focus();'>
 <div id="wrapper">
-  <form name="login-form" class="login-form" action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
+  <form name="loginForm" class="login-form" action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
     <div class="header">
       <h1><f:message key="user.login.title"/></h1>
       <span><f:message key="user.login.subtitle"/><span class="title"><c:out value="MusicLib."/></span></span>

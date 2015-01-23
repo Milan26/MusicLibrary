@@ -45,6 +45,20 @@
                 <li><a href="${pageContext.request.contextPath}/index.jsp"><f:message key="navigation.home"/></a></li>
                 <li><a href="${pageContext.request.contextPath}/music"><f:message key="navigation.music"/></a></li>
                 <li><a href="${pageContext.request.contextPath}/about"><f:message key="navigation.about"/></a></li>
+                <%--<div class="left-submenu">--%>
+                    <c:if test="${not empty pageContext.request.userPrincipal}">
+                        <c:if test="${pageContext.request.isUserInRole('ADMIN')}">
+                            <li class="menu">
+                                <a href=""><f:message key="navigation.admin"/></a>
+                                <ul>
+                                    <li><a href="${pageContext.request.contextPath}/admin/albums"><f:message key="navigation.admin.albums"/></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/admin/songs"><f:message key="navigation.admin.songs"/></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/admin/artists"><f:message key="navigation.admin.artists"/></a></li>
+                                </ul>
+                            </li>
+                        </c:if>
+                    </c:if>
+                <%--</div>--%>
             </ul>
         </div>
         <div class="right">

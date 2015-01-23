@@ -110,29 +110,45 @@ label {
     margin-right: 20px;
 }
 
+#nav .menu ul {
+    display: none;
+    text-align: right;
+    font-size: large;
+    z-index: 1000;
+    position: absolute;
+    border: 5px solid white;
+    padding: 10px;
+    width: 120px;
+    float: left;
+    background-color: #ECB428;
+}
+
+#nav .menu:hover > ul {
+    display: block;
+}
+
 /* Right */
 #nav .right {
     float: right;
     text-align: right;
-    /*width: 8%;*/
     min-width: 146px;
     overflow: hidden;
-    /*font-size: medium;*/
-    font-family: 'Lobster', cursive;
 }
 
 #nav .right ul ul {
     display: none;
     text-align: right;
-    font-size: medium;
+    font-size: large;
     padding: 10px;
     z-index: 1000;
-    position: relative;
+    position: absolute;
+    border: 5px solid white;
+    width: 100px;
+    background-color: #ECB428;
 }
 
 #nav .right ul li:hover > ul {
     display: block;
-    background-color: rgba(220, 200, 200, .5);
 }
 
 #nav .right ul li input {
