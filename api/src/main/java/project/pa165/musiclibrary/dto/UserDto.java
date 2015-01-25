@@ -20,7 +20,6 @@ public class UserDto implements Serializable {
     @NotEmpty
     @Email
     private String email;
-    @NotEmpty
     @Size(max = 40)
     private String firstName;
     @Size(max = 40)
