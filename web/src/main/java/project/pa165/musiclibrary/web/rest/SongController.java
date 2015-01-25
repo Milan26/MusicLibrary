@@ -11,6 +11,7 @@ import project.pa165.musiclibrary.services.ArtistService;
 import project.pa165.musiclibrary.services.SongService;
 import project.pa165.musiclibrary.util.ErrorInfo;
 import project.pa165.musiclibrary.util.Genre;
+import project.pa165.musiclibrary.web.util.RestAuthenticatorHelper;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -27,6 +28,7 @@ public class SongController {
     private ArtistService artistService;
     private AlbumService albumService;
     private SongService songService;
+    private RestAuthenticatorHelper restAuthenticatorHelper;
 
     public SongService getSongService() {
         return songService;
@@ -55,9 +57,18 @@ public class SongController {
         this.albumService = albumService;
     }
 
+    public RestAuthenticatorHelper getRestAuthenticatorHelper() {
+        return restAuthenticatorHelper;
+    }
+
+    @Inject
+    public void setRestAuthenticatorHelper(RestAuthenticatorHelper restAuthenticatorHelper) {
+        this.restAuthenticatorHelper = restAuthenticatorHelper;
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public List<SongDto> getAllSongs() {
-        return songService.getAllSongs();
+        return getSongService().getAllSongs();
     }
 
     @RequestMapping(value = "/genres", method = RequestMethod.GET)
@@ -80,26 +91,26 @@ public class SongController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteSong(@PathVariable("id") Long id) {
         if (getSongService().findSong(id) == null) throw new SongNotFoundException(id.toString());
-        songService.deleteSong(id);
+        getRestAuthenticatorHelper().authenticate();
+        getSongService().deleteSong(id);
     }
 
     @ResponseStatus(value = HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
     public void createSong(@Valid @RequestBody SongDto song, Errors errors) {
-        if (errors.hasErrors())
-            throw new BadRequestException("Failed to map JSON to SongDto", errors);
-        songService.createSong(song);
+        if (errors.hasErrors()) throw new BadRequestException("Failed to map JSON to SongDto", errors);
+        getRestAuthenticatorHelper().authenticate();
+        getSongService().createSong(song);
     }
 
     @RequestMapping(value = "/{album_id}/{artist_id}", method = RequestMethod.PUT)
     public void updateSong(@PathVariable("album_id") Long albumId, @PathVariable("artist_id") Long artistId,
             @Valid @RequestBody SongDto song, Errors errors) {
-        if (errors.hasErrors())
-            throw new BadRequestException("Failed to map JSON to SongDto", errors);
+        if (errors.hasErrors()) throw new BadRequestException("Failed to map JSON to SongDto", errors);
         if (albumId != null) song.setAlbum(getAlbumService().findAlbum(albumId));
         if (artistId != null) song.setArtist(getArtistService().findArtist(artistId));
-
-        songService.updateSong(song);
+        getRestAuthenticatorHelper().authenticate();
+        getSongService().updateSong(song);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

@@ -23,15 +23,22 @@
                       authentication-failure-url="/user/login?error"/>
               <security:logout logout-success-url="/user/login?logout"
                                invalidate-session="true" delete-cookies="JSESSIONID"/>
+              <!-- CRSFT protection temporaly disabled, due to REST client token retrieval and generation -->
               <!-- csrf protection -->
-              <security:csrf/>
+              <!--<security:csrf/>-->
               <!-- session fixation protection -->
               <security:session-management session-fixation-protection="migrateSession">
                      <security:concurrency-control max-sessions="1"/>
               </security:session-management>
 
               <security:access-denied-handler error-page="/user/403" />
+
+              <security:custom-filter ref="corsHandler" after="PRE_AUTH_FILTER"/>
        </security:http>
+
+       <bean id="corsHandler" class="project.pa165.musiclibrary.web.filter.CORSFilter" />
+
+       <bean class="project.pa165.musiclibrary.web.util.RestAuthenticatorHelperImpl"/>
 
        <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
               <constructor-arg name="strength" value="11"/>

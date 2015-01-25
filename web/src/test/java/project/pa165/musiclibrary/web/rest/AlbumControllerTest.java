@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import project.pa165.musiclibrary.dto.AlbumDto;
 import project.pa165.musiclibrary.services.AlbumService;
+import project.pa165.musiclibrary.web.util.RestAuthenticatorHelper;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -33,6 +34,8 @@ public class AlbumControllerTest {
     private MockMvc mockMvc;
     @Mock
     private AlbumService albumService;
+    @Mock
+    private RestAuthenticatorHelper restAuthenticatorHelper;
     @InjectMocks
     private AlbumController albumController;
 

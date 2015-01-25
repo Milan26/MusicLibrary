@@ -107,7 +107,12 @@ INSERT INTO Song (title,trackNumber,duration,genre, album_id, artist_id) VALUES 
 -- password = admin; user
 INSERT INTO USERS (email,firstName,lastName,password,enabled) VALUES ('admin@admin.com','admin','admin','$2a$11$TWCBJFqWUd8T5Lafjc3r8.QEre7ixhqixhv0tuzeBIcBIh8nVVkCe', TRUE);
 INSERT INTO USERS (email,firstName,lastName,password,enabled) VALUES ('user@user.com','user','user','$2a$11$zFbG6b4QPaPMKEbZMM1W1uhFn5YS9WLqgMw.HT0U2aMBvZTJizFV.', TRUE);
+INSERT INTO USERS (email,password,enabled) VALUES ('rest','$2a$11$crB7dlyo9iEZSgeC3vIQje4N44hn8GStAsRXPQfjJCUZzeCxAkHFK', TRUE);
 
+INSERT INTO USERAUTHORITY (authority, email) VALUES ('CREATE','rest');
+INSERT INTO USERAUTHORITY (authority, email) VALUES ('DELETE','rest');
+INSERT INTO USERAUTHORITY (authority, email) VALUES ('EDIT','rest');
+INSERT INTO USERAUTHORITY (authority, email) VALUES ('VIEW','rest');
 INSERT INTO USERAUTHORITY (authority, email) VALUES ('ADMIN','admin@admin.com');
 INSERT INTO USERAUTHORITY (authority, email) VALUES ('CREATE','admin@admin.com');
 INSERT INTO USERAUTHORITY (authority, email) VALUES ('DELETE','admin@admin.com');

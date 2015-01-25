@@ -16,6 +16,7 @@ import project.pa165.musiclibrary.services.AlbumService;
 import project.pa165.musiclibrary.services.ArtistService;
 import project.pa165.musiclibrary.util.Genre;
 import project.pa165.musiclibrary.services.SongService;
+import project.pa165.musiclibrary.web.util.RestAuthenticatorHelper;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -43,6 +44,8 @@ public class SongControllerTest {
     private AlbumService albumService;
     @Mock
     private ArtistService artistService;
+    @Mock
+    private RestAuthenticatorHelper restAuthenticatorHelper;
     @InjectMocks
     private SongController songController;
 
