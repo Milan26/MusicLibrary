@@ -17,7 +17,9 @@
       <c:otherwise>${pageContext.errorData.statusCode}</c:otherwise>
     </c:choose>
   </title>
-
+  <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" href="">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-error.css"/>
 </head>
 <body>

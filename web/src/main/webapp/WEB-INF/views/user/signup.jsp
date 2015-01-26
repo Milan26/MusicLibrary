@@ -8,6 +8,8 @@
 <html>
 <head>
   <title><f:message key="user.signup"/></title>
+  <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-login.css"/>
 </head>
 <body>
