@@ -1,5 +1,3 @@
-@import url('http://fonts.googleapis.com/css?family=Sigmar+One');
-
 /**
  * @author Milan
  */
@@ -49,7 +47,6 @@
 }
 
 #info div h3 {
-    font-family: 'Sigmar One', cursive;
     font-size: 20px;
 }
 
@@ -57,6 +54,10 @@ table th {
     border-bottom: #FFFFFF solid 5px;
     text-align: center;
     font-weight: bold;
+}
+
+thead {
+    color: white;
 }
 
 table td {

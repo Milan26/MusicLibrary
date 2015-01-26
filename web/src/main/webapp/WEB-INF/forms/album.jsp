@@ -2,7 +2,7 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<form:form method="POST" action="${pageContext.request.contextPath}/admin/albums/update" modelAttribute="album">
+<form:form cssClass="editable-form" method="POST" action="${pageContext.request.contextPath}/admin/albums/update" modelAttribute="album">
     <table>
         <tr>
             <th><form:label path="title"><f:message key="album.title"/>:</form:label></th>
@@ -10,10 +10,7 @@
             <td><form:errors path="title" cssClass="error"/></td>
         </tr>
         <tr>
-            <th><form:label path="releaseDate">
-                <f:message key="album.releaseDate"/>
-                <c:out value=" (dd-mm-yyyy):"/>
-            </form:label></th>
+            <th><form:label path="releaseDate"><f:message key="album.releaseDate"/><c:out value=" (dd-mm-yyyy):"/></form:label></th>
             <td><form:input path="releaseDate"/></td>
             <td><form:errors path="releaseDate" cssClass="error"/></td>
         </tr>
@@ -30,5 +27,5 @@
     </table>
     <input type="hidden" name="id" value="${album.id}"/>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    <input class="submit_btn" type="submit" value="<f:message key='label.submit'/>"/>
+    <input class="submit_btn top-margin float" type="submit" value="<f:message key='label.submit'/>"/>
 </form:form>

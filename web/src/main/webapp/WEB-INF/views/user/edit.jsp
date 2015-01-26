@@ -11,12 +11,9 @@
 <f:message var="header_title" key="label.user"/>
 <f:message var="header_subtitle" key="user.edit"/>
 <my:layout title="${title}" header_title="${header_title}" header_subtitle="${header_subtitle}">
-    <jsp:attribute name="head">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style-user.css"/>
-    </jsp:attribute>
     <jsp:attribute name="content">
         <div id="content_wrapper">
-            <form:form method="POST" action="${pageContext.request.contextPath}/user/profile/edit" modelAttribute="user">
+            <form:form cssClass="editable-form" method="POST" action="${pageContext.request.contextPath}/user/profile/edit" modelAttribute="user">
                 <table>
                     <tr>
                         <th><form:label path="email"><f:message key="user.email"/>:</form:label></th>
@@ -42,7 +39,7 @@
                 <form:hidden path="id"/>
                 <form:hidden path="enabled"/>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <input class="submit_btn" type="submit" value="<f:message key='label.submit'/>"/>
+                <input class="submit_btn top-margin float" type="submit" value="<f:message key='label.submit'/>"/>
             </form:form>
         </div>
     </jsp:attribute>

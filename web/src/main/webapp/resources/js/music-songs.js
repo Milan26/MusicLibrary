@@ -46,6 +46,8 @@ $(document).ready(function () {
     $("#views option:last").prop("selected", true);
 
     $("#holder").prop("hidden", true);
+    // because of pagination on Music-Albums site
+    $("#gallery_wrapper").css("margin-top", "28px");
 });
 
 $(document).ready(function () {

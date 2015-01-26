@@ -2,7 +2,7 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<form:form method="POST" action="${pageContext.request.contextPath}/admin/songs/update" modelAttribute="song">
+<form:form cssClass="editable-form" method="POST" action="${pageContext.request.contextPath}/admin/songs/update" modelAttribute="song">
     <table>
         <tr>
             <th><form:label path="title"><f:message key="song.title"/>:</form:label></th>
@@ -55,5 +55,5 @@
     </table>
     <input type="hidden" name="id" value="${song.id}"/>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    <input class="submit_btn" type="submit" value="<f:message key='label.submit'/>"/>
+    <input class="submit_btn top-margin float" type="submit" value="<f:message key='label.submit'/>"/>
 </form:form>

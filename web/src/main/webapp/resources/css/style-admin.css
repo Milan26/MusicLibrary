@@ -1,21 +1,7 @@
-#content_wrapper {
-    width: 100%;
-    background: #ffffff;
-    padding: 10px;
-    margin-top: 28px;
-    color: #000000;
-    display: inline-block;
-}
-
-#data-table * {
-    vertical-align: middle;
-}
+/**
+ * @author Milan
+ */
 
 #data-table td:last-child, td:nth-last-child(2) {
     text-align: right;
 }
-
-#data-table thead {
-    font-weight: bold;
-}
-
