@@ -119,4 +119,19 @@ public class SongDto implements Serializable {
     public void setAlbum(AlbumDto album) {
         this.album = album;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SongDto)) return false;
+
+        SongDto songDto = (SongDto) o;
+
+        return !(id != null ? !id.equals(songDto.id) : songDto.id != null);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 }

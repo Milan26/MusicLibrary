@@ -63,4 +63,19 @@ public class ArtistDto implements Serializable {
     public void setSongs(List<SongDto> songs) {
         this.songs = songs;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ArtistDto)) return false;
+
+        ArtistDto artistDto = (ArtistDto) o;
+
+        return !(id != null ? !id.equals(artistDto.id) : artistDto.id != null);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 }

@@ -87,4 +87,22 @@ public class UserDto implements Serializable {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserDto)) return false;
+
+        UserDto userDto = (UserDto) o;
+
+        if (!email.equals(userDto.email)) return false;
+        return !(id != null ? !id.equals(userDto.id) : userDto.id != null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + email.hashCode();
+        return result;
+    }
 }
