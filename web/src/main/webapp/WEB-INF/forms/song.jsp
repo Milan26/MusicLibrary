@@ -30,22 +30,22 @@
             <td><form:errors path="genre" cssClass="error"/></td>
         </tr>
         <tr>
-            <th><form:label path="artist.id"><f:message key="song.artist"/>:</form:label></th>
+            <th><form:label path="artist"><f:message key="song.artist"/>:</form:label></th>
             <td>
-                <form:select path="artist.id">
+                <form:select path="artist">
                     <form:options items="${artists}" itemValue="id" itemLabel="id"/>
                 </form:select>
             </td>
-            <td><form:errors path="artist.id" cssClass="error"/></td>
+            <td><form:errors path="artist" cssClass="error"/></td>
         </tr>
         <tr>
-            <th><form:label path="album.id"><f:message key="song.album"/>:</form:label></th>
+            <th><form:label path="album"><f:message key="song.album"/>:</form:label></th>
             <td>
-                <form:select path="album.id">
+                <form:select path="album">
                     <form:options items="${albums}" itemValue="id" itemLabel="id"/>
                 </form:select>
             </td>
-            <td><form:errors path="album.id" cssClass="error"/></td>
+            <td><form:errors path="album" cssClass="error"/></td>
         </tr>
         <tr>
             <th><form:label path="note"><f:message key="song.note"/>:</form:label></th>

@@ -5,6 +5,7 @@ import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,6 +18,7 @@ import project.pa165.musiclibrary.services.SongService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.beans.PropertyEditorSupport;
 import java.util.Locale;
 
 /**
@@ -65,6 +67,22 @@ public class AdministrationController {
     @Inject
     public void setMessageSource(MessageSource messageSource) {
         this.messageSource = messageSource;
+    }
+
+    @InitBinder
+    protected void initBinderAlbumPropertyConverter(ServletRequestDataBinder binder) throws Exception {
+        binder.registerCustomEditor(AlbumDto.class, "album", new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {setValue(getAlbumService().findAlbum(Long.valueOf(text)));}
+        });
+    }
+
+    @InitBinder
+    protected void initBinderArtistPropertyConverter(ServletRequestDataBinder binder) throws Exception {
+        binder.registerCustomEditor(ArtistDto.class, "artist", new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {setValue(getArtistService().findArtist(Long.valueOf(text)));}
+        });
     }
 
     @RequestMapping(value = "/albums", method = RequestMethod.GET)
@@ -219,9 +237,5 @@ public class AdministrationController {
 
     private void copyHiddenFields(SongDto song, SongDto modelSong) {
         modelSong.setId(song.getId());
-        if (modelSong.getAlbum() != null)
-            modelSong.setAlbum(getAlbumService().findAlbum(modelSong.getAlbum().getId()));
-        if (modelSong.getArtist() != null)
-            modelSong.setArtist(getArtistService().findArtist(modelSong.getArtist().getId()));
     }
 }
